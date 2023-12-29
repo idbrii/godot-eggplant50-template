@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://Platforms/MovingPlatform.gd" type="Script" id=1]
+[ext_resource path="res://games/movement2/Platforms/MovingPlatform.gd" type="Script" id=1]
 
 [node name="Platform" type="Node2D"]
 modulate = Color( 0, 0.517647, 0.337255, 1 )

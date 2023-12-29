@@ -1,11 +1,11 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://World/World.gd" type="Script" id=1]
-[ext_resource path="res://Platforms/TileMap.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Camera/FollowCamera.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Player/Player.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Platforms/MovingPlatform.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Platforms/CirclePlatform.tscn" type="PackedScene" id=6]
+[ext_resource path="res://games/movement2/World/World.gd" type="Script" id=1]
+[ext_resource path="res://games/movement2/Platforms/TileMap.tscn" type="PackedScene" id=2]
+[ext_resource path="res://games/movement2/Camera/FollowCamera.tscn" type="PackedScene" id=3]
+[ext_resource path="res://games/movement2/Player/Player.tscn" type="PackedScene" id=4]
+[ext_resource path="res://games/movement2/Platforms/MovingPlatform.tscn" type="PackedScene" id=5]
+[ext_resource path="res://games/movement2/Platforms/CirclePlatform.tscn" type="PackedScene" id=6]
 
 [node name="World" type="Node2D"]
 script = ExtResource( 1 )

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/ufo-50-32x_withHexCodes.png-5b8152bde29d6e0f5ebd9e738cf16493.stex"
+path="res://.import/Circle.png-cc1601df218ef4e480be3f951c5eccfb.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/ufo-50-32x_withHexCodes.png"
-dest_files=[ "res://.import/ufo-50-32x_withHexCodes.png-5b8152bde29d6e0f5ebd9e738cf16493.stex" ]
+source_file="res://games/movement2/Art/Circle.png"
+dest_files=[ "res://.import/Circle.png-cc1601df218ef4e480be3f951c5eccfb.stex" ]
 
 [params]
 
@@ -31,5 +31,5 @@ process/invert_color=false
 process/normal_map_invert_y=false
 stream=false
 size_limit=0
-detect_3d=true
+detect_3d=false
 svg/scale=1.0
