@@ -101,6 +101,10 @@ Input2={
  ]
 }
 
+[mono]
+
+project/assembly_name="Eggplant50"
+
 [physics]
 
 common/enable_pause_aware_picking=true
