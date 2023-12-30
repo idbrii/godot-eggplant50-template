@@ -3,9 +3,12 @@ extends Node2D
 const TheList : GameList = preload("res://games/eggplant_games.tres")
 
 onready var ButtonTemplate = get_node("%ButtonTemplate")
+onready var QuitButton = get_node("%Quit")
 
 
 func _ready():
+	QuitButton.connect("pressed", self, "_quit")
+
 	var needs_focus = true
 	for g in TheList.games:
 		var btn = add_game(g)
@@ -28,3 +31,8 @@ func add_game(g) -> Button:
 
 func _button_pressed(game):
 	Eggplant.transition_to(game.initial_scene)
+
+
+func _quit():
+	get_tree().quit()
+
