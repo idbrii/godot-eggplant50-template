@@ -11,7 +11,7 @@ func _ready():
 		Target = Target[0] #because get_nodes_in_group returns an array even if it's an array of size 1
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	if Target != null:
 		position = Target.position
 	else:
