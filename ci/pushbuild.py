@@ -9,8 +9,9 @@ import git
 
 project = "eggplant50"
 
-## TODO: Change to your itchio name
+## TODO: Change to your itchio name or set to False to skip itchio upload.
 itch_project = f"idbrii/{project}"
+#~ itch_project = False
 
 ## TODO: Change to where you want to export builds.
 export_path = Path("C:/code/builds/") / project
@@ -19,7 +20,7 @@ export_path = Path("C:/code/builds/") / project
 platforms = [
     # "mac",
     "web",
-    #~ "win",
+    "win",
 ]
 
 
@@ -59,19 +60,20 @@ def build_platform(platform, export_root, output_artifact):
             project_path,
         ]
     )
-    itch_channel = f"{itch_project}:{platform}"
-    print("Uploading as version", itch_channel, version)
-    # pprint.pprint(
-    subprocess.check_call(
-        [
-            "butler",
-            "push",
-            export_path,
-            itch_channel,
-            "--userversion",
-            version,
-        ]
-    )
+    if itch_project:
+        itch_channel = f"{itch_project}:{platform}"
+        print("Uploading to itch.io as version", itch_channel, version)
+        # pprint.pprint(
+        subprocess.check_call(
+            [
+                "butler",
+                "push",
+                export_path,
+                itch_channel,
+                "--userversion",
+                version,
+            ]
+        )
 
 
 project_root = Path(__file__).resolve().parent.parent
