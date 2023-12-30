@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://mainmenu/theme/theme_eggplant.tres" type="Theme" id=1]
+[ext_resource path="res://mainmenu/art/font/font_kenpixel_blocks.tres" type="DynamicFont" id=2]
+[ext_resource path="res://mainmenu/theme/style_panel_bg.tres" type="StyleBox" id=3]
+
+[node name="MainMenu" type="Node2D"]
+
+[node name="Panel" type="Panel" parent="."]
+margin_left = 25.0
+margin_top = 25.0
+margin_right = 615.0
+margin_bottom = 455.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+custom_styles/panel = ExtResource( 3 )
+
+[node name="Label" type="Label" parent="Panel"]
+margin_right = 590.0
+margin_bottom = 48.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 2 )
+text = "Welcome to Eggplant50"
+align = 1
+valign = 1
+
+[node name="GameSelection" type="VBoxContainer" parent="Panel"]
+margin_left = 50.0
+margin_top = 100.0
+margin_right = 540.0
+margin_bottom = 144.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Button" type="Button" parent="Panel/GameSelection"]
+margin_right = 490.0
+margin_bottom = 58.0

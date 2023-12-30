@@ -1,0 +1,21 @@
+[gd_resource type="Theme" load_steps=7 format=2]
+
+[ext_resource path="res://mainmenu/theme/style_button_normal.tres" type="StyleBox" id=1]
+[ext_resource path="res://mainmenu/theme/style_button_hover.tres" type="StyleBox" id=2]
+[ext_resource path="res://mainmenu/theme/style_button_press.tres" type="StyleBox" id=3]
+[ext_resource path="res://mainmenu/theme/style_button_disabled.tres" type="StyleBox" id=4]
+[ext_resource path="res://mainmenu/art/font/font_kenpixel_mini.tres" type="DynamicFont" id=5]
+[ext_resource path="res://mainmenu/art/font/font_kenpixel_high.tres" type="DynamicFont" id=6]
+
+[resource]
+Button/colors/font_color_disabled = Color( 0.901961, 0.901961, 0.901961, 0.415686 )
+Button/colors/font_color_hover = Color( 0.941176, 0.866667, 0.968627, 0.466667 )
+Button/fonts/font = ExtResource( 6 )
+Button/styles/disabled = ExtResource( 4 )
+Button/styles/focus = ExtResource( 2 )
+Button/styles/hover = ExtResource( 2 )
+Button/styles/normal = ExtResource( 1 )
+Button/styles/pressed = ExtResource( 3 )
+Label/fonts/font = ExtResource( 5 )
+LineEdit/fonts/font = ExtResource( 5 )
+TextEdit/fonts/font = ExtResource( 5 )
