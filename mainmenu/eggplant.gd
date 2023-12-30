@@ -1,6 +1,6 @@
 extends Node
 
-
+const transition_scene = preload("res://mainmenu/scene_transition.tscn")
 
 func _input(_event: InputEvent):
 	# Toggle fullscreen with Alt-Enter
@@ -10,9 +10,9 @@ func _input(_event: InputEvent):
 
 func transition_to(next_scene: PackedScene):
 	assert(next_scene, "Need a scene to transition to.")
-	var result = get_tree().change_scene_to(next_scene)
-	if result != OK:
-		printt("Failed to transition to scene.", result)
+	var transitioner = transition_scene.instance()
+	add_child(transitioner)
+	transitioner.fade_transition_to(next_scene)
 
 
 func return_to_menu():
