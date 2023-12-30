@@ -28,6 +28,8 @@ _global_script_class_icons={
 
 config/name="Eggplant50"
 run/main_scene="res://mainmenu/mainmenu.tscn"
+config/icon="res://icon.png"
+config/windows_native_icon="res://icon.ico"
 
 [autoload]
 
