@@ -1,6 +1,5 @@
 extends Node
 
-const _main_menu = preload("res://mainmenu/mainmenu.tscn")
 
 
 func _input(_event: InputEvent):
@@ -10,10 +9,14 @@ func _input(_event: InputEvent):
 
 
 func transition_to(next_scene: PackedScene):
-	get_tree().change_scene_to(next_scene)
+	assert(next_scene, "Need a scene to transition to.")
+	var result = get_tree().change_scene_to(next_scene)
+	if result != OK:
+		printt("Failed to transition to scene.", result)
 
 
 func return_to_menu():
-	transition_to(_main_menu)
+	printt("Returning to menu...")
+	transition_to(preload("res://mainmenu/mainmenu.tscn"))
 
 
