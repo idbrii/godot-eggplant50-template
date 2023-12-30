@@ -27,3 +27,21 @@ vote and then a few week or so to ponder before jamming begins in earnest ⌨️
 Once the jam is done, we can merge all the different projects, re-add
 everyone's GameDef to res://games/eggplant_games.tres, and hopefully the package will
 all work!
+
+
+## Inputs
+
+Use the `move_` inputs for movement:
+
+	# Using get_vector will have a circular deadzone.
+	var move := Input.get_vector("move_left", "move_right", "move_up", "move_down")
+	print(move.x, move.y)
+
+	# Using get_axis will have a cross deadzone.
+	var move_x := Input.get_axis("move_left", "move_right")
+	var move_y := Input.get_axis("move_up", "move_down")
+
+Use `Input1` and `Input2` for actions:
+
+	var jumped = Input.is_action_just_pressed("Input1")
+	var grabbing = Input.is_action_pressed("Input2")
