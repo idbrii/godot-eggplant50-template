@@ -1,10 +1,12 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://mainmenu/theme/theme_eggplant.tres" type="Theme" id=1]
 [ext_resource path="res://mainmenu/art/font/font_kenpixel_blocks.tres" type="DynamicFont" id=2]
 [ext_resource path="res://mainmenu/theme/style_panel_bg.tres" type="StyleBox" id=3]
+[ext_resource path="res://mainmenu/mainmenu.gd" type="Script" id=4]
 
 [node name="MainMenu" type="Node2D"]
+script = ExtResource( 4 )
 
 [node name="Panel" type="Panel" parent="."]
 margin_left = 25.0
@@ -17,8 +19,9 @@ theme = ExtResource( 1 )
 custom_styles/panel = ExtResource( 3 )
 
 [node name="Label" type="Label" parent="Panel"]
+margin_top = 25.0
 margin_right = 590.0
-margin_bottom = 48.0
+margin_bottom = 73.0
 size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 2 )
 text = "Welcome to Eggplant50"
@@ -33,6 +36,8 @@ margin_bottom = 144.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Button" type="Button" parent="Panel/GameSelection"]
+[node name="ButtonTemplate" type="Button" parent="Panel/GameSelection"]
+unique_name_in_owner = true
+visible = false
 margin_right = 490.0
 margin_bottom = 58.0
