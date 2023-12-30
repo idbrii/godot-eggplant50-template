@@ -26,9 +26,5 @@ func add_game(g) -> Button:
 	return btn
 
 
-func transition_to(next_scene: PackedScene):
-	get_tree().change_scene_to(next_scene)
-
-
 func _button_pressed(game):
-	transition_to(game.initial_scene)
+	Eggplant.transition_to(game.initial_scene)

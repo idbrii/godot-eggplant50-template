@@ -45,3 +45,13 @@ Use `Input1` and `Input2` for actions:
 
 	var jumped = Input.is_action_just_pressed("Input1")
 	var grabbing = Input.is_action_pressed("Input2")
+
+
+## Returning to Menu
+
+To return to main menu from your game, call:
+
+    Eggplant.return_to_menu()
+
+You could do this from the `pause` input (see games/movement2/World/World.gd)
+or something more sophisticated.
