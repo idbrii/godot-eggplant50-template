@@ -6,12 +6,21 @@ onready var ButtonTemplate = get_node("%ButtonTemplate")
 
 
 func _ready():
+	var needs_focus = true
 	for g in TheList.games:
-		var btn = ButtonTemplate.duplicate()
-		btn.text = g.game_name
-		btn.visible = true
-		btn.connect("pressed", self, "_button_pressed", [g])
-		ButtonTemplate.get_parent().add_child(btn)
+		var btn = add_game(g)
+		if needs_focus:
+			needs_focus = false
+			btn.grab_focus()
+
+
+func add_game(g) -> Button:
+	var btn = ButtonTemplate.duplicate()
+	btn.text = g.game_name
+	btn.visible = true
+	btn.connect("pressed", self, "_button_pressed", [g])
+	ButtonTemplate.get_parent().add_child(btn)
+	return btn
 
 
 func transition_to(next_scene: PackedScene):
