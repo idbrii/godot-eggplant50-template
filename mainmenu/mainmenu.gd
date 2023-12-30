@@ -8,6 +8,9 @@ onready var QuitButton = get_node("%Quit")
 
 func _ready():
 	QuitButton.connect("pressed", self, "_quit")
+	if OS.get_name().to_lower() in ["web", "html5"]:
+		# Quit button doesn't work on web, so hide it. Users have to exit fullscreen instead.
+		QuitButton.visible = false
 
 	var needs_focus = true
 	for g in TheList.games:
