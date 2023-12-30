@@ -1,11 +1,12 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://games/movement2/World/World.gd" type="Script" id=1]
 [ext_resource path="res://games/movement2/Platforms/TileMap.tscn" type="PackedScene" id=2]
-[ext_resource path="res://games/movement2/Camera/FollowCamera.tscn" type="PackedScene" id=3]
+[ext_resource path="res://games/movement2/Camera/ScreenCamera.tscn" type="PackedScene" id=3]
 [ext_resource path="res://games/movement2/Player/Player.tscn" type="PackedScene" id=4]
 [ext_resource path="res://games/movement2/Platforms/MovingPlatform.tscn" type="PackedScene" id=5]
 [ext_resource path="res://games/movement2/Platforms/CirclePlatform.tscn" type="PackedScene" id=6]
+[ext_resource path="res://games/movement2/Camera/FollowCamera.tscn" type="PackedScene" id=7]
 
 [node name="World" type="Node2D"]
 script = ExtResource( 1 )
@@ -39,4 +40,11 @@ move_to = Vector2( -160, 0 )
 [node name="CirclePlatform" parent="Platforms" instance=ExtResource( 6 )]
 position = Vector2( 512, 608 )
 
-[node name="FollowCamera" parent="." instance=ExtResource( 3 )]
+[node name="FollowCamera" parent="." instance=ExtResource( 7 )]
+visible = false
+position = Vector2( -960, 545 )
+current = false
+zoom = Vector2( 3, 3 )
+
+[node name="ScreenCamera" parent="." instance=ExtResource( 3 )]
+zoom = Vector2( 3, 3 )
