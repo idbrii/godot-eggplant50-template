@@ -12,11 +12,14 @@ func _ready():
 		if needs_focus:
 			needs_focus = false
 			btn.grab_focus()
+		# Uncomment to test scrolling
+		#~ for i in range(50):
+		#~ 	add_game(g)
 
 
 func add_game(g) -> Button:
 	var btn = ButtonTemplate.duplicate()
-	btn.text = g.game_name
+	btn.text = "{name} - {author}".format({ "name": g.game_name, "author": g.game_author, })
 	btn.visible = true
 	btn.connect("pressed", self, "_button_pressed", [g])
 	ButtonTemplate.get_parent().add_child(btn)

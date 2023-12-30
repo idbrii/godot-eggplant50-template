@@ -9,10 +9,11 @@
 script = ExtResource( 4 )
 
 [node name="Panel" type="Panel" parent="."]
-margin_left = 25.0
-margin_top = 25.0
-margin_right = 615.0
-margin_bottom = 455.0
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 635.0
+margin_bottom = 355.0
+rect_min_size = Vector2( 320, 180 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource( 1 )
@@ -20,7 +21,7 @@ custom_styles/panel = ExtResource( 3 )
 
 [node name="Label" type="Label" parent="Panel"]
 margin_top = 25.0
-margin_right = 590.0
+margin_right = 630.0
 margin_bottom = 73.0
 size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 2 )
@@ -28,15 +29,22 @@ text = "Welcome to Eggplant50"
 align = 1
 valign = 1
 
-[node name="GameSelection" type="VBoxContainer" parent="Panel"]
-margin_left = 50.0
-margin_top = 100.0
-margin_right = 540.0
-margin_bottom = 144.0
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel"]
+margin_left = 10.0
+margin_top = 80.0
+margin_right = 620.0
+margin_bottom = 347.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+follow_focus = true
+
+[node name="GameSelection" type="VBoxContainer" parent="Panel/ScrollContainer"]
+margin_right = 610.0
+margin_bottom = 267.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="ButtonTemplate" type="Button" parent="Panel/GameSelection"]
+[node name="ButtonTemplate" type="Button" parent="Panel/ScrollContainer/GameSelection"]
 unique_name_in_owner = true
 visible = false
 margin_right = 490.0
