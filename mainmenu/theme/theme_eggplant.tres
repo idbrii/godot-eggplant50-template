@@ -8,8 +8,9 @@
 [ext_resource path="res://mainmenu/art/font/font_kenpixel_high.tres" type="DynamicFont" id=6]
 
 [resource]
+default_font = ExtResource( 5 )
 Button/colors/font_color_disabled = Color( 0.901961, 0.901961, 0.901961, 0.415686 )
-Button/colors/font_color_hover = Color( 0.941176, 0.866667, 0.968627, 0.466667 )
+Button/colors/font_color_hover = Color( 0.921569, 0.870588, 0.945098, 1 )
 Button/fonts/font = ExtResource( 6 )
 Button/styles/disabled = ExtResource( 4 )
 Button/styles/focus = ExtResource( 2 )
