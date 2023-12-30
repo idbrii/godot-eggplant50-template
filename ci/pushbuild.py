@@ -89,4 +89,4 @@ if "win" in platforms:
     build_platform("win", export_path, project + ".exe")
 
 if "mac" in platforms:
-    build_platform("mac", export_path, project)
+    build_platform("mac", export_path, project + "-mac.zip")
