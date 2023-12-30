@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://dnpo60iiyjo3p"
-path="res://.godot/imported/kenpixel.ttf-f9babf1b20c6be94d81df5e9ca60f7e0.fontdata"
+path="res://.godot/imported/kenpixel.ttf-54fe1c16569c5d9d7ad208f1880a8f72.fontdata"
 
 [deps]
 
-source_file="res://assets/pixelart/font/kenpixel/kenpixel.ttf"
-dest_files=["res://.godot/imported/kenpixel.ttf-f9babf1b20c6be94d81df5e9ca60f7e0.fontdata"]
+source_file="res://mainmenu/art/font/kenpixel/kenpixel.ttf"
+dest_files=["res://.godot/imported/kenpixel.ttf-54fe1c16569c5d9d7ad208f1880a8f72.fontdata"]
 
 [params]
 

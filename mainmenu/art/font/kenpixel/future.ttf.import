@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://dwnjf5lr8sv6f"
-path="res://.godot/imported/future.ttf-67c1dcd9293b66f661f8ad401cf4b585.fontdata"
+path="res://.godot/imported/future.ttf-efd37b161e2f75b736f746ae354bac4c.fontdata"
 
 [deps]
 
-source_file="res://assets/pixelart/font/kenpixel/future.ttf"
-dest_files=["res://.godot/imported/future.ttf-67c1dcd9293b66f661f8ad401cf4b585.fontdata"]
+source_file="res://mainmenu/art/font/kenpixel/future.ttf"
+dest_files=["res://.godot/imported/future.ttf-efd37b161e2f75b736f746ae354bac4c.fontdata"]
 
 [params]
 
