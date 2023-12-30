@@ -36,8 +36,9 @@ func _draw() -> void:
 func start_tween() -> void:
 	MovedObject.position = move_to
 	var time = move_to.length() / float(speed)
-	var tween: SceneTreeTween = get_tree().create_tween()
+	var tween: SceneTreeTween = create_tween()
 	tween.set_trans(Tween.TRANS_QUAD) # warning-ignore:return_value_discarded
 	tween.tween_property(MovedObject, "position", -move_to, time).set_delay(stop_time) # warning-ignore:return_value_discarded
 	tween.tween_property(MovedObject, "position", move_to, time).set_delay(stop_time) # warning-ignore:return_value_discarded
 	tween.set_loops() # warning-ignore:return_value_discarded
+
