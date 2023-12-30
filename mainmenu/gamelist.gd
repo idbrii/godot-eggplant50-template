@@ -6,5 +6,5 @@ extends Resource
 export(Array, Resource) var games
 
 func _init(p_games = null):
-    games = p_games
+	games = p_games
 

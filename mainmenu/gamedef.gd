@@ -12,6 +12,6 @@ export(String) var game_name
 export(String) var game_author
 
 func _init(p_initial_scene = null, p_game_name = "", p_game_author = ""):
-    initial_scene = p_initial_scene
-    game_name = p_game_name
-    game_author = p_game_author
+	initial_scene = p_initial_scene
+	game_name = p_game_name
+	game_author = p_game_author
