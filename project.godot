@@ -180,6 +180,14 @@ toggle_fullscreen={
  ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="player"
+2d_physics/layer_2="item"
+2d_physics/layer_3="platform"
+2d_physics/layer_4="wall"
+2d_physics/layer_5="enemy"
+
 [logging]
 
 file_logging/enable_file_logging=true
