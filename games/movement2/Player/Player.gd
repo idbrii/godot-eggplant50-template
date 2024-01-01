@@ -48,10 +48,10 @@ func get_input() -> Dictionary:
 	return {
 		"x": move.x,
 		"y": move.y,
-		"just_jump": Input.is_action_just_pressed("Input1"),
-		"jump": Input.is_action_pressed("Input1"),
-		"released_jump": Input.is_action_just_released("Input1"),
-		"walk": Input.is_action_pressed("Input2"),
+		"just_jump": Input.is_action_just_pressed("action1"),
+		"jump": Input.is_action_pressed("action1"),
+		"released_jump": Input.is_action_just_released("action1"),
+		"walk": Input.is_action_pressed("action2"),
 	}
 
 

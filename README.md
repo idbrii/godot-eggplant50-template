@@ -41,10 +41,10 @@ Use the `move_` inputs for movement:
 	var move_x := Input.get_axis("move_left", "move_right")
 	var move_y := Input.get_axis("move_up", "move_down")
 
-Use `Input1` and `Input2` for actions:
+Use `action1` and `action2` for actions:
 
-	var jumped = Input.is_action_just_pressed("Input1")
-	var grabbing = Input.is_action_pressed("Input2")
+	var jumped = Input.is_action_just_pressed("action1")
+	var grabbing = Input.is_action_pressed("action2")
 
 
 ## Returning to Menu
