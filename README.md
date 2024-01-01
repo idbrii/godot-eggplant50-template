@@ -47,6 +47,13 @@ Use `action1` and `action2` for actions:
 	var grabbing = Input.is_action_pressed("action2")
 
 
+The input mapping is modelled after [pico-8](https://iiviigames.github.io/pico8-api/img/input.png):
+
+* primary action: Z,C,N,Space keys or X,B buttons
+* secondary action: X,V,M keys or A,Y buttons
+* pause: Enter,p keys or Start,Select buttons
+
+
 ## Returning to Menu
 
 To return to main menu from your game, call:
