@@ -70,9 +70,9 @@ You should ensure your game works in a web build. The template includes a
 script to simplify build creation and itch.io upload.
 
 1. Create an itch.io project called `eggplant50`. Make sure to [enable SharedArrayBuffer](https://itch.io/t/2025776/experimental-sharedarraybuffer-support).
-2. To auto upload to itch.io:
+2. To auto-upload to itch.io:
     1. Edit `ci/pushbuild.py` and change "idbrii" to your itch.io name.
-    2. (Optional) [Install and setup butler](https://itch.io/docs/butler/)
+    2. [Install and setup butler](https://itch.io/docs/butler/)
 2. To manually upload to itch.io:
     1. Edit `ci/pushbuild.py` and set `itch_project = False`
     1. `export_path` will be where to find your files to upload to itch.io.
