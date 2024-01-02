@@ -7,7 +7,7 @@ onready var QuitButton = get_node("%Quit")
 
 
 func _ready():
-	QuitButton.connect("pressed", self, "_quit")
+	QuitButton.connect("pressed", self, "_quit")  # warning-ignore:return_value_discarded
 	if OS.get_name().to_lower() in ["web", "html5"]:
 		# Quit button doesn't work on web, so hide it. Users have to exit fullscreen instead.
 		QuitButton.visible = false
@@ -27,7 +27,7 @@ func add_game(g) -> Button:
 	var btn = ButtonTemplate.duplicate()
 	btn.text = "{name} - {author}".format({ "name": g.game_name, "author": g.game_author, })
 	btn.visible = true
-	btn.connect("pressed", self, "_button_pressed", [g])
+	btn.connect("pressed", self, "_button_pressed", [g])  # warning-ignore:return_value_discarded
 	ButtonTemplate.get_parent().add_child(btn)
 	return btn
 
