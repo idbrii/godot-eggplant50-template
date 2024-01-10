@@ -1,21 +1,14 @@
-# Eggplant50
+# [Eggplant50](https://itch.io/jam/eggplant-50)
 
 We're trying to pack a bunch of games together!
 
 # Theme
 
-* 🍆 With Jamuary on the horizon let's decide on a theme! Here are 5 to choose from:
-* 🎆 Maximizing Minimalism
-* 🏗️ Constructing Your Dreams
-* 🔮 Cheating Depth
-* 📐 Finding Poetry in Geometry
-* 🗿 The Design of Spelunky
+📐 Finding Poetry in Geometry
 
-This is for the UFO 50 fan jam or Jamuary as @docky (Hayden Scott-Baron) has so
-aptly dubbed it. Voting on multiple themes is kosher 👍 Let's conclude the
-voting next Saturday (Saturday 6th 2024) which should give everyone a chance to
-vote and then a few week or so to ponder before jamming begins in earnest ⌨️ 🧠
-
+This is for the UFO 50 fan jam or Jamuary as @docky has so aptly dubbed it. We
+voted and selected this theme. More details on the
+[Jam Page](https://itch.io/jam/eggplant-50).
 
 # Adding your game
 
