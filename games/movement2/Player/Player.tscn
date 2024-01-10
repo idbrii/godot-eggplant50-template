@@ -63,4 +63,4 @@ scale = Vector2( 0.25, 0.25 )
 [node name="Polygon2D" type="Polygon2D" parent="Sprite/Visual"]
 position = Vector2( 0, -16 )
 color = Color( 0.909804, 0.917647, 0.290196, 1 )
-polygon = PoolVector2Array( -16, -16, -16, 16, 16, 16, 16, -16 )
+polygon = PoolVector2Array( -16, -16, -16, 16, 13.1243, 16, 16, 12, 16, -11.1929, 12, -16 )
