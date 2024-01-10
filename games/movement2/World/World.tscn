@@ -49,6 +49,7 @@ __meta__ = {
 "_editor_description_": "You can delete this camera if you're using ScreenCamera."
 }
 target_node = NodePath("../Player")
+prevent_vertical_movement = true
 
 [node name="ScreenCamera" parent="." instance=ExtResource( 3 )]
 position = Vector2( -320, 180 )
