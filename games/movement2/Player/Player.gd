@@ -13,23 +13,23 @@ extends KinematicBody2D
 var velocity := Vector2(0,0)
 var face_direction := 1
 
-var run_threshold: float = 0.8  # in [0.1] set to 0 to disable walk detection
-export var max_walk_speed: float = 200
-export var max_run_speed: float = 560
-export var acceleration: float = 2880
-export var turning_acceleration : float = 9600
-export var deceleration: float = 3200
+export(float, 0, 1) var run_threshold: float = 0.8  # in [0.1] set to 0 to disable walk detection
+export var max_walk_speed: float = 100.0
+export var max_run_speed: float = 280.0
+export var acceleration: float = 2016.0
+export var turning_acceleration : float = 6720.0
+export var deceleration: float = 2240.0
 # ------------------------------------------ #
 
 # GRAVITY ----- #
-export var gravity_acceleration : float = 3840
-export var gravity_max : float = 1020
+export var gravity_acceleration : float = 1920.0
+export var gravity_max : float = 510.0
 # ------------- #
 
 # JUMP VARIABLES ------------------- #
-export var jump_force : float = 1400
+export var jump_force : float = 600.0
 export var jump_cut : float = 0.25
-export var jump_gravity_max : float = 500
+export var jump_gravity_max : float = 500.0
 export var jump_hang_treshold : float = 2.0
 export var jump_hang_gravity_mult : float = 0.1
 # Timers
