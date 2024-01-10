@@ -45,6 +45,10 @@ position = Vector2( 512, 608 )
 visible = false
 position = Vector2( -320, 180 )
 current = false
+__meta__ = {
+"_editor_description_": "You can delete this camera if you're using ScreenCamera."
+}
+target_node = NodePath("../Player")
 
 [node name="ScreenCamera" parent="." instance=ExtResource( 3 )]
 position = Vector2( -320, 180 )
