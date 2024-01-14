@@ -34,6 +34,7 @@ config/windows_native_icon="res://icon.ico"
 [autoload]
 
 Eggplant="*res://mainmenu/eggplant.gd"
+CustomSignals="*res://games/CodyMace/CustomSignals/CustomSignals.cs"
 
 [display]
 
