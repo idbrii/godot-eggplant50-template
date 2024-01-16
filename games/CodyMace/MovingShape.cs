@@ -26,6 +26,7 @@ public class MovingShape : Area2D
 
     [Export]
     public float velocity = 0;
+    bool popped = false;
 
     ShapeType shapeType = ShapeType.Circle;
     Sprite sprite;
@@ -71,7 +72,9 @@ public class MovingShape : Area2D
 
     public void OnPlayerBodyEntered(Node body)
     {
-        if (body.Name == "Player") {
+        if (body.Name == "Player" && !popped) {
+            popped = true;
+            GetNode<AudioStreamPlayer>("PopSound").Play();
             velocity = 0;
             sprite.Visible = false;
             GetNode<CollisionShape2D>("CollisionShape2D").Disabled = true;
