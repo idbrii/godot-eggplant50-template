@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/ufo-50-32x_withHexCodes.png-2013a435b506223d83f40f50161bc3e8.stex"
+path="res://.import/palette-mail24.png-1d97221a8ffea3073d27449a86d359d3.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ufo-50-32x_withHexCodes.png"
-dest_files=[ "res://.import/ufo-50-32x_withHexCodes.png-2013a435b506223d83f40f50161bc3e8.stex" ]
+source_file="res://palette-mail24.png"
+dest_files=[ "res://.import/palette-mail24.png-1d97221a8ffea3073d27449a86d359d3.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
