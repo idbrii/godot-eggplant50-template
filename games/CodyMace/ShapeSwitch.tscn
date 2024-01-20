@@ -198,6 +198,5 @@ margin_left = -22.2865
 margin_top = -110.0
 margin_right = 22.2865
 margin_bottom = 110.0
-supports_restart = false
 
 [connection signal="jump" from="Player" to="." method="_on_Player_jump"]

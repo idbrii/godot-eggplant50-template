@@ -35,6 +35,13 @@ public class ShapeSwitch : Node2D
 				velocity += 0.5f;
 			}
 			await Task.Delay(delay);
+			if (!Godot.Object.IsInstanceValid(this))
+			{
+				// If we changed scenes, this object no longer exists and we
+				// need to abort the coroutine. Not sure why this isn't
+				// automatic.
+				return;
+			}
 		}
 	}
 
