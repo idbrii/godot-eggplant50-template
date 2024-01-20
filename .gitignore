@@ -13,3 +13,7 @@ export_presets.cfg
 .mono/
 data_*/
 mono_crash.*.json
+
+
+# Generic system ignores (these could be in your ~/.gitignore)
+.DS_Store
