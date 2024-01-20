@@ -2,6 +2,8 @@ extends Node
 
 const transition_scene = preload("res://mainmenu/scene_transition.tscn")
 
+var last_played_scene : PackedScene
+
 
 func _ready():
 	# To toggle fullscreen while paused.
@@ -17,9 +19,14 @@ func _input(_event: InputEvent):
 
 func transition_to(next_scene: PackedScene):
 	assert(next_scene, "Need a scene to transition to.")
+	last_played_scene = next_scene
 	var transitioner = transition_scene.instance()
 	add_child(transitioner)
 	transitioner.fade_transition_to(next_scene)
+
+
+func restart_scene():
+	transition_to(last_played_scene)
 
 
 func return_to_menu():

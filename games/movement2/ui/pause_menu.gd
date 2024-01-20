@@ -1,15 +1,19 @@
 extends Popup
 
+export var supports_restart := true
 
 static func ok(err):
 	assert(err == OK)
 
 
 func _ready():
+	var restart_btn = get_node("%RestartButton")
 	ok(get_node("%ContinueButton").connect("pressed", self, "_on_continue"))
-	ok(get_node("%RestartButton").connect("pressed", self, "_on_restart"))
+	ok(restart_btn.connect("pressed", self, "_on_restart"))
 	ok(get_node("%QuitButton").connect("pressed", self, "_on_quit"))
 	ok(connect("visibility_changed", self, "_on_visibility_changed"))
+	if not supports_restart:
+		restart_btn.visible = false
 
 
 func _input(_event: InputEvent) -> void:
@@ -34,8 +38,7 @@ func _on_quit():
 
 func _on_restart():
 	_set_pause(false)
-	var ThisGameDef = load("res://games/movement2/game_movement2.tres")
-	Eggplant.transition_to(ThisGameDef.initial_scene)
+	Eggplant.restart_scene()
 
 
 func _set_pause(should_pause):

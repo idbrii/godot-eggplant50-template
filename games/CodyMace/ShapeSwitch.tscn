@@ -4,10 +4,10 @@
 [ext_resource path="res://games/CodyMace/ShapeSwitch.cs" type="Script" id=2]
 [ext_resource path="res://games/movement2/Player/Sprite.gd" type="Script" id=3]
 [ext_resource path="res://games/CodyMace/Player.gd" type="Script" id=4]
-[ext_resource path="res://games/CodyMace/GDSController.gd" type="Script" id=5]
 [ext_resource path="res://games/CodyMace/Assets/heart.png" type="Texture" id=6]
 [ext_resource path="res://mainmenu/art/font/font_kenpixel_mini.tres" type="DynamicFont" id=7]
 [ext_resource path="res://games/CodyMace/Audio/heal.wav" type="AudioStream" id=8]
+[ext_resource path="res://games/movement2/ui/GameMenu.tscn" type="PackedScene" id=9]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 112, 10 )
@@ -56,9 +56,6 @@ margin_top = -163.0
 margin_right = 267.0
 margin_bottom = 166.0
 color = Color( 0.301961, 0.301961, 0.301961, 1 )
-
-[node name="GDSController" type="Node" parent="."]
-script = ExtResource( 5 )
 
 [node name="Platform" type="RigidBody2D" parent="."]
 mode = 1
@@ -189,5 +186,18 @@ bbcode_text = "0"
 meta_underlined = false
 text = "0"
 scroll_active = false
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="GameMenu" parent="UI" instance=ExtResource( 9 )]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -22.2865
+margin_top = -110.0
+margin_right = 22.2865
+margin_bottom = 110.0
+supports_restart = false
 
 [connection signal="jump" from="Player" to="." method="_on_Player_jump"]
