@@ -22,6 +22,18 @@ everyone's GameDef to res://games/eggplant_games.tres, and hopefully the package
 all work!
 
 
+## Examples
+
+There are two example games:
+
+1. games/movement2/ - a gdscript game with a decent tunable player controller
+2. games/CodyMace/ - a C# game with sound that uses movement2's Player.gd player controller
+
+Feel free to delete these and work in your own folder. If you want to use them
+as a starting point, make sure you **duplicate** and delete the original so
+godot drops any connections between files when we put the projects together.
+
+
 ## Inputs
 
 Use the `move_` inputs for movement:
