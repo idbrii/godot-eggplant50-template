@@ -39,9 +39,11 @@ export var jump_buffer : float = 0.1
 var jump_coyote_timer : float = 0
 var jump_buffer_timer : float = 0
 var is_jumping := false
+var prev_y_velocity : float = 0
 # ----------------------------------- #
 
 signal jump
+signal jump_landed
 
 
 # All inputs we want to keep track of
@@ -56,7 +58,6 @@ func get_input() -> Dictionary:
 		"walk": Input.is_action_pressed("action2"),
 	}
 
-
 func _physics_process(delta: float) -> void:
 	x_movement(delta)
 	jump_logic(delta)
@@ -64,6 +65,9 @@ func _physics_process(delta: float) -> void:
 
 	timers(delta)
 	apply_velocity()
+	if (prev_y_velocity > 0 and velocity.y == 0):
+		emit_signal("jump_landed")
+	prev_y_velocity = velocity.y
 
 
 func apply_velocity() -> void:
