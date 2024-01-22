@@ -19,6 +19,9 @@ public class ShapeSwitch : Node2D
 	Node2D life3;
 	RichTextLabel scoreLabel;
 
+    [Signal]
+    public delegate void GameOverEventHandler();
+
 	public override async void _Ready()
 	{
 		player = GetNode<Node2D>("Player");
@@ -64,10 +67,16 @@ public class ShapeSwitch : Node2D
 		if (shapeType != ShapeType.Heart && shapeType != playerShapeType)
 		{
 			life -= 1;
-			playerShapeType = shapeType;
+			// screen shake
+			GetNode<ShakeableCamera>("Camera2D").Shake();
+			// play hit sound
+            GetNode<AudioStreamPlayer>("HitSound").Play();
 		} else {
 			score += 1;
+			// play point sound
+            GetNode<AudioStreamPlayer>("PointSound").Play();
 		}
+		playerShapeType = shapeType;
 		Sprite sprite = player.GetNode<Node2D>("SpriteContainer").GetNode<Sprite>("Sprite");
 		switch (shapeType)
 		{
@@ -88,13 +97,63 @@ public class ShapeSwitch : Node2D
 		if (life <= 0)
 		{
 			// game over
+			// destroy player
+			player.QueueFree();
 			life = 0;
+			HandleGameOver();
 		}
 		if (life > 3)
 		{
 			life = 3;
 		}
 		UpdateUI();
+	}
+
+	async void HandleGameOver()
+	{
+		await ToSignal(GetTree().CreateTimer(1.0f), "timeout");
+		EmitSignal(nameof(GameOverEventHandler));
+	}
+
+	void JumpLandedEventHandler()
+	{
+		return;
+		playerShapeType = (ShapeType)playerShapeType + 1;
+		var nextShapeType = (ShapeType)playerShapeType + 1;
+		if (playerShapeType > ShapeType.Triangle)
+		{
+			playerShapeType = ShapeType.Circle;
+		}
+		if (nextShapeType > ShapeType.Triangle)
+		{
+			nextShapeType = ShapeType.Circle;
+		}
+		Sprite sprite = player.GetNode<Node2D>("SpriteContainer").GetNode<Sprite>("Sprite");
+		switch (playerShapeType)
+		{
+			case ShapeType.Circle:
+				sprite.Texture = GD.Load<Texture>("res://games/CodyMace/Assets/circle.png");
+				break;
+			case ShapeType.Square:
+				sprite.Texture = GD.Load<Texture>("res://games/CodyMace/Assets/square.png");
+				break;
+			case ShapeType.Triangle:
+				sprite.Texture = GD.Load<Texture>("res://games/CodyMace/Assets/triangle.png");
+				break;
+		}
+		Sprite nextShapeSprite = GetNode<Sprite>("NextShape");
+		switch (nextShapeType)
+		{
+			case ShapeType.Circle:
+				nextShapeSprite.Texture = GD.Load<Texture>("res://games/CodyMace/Assets/circle.png");
+				break;
+			case ShapeType.Square:
+				nextShapeSprite.Texture = GD.Load<Texture>("res://games/CodyMace/Assets/square.png");
+				break;
+			case ShapeType.Triangle:
+				nextShapeSprite.Texture = GD.Load<Texture>("res://games/CodyMace/Assets/triangle.png");
+				break;
+		}
 	}
 
 	void UpdateUI()

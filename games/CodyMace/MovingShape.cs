@@ -94,4 +94,9 @@ public class MovingShape : Area2D
     {
         QueueFree();
     }
+
+    void GameOverDude()
+    {
+        GD.Print("Game over dude");
+    }
 }

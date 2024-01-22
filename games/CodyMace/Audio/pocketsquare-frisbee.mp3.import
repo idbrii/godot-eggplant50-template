@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/pocketsquare-frisbee.mp3-7af19b94b82cacaca705a06b58d9d717.mp3str"
+
+[deps]
+
+source_file="res://games/CodyMace/Audio/pocketsquare-frisbee.mp3"
+dest_files=[ "res://.import/pocketsquare-frisbee.mp3-7af19b94b82cacaca705a06b58d9d717.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
