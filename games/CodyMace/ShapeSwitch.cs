@@ -89,6 +89,7 @@ public class ShapeSwitch : Node2D
 			// play point sound
             GetNode<AudioStreamPlayer>("PointSound").Play();
 		}
+		playerShapeType = shapeType;
 		Sprite sprite = player.GetNode<Node2D>("SpriteContainer").GetNode<Sprite>("Sprite");
 		switch (shapeType)
 		{
@@ -167,6 +168,53 @@ public class ShapeSwitch : Node2D
 
 	void UpdateNextShapeUI(ShapeType nextShapeType)
 	{
+		Sprite nextShapeSprite = GetNode<Sprite>("NextShape");
+		switch (nextShapeType)
+		{
+			case ShapeType.Circle:
+				nextShapeSprite.Texture = GD.Load<Texture>("res://games/CodyMace/Assets/circle.png");
+				break;
+			case ShapeType.Square:
+				nextShapeSprite.Texture = GD.Load<Texture>("res://games/CodyMace/Assets/square.png");
+				break;
+			case ShapeType.Triangle:
+				nextShapeSprite.Texture = GD.Load<Texture>("res://games/CodyMace/Assets/triangle.png");
+				break;
+		}
+	}
+
+	async void HandleGameOver()
+	{
+		await ToSignal(GetTree().CreateTimer(1.0f), "timeout");
+		EmitSignal(nameof(GameOverEventHandler));
+	}
+
+	void JumpLandedEventHandler()
+	{
+		return;
+		playerShapeType = (ShapeType)playerShapeType + 1;
+		var nextShapeType = (ShapeType)playerShapeType + 1;
+		if (playerShapeType > ShapeType.Triangle)
+		{
+			playerShapeType = ShapeType.Circle;
+		}
+		if (nextShapeType > ShapeType.Triangle)
+		{
+			nextShapeType = ShapeType.Circle;
+		}
+		Sprite sprite = player.GetNode<Node2D>("SpriteContainer").GetNode<Sprite>("Sprite");
+		switch (playerShapeType)
+		{
+			case ShapeType.Circle:
+				sprite.Texture = GD.Load<Texture>("res://games/CodyMace/Assets/circle.png");
+				break;
+			case ShapeType.Square:
+				sprite.Texture = GD.Load<Texture>("res://games/CodyMace/Assets/square.png");
+				break;
+			case ShapeType.Triangle:
+				sprite.Texture = GD.Load<Texture>("res://games/CodyMace/Assets/triangle.png");
+				break;
+		}
 		Sprite nextShapeSprite = GetNode<Sprite>("NextShape");
 		switch (nextShapeType)
 		{
