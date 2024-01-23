@@ -67,12 +67,13 @@ The input mapping is modelled after [pico-8](https://iiviigames.github.io/pico8-
 
 ## Returning to Menu
 
-To return to main menu from your game, call:
+Add games/movement2/ui/GameMenu.tscn to your scene for a pause menu that
+includes options to 'Restart' and 'Quit to Menu'. If you want to customize this
+menu, be sure to **duplicate** it into your game.
+
+To return to main menu from code, call:
 
     Eggplant.return_to_menu()
-
-You could do this from the `pause` input (see games/movement2/World/World.gd)
-or something more sophisticated.
 
 
 ## Deploy to itch.io
