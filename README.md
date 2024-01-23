@@ -2,6 +2,8 @@
 
 We're trying to pack a bunch of games together!
 
+This repo is for the final project with everything merged into one megagame.
+
 # Theme
 
 📐 Finding Poetry in Geometry
@@ -10,16 +12,20 @@ This is for the UFO 50 fan jam or Jamuary as @docky has so aptly dubbed it. We
 voted and selected this theme. More details on the
 [Jam Page](https://itch.io/jam/eggplant-50).
 
+
 # Adding your game
 
-1. Clone this repo as a template so you can create your game in Godot 3.5 with this project as your base.
+1. Fork this repo so you have the same project structure.
+2. Install Godot 3.5 .NET so you can run the mega project with both .NET and gdscript  games.
 2. Create your game in res://games/your-name-here That way all our games are isolated, so it should be easier to merge them back together.
 3. Create a GameDef as res://games/your-name-here/game_yourname.tres
 4. Add your GameDef to res://games/eggplant_games.tres
 
-Once the jam is done, we can merge all the different projects, re-add
-everyone's GameDef to res://games/eggplant_games.tres, and hopefully the package will
-all work!
+Once you complete your game, rebase onto latest and submit a PR. Make sure not
+to include any commits that remove files from the template or change project
+settings since these will cause conflicts. You can accept yours for
+eggplant_games.tres conflicts since we'll just re-add everyone's GameDefs
+before.
 
 
 ## Examples
