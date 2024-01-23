@@ -88,3 +88,13 @@ pip install -r ci/requirements.txt
 python ci/pushbuild.py
 ```
 
+## Troubleshooting
+
+### _load: No loader found for resource: res://games/CodyMace/ShapeSwitch.cs
+
+You're probably not using the .NET version of godot, so any games with .cs will fail to load. We are using Godot v3.5.3.stable.mono.official [6c814135b]
+
+You can either:
+* [Download Godot 3 for Windows](https://godotengine.org/download/3.x/windows/) click on **Godot Engine - .NET**
+* Remove other games from the `eggplant_games.tres` resource
+
