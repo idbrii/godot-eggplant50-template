@@ -2,7 +2,7 @@
 
 We're trying to pack a bunch of games together!
 
-This repo is for the final project with everything merged into one megagame.
+This repo is a starting point, project structure, and the destination for all games merged into one megagame.
 
 # Theme
 
