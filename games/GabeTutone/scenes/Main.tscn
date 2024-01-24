@@ -1,0 +1,63 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://font/FallingSky-JKwK.otf" type="DynamicFontData" id=5]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.407843, 0.168627, 0.509804, 1 )
+border_width_left = 5
+border_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 46
+font_data = ExtResource( 5 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 1, 0.94902, 0.458824, 1 )
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color( 0.74902, 0.247059, 0.701961, 1 )
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+shadow_size = 5
+shadow_offset = Vector2( 5, 5 )
+
+[node name="Main" type="Node"]
+script = null
+circle_scene = null
+cross_scene = null
+
+[node name="Board" parent="."]
+position = Vector2( 300, 300 )
+
+[node name="SidePanel" type="Panel" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -300.0
+custom_styles/panel = SubResource( 1 )
+
+[node name="PlayerLabel" type="Label" parent="."]
+margin_left = 600.0
+margin_top = 120.0
+margin_right = 900.0
+margin_bottom = 187.0
+custom_fonts/font = SubResource( 2 )
+text = "Next Player:"
+align = 1
+valign = 1
+
+[node name="PlayerPanel" type="Panel" parent="."]
+margin_left = 650.0
+margin_top = 200.0
+margin_right = 850.0
+margin_bottom = 400.0
+custom_styles/panel = SubResource( 3 )
+
+[node name="GameOverMenu" parent="."]
+pause_mode = 2
+
+[connection signal="restart" from="GameOverMenu" to="." method="_on_GameOverMenu_restart"]
