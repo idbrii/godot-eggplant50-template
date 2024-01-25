@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/triangle.png-379b253cada918576825de8cc2037d3d.stex"
+path="res://.import/eggplant-jam-bordered.png-cf59f3ae089f12d9939d8eab8acce271.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://games/CodyMace/Assets/triangle.png"
-dest_files=[ "res://.import/triangle.png-379b253cada918576825de8cc2037d3d.stex" ]
+source_file="res://games/CodyMace/Assets/eggplant-jam-bordered.png"
+dest_files=[ "res://.import/eggplant-jam-bordered.png-cf59f3ae089f12d9939d8eab8acce271.stex" ]
 
 [params]
 

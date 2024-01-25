@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://games/CodyMace/Assets/square.png" type="Texture" id=1]
 [ext_resource path="res://games/CodyMace/ShapeSwitch.cs" type="Script" id=2]
@@ -9,11 +9,12 @@
 [ext_resource path="res://mainmenu/art/font/font_kenpixel_mini.tres" type="DynamicFont" id=7]
 [ext_resource path="res://games/CodyMace/Audio/jump.wav" type="AudioStream" id=8]
 [ext_resource path="res://games/movement2/ui/GameMenu.tscn" type="PackedScene" id=9]
-[ext_resource path="res://games/CodyMace/Assets/circle.png" type="Texture" id=10]
+[ext_resource path="res://games/CodyMace/Assets/triangle.png" type="Texture" id=10]
 [ext_resource path="res://games/CodyMace/ShakeableCamera.cs" type="Script" id=11]
 [ext_resource path="res://games/CodyMace/Audio/point.wav" type="AudioStream" id=12]
 [ext_resource path="res://games/CodyMace/Audio/hit.wav" type="AudioStream" id=13]
 [ext_resource path="res://games/CodyMace/Audio/pocketsquare-frisbee.mp3" type="AudioStream" id=14]
+[ext_resource path="res://games/CodyMace/Audio/change.wav" type="AudioStream" id=15]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 112, 10 )
@@ -61,7 +62,7 @@ margin_left = -269.0
 margin_top = -163.0
 margin_right = 267.0
 margin_bottom = 166.0
-color = Color( 0.301961, 0.301961, 0.301961, 1 )
+color = Color( 0.215686, 0.145098, 0.219608, 1 )
 
 [node name="Platform" type="RigidBody2D" parent="."]
 mode = 1
@@ -75,7 +76,7 @@ margin_left = -111.0
 margin_top = -10.0
 margin_right = 113.0
 margin_bottom = 10.0
-color = Color( 0.517647, 0.517647, 0.517647, 1 )
+color = Color( 0.698039, 0.737255, 0.760784, 1 )
 
 [node name="Platform2" type="RigidBody2D" parent="."]
 position = Vector2( -122, -82 )
@@ -128,6 +129,10 @@ stream = ExtResource( 14 )
 volume_db = 5.0
 autoplay = true
 
+[node name="ChangeSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 15 )
+volume_db = -4.444
+
 [node name="Player" type="KinematicBody2D" parent="."]
 position = Vector2( 0, -27 )
 script = ExtResource( 4 )
@@ -168,7 +173,7 @@ __meta__ = {
 }
 
 [node name="Sprite" type="Sprite" parent="Life1"]
-modulate = Color( 0.937255, 0.215686, 0.34902, 1 )
+modulate = Color( 0.882353, 0.254902, 0.254902, 1 )
 scale = Vector2( 0.8, 0.8 )
 texture = ExtResource( 6 )
 
@@ -180,7 +185,7 @@ __meta__ = {
 }
 
 [node name="Sprite" type="Sprite" parent="Life2"]
-modulate = Color( 0.937255, 0.215686, 0.34902, 1 )
+modulate = Color( 0.882353, 0.254902, 0.254902, 1 )
 scale = Vector2( 0.8, 0.8 )
 texture = ExtResource( 6 )
 
@@ -192,7 +197,7 @@ __meta__ = {
 }
 
 [node name="Sprite" type="Sprite" parent="Life3"]
-modulate = Color( 0.937255, 0.215686, 0.34902, 1 )
+modulate = Color( 0.882353, 0.254902, 0.254902, 1 )
 scale = Vector2( 0.8, 0.8 )
 texture = ExtResource( 6 )
 
