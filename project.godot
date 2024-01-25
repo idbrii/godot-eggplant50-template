@@ -9,11 +9,6 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "MarginContainer",
-"class": "ChoiceContainer",
-"language": "GDScript",
-"path": "res://examples/scenes/common/choice_container.gd"
-}, {
 "base": "Resource",
 "class": "GameDef",
 "language": "GDScript",
@@ -23,17 +18,10 @@ _global_script_classes=[ {
 "class": "GameList",
 "language": "GDScript",
 "path": "res://mainmenu/gamelist.gd"
-}, {
-"base": "Reference",
-"class": "InkGDProfiler",
-"language": "GDScript",
-"path": "res://examples/scenes/common/profiler.gd"
 } ]
 _global_script_class_icons={
-"ChoiceContainer": "",
 "GameDef": "",
-"GameList": "",
-"InkGDProfiler": ""
+"GameList": ""
 }
 
 [application]
