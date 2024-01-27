@@ -1,0 +1,124 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://addons/colorful-palette-swap/panel/processingpopup.gd" type="Script" id=1]
+[ext_resource path="res://addons/colorful-palette-swap/panel/theme.tres" type="Theme" id=2]
+[ext_resource path="res://addons/colorful-palette-swap/code/extract_palette.gd" type="Script" id=3]
+[ext_resource path="res://addons/colorful-palette-swap/panel/EditorPathInput.tscn" type="PackedScene" id=4]
+[ext_resource path="res://addons/colorful-palette-swap/code/invalid_path_popup.gd" type="Script" id=6]
+
+[node name="ExtractPalettePopup" type="WindowDialog"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -424.0
+margin_bottom = -450.0
+rect_min_size = Vector2( 600, 150 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 2 )
+window_title = "Extract Palette"
+script = ExtResource( 1 )
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_top = 10.0
+margin_right = -10.0
+margin_bottom = -10.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+scroll_vertical_enabled = false
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer"]
+margin_right = 580.0
+margin_bottom = 130.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 50
+
+[node name="Extract" type="VBoxContainer" parent="ScrollContainer/HBoxContainer"]
+margin_right = 580.0
+margin_bottom = 130.0
+rect_min_size = Vector2( 350, 0 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="ScrollContainer/HBoxContainer/Extract"]
+margin_right = 580.0
+margin_bottom = 14.0
+text = "Extract Palette"
+
+[node name="ExtractPalette" type="HBoxContainer" parent="ScrollContainer/HBoxContainer/Extract"]
+unique_name_in_owner = true
+margin_top = 18.0
+margin_right = 580.0
+margin_bottom = 112.0
+rect_min_size = Vector2( 300, 0 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 3 )
+
+[node name="Paths" type="VBoxContainer" parent="ScrollContainer/HBoxContainer/Extract/ExtractPalette"]
+margin_right = 515.0
+margin_bottom = 94.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Input" parent="ScrollContainer/HBoxContainer/Extract/ExtractPalette/Paths" instance=ExtResource( 4 )]
+margin_right = 515.0
+label = "Input"
+path_tooltip = "Path to input base palette."
+
+[node name="Output" parent="ScrollContainer/HBoxContainer/Extract/ExtractPalette/Paths" instance=ExtResource( 4 )]
+margin_top = 28.0
+margin_right = 515.0
+margin_bottom = 52.0
+label = "Output"
+path_tooltip = "Path to write extracted palette."
+path_type = 3
+
+[node name="Filter" type="HBoxContainer" parent="ScrollContainer/HBoxContainer/Extract/ExtractPalette/Paths"]
+margin_top = 56.0
+margin_right = 515.0
+margin_bottom = 76.0
+
+[node name="Label" type="Label" parent="ScrollContainer/HBoxContainer/Extract/ExtractPalette/Paths/Filter"]
+margin_top = 3.0
+margin_right = 90.0
+margin_bottom = 17.0
+rect_min_size = Vector2( 90, 0 )
+text = "Colour Filter"
+
+[node name="Value" type="OptionButton" parent="ScrollContainer/HBoxContainer/Extract/ExtractPalette/Paths/Filter"]
+margin_left = 100.0
+margin_right = 515.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "All"
+items = [ "All", null, false, 0, null, "Grey Value", null, false, 1, null, "Hue", null, false, 2, null ]
+selected = 0
+
+[node name="Button" type="Button" parent="ScrollContainer/HBoxContainer/Extract/ExtractPalette"]
+margin_left = 525.0
+margin_top = 12.0
+margin_right = 580.0
+margin_bottom = 82.0
+rect_min_size = Vector2( 0, 70 )
+size_flags_vertical = 4
+text = "Extract"
+
+[node name="Status" type="Label" parent="ScrollContainer/HBoxContainer/Extract"]
+margin_top = 116.0
+margin_right = 580.0
+margin_bottom = 130.0
+
+[node name="InvalidPathPopup" type="AcceptDialog" parent="."]
+unique_name_in_owner = true
+margin_right = 123.0
+margin_bottom = 58.0
+window_title = "Invalid path"
+resizable = true
+script = ExtResource( 6 )
+
+[connection signal="process_complete" from="ScrollContainer/HBoxContainer/Extract/ExtractPalette" to="." method="_on_process_complete"]
