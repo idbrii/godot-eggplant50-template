@@ -1,7 +1,7 @@
 extends HBoxContainer
 
-func on_time_update():
-	pass
+func update_timer(secs):
+	$TimeLabel.text = "%.2f" % secs
 	
 func on_touch_update(count):
 	$TouchLabel.text = str(count)

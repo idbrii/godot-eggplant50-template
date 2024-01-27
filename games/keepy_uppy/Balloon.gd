@@ -3,6 +3,8 @@ extends RigidBody2D
 const MAX_SPEED = 100
 
 signal touch_update(count)
+signal balloon_popped(balloon)
+signal floor_touched()
 
 var knocks = 0
 var keep_up_touches = 0
@@ -33,11 +35,17 @@ func on_body_entered(body) -> void:
 		keep_up_touches += 1
 		emit_signal('touch_update', keep_up_touches)
 
+	if body == $'../Room/Floor':
+		keep_up_touches = 0
+		emit_signal('touch_update', keep_up_touches)
+		emit_signal('floor_touched')
+
 	print("knocked into ", body)
 	if $PopTimer.is_stopped():
 		$PopTimer.start()
 	elif knocks > 3:
 		print("pop! ", knocks)
+		emit_signal('balloon_popped', self)
 	
 	knocks += 1
 

@@ -13,7 +13,6 @@ var dashing = false
 var velocity = Vector2()
 var jumping = false
 
-var previous_knock = self
 var stick_combo_touches = 0
 var head_combo_touches = 0
 
@@ -32,8 +31,6 @@ func stick_knock(_body):
 	emit_signal('stick_combo_update', stick_combo_touches)
 	emit_signal('head_combo_update', head_combo_touches)
 
-	previous_knock = $Stick
-
 func head_knock(_body):
 	head_combo_touches += 1
 	stick_combo_touches = 0
@@ -41,7 +38,11 @@ func head_knock(_body):
 	emit_signal('head_combo_update', head_combo_touches)
 	emit_signal('stick_combo_update', stick_combo_touches)
 
-	previous_knock = $Head
+func on_floor_touched():
+	stick_combo_touches = 0
+	head_combo_touches  = 0
+	emit_signal('head_combo_update', head_combo_touches)
+	emit_signal('stick_combo_update', stick_combo_touches)
 
 func get_input():
 	velocity.x = 0

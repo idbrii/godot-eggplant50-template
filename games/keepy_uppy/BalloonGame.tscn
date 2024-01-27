@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://games/keepy_uppy/lilrobo.png" type="Texture" id=1]
 [ext_resource path="res://games/keepy_uppy/LilRobo.gd" type="Script" id=2]
@@ -7,9 +7,10 @@
 [ext_resource path="res://games/keepy_uppy/Status.gd" type="Script" id=5]
 [ext_resource path="res://mainmenu/theme/theme_eggplant.tres" type="Theme" id=6]
 [ext_resource path="res://games/keepy_uppy/BalloonGame.gd" type="Script" id=7]
+[ext_resource path="res://games/keepy_uppy/PauseMenu.gd" type="Script" id=8]
 
 [sub_resource type="PhysicsMaterial" id=1]
-bounce = 0.95
+bounce = 0.9
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 312.25, 10 )
@@ -34,89 +35,93 @@ __meta__ = {
 }
 
 [node name="Status" type="HBoxContainer" parent="UI"]
+margin_left = 8.0
 margin_right = 638.0
 margin_bottom = 32.0
 script = ExtResource( 5 )
 
-[node name="VSeparator5" type="VSeparator" parent="UI/Status"]
-margin_right = 4.0
-margin_bottom = 32.0
-
 [node name="Label" type="Label" parent="UI/Status"]
-margin_left = 8.0
 margin_top = 6.0
-margin_right = 88.0
+margin_right = 80.0
 margin_bottom = 26.0
 text = "Time in air"
 
 [node name="TimeLabel" type="Label" parent="UI/Status"]
-margin_left = 92.0
+margin_left = 84.0
 margin_top = 6.0
-margin_right = 126.0
+margin_right = 164.0
 margin_bottom = 26.0
+rect_min_size = Vector2( 80, 0 )
 text = "0.00"
 
-[node name="VSeparator" type="VSeparator" parent="UI/Status"]
-margin_left = 130.0
-margin_right = 134.0
-margin_bottom = 32.0
-
 [node name="Label2" type="Label" parent="UI/Status"]
-margin_left = 138.0
+margin_left = 168.0
 margin_top = 6.0
-margin_right = 206.0
+margin_right = 236.0
 margin_bottom = 26.0
 text = "Touches"
 
 [node name="TouchLabel" type="Label" parent="UI/Status"]
-margin_left = 210.0
+margin_left = 240.0
 margin_top = 6.0
-margin_right = 220.0
+margin_right = 284.0
 margin_bottom = 26.0
+rect_min_size = Vector2( 44, 0 )
 text = "0"
 
-[node name="VSeparator2" type="VSeparator" parent="UI/Status"]
-margin_left = 224.0
-margin_right = 228.0
-margin_bottom = 32.0
-
 [node name="Label3" type="Label" parent="UI/Status"]
-margin_left = 232.0
+margin_left = 288.0
 margin_top = 6.0
-margin_right = 330.0
+margin_right = 386.0
 margin_bottom = 26.0
 text = "Stick combo"
 
 [node name="StickComboLabel" type="Label" parent="UI/Status"]
-margin_left = 334.0
+margin_left = 390.0
 margin_top = 6.0
-margin_right = 344.0
+margin_right = 434.0
 margin_bottom = 26.0
+rect_min_size = Vector2( 44, 0 )
 text = "0"
 
-[node name="VSeparator3" type="VSeparator" parent="UI/Status"]
-margin_left = 348.0
-margin_right = 352.0
-margin_bottom = 32.0
-
 [node name="Label4" type="Label" parent="UI/Status"]
-margin_left = 356.0
+margin_left = 438.0
 margin_top = 6.0
-margin_right = 452.0
+margin_right = 534.0
 margin_bottom = 26.0
 text = "Head combo"
 
 [node name="HeadComboLabel" type="Label" parent="UI/Status"]
-margin_left = 456.0
+margin_left = 538.0
 margin_top = 6.0
-margin_right = 466.0
+margin_right = 582.0
 margin_bottom = 26.0
+rect_min_size = Vector2( 44, 0 )
 text = "0"
 
-[node name="VSeparator4" type="VSeparator" parent="UI/Status"]
-margin_left = 470.0
-margin_right = 474.0
-margin_bottom = 32.0
+[node name="PauseMenu" type="VBoxContainer" parent="UI"]
+pause_mode = 2
+visible = false
+margin_left = 224.0
+margin_top = 124.0
+margin_right = 264.0
+margin_bottom = 164.0
+script = ExtResource( 8 )
+
+[node name="Restart" type="Button" parent="UI/PauseMenu"]
+margin_right = 114.0
+margin_bottom = 58.0
+focus_neighbour_top = NodePath("../Quit")
+focus_neighbour_bottom = NodePath("../Quit")
+text = "restart"
+
+[node name="Quit" type="Button" parent="UI/PauseMenu"]
+margin_top = 62.0
+margin_right = 114.0
+margin_bottom = 120.0
+focus_neighbour_top = NodePath("../Restart")
+focus_neighbour_bottom = NodePath("../Restart")
+text = "quit"
 
 [node name="Balloon" type="RigidBody2D" parent="."]
 position = Vector2( 69, 152 )
