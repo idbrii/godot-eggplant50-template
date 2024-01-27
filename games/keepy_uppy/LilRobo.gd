@@ -1,5 +1,8 @@
 extends KinematicBody2D
 
+signal stick_combo_update(count)
+signal head_combo_update(count)
+
 export (int) var run_speed = 90
 export (int) var dash_speed = 90
 export (int) var jump_speed = -130
@@ -10,11 +13,35 @@ var dashing = false
 var velocity = Vector2()
 var jumping = false
 
+var previous_knock = self
+var stick_combo_touches = 0
+var head_combo_touches = 0
+
 func _ready():
 	$DashTimer.connect('timeout', self, 'stop_dash')
+	$Stick.connect('body_entered', self, 'stick_knock')
+	$Head.connect('body_entered', self, 'head_knock')
 
 func stop_dash():
 	dashing = false
+
+func stick_knock(_body):
+	stick_combo_touches += 1
+	head_combo_touches = 0
+
+	emit_signal('stick_combo_update', stick_combo_touches)
+	emit_signal('head_combo_update', head_combo_touches)
+
+	previous_knock = $Stick
+
+func head_knock(_body):
+	head_combo_touches += 1
+	stick_combo_touches = 0
+
+	emit_signal('head_combo_update', head_combo_touches)
+	emit_signal('stick_combo_update', stick_combo_touches)
+
+	previous_knock = $Head
 
 func get_input():
 	velocity.x = 0

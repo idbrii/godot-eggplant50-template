@@ -1,9 +1,12 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://games/keepy_uppy/lilrobo.png" type="Texture" id=1]
 [ext_resource path="res://games/keepy_uppy/LilRobo.gd" type="Script" id=2]
 [ext_resource path="res://games/keepy_uppy/yellow-balloon.png" type="Texture" id=3]
 [ext_resource path="res://games/keepy_uppy/Balloon.gd" type="Script" id=4]
+[ext_resource path="res://games/keepy_uppy/Status.gd" type="Script" id=5]
+[ext_resource path="res://mainmenu/theme/theme_eggplant.tres" type="Theme" id=6]
+[ext_resource path="res://games/keepy_uppy/BalloonGame.gd" type="Script" id=7]
 
 [sub_resource type="PhysicsMaterial" id=1]
 bounce = 0.95
@@ -15,21 +18,111 @@ extents = Vector2( 312.25, 10 )
 extents = Vector2( 10, 182 )
 
 [node name="BalloonGame" type="Node2D"]
+script = ExtResource( 7 )
 
-[node name="Control" type="Control" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
+[node name="UI" type="Control" parent="."]
+margin_right = 641.0
+margin_bottom = 359.0
+theme = ExtResource( 6 )
 
-[node name="ColorRect" type="ColorRect" parent="Control"]
+[node name="ColorRect" type="ColorRect" parent="UI"]
 margin_right = 656.0
 margin_bottom = 378.0
 color = Color( 0.698039, 0.737255, 0.760784, 1 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="Status" type="HBoxContainer" parent="UI"]
+margin_right = 638.0
+margin_bottom = 32.0
+script = ExtResource( 5 )
+
+[node name="VSeparator5" type="VSeparator" parent="UI/Status"]
+margin_right = 4.0
+margin_bottom = 32.0
+
+[node name="Label" type="Label" parent="UI/Status"]
+margin_left = 8.0
+margin_top = 6.0
+margin_right = 88.0
+margin_bottom = 26.0
+text = "Time in air"
+
+[node name="TimeLabel" type="Label" parent="UI/Status"]
+margin_left = 92.0
+margin_top = 6.0
+margin_right = 126.0
+margin_bottom = 26.0
+text = "0.00"
+
+[node name="VSeparator" type="VSeparator" parent="UI/Status"]
+margin_left = 130.0
+margin_right = 134.0
+margin_bottom = 32.0
+
+[node name="Label2" type="Label" parent="UI/Status"]
+margin_left = 138.0
+margin_top = 6.0
+margin_right = 206.0
+margin_bottom = 26.0
+text = "Touches"
+
+[node name="TouchLabel" type="Label" parent="UI/Status"]
+margin_left = 210.0
+margin_top = 6.0
+margin_right = 220.0
+margin_bottom = 26.0
+text = "0"
+
+[node name="VSeparator2" type="VSeparator" parent="UI/Status"]
+margin_left = 224.0
+margin_right = 228.0
+margin_bottom = 32.0
+
+[node name="Label3" type="Label" parent="UI/Status"]
+margin_left = 232.0
+margin_top = 6.0
+margin_right = 330.0
+margin_bottom = 26.0
+text = "Stick combo"
+
+[node name="StickComboLabel" type="Label" parent="UI/Status"]
+margin_left = 334.0
+margin_top = 6.0
+margin_right = 344.0
+margin_bottom = 26.0
+text = "0"
+
+[node name="VSeparator3" type="VSeparator" parent="UI/Status"]
+margin_left = 348.0
+margin_right = 352.0
+margin_bottom = 32.0
+
+[node name="Label4" type="Label" parent="UI/Status"]
+margin_left = 356.0
+margin_top = 6.0
+margin_right = 452.0
+margin_bottom = 26.0
+text = "Head combo"
+
+[node name="HeadComboLabel" type="Label" parent="UI/Status"]
+margin_left = 456.0
+margin_top = 6.0
+margin_right = 466.0
+margin_bottom = 26.0
+text = "0"
+
+[node name="VSeparator4" type="VSeparator" parent="UI/Status"]
+margin_left = 470.0
+margin_right = 474.0
+margin_bottom = 32.0
 
 [node name="Balloon" type="RigidBody2D" parent="."]
 position = Vector2( 69, 152 )
 mass = 0.05
 physics_material_override = SubResource( 1 )
-contacts_reported = 2
+contacts_reported = 4
 contact_monitor = true
 script = ExtResource( 4 )
 __meta__ = {
@@ -64,6 +157,23 @@ polygon = PoolVector2Array( 21, -42, 23, -15, 16, -15, 16, -23, 6, -21, -10, -22
 
 [node name="DashTimer" type="Timer" parent="LilRobo"]
 one_shot = true
+
+[node name="Stick" type="Area2D" parent="LilRobo"]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="LilRobo/Stick"]
+position = Vector2( 23, -33 )
+polygon = PoolVector2Array( -1, 5, 0, 19, 3, 19, 3, -10, -3, -10 )
+
+[node name="Head" type="Area2D" parent="LilRobo"]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="LilRobo/Head"]
+polygon = PoolVector2Array( -11, -23, 16, -24, 17, -5, -13, -4 )
 
 [node name="Room" type="Node2D" parent="."]
 

@@ -2,11 +2,17 @@ extends RigidBody2D
 
 const MAX_SPEED = 100
 
+signal touch_update(count)
+
 var knocks = 0
+var keep_up_touches = 0
 var previously_touched
 
 func _ready() -> void:
+	knocks = 0
+	keep_up_touches = 0
 	previously_touched = self
+
 	$DragTimer.connect('timeout', self, 'drag_timeout')
 	$PopTimer.connect('timeout', self, 'pop_timeout')
 	connect('body_entered', self, 'on_body_entered')
@@ -19,16 +25,23 @@ func _physics_process(_delta: float) -> void:
 func drag_timeout() -> void:
 	linear_damp = -1
 
+func was_previous_touch(body):
+	return previously_touched == body
+
 func on_body_entered(body) -> void:
-	if previously_touched == body:
-		return
+	if body == $'../LilRobo':
+		keep_up_touches += 1
+		emit_signal('touch_update', keep_up_touches)
+
 	print("knocked into ", body)
 	if $PopTimer.is_stopped():
 		$PopTimer.start()
 	elif knocks > 3:
 		print("pop! ", knocks)
-
+	
 	knocks += 1
+
+	previously_touched = body
 
 func pop_timeout() -> void:
 	knocks = 0
