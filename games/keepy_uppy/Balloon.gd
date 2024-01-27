@@ -1,5 +1,10 @@
 extends RigidBody2D
 
+enum BalloonState {
+	IN_PLAY,
+	POPPED
+}
+
 const MAX_SPEED = 100
 
 signal touch_update(count)
@@ -9,11 +14,13 @@ signal floor_touched()
 var knocks = 0
 var keep_up_touches = 0
 var previously_touched
+var current_state = BalloonState.IN_PLAY
 
 func _ready() -> void:
 	knocks = 0
 	keep_up_touches = 0
 	previously_touched = self
+	current_state = BalloonState.IN_PLAY
 
 	$DragTimer.connect('timeout', self, 'drag_timeout')
 	$PopTimer.connect('timeout', self, 'pop_timeout')
@@ -31,6 +38,9 @@ func was_previous_touch(body):
 	return previously_touched == body
 
 func on_body_entered(body) -> void:
+	if current_state == BalloonState.POPPED:
+		return
+
 	if body == $'../LilRobo':
 		keep_up_touches += 1
 		emit_signal('touch_update', keep_up_touches)
@@ -46,6 +56,7 @@ func on_body_entered(body) -> void:
 	elif knocks > 3:
 		print("pop! ", knocks)
 		emit_signal('balloon_popped', self)
+		current_state = BalloonState.POPPED
 	
 	knocks += 1
 

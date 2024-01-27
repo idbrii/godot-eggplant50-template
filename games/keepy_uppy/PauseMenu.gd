@@ -1,7 +1,5 @@
 extends VBoxContainer
 
-signal restart_game()
-
 func _ready() -> void:
 	$Restart.connect('pressed', self, 'restart_pressed')
 	$Quit.connect('pressed', self, 'quit_pressed')
