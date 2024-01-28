@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/eggplant-jam-bordered.png-8ed37f862f4256cf55a1e2ef89c9465a.stex"
+path="res://.import/sand-background.png-176b0629fbcc9778f9454dbbb57fc045.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://eggplant-jam-bordered.png"
-dest_files=[ "res://.import/eggplant-jam-bordered.png-8ed37f862f4256cf55a1e2ef89c9465a.stex" ]
+source_file="res://games/CodyMace/Assets/sand-background.png"
+dest_files=[ "res://.import/sand-background.png-176b0629fbcc9778f9454dbbb57fc045.stex" ]
 
 [params]
 
