@@ -26,7 +26,6 @@ zoom = Vector2( 0.75, 0.75 )
 [node name="Background2" type="Node2D" parent="."]
 position = Vector2( 1, 6 )
 rotation = 0.00238436
-scale = Vector2( 1, 1 )
 
 [node name="Sprite" type="Sprite" parent="Background2"]
 position = Vector2( -0.999996, -2.99999 )
