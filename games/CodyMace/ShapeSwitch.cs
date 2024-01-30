@@ -38,7 +38,7 @@ public class ShapeSwitch : Node2D
 				delay -= 4;
 				velocity += 0.5f;
 			}
-			await Task.Delay(delay);
+		    await ToSignal(GetTree().CreateTimer(delay / 1000.0f), "timeout");
 			if (!Godot.Object.IsInstanceValid(this))
 			{
 				// If we changed scenes, this object no longer exists and we

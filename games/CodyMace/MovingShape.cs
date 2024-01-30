@@ -82,7 +82,7 @@ public class MovingShape : Area2D
         Position = new Vector2(Position.x, Position.y - velocity * delta);
     }
 
-    public void OnPlayerBodyEntered(Node body)
+    public async void OnPlayerBodyEntered(Node body)
     {
         if (body.Name == "Player" && !popped) {
             popped = true;
@@ -96,14 +96,8 @@ public class MovingShape : Area2D
             if (shapeType == ShapeType.Jam) {
                 explosion.Color = jamColor;
             }
-            Timer timer = new Timer
-            {
-                WaitTime = 1.0f,
-                OneShot = true
-            };
-            AddChild(timer);
-            timer.Start();
-            timer.Connect("timeout", this, nameof(OnExplosionFinished));
+		    await ToSignal(GetTree().CreateTimer(1.0f), "timeout");
+            OnExplosionFinished();
         }
     }
 
