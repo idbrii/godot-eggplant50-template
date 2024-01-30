@@ -8,14 +8,14 @@ import os
 
 import git
 
-project = "eggplant50"
+project = "eggplant-50"
 
 ## TODO: Change to your itchio name or set to False to skip itchio upload.
-itch_project = f"idbrii/{project}"
+itch_project = f"codymace/{project}"
 #~ itch_project = False
 
 ## TODO: Change to where you want to export builds.
-export_path = Path("C:/code/builds/") / project
+export_path = Path("/Users/codymace/Desktop") / project
 
 ## Uncomment the platforms you want to build.
 platforms = [
