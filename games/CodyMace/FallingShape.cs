@@ -15,6 +15,8 @@ public class FallingShape : RigidBody2D
 
     float timeSinceHit = 0;
 
+    public bool increaseSmallChance = false;
+
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
@@ -47,15 +49,41 @@ public class FallingShape : RigidBody2D
         }
         int sizeSpread = (int)GD.RandRange(0, 10);
         float randomScale;
-        if (sizeSpread < 5) {
-            randomScale = (float)GD.RandRange(0.1f, 0.4f);
-            sizeClass = 0;
-        } else if (sizeSpread < 9) {
-            randomScale = (float)GD.RandRange(0.4f, 0.7f);
-            sizeClass = 1;
-        } else {
-            randomScale = (float)GD.RandRange(0.9f, 1.2f);
-            sizeClass = 2;
+        if (increaseSmallChance)
+        {
+            if (sizeSpread < 8)
+            {
+                randomScale = (float)GD.RandRange(0.1f, 0.15f);
+                sizeClass = 0;
+            }
+            else if (sizeSpread < 9)
+            {
+                randomScale = (float)GD.RandRange(0.2f, 0.7f);
+                sizeClass = 1;
+            }
+            else
+            {
+                randomScale = (float)GD.RandRange(0.7f, 1.5f);
+                sizeClass = 2;
+            }
+        }
+        else
+        {
+            if (sizeSpread < 5)
+            {
+                randomScale = (float)GD.RandRange(0.1f, 0.4f);
+                sizeClass = 0;
+            }
+            else if (sizeSpread < 9)
+            {
+                randomScale = (float)GD.RandRange(0.4f, 0.7f);
+                sizeClass = 1;
+            }
+            else
+            {
+                randomScale = (float)GD.RandRange(0.9f, 1.2f);
+                sizeClass = 2;
+            }
         }
         node.Visible = true;
         int colorIndex = (int)GD.RandRange(0, colors.Length);

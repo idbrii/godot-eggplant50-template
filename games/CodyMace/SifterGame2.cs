@@ -1,8 +1,6 @@
 using Godot;
-using System;
-using System.Threading.Tasks;
 
-public class SifterGame : Node2D
+public class SifterGame2 : Node2D
 {
 	PackedScene shapeScene = GD.Load<PackedScene>("res://games/CodyMace/FallingShape.tscn");
     bool dropShapes = false;
@@ -39,8 +37,8 @@ public class SifterGame : Node2D
     private void AddShape()
 	{
 		var shape = shapeScene.Instance() as FallingShape;
+        shape.increaseSmallChance = true;
 		AddChild(shape);
-		var newX = GD.RandRange(-80, 80);
-		shape.Position = new Vector2((float)newX, -160f);
+		shape.Position = new Vector2(-250, -180f);
 	}
 }
