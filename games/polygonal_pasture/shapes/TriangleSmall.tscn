@@ -10,6 +10,7 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true
 }
+merge_with_size = 2
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )

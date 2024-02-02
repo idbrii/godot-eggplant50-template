@@ -82,17 +82,6 @@ script = ExtResource( 12 )
 position = Vector2( 511, 123 )
 scale = Vector2( 0.75, 0.75 )
 
-[node name="triangle-small" parent="Basket/GrownShapes" instance=ExtResource( 8 )]
-merge_with_size = 1
-
-[node name="triangle-medium" parent="Basket/GrownShapes" instance=ExtResource( 9 )]
-shape_size = 1
-merge_result = ExtResource( 10 )
-
-[node name="triangle-large" parent="Basket/GrownShapes" instance=ExtResource( 10 )]
-shape_size = 2
-merge_with_size = 1
-
 [node name="Sprite" type="Sprite" parent="Basket"]
 position = Vector2( 511, 123 )
 scale = Vector2( 0.75, 0.75 )
@@ -114,3 +103,17 @@ polygon = PoolVector2Array( 601, 54, 560, 187, 566, 187, 607, 55, 606, 51, 603, 
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Basket/Edges/StaticBody2D3"]
 polygon = PoolVector2Array( 561, 188, 461, 188, 461, 194, 561, 194 )
+
+[node name="Node2D" type="Node2D" parent="Basket"]
+
+[node name="triangle-small" parent="Basket/Node2D" instance=ExtResource( 8 )]
+position = Vector2( 677, -130 )
+scale = Vector2( 0.75, 0.75 )
+
+[node name="triangle-medium" parent="Basket/Node2D" instance=ExtResource( 9 )]
+position = Vector2( 683, -87.9998 )
+scale = Vector2( 0.75, 0.75 )
+
+[node name="triangle-large" parent="Basket/Node2D" instance=ExtResource( 10 )]
+position = Vector2( 682, -33.9997 )
+scale = Vector2( 0.75, 0.75 )

@@ -23,11 +23,17 @@ _global_script_classes=[ {
 "class": "GrownShape",
 "language": "GDScript",
 "path": "res://games/polygonal_pasture/GrownShape.gd"
+}, {
+"base": "Sprite",
+"class": "PpShape",
+"language": "GDScript",
+"path": "res://games/polygonal_pasture/Shape.gd"
 } ]
 _global_script_class_icons={
 "GameDef": "",
 "GameList": "",
-"GrownShape": ""
+"GrownShape": "",
+"PpShape": ""
 }
 
 [application]
