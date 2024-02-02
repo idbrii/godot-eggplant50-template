@@ -7,9 +7,9 @@
 [ext_resource path="res://games/polygonal_pasture/assets/plot-highlight.png" type="Texture" id=5]
 [ext_resource path="res://games/polygonal_pasture/PolygonPasture.gd" type="Script" id=6]
 [ext_resource path="res://games/polygonal_pasture/Plot.gd" type="Script" id=7]
-[ext_resource path="res://games/polygonal_pasture/assets/triangle-small.png" type="Texture" id=8]
-[ext_resource path="res://games/polygonal_pasture/assets/triangle-medium.png" type="Texture" id=9]
-[ext_resource path="res://games/polygonal_pasture/assets/triangle-large.png" type="Texture" id=10]
+[ext_resource path="res://games/polygonal_pasture/shapes/TriangleSmall.tscn" type="PackedScene" id=8]
+[ext_resource path="res://games/polygonal_pasture/shapes/TriangleMedium.tscn" type="PackedScene" id=9]
+[ext_resource path="res://games/polygonal_pasture/shapes/TriangleLarge.tscn" type="PackedScene" id=10]
 [ext_resource path="res://games/polygonal_pasture/assets/basket.png" type="Texture" id=11]
 [ext_resource path="res://games/polygonal_pasture/Basket.gd" type="Script" id=12]
 
@@ -82,44 +82,16 @@ script = ExtResource( 12 )
 position = Vector2( 511, 123 )
 scale = Vector2( 0.75, 0.75 )
 
-[node name="triangle-small" type="RigidBody2D" parent="Basket/GrownShapes"]
-position = Vector2( 221.333, -337.333 )
-mode = 1
-__meta__ = {
-"_edit_group_": true
-}
+[node name="triangle-small" parent="Basket/GrownShapes" instance=ExtResource( 8 )]
+merge_with_size = 1
 
-[node name="Sprite" type="Sprite" parent="Basket/GrownShapes/triangle-small"]
-texture = ExtResource( 8 )
+[node name="triangle-medium" parent="Basket/GrownShapes" instance=ExtResource( 9 )]
+shape_size = 1
+merge_result = ExtResource( 10 )
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Basket/GrownShapes/triangle-small"]
-polygon = PoolVector2Array( 0, -12, -12, 12, 12, 12 )
-
-[node name="triangle-medium" type="RigidBody2D" parent="Basket/GrownShapes"]
-position = Vector2( 229.333, -281.333 )
-mode = 1
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Sprite" type="Sprite" parent="Basket/GrownShapes/triangle-medium"]
-texture = ExtResource( 9 )
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Basket/GrownShapes/triangle-medium"]
-polygon = PoolVector2Array( 0, -24, -24, 24, 24, 24 )
-
-[node name="triangle-large" type="RigidBody2D" parent="Basket/GrownShapes"]
-position = Vector2( 228, -209.333 )
-mode = 1
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Sprite" type="Sprite" parent="Basket/GrownShapes/triangle-large"]
-texture = ExtResource( 10 )
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Basket/GrownShapes/triangle-large"]
-polygon = PoolVector2Array( 0, -32, -32, 32, 32, 32 )
+[node name="triangle-large" parent="Basket/GrownShapes" instance=ExtResource( 10 )]
+shape_size = 2
+merge_with_size = 1
 
 [node name="Sprite" type="Sprite" parent="Basket"]
 position = Vector2( 511, 123 )
