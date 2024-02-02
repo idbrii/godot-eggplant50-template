@@ -11,7 +11,7 @@ func get_input() -> Dictionary:
 		"walk": Input.is_action_pressed("action2"),
 	}
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	var action = get_input()
 	position.x += action.x
 	position.y += action.y
@@ -30,10 +30,8 @@ func handle_action():
 
 var plots_on = []
 func on_plot_enter(plot):
-	print('entered ', plot)
 	if !plots_on.has(plot):
 		plots_on.append(plot)
 
 func on_plot_exit(plot):
-	print('exited ', plot)
 	plots_on.erase(plot)

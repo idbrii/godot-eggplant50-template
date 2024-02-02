@@ -1,5 +1,7 @@
 extends Area2D
 
+signal shape_harvested(shape)
+
 enum PlotState {
 	EMPTY,
 	SEEDED,
@@ -57,9 +59,12 @@ func _grow_shape():
 
 const TWEEN_DURATION = 0.5
 func harvest_shape():
-	var seed_node = get_node('Seed')
+	var seed_node : Sprite = get_node('Seed')
 	if !can_harvest():
 		return
+	
+	var orig_state = state
+	# Change now so nothing can be replanted (yet)
 	state = PlotState.FALLOW
 	
 	var go_up = get_tree().create_tween()
@@ -67,5 +72,13 @@ func harvest_shape():
 	go_up.set_ease(Tween.EASE_IN)
 	var fade_out = get_tree().create_tween()
 	fade_out.tween_property(seed_node, 'modulate', Color('#00ffffff'), TWEEN_DURATION)
+	
 	yield(fade_out, 'finished')
-	# emit_signal('shape_harvested', ???)
+
+	if orig_state == PlotState.ROTTEN:
+		return
+
+	# This is _hideous_
+	var path_parts = seed_node.texture.resource_path.split('/')
+	var shape_name = path_parts[path_parts.size()-1].rstrip('.png')
+	emit_signal('shape_harvested', shape_name)
