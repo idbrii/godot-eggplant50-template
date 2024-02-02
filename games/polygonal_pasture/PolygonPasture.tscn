@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://games/polygonal_pasture/assets/farmer.png" type="Texture" id=1]
 [ext_resource path="res://games/polygonal_pasture/assets/plot.png" type="Texture" id=2]
@@ -7,11 +7,11 @@
 [ext_resource path="res://games/polygonal_pasture/assets/plot-highlight.png" type="Texture" id=5]
 [ext_resource path="res://games/polygonal_pasture/PolygonPasture.gd" type="Script" id=6]
 [ext_resource path="res://games/polygonal_pasture/Plot.gd" type="Script" id=7]
-[ext_resource path="res://games/polygonal_pasture/shapes/TriangleSmall.tscn" type="PackedScene" id=8]
-[ext_resource path="res://games/polygonal_pasture/shapes/TriangleMedium.tscn" type="PackedScene" id=9]
-[ext_resource path="res://games/polygonal_pasture/shapes/TriangleLarge.tscn" type="PackedScene" id=10]
+[ext_resource path="res://games/polygonal_pasture/assets/floor.png" type="Texture" id=8]
 [ext_resource path="res://games/polygonal_pasture/assets/basket.png" type="Texture" id=11]
 [ext_resource path="res://games/polygonal_pasture/Basket.gd" type="Script" id=12]
+[ext_resource path="res://games/polygonal_pasture/Distribution.gd" type="Script" id=13]
+[ext_resource path="res://games/polygonal_pasture/assets/collector1.png" type="Texture" id=14]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 27.0
@@ -20,10 +20,41 @@ radius = 27.0
 radius = 6.0
 height = 34.0
 
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 125, 10 )
+
+[sub_resource type="AtlasTexture" id=7]
+flags = 4
+atlas = ExtResource( 14 )
+region = Rect2( 0, 0, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=8]
+flags = 4
+atlas = ExtResource( 14 )
+region = Rect2( 24, 0, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=9]
+flags = 4
+atlas = ExtResource( 14 )
+region = Rect2( 48, 0, 24, 24 )
+
+[sub_resource type="AtlasTexture" id=10]
+flags = 4
+atlas = ExtResource( 14 )
+region = Rect2( 72, 0, 24, 24 )
+
+[sub_resource type="SpriteFrames" id=11]
+animations = [ {
+"frames": [ SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
 [node name="PolygonPasture" type="Node2D"]
 script = ExtResource( 6 )
 __meta__ = {
-"_edit_horizontal_guides_": [ 64.0, 128.0, 192.0, 256.0 ],
+"_edit_horizontal_guides_": [ 64.0, 128.0, 192.0, 256.0, 341.0 ],
 "_edit_vertical_guides_": [ 64.0, 128.0, 192.0, 256.0 ]
 }
 
@@ -104,16 +135,22 @@ polygon = PoolVector2Array( 601, 54, 560, 187, 566, 187, 607, 55, 606, 51, 603, 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Basket/Edges/StaticBody2D3"]
 polygon = PoolVector2Array( 561, 188, 461, 188, 461, 194, 561, 194 )
 
-[node name="Node2D" type="Node2D" parent="Basket"]
+[node name="Distribution" type="Node2D" parent="."]
+position = Vector2( 509, 350 )
+script = ExtResource( 13 )
 
-[node name="triangle-small" parent="Basket/Node2D" instance=ExtResource( 8 )]
-position = Vector2( 677, -130 )
-scale = Vector2( 0.75, 0.75 )
+[node name="ScoreFloor" type="StaticBody2D" parent="Distribution"]
+collision_layer = 2
+collision_mask = 2
 
-[node name="triangle-medium" parent="Basket/Node2D" instance=ExtResource( 9 )]
-position = Vector2( 683, -87.9998 )
-scale = Vector2( 0.75, 0.75 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Distribution/ScoreFloor"]
+position = Vector2( 0.5, 0 )
+shape = SubResource( 6 )
 
-[node name="triangle-large" parent="Basket/Node2D" instance=ExtResource( 10 )]
-position = Vector2( 682, -33.9997 )
-scale = Vector2( 0.75, 0.75 )
+[node name="Sprite" type="Sprite" parent="Distribution/ScoreFloor"]
+texture = ExtResource( 8 )
+
+[node name="CollectorOne" type="AnimatedSprite" parent="Distribution"]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( -149, -20 )
+frames = SubResource( 11 )

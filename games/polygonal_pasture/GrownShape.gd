@@ -5,6 +5,7 @@ extends RigidBody2D
 const PpShape = preload('res://games/polygonal_pasture/Shape.gd')
 
 signal shapes_merged(shape_a, shape_b)
+signal shape_collectable(shape)
 
 var shape : PpShape
 
@@ -17,7 +18,7 @@ func _ready() -> void:
 	merge_wait = Timer.new()
 	add_child(merge_wait)
 	merge_wait.one_shot = true
-	merge_wait.wait_time = 9.0
+	merge_wait.wait_time = 7.0
 	merge_wait.start()
 	merge_wait.connect('timeout', self, 'merge_wait_over')
 	
@@ -25,12 +26,16 @@ func _ready() -> void:
 #	connect('body_exited', self, '_on_shape_untouch')
 
 func _on_shape_touch(body):
-	if body is StaticBody2D:
-		return
-	if merge_with_name == body.merge_with_name \
-	and shape.shape_size == body.merge_with_size \
-	and merge_with_size < body.merge_with_size:
-		wait_on_merger(body)
+	if body.name == 'ScoreFloor':
+		yield(get_tree(), "idle_frame")
+		mode = RigidBody2D.MODE_STATIC
+		$CollisionPolygon2D.disabled = true
+		emit_signal('shape_collectable', self)
+	elif !(body is StaticBody2D):
+		if merge_with_name == body.merge_with_name \
+		and shape.shape_size == body.merge_with_size \
+		and merge_with_size < body.merge_with_size:
+			wait_on_merger(body)
 
 func wait_on_merger(other_shape):
 	merge_wait.paused = true

@@ -83,6 +83,8 @@ func harvest_shape():
 	
 	yield(fade_out, 'finished')
 
+	modulate = Color('#44ffffff')
+
 	if orig_state == PlotState.ROTTEN:
 		return
 
