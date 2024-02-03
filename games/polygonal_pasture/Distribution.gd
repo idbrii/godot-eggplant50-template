@@ -1,14 +1,12 @@
 extends Node2D
 
 func on_shape_ready_to_collect(shape: RigidBody2D):
-	print('come collect: ', shape)
 	var collector : AnimatedSprite = $CollectorOne.duplicate()
 	add_child(collector)
 
 	var tween_duration = 1 + randi() % 4
 	var go_get = get_tree().create_tween()
 	var go_to = Vector2(shape.global_position.x, collector.global_position.y)
-	print('going to: ', go_to)
 	go_get.tween_property(collector, 'global_position', go_to, tween_duration*0.33)
 	go_get.set_ease(Tween.EASE_IN)
 	var fade_in = get_tree().create_tween()
