@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://games/bones7242/sprites/baseball.jpg" type="Texture" id=1]
+[ext_resource path="res://games/bones7242/spr_baseball.gd" type="Script" id=2]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="spr_baseball" type="Sprite" parent="."]
+position = Vector2( 303, 169 )
+texture = ExtResource( 1 )
+script = ExtResource( 2 )
