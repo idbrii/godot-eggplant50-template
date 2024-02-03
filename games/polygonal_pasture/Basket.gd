@@ -8,6 +8,11 @@ var triangle_small  = preload('res://games/polygonal_pasture/shapes/TriangleSmal
 var triangle_medium = preload('res://games/polygonal_pasture/shapes/TriangleMedium.tscn')
 var triangle_large  = preload('res://games/polygonal_pasture/shapes/TriangleLarge.tscn')
 
+var square_small  = preload('res://games/polygonal_pasture/shapes/SquareSmall.tscn')
+var square_medium = preload('res://games/polygonal_pasture/shapes/SquareMedium.tscn')
+var square_large  = preload('res://games/polygonal_pasture/shapes/SquareLarge.tscn')
+
+
 var shape_map = [null, null, null]
 
 func _ready() -> void:
@@ -16,6 +21,11 @@ func _ready() -> void:
 	tmap.insert(PpShape.ShapeSize.MEDIUM, triangle_medium)
 	tmap.insert(PpShape.ShapeSize.LARGE, triangle_large)
 	shape_map.insert(PpShape.ShapeName.TRIANGLE, tmap)
+	var smap = [null, null, null]
+	smap.insert(PpShape.ShapeSize.SMALL, square_small)
+	smap.insert(PpShape.ShapeSize.MEDIUM, square_medium)
+	smap.insert(PpShape.ShapeSize.LARGE, square_large)
+	shape_map.insert(PpShape.ShapeName.SQUARE, smap)
 	
 func on_shape_gathered(shape):
 	var shape_node : GrownShape = shape_map[shape.shape_name][shape.shape_size].instance()
