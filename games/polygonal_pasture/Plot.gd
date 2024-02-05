@@ -27,12 +27,12 @@ func can_plant():
 func can_harvest():
 	return state > PlotState.SEEDED and state < PlotState.FALLOW
 
-func add_seed():
+func add_seed(new_shape: PpShape):
 	if has_node('Shape') or state == PlotState.FALLOW:
 		return
-	shape.texture = load('res://games/polygonal_pasture/assets/square-seed.png')
+	shape.texture = load(new_shape.texture_path())
 	shape.name = 'Shape'
-	shape.shape_name = PpShape.ShapeName.SQUARE
+	shape.shape_name = new_shape.shape_name
 	shape.shape_size = PpShape.ShapeSize.SEED
 	add_child(shape)
 	state = PlotState.SEEDED
@@ -60,6 +60,7 @@ func _grow_shape():
 			shape.shape_size = PpShape.ShapeSize.LARGE
 		PlotState.LARGE:
 			state = PlotState.ROTTEN
+			shape.shape_size = PpShape.ShapeSize.ROTTEN
 
 	shape_node.texture = load(shape.texture_path())
 

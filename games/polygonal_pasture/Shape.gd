@@ -24,3 +24,6 @@ func _init():
 
 func texture_path():
 	return texture_path_format % [name_map[shape_name], size_map[shape_size]]
+
+func status_name():
+	return name_map[shape_name].capitalize()
