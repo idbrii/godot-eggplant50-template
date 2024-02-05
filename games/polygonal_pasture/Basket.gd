@@ -39,8 +39,27 @@ func on_shape_gathered(shape):
 	shape_node.contacts_reported = 10
 	add_child(shape_node)
 
-func _on_shape_merger(shape_a: RigidBody2D, shape_b: RigidBody2D):
-	# TODO Spawn shape created from merger
+func _on_shape_merger(shape_a: GrownShape, shape_b: GrownShape):
+	var shape = PpShape.new()
+	shape.shape_name = shape_a.merge_to_name
+	shape.shape_size = shape_a.merge_to_size
+
+	var new_shape : GrownShape = shape_map[shape.shape_name][shape.shape_size].instance()
+	add_child(new_shape)
+
+	# Wait for the shape node to be initialized.
+	yield(get_tree(), "idle_frame")
+	new_shape.shape = shape
+	new_shape.from_merger = (shape_a.from_merger+shape_b.from_merger)+1
+	new_shape.position = shape_a.position
+	new_shape.rotation = shape_a.rotation
+	new_shape.mode = RigidBody2D.MODE_RIGID
+	new_shape.connect('shapes_merged', self, '_on_shape_merger')
+	new_shape.connect('shape_collectable', self, '_on_shape_collectable')
+	new_shape.contact_monitor = true
+	new_shape.contacts_reported = 10
+
+	remove_child(shape_a)
 	remove_child(shape_b)
 
 func _on_shape_collectable(shape):

@@ -8,6 +8,10 @@ extents = Vector2( 24, 24 )
 
 [node name="SquareMedium" type="RigidBody2D"]
 script = ExtResource( 1 )
+merge_with_name = 1
+merge_with_size = 3
+score = 20
+merge_multiplier = 30
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )

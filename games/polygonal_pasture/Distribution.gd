@@ -1,6 +1,21 @@
 extends Node2D
 
-func on_shape_ready_to_collect(shape: RigidBody2D):
+func on_shape_ready_to_collect(shape: GrownShape):
+	var score = Label.new()
+	score.text = str(shape.final_score())
+	score.set_as_toplevel(true)
+	score.rect_position = Vector2(shape.global_position.x, shape.global_position.y - 16)
+	score.theme = load('res://mainmenu/theme/theme_eggplant.tres')
+	add_child(score)
+
+	var score_exit = get_tree().create_tween()
+	score_exit.tween_property(score, 'rect_position', Vector2(score.rect_position.x, score.rect_position.y - 24+(randi()%16)), 2)
+	score_exit.set_ease(Tween.EASE_OUT)
+
+	var fade_score = get_tree().create_tween()
+	fade_score.tween_property(score, 'modulate', Color('#00ffffff'), 3)
+	fade_score.set_ease(Tween.EASE_OUT)
+
 	var collector : AnimatedSprite = $CollectorOne.duplicate()
 	add_child(collector)
 

@@ -11,6 +11,10 @@ __meta__ = {
 "_edit_group_": true
 }
 merge_with_size = 1
+merge_to_name = 1
+merge_to_size = 2
+score = 25
+merge_multiplier = 25
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
