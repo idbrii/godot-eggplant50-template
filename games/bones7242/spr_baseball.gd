@@ -10,6 +10,8 @@ var fall_down = false
 var power = 0
 var gravity = 0.5
 
+
+
 func _process(delta):
 	# rotation += angular_speed * delta
 	#position +=  Vector2.DOWN * movement_speed * delta
