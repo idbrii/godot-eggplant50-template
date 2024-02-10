@@ -1,7 +1,6 @@
 extends State
-class_name BaseballWindup
+class_name BaseballRelease
 
-var gravity
 
 func Update(delta: float):
 	# move down

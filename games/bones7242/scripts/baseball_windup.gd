@@ -2,7 +2,7 @@ extends State
 class_name BaseballWindup
 
 
-@export var power = 0
+export var power = 0
 
 func Update(delta: float):
 	# move down

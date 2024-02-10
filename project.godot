@@ -15,6 +15,11 @@ _global_script_classes=[ {
 "path": "res://games/bones7242/scripts/baseball_held.gd"
 }, {
 "base": "State",
+"class": "BaseballRelease",
+"language": "GDScript",
+"path": "res://games/bones7242/scripts/baseball_release.gd"
+}, {
+"base": "State",
 "class": "BaseballWindup",
 "language": "GDScript",
 "path": "res://games/bones7242/scripts/baseball_windup.gd"
@@ -32,15 +37,16 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "State",
 "language": "GDScript",
-"path": "res://games/bones7242/scripts/scr_state.gd"
+"path": "res://games/bones7242/scripts/state.gd"
 }, {
 "base": "Node",
 "class": "StateMachine",
 "language": "GDScript",
-"path": "res://games/bones7242/scr_state_machine_2.gd"
+"path": "res://games/bones7242/trash/scr_state_machine_2.gd"
 } ]
 _global_script_class_icons={
 "BaseballHeld": "",
+"BaseballRelease": "",
 "BaseballWindup": "",
 "GameDef": "",
 "GameList": "",
