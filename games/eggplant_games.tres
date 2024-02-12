@@ -1,7 +1,7 @@
 [gd_resource type="Resource" load_steps=5 format=2]
 
 [ext_resource path="res://mainmenu/gamelist.gd" type="Script" id=1]
-[ext_resource path="res://games/movement2/game_movement2.tres" type="Resource" id=2]
+[ext_resource path="res://games/Arkaruga/arkaruga.tres" type="Resource" id=2]
 [ext_resource path="res://games/drop_walker/game_dropwalker.tres" type="Resource" id=3]
 [ext_resource path="res://games/dice_stanza/game_dicestanza.tres" type="Resource" id=4]
 
