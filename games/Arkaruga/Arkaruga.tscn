@@ -1,67 +1,55 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://games/Arkaruga/Sprites/Ball/ball-dark.png" type="Texture" id=1]
 [ext_resource path="res://games/Arkaruga/Sprites/Paddle/paddle-body.png" type="Texture" id=2]
 [ext_resource path="res://games/Arkaruga/Sprites/Paddle/paddle-bumper-dark.png" type="Texture" id=3]
 [ext_resource path="res://games/Arkaruga/Sprites/Paddle/paddle-alarm-dark.png" type="Texture" id=4]
-[ext_resource path="res://games/Arkaruga/ShadowLayer.gd" type="Script" id=5]
-[ext_resource path="res://games/Arkaruga/Arkargua-Viewport.gd" type="Script" id=6]
+[ext_resource path="res://games/Arkaruga/Arkaruga-ObjectLayer.gd" type="Script" id=5]
 
-[sub_resource type="ViewportTexture" id=3]
-viewport_path = NodePath("ObjectLayer/ViewportContainer/Viewport")
-
-[sub_resource type="World" id=4]
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 353.5, 17.5 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 100, 6 )
 
 [sub_resource type="CircleShape2D" id=1]
 
-[sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 353.5, 17.5 )
+[sub_resource type="ViewportTexture" id=3]
+viewport_path = NodePath("ViewportContainer/Viewport")
 
 [node name="Window" type="Control"]
 margin_right = 640.0
 margin_bottom = 360.0
 
-[node name="ObjectLayer" type="CanvasLayer" parent="."]
-script = ExtResource( 5 )
-
-[node name="ShadowRect" type="TextureRect" parent="ObjectLayer"]
-modulate = Color( 0, 0, 0, 0.294118 )
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 2.0
-margin_top = 2.0
-margin_right = 42.0
-margin_bottom = 42.0
-texture = SubResource( 3 )
-flip_v = true
-
-[node name="ViewportContainer" type="ViewportContainer" parent="ObjectLayer"]
+[node name="ViewportContainer" type="ViewportContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 stretch = true
 
-[node name="Viewport" type="Viewport" parent="ObjectLayer/ViewportContainer"]
-size = Vector2( 640, 360 )
-world = SubResource( 4 )
+[node name="Viewport" type="Viewport" parent="ViewportContainer"]
+size = Vector2( 10, 10 )
 transparent_bg = true
-handle_input_locally = false
 hdr = false
 usage = 0
-render_target_update_mode = 3
 audio_listener_enable_2d = true
-audio_listener_enable_3d = true
-script = ExtResource( 6 )
 
-[node name="Paddle" type="KinematicBody2D" parent="ObjectLayer/ViewportContainer/Viewport"]
+[node name="ObjectLayer" type="CanvasLayer" parent="."]
+script = ExtResource( 5 )
+viewportPath = NodePath("../ViewportContainer/Viewport")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ObjectLayer/ViewportContainer/Viewport/Paddle"]
+[node name="StaticBody2D" type="StaticBody2D" parent="ObjectLayer"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ObjectLayer/StaticBody2D"]
+position = Vector2( 327, 364 )
+shape = SubResource( 5 )
+
+[node name="Paddle" type="KinematicBody2D" parent="ObjectLayer"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ObjectLayer/Paddle"]
 position = Vector2( 100, 8 )
 shape = SubResource( 2 )
 
-[node name="Body" type="NinePatchRect" parent="ObjectLayer/ViewportContainer/Viewport/Paddle"]
+[node name="Body" type="NinePatchRect" parent="ObjectLayer/Paddle"]
 margin_right = 200.0
 margin_bottom = 16.0
 texture = ExtResource( 2 )
@@ -70,7 +58,7 @@ patch_margin_top = 8
 patch_margin_right = 32
 patch_margin_bottom = 8
 
-[node name="Bumper" type="NinePatchRect" parent="ObjectLayer/ViewportContainer/Viewport/Paddle/Body"]
+[node name="Bumper" type="NinePatchRect" parent="ObjectLayer/Paddle/Body"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 texture = ExtResource( 3 )
@@ -79,7 +67,7 @@ patch_margin_top = 8
 patch_margin_right = 32
 patch_margin_bottom = 8
 
-[node name="Alarm" type="NinePatchRect" parent="ObjectLayer/ViewportContainer/Viewport/Paddle/Body"]
+[node name="Alarm" type="NinePatchRect" parent="ObjectLayer/Paddle/Body"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 texture = ExtResource( 4 )
@@ -88,23 +76,17 @@ patch_margin_top = 8
 patch_margin_right = 32
 patch_margin_bottom = 8
 
-[node name="Ball2" type="RigidBody2D" parent="ObjectLayer/ViewportContainer/Viewport"]
+[node name="Ball2" type="RigidBody2D" parent="ObjectLayer"]
 position = Vector2( 300, 101 )
 __meta__ = {
 "_edit_group_": true
 }
 
-[node name="Sprite" type="Sprite" parent="ObjectLayer/ViewportContainer/Viewport/Ball2"]
+[node name="Sprite" type="Sprite" parent="ObjectLayer/Ball2"]
 texture = ExtResource( 1 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ObjectLayer/ViewportContainer/Viewport/Ball2"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ObjectLayer/Ball2"]
 shape = SubResource( 1 )
-
-[node name="StaticBody2D" type="StaticBody2D" parent="ObjectLayer/ViewportContainer/Viewport"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ObjectLayer/ViewportContainer/Viewport/StaticBody2D"]
-position = Vector2( 327, 364 )
-shape = SubResource( 5 )
 
 [node name="BackgroundLayer" type="CanvasLayer" parent="."]
 layer = -99
@@ -116,3 +98,17 @@ color = Color( 0.470588, 0.517647, 0.670588, 1 )
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="ShadowLayer" type="CanvasLayer" parent="."]
+layer = -50
+
+[node name="ShadowRect" type="TextureRect" parent="ShadowLayer"]
+modulate = Color( 0, 0, 0, 0.294118 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 42.0
+margin_bottom = 42.0
+texture = SubResource( 3 )
+flip_v = true
