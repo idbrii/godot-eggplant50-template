@@ -21,10 +21,12 @@ var max_swing_x = 300
 var start_swing_y = 0
 var swing_y = start_swing_y
 var max_swing_y = 100
-var bat_start_radius = 32
+var bat_start_radius = 64
 var bat_radius = bat_start_radius
-var color = Color(1,0,0)
+var min_bat_radius = 16
+const RED = Color(1,0,0)
 const GREEN = Color( 0, 1, 0, 1 )
+var color = GREEN
 var swing_center : Vector2
 
 var initial_state = State.IDLE
@@ -33,6 +35,7 @@ var last_state : int
 
 var swing_x_swing_increment : int
 var swing_y_swing_increment : int
+var bat_radius_increment : int
 
 func change_state(new_state):
 	# store the current state as last state, if it exists
@@ -60,10 +63,10 @@ func _process(delta):
 		State.WINDUP:
 			# do windup stuff
 			#make circle bigger
-			bat_radius += 2
+			bat_radius -= (bat_radius - min_bat_radius) / 10
 			#change x and y to pull circle back on an arc
-			swing_x += (max_swing_x - swing_x) / 20
-			swing_y += (max_swing_y - swing_y) / 20
+			swing_x += (max_swing_x - swing_x) / 30
+			swing_y += (max_swing_y - swing_y) / 30
 			print('winding up bat:' + str(bat_radius))
 			# build up power
 			if power < max_power:
@@ -73,27 +76,33 @@ func _process(delta):
 				print("i am SWING the bat")
 				print('swing power:' + str(power))
 				change_state(State.SWING)
-				#reset vars
-				bat_radius = bat_start_radius
-				swing_x = start_swing_x
-				swing_y = start_swing_y
 				# set vars for swing
-				var speed = 200 - power
-				swing_x_swing_increment = (swing_x - start_swing_x) / speed
-				swing_y_swing_increment = (swing_y - start_swing_y) / speed
+				#var speed = 110 - power
+				swing_x_swing_increment = (swing_x - start_swing_x) / 5
+				swing_y_swing_increment = (swing_y - start_swing_y) / 5
 		State.SWING:
 			# do swing stuff
-			bat_radius -= 2
+			#bat_radius -= bat_radius_increment
 			swing_x -= swing_x_swing_increment
 			swing_y -= swing_y_swing_increment
 			# listen for swing complete
 			if swing_x <= start_swing_x:
 				change_state(State.FOLLOWTHROUGH) #should go to follow through.
+				color = RED
 		State.FOLLOWTHROUGH:
 			# tbd: move ball up and left, hold for a moment
 			# when done, go back to idle
-			change_state(State.IDLE)
-			
+			if swing_x < max_swing_x:
+				swing_x += swing_x_swing_increment
+				swing_y += swing_y_swing_increment
+
+			if Input.is_action_just_released("action2"):
+				change_state(State.IDLE)
+				color = GREEN
+				#reset vars
+				swing_x = start_swing_x
+				swing_y = start_swing_y
+				bat_radius = bat_start_radius
 		_:
 			print("I am not a bat state I know of!")
 		
