@@ -4,8 +4,9 @@ export var maxSpeed = 450
 export var acceleration = 300
 export var reverseAcceleration = 450
 export var boostModifier = 1.6
+export var maxBounceAngle = 80
 
-var speed = 0 
+var speed = 0
 
 func _ready():
 	pass
@@ -38,5 +39,22 @@ func _process(delta):
 	var collision = move_and_collide(Vector2.RIGHT * speed * delta)
 	if collision != null:
 		speed = 0
+		
+	return
+
+func getVelocity():
+	return Vector2.RIGHT * speed
+
+func getBounceDirectionFromPosition(position):
+	var collider := $Collision as CollisionShape2D
+	var shape := collider.shape as RectangleShape2D
+	var width = shape.extents.x
+	var offset = position.x - collider.global_position.x
+	var normalizedBounceDirection = clamp(offset / width, -1, 1)
+	var bounceAngle = normalizedBounceDirection * maxBounceAngle
 	
-	pass
+	return Vector2.UP.rotated(deg2rad(bounceAngle))
+	
+	
+	
+	
