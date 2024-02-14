@@ -6,7 +6,7 @@
 [ext_resource path="res://games/Arkaruga/Sprites/Paddle/paddle-alarm-dark.png" type="Texture" id=4]
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 50, 6 )
+extents = Vector2( 46, 4 )
 
 [node name="Paddle" type="KinematicBody2D"]
 position = Vector2( 277, 330 )
@@ -15,7 +15,7 @@ maxSpeed = 250
 acceleration = 600
 reverseAcceleration = 900
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="Collision" type="CollisionShape2D" parent="."]
 position = Vector2( 50, 8 )
 shape = SubResource( 2 )
 
