@@ -63,7 +63,6 @@ func _process(delta):
 				change_state(State.RELEASED)
 				windup_speed = starting_windup_speed #reset windup speed
 		State.RELEASED:
-			#print("i am RELEASED")
 			# do released stuff
 			power -= gravity
 			#print('power:' + str(power))
@@ -76,8 +75,8 @@ func _process(delta):
 				change_state(State.GROUNDED)
 				power = 0 #reset power
 		State.GROUNDED:
-			#print("i am GROUNDED")
-			if Input.is_action_just_released("action1"):
+			#if Input.is_action_just_released("action1"):
+			if true: #placeholder - replace with timer after "strike" or hit or whatever.
 				change_state(State.HELD)
 				position.y = 199
 		_:

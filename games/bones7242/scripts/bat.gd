@@ -65,8 +65,8 @@ func _process(delta):
 			#make circle bigger
 			bat_radius -= (bat_radius - min_bat_radius) / 10
 			#change x and y to pull circle back on an arc
-			swing_x += (max_swing_x - swing_x) / 30
-			swing_y += (max_swing_y - swing_y) / 30
+			swing_x += (max_swing_x - swing_x) / 10
+			swing_y += (max_swing_y - swing_y) / 40
 			print('winding up bat:' + str(bat_radius))
 			# build up power
 			if power < max_power:
@@ -96,7 +96,8 @@ func _process(delta):
 				swing_x += swing_x_swing_increment
 				swing_y += swing_y_swing_increment
 
-			if Input.is_action_just_released("action2"):
+			#if Input.is_action_just_released("action2"):
+			if true: #placeholder - replace with timer after "strike" or hit or whatever.
 				change_state(State.IDLE)
 				color = GREEN
 				#reset vars
