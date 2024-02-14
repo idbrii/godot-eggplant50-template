@@ -43,8 +43,10 @@ func change_state(new_state):
 		last_state = current_state
 	
 	current_state = new_state
-	
 	pass
+
+func check_for_hit():
+	return false
 
 func _ready():
 	change_state(initial_state)
@@ -67,7 +69,7 @@ func _process(delta):
 			#change x and y to pull circle back on an arc
 			swing_x += (max_swing_x - swing_x) / 10
 			swing_y += (max_swing_y - swing_y) / 40
-			print('winding up bat:' + str(bat_radius))
+			#print('winding up bat:' + str(bat_radius))
 			# build up power
 			if power < max_power:
 				power += power_increment
@@ -89,6 +91,10 @@ func _process(delta):
 			if swing_x <= start_swing_x:
 				change_state(State.FOLLOWTHROUGH) #should go to follow through.
 				color = RED
+				# check if a hit, 
+				# if so, then initiate the hit state on baseball
+				if check_for_hit():
+					print("YOU GOT A HIT!")
 		State.FOLLOWTHROUGH:
 			# tbd: move ball up and left, hold for a moment
 			# when done, go back to idle
@@ -113,5 +119,5 @@ func _process(delta):
 func _draw():
 	#draw bat circle
 	swing_center = Vector2(bat_x - swing_x, bat_y - swing_y)
-	print('swing_center draw:' + str(swing_center))
+	#print('swing_center draw:' + str(swing_center))
 	draw_circle(swing_center, bat_radius, color)

@@ -1,9 +1,14 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://games/bones7242/sprites/baseball.jpg" type="Texture" id=1]
 [ext_resource path="res://games/bones7242/scripts/baseball.gd" type="Script" id=2]
 [ext_resource path="res://games/bones7242/scripts/bat.gd" type="Script" id=3]
 [ext_resource path="res://games/bones7242/scripts/scn_bones7242.gd" type="Script" id=4]
+[ext_resource path="res://games/bones7242/area2d.gd" type="Script" id=5]
+
+[sub_resource type="CircleShape2D" id=1]
+
+[sub_resource type="CircleShape2D" id=2]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 4 )
@@ -13,5 +18,16 @@ position = Vector2( 303, 169 )
 texture = ExtResource( 1 )
 script = ExtResource( 2 )
 
+[node name="baseball_area2d" type="Area2D" parent="baseball"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="baseball/baseball_area2d"]
+shape = SubResource( 1 )
+
 [node name="bat" type="Node2D" parent="."]
 script = ExtResource( 3 )
+
+[node name="area2d" type="Area2D" parent="bat"]
+script = ExtResource( 5 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bat/area2d"]
+shape = SubResource( 2 )
