@@ -36,9 +36,17 @@ func _process(delta):
 	var activeMaxSpeed = maxSpeed * modifier
 	speed = clamp(speed, -activeMaxSpeed, activeMaxSpeed)
 	
+	
 	var collision = move_and_collide(Vector2.RIGHT * speed * delta)
 	if collision != null:
-		speed = 0
+		if collision.collider.has_method("isBall"):
+			# don't let the ball stop us
+			# we should be able to fix this via collision layers/masks
+			# but until 4.0 it's impossible to do one-way collision detection. Fun!
+			position += collision.remainder
+		else:
+			# stop our velocity
+			speed = 0
 		
 	return
 

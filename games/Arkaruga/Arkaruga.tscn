@@ -31,11 +31,9 @@ script = ExtResource( 5 )
 viewportPath = NodePath("../ViewportContainer/Viewport")
 
 [node name="Paddle" parent="ObjectLayer" instance=ExtResource( 2 )]
-collision_mask = 9
+collision_mask = 0
 
 [node name="Ball" parent="ObjectLayer" instance=ExtResource( 1 )]
-paddleSpeedRatio = 1.0
-paddlePositionRatio = 0.75
 
 [node name="Walls" type="Node2D" parent="ObjectLayer"]
 

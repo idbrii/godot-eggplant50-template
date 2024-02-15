@@ -47,6 +47,8 @@ window/stretch/aspect="keep"
 wind=false
 resol=false
 log=false
+debugger=false
+stdout=false
 
 [input]
 
