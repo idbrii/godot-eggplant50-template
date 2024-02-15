@@ -1,7 +1,6 @@
 extends KinematicBody2D
 
 const Paddle = preload("res://games/Arkaruga/Scripts/Arkaruga-Paddle.gd")
-
 export var baseSpeed = 200
 export var minSpeed = 150
 export var maxSpeed = 300
@@ -47,3 +46,5 @@ func processCollision(collision):
 	
 	velocity = finalDirection * finalSpeed
 		
+func isBall():
+	return true
