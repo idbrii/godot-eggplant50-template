@@ -4,7 +4,7 @@
 [ext_resource path="res://games/bones7242/scripts/baseball.gd" type="Script" id=2]
 [ext_resource path="res://games/bones7242/scripts/bat.gd" type="Script" id=3]
 [ext_resource path="res://games/bones7242/scripts/scn_bones7242.gd" type="Script" id=4]
-[ext_resource path="res://games/bones7242/area2d.gd" type="Script" id=5]
+[ext_resource path="res://eggplant-jam.png" type="Texture" id=5]
 
 [sub_resource type="CircleShape2D" id=1]
 
@@ -13,12 +13,16 @@
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 4 )
 
-[node name="baseball" type="Sprite" parent="."]
-position = Vector2( 303, 169 )
-texture = ExtResource( 1 )
+[node name="baseball" type="Node2D" parent="."]
 script = ExtResource( 2 )
 
+[node name="spr_baseball" type="Sprite" parent="baseball"]
+position = Vector2( 350, 172 )
+scale = Vector2( 0.625, 0.625 )
+texture = ExtResource( 1 )
+
 [node name="baseball_area2d" type="Area2D" parent="baseball"]
+position = Vector2( 350, 172 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="baseball/baseball_area2d"]
 shape = SubResource( 1 )
@@ -26,8 +30,16 @@ shape = SubResource( 1 )
 [node name="bat" type="Node2D" parent="."]
 script = ExtResource( 3 )
 
-[node name="area2d" type="Area2D" parent="bat"]
-script = ExtResource( 5 )
+[node name="bat_area2d" type="Area2D" parent="bat"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="bat/area2d"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bat/bat_area2d"]
+position = Vector2( 345, 170 )
 shape = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="bat"]
+position = Vector2( 347, 168 )
+texture = ExtResource( 5 )
+centered = false
+
+[connection signal="area_entered" from="baseball/baseball_area2d" to="baseball/spr_baseball" method="_on_baseball_area2d_area_entered"]
+[connection signal="area_entered" from="bat/bat_area2d" to="bat" method="_on_bat_area2d_area_entered"]

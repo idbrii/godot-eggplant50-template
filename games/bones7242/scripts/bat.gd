@@ -70,6 +70,7 @@ func _process(delta):
 			swing_x += (max_swing_x - swing_x) / 10
 			swing_y += (max_swing_y - swing_y) / 40
 			#print('winding up bat:' + str(bat_radius))
+			position = Vector2(bat_x - swing_x, bat_y - swing_y)
 			# build up power
 			if power < max_power:
 				power += power_increment
@@ -87,6 +88,7 @@ func _process(delta):
 			#bat_radius -= bat_radius_increment
 			swing_x -= swing_x_swing_increment
 			swing_y -= swing_y_swing_increment
+			position = Vector2(bat_x - swing_x, bat_y - swing_y)
 			# listen for swing complete
 			if swing_x <= start_swing_x:
 				change_state(State.FOLLOWTHROUGH) #should go to follow through.
@@ -101,7 +103,7 @@ func _process(delta):
 			if swing_x < max_swing_x:
 				swing_x += swing_x_swing_increment
 				swing_y += swing_y_swing_increment
-
+			position = Vector2(bat_x - swing_x, bat_y - swing_y)
 			#if Input.is_action_just_released("action2"):
 			if true: #placeholder - replace with timer after "strike" or hit or whatever.
 				change_state(State.IDLE)
@@ -120,4 +122,18 @@ func _draw():
 	#draw bat circle
 	swing_center = Vector2(bat_x - swing_x, bat_y - swing_y)
 	#print('swing_center draw:' + str(swing_center))
-	draw_circle(swing_center, bat_radius, color)
+	#draw_circle(swing_center, bat_radius, color)
+
+
+func _on_bat_area2d_area_entered(area):
+	print("jsome entered my area!")
+	if area.name == "baseball_area2d":
+		print("baseball entered my area!")
+		# Assign new direction.
+		#area.direction = Vector2(_ball_dir, randf() * 2 - 1).normalized()
+		
+	if area.name == "bat_area2d":
+		print("bat entered my area!")
+		# Assign new direction.
+		#area.direction = Vector2(_ball_dir, randf() * 2 - 1).normalized()
+	

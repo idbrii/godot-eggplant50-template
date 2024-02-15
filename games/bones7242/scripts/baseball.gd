@@ -1,4 +1,4 @@
-extends Sprite
+extends Node2D
 
 var angular_speed = PI
 var starting_windup_speed = 10
@@ -83,3 +83,8 @@ func _process(delta):
 			print("I am not a baseball state I know of!")
 		
 	#print('power:' + str(power))
+
+
+func _on_baseball_area2d_area_entered(area):
+	print("baseballe: some entered my area!")
+	

@@ -21,3 +21,8 @@ func _on_area_entered(area):
 		print("baseball entered my area!")
 		# Assign new direction.
 		#area.direction = Vector2(_ball_dir, randf() * 2 - 1).normalized()
+		
+	if area.name == "bat_area2d":
+		print("bat entered my area!")
+		# Assign new direction.
+		#area.direction = Vector2(_ball_dir, randf() * 2 - 1).normalized()
