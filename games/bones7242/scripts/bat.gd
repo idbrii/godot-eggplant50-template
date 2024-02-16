@@ -13,8 +13,8 @@ var power_increment = 1
 var max_power = 100
 
 # variables for swinging
-var bat_x = 640 / 2
-var bat_y = 320 / 2
+var bat_x = 640 / 4
+var bat_y = 320 / 4
 var start_swing_x = 0
 var swing_x = start_swing_x
 var max_swing_x = 300
@@ -46,7 +46,12 @@ func change_state(new_state):
 	pass
 
 func check_for_hit():
-	return false
+	#get position of ball
+	var baseball_object = $"../baseball_area2d"
+	#see if ball within radius of hitting sphere
+	var distance_to_ball_center = position.distance_to(baseball_object.position)
+	print('distance to ball = ' + str(distance_to_ball_center))
+	return distance_to_ball_center < 100
 
 func _ready():
 	change_state(initial_state)
@@ -88,15 +93,16 @@ func _process(delta):
 			#bat_radius -= bat_radius_increment
 			swing_x -= swing_x_swing_increment
 			swing_y -= swing_y_swing_increment
-			position = Vector2(bat_x - swing_x, bat_y - swing_y)
-			# listen for swing complete
+			position = Vector2(bat_x - swing_x, bat_y - swing_y)	
+			# check if a hit, 
+			# if so, then initiate the hit state on baseball
+			if check_for_hit():
+				print("YOU GOT A HIT!")
+			# check for end of contact zone
+			# if so move on to follow through
 			if swing_x <= start_swing_x:
 				change_state(State.FOLLOWTHROUGH) #should go to follow through.
 				color = RED
-				# check if a hit, 
-				# if so, then initiate the hit state on baseball
-				if check_for_hit():
-					print("YOU GOT A HIT!")
 		State.FOLLOWTHROUGH:
 			# tbd: move ball up and left, hold for a moment
 			# when done, go back to idle
@@ -120,20 +126,6 @@ func _process(delta):
 
 func _draw():
 	#draw bat circle
-	swing_center = Vector2(bat_x - swing_x, bat_y - swing_y)
+	swing_center = position
 	#print('swing_center draw:' + str(swing_center))
-	#draw_circle(swing_center, bat_radius, color)
-
-
-func _on_bat_area2d_area_entered(area):
-	print("jsome entered my area!")
-	if area.name == "baseball_area2d":
-		print("baseball entered my area!")
-		# Assign new direction.
-		#area.direction = Vector2(_ball_dir, randf() * 2 - 1).normalized()
-		
-	if area.name == "bat_area2d":
-		print("bat entered my area!")
-		# Assign new direction.
-		#area.direction = Vector2(_ball_dir, randf() * 2 - 1).normalized()
-	
+	draw_circle(swing_center, bat_radius, color)

@@ -1,4 +1,4 @@
-extends Node2D
+extends Area2D
 
 var angular_speed = PI
 var starting_windup_speed = 10
@@ -15,7 +15,7 @@ var last_state : int
 
 var power = 0
 var power_increment = 40
-var gravity = power_increment
+var grav = power_increment
 var max_fall_speed = 100
 
 var h_move_speed = 8
@@ -64,7 +64,7 @@ func _process(delta):
 				windup_speed = starting_windup_speed #reset windup speed
 		State.RELEASED:
 			# do released stuff
-			power -= gravity
+			power -= grav
 			#print('power:' + str(power))
 			var next_movement = -1 * power * delta
 			if next_movement <= max_fall_speed:
@@ -83,8 +83,3 @@ func _process(delta):
 			print("I am not a baseball state I know of!")
 		
 	#print('power:' + str(power))
-
-
-func _on_baseball_area2d_area_entered(area):
-	print("baseballe: some entered my area!")
-	
