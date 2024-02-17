@@ -1,4 +1,5 @@
 extends Node2D
+signal actions(atk, def, extra)
 
 
 # Declare member variables here. Examples:
@@ -10,6 +11,8 @@ var action_scene = preload("res://games/TriangleCut/Action.tscn")
 
 var adjacencies = {}
 var triangles = {}
+
+var active_option setget set_active_option  # player's choice to cut
 
 
 # Called when the node enters the scene tree for the first time.
@@ -30,6 +33,7 @@ func _ready() -> void:
                     adjacencies[n].append(curr)
                     new_nodes.append(n)
                     var line = Line2D.new()
+                    line.width = 4
                     line.add_point(curr)
                     line.add_point(n)
                     $Edges.add_child(line)
@@ -38,6 +42,7 @@ func _ready() -> void:
     # delete extra
     var to_delete = []
     for n in adjacencies:
+        adjacencies[n].sort()
         if adjacencies[n].size() < 2:
             to_delete.append(n)
     for line in $Edges.get_children():
@@ -48,17 +53,30 @@ func _ready() -> void:
             adjacencies[m].remove(adjacencies[m].find(n))
         adjacencies.erase(n)
     create_triangles()
-            
+    $Player.global_position = center
+    active_option = adjacencies[center][0]
+    find_line($Player.position, active_option).width = 8
+    
+func sort_points_cw(p1, p2):
+    # hackey, depends on player pos, only works on current player node
+    var center = $Player.position
+    var p1p = p1 - center
+    var p2p = p2 - center
+    
+    return p1p.angle() < p2p.angle()
+
     
     
 func create_edges_for(pos: Vector2) -> Array:
     var ret = []
+    # CW order
     ret.push_back(pos + Vector2(-SIDE_LEN, 0)) # left
-    ret.push_back(pos + Vector2(SIDE_LEN, 0))  # right
     ret.push_back(pos + Vector2(-1, -sqrt(3)).normalized()*SIDE_LEN) # top left
-    ret.push_back(pos + Vector2(-1, sqrt(3)).normalized()*SIDE_LEN) # bottom left
     ret.push_back(pos + Vector2(1, -sqrt(3)).normalized()*SIDE_LEN) # top right
-    ret.push_back(pos + Vector2(1, sqrt(3)).normalized()*SIDE_LEN) # bottom left
+    ret.push_back(pos + Vector2(SIDE_LEN, 0))  # right
+    ret.push_back(pos + Vector2(1, sqrt(3)).normalized()*SIDE_LEN) # bottom right
+    ret.push_back(pos + Vector2(-1, sqrt(3)).normalized()*SIDE_LEN) # bottom left
+    
     return ret
 
 func create_triangles():
@@ -75,7 +93,59 @@ func create_triangles():
                         triangles[tri_key] = action
                         $Actions.add_child(action)
 
+func set_active_option(new_val):
+    var curr = find_line($Player.position, active_option)
+    if curr != null:
+        find_line($Player.position, active_option).width = 4
+    active_option = new_val
+    find_line($Player.position, active_option).width = 8
+    
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta: float) -> void:
-#    pass
+func find_line(p1, p2):
+    for line in $Edges.get_children():
+        if (line.points[0] == p1 and line.points[1] == p2) or (line.points[1] == p1 and line.points[0] == p2):
+            return line
+
+func traverse_active_edge():
+    # Delete the line
+    var line = find_line($Player.position, active_option)
+    adjacencies[$Player.position].remove(adjacencies[$Player.position].find(active_option))
+    adjacencies[active_option].remove(adjacencies[active_option].find($Player.position))
+    
+    # Activate triangle and delete
+    var actions = {"atk": 0 , "def": 0, "extra": 0}
+    var tris_to_del = []
+    for tri in triangles:
+        if active_option in tri and $Player.position in tri:
+            actions[triangles[tri].type] += 1
+            triangles[tri].queue_free()
+            tris_to_del.append(tri)
+        
+    for tri in tris_to_del:
+        triangles.erase(tri)
+    
+    # Move player to new loc
+    $Player.position = active_option
+    adjacencies[$Player.position].sort_custom(self, "sort_points_cw")
+    line.queue_free()
+    
+    # TODO: deal with when player strands themselves
+    self.set_active_option(adjacencies[$Player.position][0])
+    emit_signal("actions", actions["atk"], actions["def"], actions["extra"])
+
+
+func _process(delta: float) -> void:
+    var curr_idx = adjacencies[$Player.global_position].find(active_option)
+    var num_adj = len(adjacencies[$Player.global_position])
+    if Input.is_action_just_pressed("move_right"):
+        self.active_option = adjacencies[$Player.global_position][(curr_idx+1) % num_adj]
+    if Input.is_action_just_pressed("move_left"):
+        self.active_option = adjacencies[$Player.global_position][(curr_idx-1) % num_adj]
+    if Input.is_action_just_pressed("action1"):
+        traverse_active_edge()
+
+
+func _on_Grid_actions(atk, def, extra) -> void:
+    print("atk: "+str(atk))
+    print("def: "+str(def))
+    print("extra: "+str(extra))
