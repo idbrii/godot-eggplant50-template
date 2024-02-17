@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://games/TriangleCut/Grid.gd" type="Script" id=1]
-[ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://games/TriangleCut/eggplant.png" type="Texture" id=2]
 
 [sub_resource type="GDScript" id=1]
 
@@ -16,7 +16,7 @@ script = ExtResource( 1 )
 script = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="Player"]
-scale = Vector2( 0.3, 0.3 )
+scale = Vector2( 2, 2 )
 texture = ExtResource( 2 )
 
 [connection signal="actions" from="." to="." method="_on_Grid_actions"]

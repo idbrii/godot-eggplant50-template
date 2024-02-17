@@ -15,19 +15,19 @@ func _ready() -> void:
 
 func set_curr_moves(new_val):
     curr_moves = new_val
-    $PlayerAP.text = "Your AP: "+str(curr_moves)
+    $CanvasLayer/HUD/VBoxContainer/HBoxAp/PlayerAP.text = ": "+str(curr_moves)
 
 func set_curr_def(new_val):
     curr_def = new_val
-    $PlayerDef.text = "Current Def: "+str(curr_def)
+    $CanvasLayer/HUD/VBoxContainer/HBoxDef/PlayerDef.text = ": "+str(curr_def)
 
 func set_curr_atk(new_val):
     curr_atk = new_val
-    $PlayerAtk.text = "Current Atk: "+str(curr_atk)
+    $CanvasLayer/HUD/VBoxContainer/HBoxAtk/PlayerAtk.text = ": "+str(curr_atk)
     
 func set_player_hp(new_val):
     player_hp = new_val
-    $PlayerHP.text = "Your HP: "+str(player_hp)
+    $CanvasLayer/HUD/VBoxContainer/HBoxHp/PlayerHP.text = ": "+str(player_hp)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -42,14 +42,16 @@ func _on_Grid_actions(atk, def, extra) -> void:
     self.curr_def += def
     if curr_moves < 1:
         $Grid.player_turn = false
-        self.player_hp -= $Enemy.attacking_for - curr_def
         $Enemy.hp -= curr_atk
+        yield(get_tree().create_timer(1.0), "timeout")
+        self.player_hp -= $Enemy.attacking_for - curr_def
         $Enemy.next_turn()
+        $Grid.update_active_option()
         
         self.curr_atk = 0
         self.curr_def = 0
         self.curr_moves = 1
         $Grid.player_turn = true
     else:
-        pass
+        $Grid.update_active_option()
     
