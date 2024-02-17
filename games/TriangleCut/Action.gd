@@ -9,10 +9,10 @@ var type
 func _ready() -> void:
     var t = randf()
     if t < .4:
-        type = "attack"
+        type = "atk"
         self.modulate = Color("#e14141")
     elif t < .8:
-        type = "defend"
+        type = "def"
         self.modulate = Color("#3898ff")
     else:
         type = "extra"
