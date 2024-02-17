@@ -13,10 +13,12 @@ var adjacencies = {}
 var triangles = {}
 
 var active_option setget set_active_option  # player's choice to cut
+var player_turn: bool = true
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+    randomize()
     if not center in adjacencies:
         adjacencies[center] = []
     var curr_nodes = [center]
@@ -55,6 +57,7 @@ func _ready() -> void:
     create_triangles()
     $Player.global_position = center
     active_option = adjacencies[center][0]
+    adjacencies[$Player.position].sort_custom(self, "sort_points_cw")
     find_line($Player.position, active_option).width = 8
     
 func sort_points_cw(p1, p2):
@@ -135,6 +138,8 @@ func traverse_active_edge():
 
 
 func _process(delta: float) -> void:
+    if not player_turn:
+        return
     var curr_idx = adjacencies[$Player.global_position].find(active_option)
     var num_adj = len(adjacencies[$Player.global_position])
     if Input.is_action_just_pressed("move_right"):
