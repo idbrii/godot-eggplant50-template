@@ -13,6 +13,7 @@ var type_to_frame = {"atk": 0, "def":1, "extra":2}
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+    $AnimationPlayer.play("RESET")
     var t = randf()
     if t < .4:
         type = "atk"
@@ -23,6 +24,8 @@ func _ready() -> void:
     else:
         type = "extra"
         $Sprite.texture = triangle_tex
+    yield(get_tree().create_timer(rand_range(0, 1.0)), "timeout")
+    $AnimationPlayer.play("spawn")
 
 func activate():
     $AnimationPlayer.play("activate")
