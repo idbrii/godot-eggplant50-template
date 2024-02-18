@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://games/Arkaruga/Objects/Arkaruga-Ball.tscn" type="PackedScene" id=1]
 [ext_resource path="res://games/Arkaruga/Objects/Arkaruga-Paddle.tscn" type="PackedScene" id=2]
@@ -6,7 +6,13 @@
 [ext_resource path="res://games/Arkaruga/Sprites/Wall/wall-horizontal.png" type="Texture" id=4]
 [ext_resource path="res://games/Arkaruga/Scripts/Arkaruga-ObjectLayer.gd" type="Script" id=5]
 [ext_resource path="res://games/Arkaruga/Sprites/Wall/wall-vertical.png" type="Texture" id=6]
+[ext_resource path="res://games/Arkaruga/Objects/Bricks/Arkaruga-Brick-Base.tscn" type="PackedScene" id=7]
 [ext_resource path="res://games/Arkaruga/Sprites/Wall/wall-corner-right.png" type="Texture" id=8]
+[ext_resource path="res://games/Arkaruga/ArkarugaManager.gd" type="Script" id=9]
+[ext_resource path="res://games/Arkaruga/Sprites/Paddle/paddle-alarm-light.png" type="Texture" id=10]
+[ext_resource path="res://games/Arkaruga/Sprites/Paddle/paddle-bumper-light.png" type="Texture" id=11]
+[ext_resource path="res://games/Arkaruga/Sprites/Paddle/paddle-bumper-dark.png" type="Texture" id=12]
+[ext_resource path="res://games/Arkaruga/Sprites/Paddle/paddle-alarm-dark.png" type="Texture" id=13]
 
 [sub_resource type="ConvexPolygonShape2D" id=5]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
@@ -113,10 +119,16 @@ viewport_path = NodePath("ViewportContainer/Viewport")
 margin_right = 640.0
 margin_bottom = 360.0
 
+[node name="ArkarugaManager" type="Node2D" parent="."]
+script = ExtResource( 9 )
+
 [node name="ViewportContainer" type="ViewportContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 stretch = true
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Viewport" type="Viewport" parent="ViewportContainer"]
 size = Vector2( 640, 360 )
@@ -133,6 +145,10 @@ viewportPath = NodePath("../ViewportContainer/Viewport")
 
 [node name="Paddle" parent="ObjectLayer" instance=ExtResource( 2 )]
 collision_mask = 0
+bumperTextureBlue = ExtResource( 11 )
+bumperTextureGreen = ExtResource( 12 )
+alarmTextureBlue = ExtResource( 10 )
+alarmTextureGreen = ExtResource( 13 )
 
 [node name="Ball" parent="ObjectLayer" instance=ExtResource( 1 )]
 
@@ -144,6 +160,12 @@ collision_layer = 4
 format = 1
 tile_data = PoolIntArray( 0, 0, 0, 1, 2, 0, 2, 2, 0, 3, 2, 0, 4, 2, 0, 5, 2, 0, 6, 2, 0, 7, 2, 0, 8, 2, 0, 9, 2, 0, 10, 2, 0, 11, 2, 0, 12, 2, 0, 13, 2, 0, 14, 2, 0, 15, 2, 0, 16, 2, 0, 17, 2, 0, 18, 2, 0, 19, 2, 0, 20, 2, 0, 21, 2, 0, 22, 2, 0, 23, 2, 0, 24, 2, 0, 25, 2, 0, 26, 2, 0, 27, 2, 0, 28, 2, 0, 29, 2, 0, 30, 2, 0, 31, 2, 0, 32, 2, 0, 33, 2, 0, 34, 2, 0, 35, 2, 0, 36, 2, 0, 37, 2, 0, 38, 1, 0, 65536, 3, 0, 65574, 3, 0, 131072, 3, 0, 131110, 3, 0, 196608, 3, 0, 196646, 3, 0, 262144, 3, 0, 262182, 3, 0, 327680, 3, 0, 327718, 3, 0, 393216, 3, 0, 393254, 3, 0, 458752, 3, 0, 458790, 3, 0, 524288, 3, 0, 524326, 3, 0, 589824, 3, 0, 589862, 3, 0, 655360, 3, 0, 655398, 3, 0, 720896, 3, 0, 720934, 3, 0, 786432, 3, 0, 786470, 3, 0, 851968, 3, 0, 852006, 3, 0, 917504, 3, 0, 917542, 3, 0, 983040, 3, 0, 983078, 3, 0, 1048576, 3, 0, 1048614, 3, 0, 1114112, 3, 0, 1114150, 3, 0, 1179648, 3, 0, 1179686, 3, 0, 1245184, 3, 0, 1245222, 3, 0, 1310720, 3, 0, 1310758, 3, 0, 1376256, 3, 0, 1376294, 3, 0, 1441792, 3, 0, 1441830, 3, 0 )
 
+[node name="Brick" parent="ObjectLayer" instance=ExtResource( 7 )]
+position = Vector2( 208, 96 )
+
+[node name="Brick2" parent="ObjectLayer" instance=ExtResource( 7 )]
+position = Vector2( 304, 72 )
+
 [node name="ShadowLayer" type="CanvasLayer" parent="."]
 layer = -50
 
@@ -151,12 +173,13 @@ layer = -50
 modulate = Color( 0, 0, 0, 0.294118 )
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 2.0
-margin_top = 2.0
-margin_right = 42.0
-margin_bottom = 42.0
+margin_right = 40.0
+margin_bottom = 40.0
 texture = SubResource( 3 )
 flip_v = true
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="BackgroundLayer" type="CanvasLayer" parent="."]
 layer = -99

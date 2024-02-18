@@ -1,21 +1,26 @@
 extends KinematicBody2D
 
+const Types = preload("res://games/Arkaruga/Scripts/Arkaruga-Types.gd")
+
 export var maxSpeed : float = 450
 export var acceleration : float = 300
 export var reverseAcceleration : float = 450
 export var boostModifier : float = 1.6
 export var maxBounceAngle : float = 80
+export var bumperTextureBlue : Texture
+export var bumperTextureGreen : Texture
+export var alarmTextureBlue : Texture
+export var alarmTextureGreen : Texture
 
 var _speed : float = 0
+onready var _collisionShape : CollisionShape2D = $Collision
+onready var _bumper : NinePatchRect = $Body/Bumper
+onready var _alarm : NinePatchRect = $Body/Alarm
+var _color
 
 func _ready():
 	pass
 	
-func _input(event):
-	if event.is_action_pressed("action1"):
-		print("Toggle!")
-		# toggle();
-
 func _process(delta):
 	var direction = 0
 	if Input.is_action_pressed("move_left"):
@@ -32,7 +37,8 @@ func _process(delta):
 	else:
 		var activeAcceleration = 0
 		if abs(_speed) > 0 && sign(direction) != sign(_speed):
-			activeAcceleration = reverseAcceleration * modifier
+			# ignore our modifier when reversing
+			activeAcceleration = reverseAcceleration
 		else:
 			activeAcceleration = acceleration * modifier
 		
@@ -54,20 +60,31 @@ func _process(delta):
 			_speed = 0
 		
 	return
+	
+func onActiveColorChanged(color: int):
+	_setColor(color)
 
 func getVelocity() -> Vector2:
 	return Vector2.RIGHT * _speed
 
-func getBounceDirectionFromPosition(position) -> Vector2:
-	var collider := $Collision as CollisionShape2D
-	var shape := collider.shape as RectangleShape2D
+func getBounceDirectionFromPosition(position : Vector2) -> Vector2:
+	var shape := _collisionShape.shape as RectangleShape2D
 	var width = shape.extents.x
-	var offset = position.x - collider.global_position.x
+	var offset = position.x - _collisionShape.global_position.x
 	var normalizedBounceDirection = clamp(offset / width, -1, 1)
 	var bounceAngle = normalizedBounceDirection * maxBounceAngle
 	
 	return Vector2.UP.rotated(deg2rad(bounceAngle))
 	
-	
+func _setColor(color: int):
+	_color = color
+	match color:
+		Types.ElementColor.BLUE:
+			_bumper.texture = bumperTextureBlue
+			_alarm.texture = alarmTextureBlue
+		Types.ElementColor.GREEN:
+			_bumper.texture = bumperTextureGreen
+			_alarm.texture = alarmTextureGreen
+	pass
 	
 	
