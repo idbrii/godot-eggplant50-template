@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/paddle-bumper-hit.png-379d1fb24f2bc584bdee4a2a32c4b3b5.stex"
+path="res://.import/wall-corner-left.png-78d09ae70ef0fc98e609ef2a60a5b278.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://games/Arkaruga/Sprites/Paddle/paddle-bumper-hit.png"
-dest_files=[ "res://.import/paddle-bumper-hit.png-379d1fb24f2bc584bdee4a2a32c4b3b5.stex" ]
+source_file="res://games/Arkaruga/Sprites/Wall/wall-corner-left.png"
+dest_files=[ "res://.import/wall-corner-left.png-78d09ae70ef0fc98e609ef2a60a5b278.stex" ]
 
 [params]
 

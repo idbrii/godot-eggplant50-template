@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/paddle-bumper-hit.png-379d1fb24f2bc584bdee4a2a32c4b3b5.stex"
+path="res://.import/brick-wide-hit.png-9172204b7dcd6b5695f8d017e4543070.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://games/Arkaruga/Sprites/Paddle/paddle-bumper-hit.png"
-dest_files=[ "res://.import/paddle-bumper-hit.png-379d1fb24f2bc584bdee4a2a32c4b3b5.stex" ]
+source_file="res://games/Arkaruga/Sprites/Bricks/Wide/brick-wide-hit.png"
+dest_files=[ "res://.import/brick-wide-hit.png-9172204b7dcd6b5695f8d017e4543070.stex" ]
 
 [params]
 
