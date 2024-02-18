@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://games/TriangleCut/Grid.tscn" type="PackedScene" id=1]
 [ext_resource path="res://games/TriangleCut/Main.gd" type="Script" id=2]
@@ -240,6 +240,108 @@ tracks/1/keys = {
 "values": [ Vector2( 20, 20 ), Vector2( 25, 25 ), Vector2( 20, 20 ) ]
 }
 
+[sub_resource type="Animation" id=26]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -34, -12 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ -42.7061 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("..:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 293, 0 ) ]
+}
+
+[sub_resource type="Animation" id=27]
+resource_name = "atk"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.6, 0.8 ),
+"transitions": PoolRealArray( 1, 0.5, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.3, 0.6 ),
+"transitions": PoolRealArray( 1, -2, 2, 1 ),
+"update": 0,
+"values": [ Vector2( -34, -12 ), Vector2( -42, -25 ), Vector2( -42, -25 ), Vector2( -29, -2 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2, 0.3, 0.6 ),
+"transitions": PoolRealArray( 1, -2, 2, 0.5 ),
+"update": 0,
+"values": [ -42.7061, -63.7253, -63.7253, 91.7963 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("..:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.5, 0.6, 0.7, 0.8, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 293, 0 ), Vector2( 293, 0 ), Vector2( 297, -2 ), Vector2( 291, 4 ), Vector2( 279, -3 ), Vector2( 293, 0 ) ]
+}
+
 [sub_resource type="Environment" id=2]
 glow_enabled = true
 glow_high_quality = true
@@ -382,6 +484,18 @@ current = true
 
 [node name="Enemy" parent="." instance=ExtResource( 3 )]
 position = Vector2( 293, 0 )
+
+[node name="AtkSprite" type="Sprite" parent="Enemy"]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( -34, -12 )
+rotation = -0.745362
+scale = Vector2( 6, 6 )
+texture = ExtResource( 6 )
+offset = Vector2( 3.16667, -2.66667 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Enemy/AtkSprite"]
+anims/RESET = SubResource( 26 )
+anims/atk = SubResource( 27 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 2 )

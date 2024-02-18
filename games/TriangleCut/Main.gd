@@ -48,6 +48,9 @@ func _on_Grid_actions(atk, def, extra) -> void:
     self.curr_def += def
     if curr_moves < 1:
         $Grid.player_turn = false
+        if curr_atk > 0:
+            $Enemy/AtkSprite/AnimationPlayer.play("atk")
+            yield($Enemy/AtkSprite/AnimationPlayer,"animation_finished")
         $Enemy.hp -= curr_atk
         yield(get_tree().create_timer(1.0), "timeout")
         if $Enemy.attacking_for > curr_def:
