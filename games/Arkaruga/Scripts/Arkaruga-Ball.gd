@@ -1,5 +1,6 @@
 extends KinematicBody2D
 
+const Types = preload("res://games/Arkaruga/Scripts/Arkaruga-Types.gd")
 const Paddle = preload("res://games/Arkaruga/Scripts/Arkaruga-Paddle.gd")
 
 export var baseSpeed : float = 200
@@ -8,16 +9,28 @@ export var maxSpeed : float = 300
 export var paddleSpeedRatio : float = .5
 export var paddlePositionRatio : float = .5
 export var minPaddleComponentBounceVerticalComponent : float = .25
+export var textureBlue : Texture
+export var textureGreen : Texture
 
-var _velocity;
+onready var _sprite : Sprite = $Sprite
+
+var _velocity : Vector2
+var _color;
 
 func _ready():
 	_velocity = Vector2.DOWN * baseSpeed
 	
 func _process(delta):
-	var collision = move_and_collide(_velocity * delta)
+	var offset = _velocity * delta
+	var collision := move_and_collide(offset)
 	if collision != null:
-		processCollision(collision)
+		if collision.travel.length_squared() > 0:
+			processCollision(collision)
+		else:
+			position += offset
+			
+func onActiveColorChanged(color: int):
+	_setColor(color)
 
 func processCollision(collision):
 	# perform default bouncing
@@ -46,3 +59,12 @@ func processCollision(collision):
 		finalDirection = finalDirection.normalized()
 	
 	_velocity = finalDirection * finalSpeed
+
+func _setColor(color: int):
+	_color = color
+	match color:
+		Types.ElementColor.BLUE:
+			_sprite.texture = textureBlue
+		Types.ElementColor.GREEN:
+			_sprite.texture = textureGreen
+	pass

@@ -1,19 +1,22 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://games/Arkaruga/Scripts/Arkaruga-Paddle.gd" type="Script" id=1]
 [ext_resource path="res://games/Arkaruga/Sprites/Paddle/paddle-body.png" type="Texture" id=2]
 [ext_resource path="res://games/Arkaruga/Sprites/Paddle/paddle-bumper-dark.png" type="Texture" id=3]
 [ext_resource path="res://games/Arkaruga/Sprites/Paddle/paddle-alarm-dark.png" type="Texture" id=4]
+[ext_resource path="res://games/Arkaruga/Sprites/Paddle/paddle-bumper-light.png" type="Texture" id=5]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 46, 4 )
 
-[node name="Paddle" type="KinematicBody2D"]
+[node name="Paddle" type="KinematicBody2D" groups=["Colorized"]]
 position = Vector2( 277, 330 )
 script = ExtResource( 1 )
-maxSpeed = 250
-acceleration = 600
-reverseAcceleration = 900
+maxSpeed = 250.0
+acceleration = 600.0
+reverseAcceleration = 900.0
+bumperTextureBlue = ExtResource( 3 )
+bumperTextureGreen = ExtResource( 5 )
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 position = Vector2( 50, 5 )
