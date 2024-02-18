@@ -19,12 +19,16 @@ var game_state = preload("res://games/TriangleCut/state.tres")
 func _ready() -> void:
     randomize()
     # check if not new game
-    $CanvasLayer/LvlHud/VBoxContainer/best.text = "Best: "+str(game_state.best)
-    $CanvasLayer/LvlHud/VBoxContainer/level.text = "Level: "+str(game_state.level)
+
     if game_state.level > 1:
         self.player_hp = game_state.health
         $Grid.set_player_loc(game_state.loc)
         $Enemy.set_level(game_state.level)
+    else:
+        if ResourceLoader.exists("user://triangle_cut.tres"):
+            game_state = ResourceLoader.load("user://triangle_cut.tres")
+    $CanvasLayer/LvlHud/VBoxContainer/best.text = "Best: "+str(game_state.best)
+    $CanvasLayer/LvlHud/VBoxContainer/level.text = "Level: "+str(game_state.level)
 
 func set_curr_moves(new_val):
     curr_moves = new_val
@@ -118,6 +122,10 @@ func enemy_dmg_num():
     add_child(dmg_num)
 
 func game_over():
+    game_state.level = 1
+    game_state.loc = Vector2()
+    game_state.health = max_player_hp
+    var result = ResourceSaver.save("user://triangle_cut.tres", game_state)
     $Grid.queue_free()
     $CanvasLayer/GameOver.visible = true
 

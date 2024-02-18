@@ -47,6 +47,7 @@ func _ready() -> void:
     $Eyes/Whites/Pupils.modulate = colors[0]
     $Eyes/Whites.material.set_shader_param("fac", rand_range(-0.5, 0.5))
     generate_name(3)
+    $Eyes/AnimationPlayer.queue("Main")
     
 func set_attacking_for(new_val):
     attacking_for = new_val
