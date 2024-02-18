@@ -53,5 +53,6 @@ func _on_Grid_actions(atk, def, extra) -> void:
         self.curr_moves = 1
         $Grid.player_turn = true
     else:
+        yield(get_tree().create_timer(0.5), "timeout")
         $Grid.update_active_option()
     
