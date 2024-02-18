@@ -32,6 +32,9 @@ viewportPath = NodePath("../ViewportContainer/Viewport")
 
 [node name="Paddle" parent="ObjectLayer" instance=ExtResource( 2 )]
 collision_mask = 0
+maxSpeed = 450.0
+acceleration = 300.0
+reverseAcceleration = 450.0
 
 [node name="Ball" parent="ObjectLayer" instance=ExtResource( 1 )]
 
