@@ -7,6 +7,10 @@ var sword_tex = preload("res://games/TriangleCut/sword.png")
 var shield_tex = preload("res://games/TriangleCut/shield.png")
 var triangle_tex = preload("res://games/TriangleCut/triangle_cut.png")
 
+var action_particle_scene = preload("res://games/TriangleCut/ActionParticle.tscn")
+
+var type_to_frame = {"atk": 0, "def":1, "extra":2}
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
     var t = randf()
@@ -20,7 +24,16 @@ func _ready() -> void:
         type = "extra"
         $Sprite.texture = triangle_tex
 
-
+func activate():
+    $AnimationPlayer.play("activate")
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta: float) -> void:
 #    pass
+
+func create_particle():
+    var particle = action_particle_scene.instance()
+    get_parent().add_child(particle)
+#    particle.texture.current_frame = type_to_frame[type]
+    particle.texture = $Sprite.texture
+    particle.global_position = global_position
+    particle.emitting = true
