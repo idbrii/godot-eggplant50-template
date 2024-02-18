@@ -61,11 +61,10 @@ func _ready() -> void:
     $Player.global_position = center
     player_loc = center
     self.active_option = adjacencies[center][0]
-    adjacencies[$Player.position].sort_custom(self, "sort_points_cw")
-#    find_line($Player.position, active_option).width = 8
+    adjacencies[player_loc].sort_custom(self, "sort_points_cw")
     
 func sort_points_cw(p1, p2):
-    # hackey, depends on player pos, only works on current player node
+    # hacky, depends on player pos, only works on current player node
     var center = $Player.position
     var p1p = p1 - center
     var p2p = p2 - center
@@ -144,7 +143,7 @@ func traverse_active_edge():
     $Player/AnimationPlayer.play("Move")
     
     yield($Tween, "tween_completed")
-    adjacencies[$Player.position].sort_custom(self, "sort_points_cw")
+    adjacencies[player_loc].sort_custom(self, "sort_points_cw")
     
     line.queue_free()
     
@@ -180,6 +179,12 @@ func _on_Grid_actions(atk, def, extra) -> void:
     print("extra: "+str(extra))
 
 func set_player_loc(new_loc):
+    
     $Player.position = new_loc
     player_loc = new_loc
+    # reset lines
+    for line in $Edges.get_children():
+        line.width = 2
+        line.default_color = Color("#7884ab")
     update_active_option()
+    adjacencies[player_loc].sort_custom(self, "sort_points_cw")
