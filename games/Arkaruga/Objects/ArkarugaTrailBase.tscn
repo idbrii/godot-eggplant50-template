@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://games/Arkaruga/Scripts/TrailRenderer.gd" type="Script" id=1]
+
+[sub_resource type="Curve" id=4]
+_data = [ Vector2( 0.496454, 0 ), 0.0, 4.63275, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+
+[node name="Trail" type="Line2D"]
+width_curve = SubResource( 4 )
+default_color = Color( 1, 1, 1, 0.486275 )
+script = ExtResource( 1 )
+length = 150
