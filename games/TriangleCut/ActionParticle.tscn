@@ -1,0 +1,87 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://games/TriangleCut/sword.png" type="Texture" id=1]
+[ext_resource path="res://games/TriangleCut/shield.png" type="Texture" id=2]
+[ext_resource path="res://games/TriangleCut/triangle_cut.png" type="Texture" id=3]
+
+[sub_resource type="Gradient" id=1]
+offsets = PoolRealArray( 0, 0.775304, 1 )
+colors = PoolColorArray( 10, 10, 10, 1, 1, 1, 1, 1, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
+
+[sub_resource type="Curve" id=3]
+max_value = 2.0
+_data = [ Vector2( 0.00193424, 1.95199 ), 0.0, 2.41371, 0, 0, Vector2( 0.251451, 2 ), -2.80325, -2.80325, 0, 0, Vector2( 0.504836, 2 ), 4.29138, 4.29138, 0, 0, Vector2( 0.750484, 1.99131 ), 7.31112, 7.31112, 0, 0, Vector2( 0.996132, 1.98835 ), 1.4, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=4]
+curve = SubResource( 3 )
+
+[sub_resource type="ParticlesMaterial" id=5]
+flag_disable_z = true
+direction = Vector3( -1, -1, 0 )
+spread = 18.95
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 5.0
+angular_velocity = 200.0
+angular_velocity_random = 0.26
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = 600.0
+damping = 72.59
+damping_random = 1.0
+scale_curve = SubResource( 4 )
+color_ramp = SubResource( 2 )
+
+[sub_resource type="AnimatedTexture" id=6]
+frames = 3
+pause = true
+frame_0/texture = ExtResource( 1 )
+frame_1/texture = ExtResource( 2 )
+frame_1/delay_sec = 0.0
+frame_2/texture = ExtResource( 3 )
+frame_2/delay_sec = 0.0
+
+[sub_resource type="Animation" id=7]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 10, 10, 10, 1 ) ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "main"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 0.5 ),
+"update": 0,
+"values": [ Color( 10, 10, 10, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[node name="Particles2D" type="Particles2D"]
+modulate = Color( 10, 10, 10, 1 )
+emitting = false
+amount = 1
+one_shot = true
+process_material = SubResource( 5 )
+texture = SubResource( 6 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "main"
+anims/RESET = SubResource( 7 )
+anims/main = SubResource( 8 )

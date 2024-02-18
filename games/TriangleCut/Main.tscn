@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://games/TriangleCut/Grid.tscn" type="PackedScene" id=1]
 [ext_resource path="res://games/TriangleCut/Main.gd" type="Script" id=2]
@@ -19,6 +19,230 @@ border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
 border_color = Color( 0.215686, 0.145098, 0.219608, 1 )
+
+[sub_resource type="Animation" id=3]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("TextureRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("TextureRect:rect_size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 20, 20 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "main"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("TextureRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6 ),
+"transitions": PoolRealArray( 1, -2, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 10, 10, 10, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("TextureRect:rect_size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6 ),
+"transitions": PoolRealArray( 1, -2, 1 ),
+"update": 0,
+"values": [ Vector2( 20, 20 ), Vector2( 25, 25 ), Vector2( 20, 20 ) ]
+}
+
+[sub_resource type="Animation" id=8]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("TextureRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("TextureRect:rect_size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 20, 20 ) ]
+}
+
+[sub_resource type="Animation" id=23]
+resource_name = "main"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("TextureRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6 ),
+"transitions": PoolRealArray( 1, -2, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 10, 10, 10, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("TextureRect:rect_size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6 ),
+"transitions": PoolRealArray( 1, -2, 1 ),
+"update": 0,
+"values": [ Vector2( 20, 20 ), Vector2( 25, 25 ), Vector2( 20, 20 ) ]
+}
+
+[sub_resource type="Animation" id=13]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("TextureRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("TextureRect:rect_size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 20, 20 ) ]
+}
+
+[sub_resource type="Animation" id=24]
+resource_name = "main"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("TextureRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6 ),
+"transitions": PoolRealArray( 1, -2, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 10, 10, 10, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("TextureRect:rect_size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6 ),
+"transitions": PoolRealArray( 1, -2, 1 ),
+"update": 0,
+"values": [ Vector2( 20, 20 ), Vector2( 25, 25 ), Vector2( 20, 20 ) ]
+}
+
+[sub_resource type="Animation" id=18]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("TextureRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("TextureRect:rect_size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 20, 20 ) ]
+}
+
+[sub_resource type="Animation" id=25]
+resource_name = "main"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("TextureRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6 ),
+"transitions": PoolRealArray( 1, -2, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 10, 10, 10, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("TextureRect:rect_size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6 ),
+"transitions": PoolRealArray( 1, -2, 1 ),
+"update": 0,
+"values": [ Vector2( 20, 20 ), Vector2( 25, 25 ), Vector2( 20, 20 ) ]
+}
+
+[sub_resource type="Environment" id=2]
+glow_enabled = true
+glow_high_quality = true
 
 [node name="Main" type="Node2D"]
 script = ExtResource( 2 )
@@ -55,6 +279,8 @@ size_flags_horizontal = 0
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer/HUD/VBoxContainer/HBoxHp"]
 margin_right = 20.0
 margin_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
 rect_min_size = Vector2( 20, 20 )
 texture = ExtResource( 5 )
 expand = true
@@ -66,6 +292,10 @@ margin_bottom = 20.0
 theme = ExtResource( 4 )
 text = ": 10"
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/HUD/VBoxContainer/HBoxHp"]
+anims/RESET = SubResource( 3 )
+anims/main = SubResource( 4 )
+
 [node name="HBoxAtk" type="HBoxContainer" parent="CanvasLayer/HUD/VBoxContainer"]
 margin_top = 24.0
 margin_right = 42.0
@@ -75,6 +305,8 @@ size_flags_horizontal = 0
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer/HUD/VBoxContainer/HBoxAtk"]
 margin_right = 20.0
 margin_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
 rect_min_size = Vector2( 20, 20 )
 texture = ExtResource( 6 )
 expand = true
@@ -86,6 +318,10 @@ margin_bottom = 20.0
 theme = ExtResource( 4 )
 text = ": 0"
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/HUD/VBoxContainer/HBoxAtk"]
+anims/RESET = SubResource( 8 )
+anims/main = SubResource( 23 )
+
 [node name="HBoxDef" type="HBoxContainer" parent="CanvasLayer/HUD/VBoxContainer"]
 margin_top = 48.0
 margin_right = 42.0
@@ -95,6 +331,8 @@ size_flags_horizontal = 0
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer/HUD/VBoxContainer/HBoxDef"]
 margin_right = 20.0
 margin_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
 rect_min_size = Vector2( 20, 20 )
 texture = ExtResource( 7 )
 expand = true
@@ -106,6 +344,10 @@ margin_bottom = 20.0
 theme = ExtResource( 4 )
 text = ": 0"
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/HUD/VBoxContainer/HBoxDef"]
+anims/RESET = SubResource( 13 )
+anims/main = SubResource( 24 )
+
 [node name="HBoxAp" type="HBoxContainer" parent="CanvasLayer/HUD/VBoxContainer"]
 margin_top = 72.0
 margin_right = 38.0
@@ -115,6 +357,8 @@ size_flags_horizontal = 0
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer/HUD/VBoxContainer/HBoxAp"]
 margin_right = 20.0
 margin_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
 rect_min_size = Vector2( 20, 20 )
 texture = ExtResource( 8 )
 expand = true
@@ -126,6 +370,10 @@ margin_bottom = 20.0
 theme = ExtResource( 4 )
 text = ": 1"
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/HUD/VBoxContainer/HBoxAp"]
+anims/RESET = SubResource( 18 )
+anims/main = SubResource( 25 )
+
 [node name="Grid" parent="." instance=ExtResource( 1 )]
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -134,5 +382,8 @@ current = true
 
 [node name="Enemy" parent="." instance=ExtResource( 3 )]
 position = Vector2( 293, 0 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 2 )
 
 [connection signal="actions" from="Grid" to="." method="_on_Grid_actions"]

@@ -36,6 +36,12 @@ func _process(delta: float) -> void:
 
 
 func _on_Grid_actions(atk, def, extra) -> void:
+    if atk > 0:
+        $CanvasLayer/HUD/VBoxContainer/HBoxAtk/AnimationPlayer.play("main")
+    if def > 0:
+        $CanvasLayer/HUD/VBoxContainer/HBoxDef/AnimationPlayer.play("main")
+    if extra > 0:
+        $CanvasLayer/HUD/VBoxContainer/HBoxAp/AnimationPlayer.play("main")
     self.curr_moves -= 1
     self.curr_moves += extra
     self.curr_atk += atk
@@ -44,7 +50,11 @@ func _on_Grid_actions(atk, def, extra) -> void:
         $Grid.player_turn = false
         $Enemy.hp -= curr_atk
         yield(get_tree().create_timer(1.0), "timeout")
-        self.player_hp -= $Enemy.attacking_for - curr_def
+        if $Enemy.attacking_for > curr_def:
+            $CanvasLayer/HUD/VBoxContainer/HBoxHp/AnimationPlayer.play("hp")
+        else:
+            pass # todo play some shield sound
+        self.player_hp -= max($Enemy.attacking_for - curr_def, 0)
         $Enemy.next_turn()
         $Grid.update_active_option()
         

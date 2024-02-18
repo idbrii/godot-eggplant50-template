@@ -128,7 +128,7 @@ func traverse_active_edge():
     for tri in triangles:
         if active_option in tri and $Player.position in tri:
             actions[triangles[tri].type] += 1
-            triangles[tri].queue_free()
+            triangles[tri].activate()
             tris_to_del.append(tri)
         
     for tri in tris_to_del:
