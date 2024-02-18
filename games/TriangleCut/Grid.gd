@@ -14,6 +14,7 @@ var triangles = {}
 
 var active_option setget set_active_option  # player's choice to cut
 var player_turn: bool = true
+var player_loc: Vector2
 
 
 # Called when the node enters the scene tree for the first time.
@@ -58,6 +59,7 @@ func _ready() -> void:
         adjacencies.erase(n)
     create_triangles()
     $Player.global_position = center
+    player_loc = center
     self.active_option = adjacencies[center][0]
     adjacencies[$Player.position].sort_custom(self, "sort_points_cw")
 #    find_line($Player.position, active_option).width = 8
@@ -105,7 +107,7 @@ func set_active_option(new_val):
         curr.default_color = Color("#7884ab")
     active_option = new_val
     var new = find_line($Player.position, active_option)
-    new.width = 4
+#    new.width = 4
     new.default_color = Color("#bf3fb3")
     
 
@@ -132,9 +134,18 @@ func traverse_active_edge():
     for tri in tris_to_del:
         triangles.erase(tri)
     
+    # Particles
+    $LineParticles.position = (player_loc + active_option)/2
+    $LineParticles.emitting = true
     # Move player to new loc
-    $Player.position = active_option
+    player_loc = active_option
+    $Tween.interpolate_property($Player, "position", null, active_option, 0.5, Tween.TRANS_ELASTIC, Tween.EASE_IN_OUT)
+    $Tween.start()
+    $Player/AnimationPlayer.play("Move")
+    
+    yield($Tween, "tween_completed")
     adjacencies[$Player.position].sort_custom(self, "sort_points_cw")
+    
     line.queue_free()
     
     # TODO: deal with when player strands themselves
@@ -144,16 +155,21 @@ func traverse_active_edge():
 func update_active_option():
     self.set_active_option(adjacencies[$Player.position][0])
 
+func process_active(delta):
+    var line = find_line($Player.position, active_option)
+    if line != null:
+        line.width = (sin(OS.get_ticks_msec()/200.0)+2.0)*4/3.0
 
 func _process(delta: float) -> void:
     if not player_turn:
         return
-    var curr_idx = adjacencies[$Player.global_position].find(active_option)
-    var num_adj = len(adjacencies[$Player.global_position])
+    process_active(delta)
+    var curr_idx = adjacencies[player_loc].find(active_option)
+    var num_adj = len(adjacencies[player_loc])
     if Input.is_action_just_pressed("move_right"):
-        self.active_option = adjacencies[$Player.global_position][(curr_idx+1) % num_adj]
+        self.active_option = adjacencies[player_loc][(curr_idx+1) % num_adj]
     if Input.is_action_just_pressed("move_left"):
-        self.active_option = adjacencies[$Player.global_position][(curr_idx-1) % num_adj]
+        self.active_option = adjacencies[player_loc][(curr_idx-1) % num_adj]
     if Input.is_action_just_pressed("action1"):
         traverse_active_edge()
 
