@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://games/Arkaruga/Objects/Arkaruga-Ball.tscn" type="PackedScene" id=1]
 [ext_resource path="res://games/Arkaruga/Objects/Arkaruga-Paddle.tscn" type="PackedScene" id=2]
@@ -16,6 +16,8 @@
 [ext_resource path="res://games/Arkaruga/ArkarugaBackground.gd" type="Script" id=14]
 [ext_resource path="res://games/Arkaruga/Objects/Bricks/Wide/Arkaruga-Brick-Wide-Blue.tscn" type="PackedScene" id=15]
 [ext_resource path="res://games/Arkaruga/Objects/Bricks/Wide/Arkaruga-Brick-Wide-Gray.tscn" type="PackedScene" id=16]
+[ext_resource path="res://games/Arkaruga/Objects/Bricks/Diamond/Brick-Diamond-Green.tscn" type="PackedScene" id=17]
+[ext_resource path="res://games/Arkaruga/Objects/Bricks/Diamond/Brick-Diamond-Blue.tscn" type="PackedScene" id=18]
 
 [sub_resource type="ConvexPolygonShape2D" id=5]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
@@ -181,7 +183,7 @@ shape = SubResource( 9 )
 
 [node name="Bricks" type="Node2D" parent="ObjectLayer"]
 
-[node name="Brick13" parent="ObjectLayer/Bricks" instance=ExtResource( 16 )]
+[node name="Brick-Diamond" parent="ObjectLayer/Bricks" instance=ExtResource( 16 )]
 position = Vector2( 160, 84 )
 _flashDuration = 0.1
 
@@ -236,6 +238,42 @@ _flashDuration = 0.1
 [node name="Brick14" parent="ObjectLayer/Bricks" instance=ExtResource( 16 )]
 position = Vector2( 464, 84 )
 _flashDuration = 0.1
+
+[node name="Brick15" parent="ObjectLayer/Bricks" instance=ExtResource( 18 )]
+position = Vector2( 96, 96 )
+
+[node name="Brick-Diamond-Blue" parent="ObjectLayer/Bricks" instance=ExtResource( 18 )]
+position = Vector2( 128, 132 )
+
+[node name="Brick-Diamond-Blue2" parent="ObjectLayer/Bricks" instance=ExtResource( 18 )]
+position = Vector2( 160, 168 )
+
+[node name="Brick-Diamond-Green" parent="ObjectLayer/Bricks" instance=ExtResource( 17 )]
+position = Vector2( 224, 120 )
+
+[node name="Brick-Diamond-Green2" parent="ObjectLayer/Bricks" instance=ExtResource( 17 )]
+position = Vector2( 256, 156 )
+
+[node name="Brick-Diamond-Green3" parent="ObjectLayer/Bricks" instance=ExtResource( 17 )]
+position = Vector2( 288, 192 )
+
+[node name="Brick-Diamond-Blue3" parent="ObjectLayer/Bricks" instance=ExtResource( 18 )]
+position = Vector2( 320, 120 )
+
+[node name="Brick-Diamond-Green4" parent="ObjectLayer/Bricks" instance=ExtResource( 17 )]
+position = Vector2( 352, 156 )
+
+[node name="Brick-Diamond-Blue4" parent="ObjectLayer/Bricks" instance=ExtResource( 18 )]
+position = Vector2( 384, 192 )
+
+[node name="Brick-Diamond-Green5" parent="ObjectLayer/Bricks" instance=ExtResource( 17 )]
+position = Vector2( 400, 108 )
+
+[node name="Brick-Diamond-Blue5" parent="ObjectLayer/Bricks" instance=ExtResource( 18 )]
+position = Vector2( 432, 144 )
+
+[node name="Brick-Diamond-Green6" parent="ObjectLayer/Bricks" instance=ExtResource( 17 )]
+position = Vector2( 464, 180 )
 
 [node name="ShadowLayer" type="CanvasLayer" parent="."]
 layer = -50
