@@ -62,3 +62,5 @@ func next_turn():
     
 func attack():
     $Eyes/AnimationPlayer.play("attacking")
+    $Eyes/AnimationPlayer.queue("RESET")
+    $Eyes/AnimationPlayer.queue("Main")
