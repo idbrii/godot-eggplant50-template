@@ -2,7 +2,9 @@ extends Node2D
 
 
 # Declare member variables here. Examples:
-var player_hp: int = 10 setget set_player_hp
+
+const max_player_hp: int = 10
+var player_hp: int = max_player_hp setget set_player_hp
 
 var curr_atk = 0 setget set_curr_atk
 var curr_def = 0 setget set_curr_def
@@ -68,6 +70,15 @@ func _on_Grid_actions(atk, def, extra) -> void:
             
         $Enemy.hp -= curr_atk
         if $Enemy.hp <= 0:
+            # overkill: heal player up to max
+            var overkill_heal = min(-1*$Enemy.hp, max_player_hp-player_hp)
+            player_hp += overkill_heal
+            if overkill_heal > 0:
+                var pds = player_dmg_number_scene.instance()
+                pds.get_node("Label").text = "+"+str(-1*$Enemy.hp)
+                pds.global_position = Vector2()
+                add_child(pds)
+                yield(pds, "child_exiting_tree")
             next_enemy()
         $Enemy.attack()
         yield(get_tree().create_timer(1.5), "timeout")
