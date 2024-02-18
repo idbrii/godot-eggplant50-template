@@ -1,0 +1,10 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://games/TriangleCut/GameState.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+health = 10
+loc = Vector2( 0, 0 )
+level = 1
+best = 0

@@ -10,11 +10,19 @@ var curr_moves = 1 setget set_curr_moves
 var enemy_dmg_number_scene = preload("res://games/TriangleCut/EnemyDmg.tscn")
 var player_dmg_number_scene = preload("res://games/TriangleCut/PlayerDmg.tscn")
 var shield_dmg_scene = preload("res://games/TriangleCut/ShieldDmg.tscn")
+var game_state = preload("res://games/TriangleCut/state.tres")
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
     randomize()
+    # check if not new game
+    $CanvasLayer/LvlHud/VBoxContainer/best.text = "Best: "+str(game_state.best)
+    $CanvasLayer/LvlHud/VBoxContainer/level.text = "Level: "+str(game_state.level)
+    if game_state.level > 1:
+        self.player_hp = game_state.health
+        $Grid.set_player_loc(game_state.loc)
+        $Enemy.set_level(game_state.level)
 
 func set_curr_moves(new_val):
     curr_moves = new_val
@@ -59,6 +67,8 @@ func _on_Grid_actions(atk, def, extra) -> void:
             
             
         $Enemy.hp -= curr_atk
+        if $Enemy.hp <= 0:
+            next_enemy()
         $Enemy.attack()
         yield(get_tree().create_timer(1.5), "timeout")
         if curr_def > 0:
@@ -99,3 +109,13 @@ func enemy_dmg_num():
 func game_over():
     $Grid.queue_free()
     $CanvasLayer/GameOver.visible = true
+
+func next_enemy():
+    game_state.health = player_hp
+    game_state.loc = $Grid.player_loc
+    if game_state.level > game_state.best:
+        game_state.best = game_state.level
+        
+    game_state.level += 1
+    get_tree().reload_current_scene()
+    

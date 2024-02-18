@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://games/TriangleCut/Grid.tscn" type="PackedScene" id=1]
 [ext_resource path="res://games/TriangleCut/Main.gd" type="Script" id=2]
@@ -257,6 +257,18 @@ tracks/1/keys = {
 "update": 0,
 "values": [ Vector2( 20, 20 ), Vector2( 25, 25 ), Vector2( 20, 20 ) ]
 }
+
+[sub_resource type="StyleBoxFlat" id=30]
+content_margin_left = 8.0
+content_margin_right = 8.0
+content_margin_top = 4.0
+content_margin_bottom = 4.0
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.215686, 0.145098, 0.219608, 1 )
 
 [sub_resource type="Animation" id=26]
 length = 0.001
@@ -529,6 +541,37 @@ text = ": 1"
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/HUD/VBoxContainer/HBoxAp"]
 anims/RESET = SubResource( 18 )
 anims/main = SubResource( 25 )
+
+[node name="LvlHud" type="PanelContainer" parent="CanvasLayer"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -86.0
+margin_top = 6.0
+margin_right = -8.0
+margin_bottom = 63.0
+custom_styles/panel = SubResource( 30 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/LvlHud"]
+margin_left = 8.0
+margin_top = 4.0
+margin_right = 70.0
+margin_bottom = 53.0
+custom_constants/separation = 4
+alignment = 1
+
+[node name="level" type="Label" parent="CanvasLayer/LvlHud/VBoxContainer"]
+margin_top = 2.0
+margin_right = 62.0
+margin_bottom = 22.0
+theme = ExtResource( 4 )
+text = "Level: 1"
+
+[node name="best" type="Label" parent="CanvasLayer/LvlHud/VBoxContainer"]
+margin_top = 26.0
+margin_right = 62.0
+margin_bottom = 46.0
+theme = ExtResource( 4 )
+text = "Best: 0"
 
 [node name="Grid" parent="." instance=ExtResource( 1 )]
 
