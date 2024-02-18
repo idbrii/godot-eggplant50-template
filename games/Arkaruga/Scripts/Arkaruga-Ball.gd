@@ -59,6 +59,10 @@ func processCollision(collision):
 		finalDirection = finalDirection.normalized()
 	
 	_velocity = finalDirection * finalSpeed
+	
+	# notify the other collider
+	if collision.collider.has_method("onBallHit"):
+		collision.collider.onBallHit(self)
 
 func _setColor(color: int):
 	_color = color
