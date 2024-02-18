@@ -52,9 +52,12 @@ func _on_Grid_actions(atk, def, extra) -> void:
             $Enemy/AtkSprite/AnimationPlayer.play("atk")
             yield($Enemy/AtkSprite/AnimationPlayer,"animation_finished")
         $Enemy.hp -= curr_atk
-        yield(get_tree().create_timer(1.0), "timeout")
+        $Enemy.attack()
+        yield(get_tree().create_timer(1.5), "timeout")
+        if curr_def > 0:
+            $CanvasLayer/HUD/VBoxContainer/HBoxDef/AnimationPlayer.play("main")
         if $Enemy.attacking_for > curr_def:
-            $CanvasLayer/HUD/VBoxContainer/HBoxHp/AnimationPlayer.play("hp")
+            $CanvasLayer/HUD/VBoxContainer/HBoxHp/AnimationPlayer.play("main")
         else:
             pass # todo play some shield sound
         self.player_hp -= max($Enemy.attacking_for - curr_def, 0)

@@ -59,3 +59,6 @@ func set_hp(new_val):
 func next_turn():
     # update attack
     self.attacking_for = round(rand_range(1, 7))
+    
+func attack():
+    $Eyes/AnimationPlayer.play("attacking")
