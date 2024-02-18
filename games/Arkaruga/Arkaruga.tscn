@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://games/Arkaruga/Objects/Arkaruga-Ball.tscn" type="PackedScene" id=1]
 [ext_resource path="res://games/Arkaruga/Objects/Arkaruga-Paddle.tscn" type="PackedScene" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://games/Arkaruga/Sprites/Paddle/paddle-bumper-light.png" type="Texture" id=11]
 [ext_resource path="res://games/Arkaruga/Sprites/Paddle/paddle-bumper-dark.png" type="Texture" id=12]
 [ext_resource path="res://games/Arkaruga/Sprites/Paddle/paddle-alarm-dark.png" type="Texture" id=13]
+[ext_resource path="res://games/Arkaruga/ArkarugaBackground.gd" type="Script" id=14]
 
 [sub_resource type="ConvexPolygonShape2D" id=5]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
@@ -184,10 +185,14 @@ __meta__ = {
 [node name="BackgroundLayer" type="CanvasLayer" parent="."]
 layer = -99
 
-[node name="ColorRect" type="ColorRect" parent="BackgroundLayer"]
+[node name="ArkarugaBackground" type="ColorRect" parent="BackgroundLayer" groups=["Colorized"]]
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0.243137, 0.215686, 0.360784, 1 )
+script = ExtResource( 14 )
 __meta__ = {
 "_edit_lock_": true
 }
+_flashStrength = 0.1
+_blueBgColor = Color( 0.243137, 0.215686, 0.360784, 1 )
+_greenBgColor = Color( 0.215686, 0.145098, 0.219608, 1 )
