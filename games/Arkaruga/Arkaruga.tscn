@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://games/Arkaruga/Objects/Arkaruga-Ball.tscn" type="PackedScene" id=1]
 [ext_resource path="res://games/Arkaruga/Objects/Arkaruga-Paddle.tscn" type="PackedScene" id=2]
@@ -6,7 +6,7 @@
 [ext_resource path="res://games/Arkaruga/Sprites/Wall/wall-horizontal.png" type="Texture" id=4]
 [ext_resource path="res://games/Arkaruga/Scripts/Arkaruga-ObjectLayer.gd" type="Script" id=5]
 [ext_resource path="res://games/Arkaruga/Sprites/Wall/wall-vertical.png" type="Texture" id=6]
-[ext_resource path="res://games/Arkaruga/Objects/Bricks/Arkaruga-Brick-Base.tscn" type="PackedScene" id=7]
+[ext_resource path="res://games/Arkaruga/Objects/Bricks/Wide/Arkaruga-Brick-Wide-Green.tscn" type="PackedScene" id=7]
 [ext_resource path="res://games/Arkaruga/Sprites/Wall/wall-corner-right.png" type="Texture" id=8]
 [ext_resource path="res://games/Arkaruga/ArkarugaManager.gd" type="Script" id=9]
 [ext_resource path="res://games/Arkaruga/Sprites/Paddle/paddle-alarm-light.png" type="Texture" id=10]
@@ -14,6 +14,8 @@
 [ext_resource path="res://games/Arkaruga/Sprites/Paddle/paddle-bumper-dark.png" type="Texture" id=12]
 [ext_resource path="res://games/Arkaruga/Sprites/Paddle/paddle-alarm-dark.png" type="Texture" id=13]
 [ext_resource path="res://games/Arkaruga/ArkarugaBackground.gd" type="Script" id=14]
+[ext_resource path="res://games/Arkaruga/Objects/Bricks/Wide/Arkaruga-Brick-Wide-Blue.tscn" type="PackedScene" id=15]
+[ext_resource path="res://games/Arkaruga/Objects/Bricks/Wide/Arkaruga-Brick-Wide-Gray.tscn" type="PackedScene" id=16]
 
 [sub_resource type="ConvexPolygonShape2D" id=5]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
@@ -156,12 +158,6 @@ alarmTextureGreen = ExtResource( 13 )
 
 [node name="Ball" parent="ObjectLayer" instance=ExtResource( 1 )]
 
-[node name="Brick" parent="ObjectLayer" instance=ExtResource( 7 )]
-position = Vector2( 208, 96 )
-
-[node name="Brick2" parent="ObjectLayer" instance=ExtResource( 7 )]
-position = Vector2( 304, 72 )
-
 [node name="Walls" type="Node2D" parent="ObjectLayer"]
 
 [node name="WallMap" type="TileMap" parent="ObjectLayer/Walls"]
@@ -182,6 +178,64 @@ shape = SubResource( 9 )
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="ObjectLayer/Walls/PaddleBlockers"]
 position = Vector2( 631, 181 )
 shape = SubResource( 9 )
+
+[node name="Bricks" type="Node2D" parent="ObjectLayer"]
+
+[node name="Brick13" parent="ObjectLayer/Bricks" instance=ExtResource( 16 )]
+position = Vector2( 160, 84 )
+_flashDuration = 0.1
+
+[node name="Brick" parent="ObjectLayer/Bricks" instance=ExtResource( 15 )]
+position = Vector2( 96, 60 )
+_flashDuration = 0.1
+
+[node name="Brick2" parent="ObjectLayer/Bricks" instance=ExtResource( 15 )]
+position = Vector2( 144, 60 )
+_flashDuration = 0.1
+
+[node name="Brick3" parent="ObjectLayer/Bricks" instance=ExtResource( 7 )]
+position = Vector2( 192, 60 )
+_flashDuration = 0.1
+
+[node name="Brick4" parent="ObjectLayer/Bricks" instance=ExtResource( 7 )]
+position = Vector2( 240, 60 )
+_flashDuration = 0.1
+
+[node name="Brick5" parent="ObjectLayer/Bricks" instance=ExtResource( 15 )]
+position = Vector2( 288, 60 )
+_flashDuration = 0.1
+
+[node name="Brick6" parent="ObjectLayer/Bricks" instance=ExtResource( 15 )]
+position = Vector2( 336, 60 )
+_flashDuration = 0.1
+
+[node name="Brick9" parent="ObjectLayer/Bricks" instance=ExtResource( 7 )]
+position = Vector2( 432, 60 )
+_flashDuration = 0.1
+
+[node name="Brick10" parent="ObjectLayer/Bricks" instance=ExtResource( 15 )]
+position = Vector2( 480, 60 )
+_flashDuration = 0.1
+
+[node name="Brick11" parent="ObjectLayer/Bricks" instance=ExtResource( 15 )]
+position = Vector2( 528, 60 )
+_flashDuration = 0.1
+
+[node name="Brick12" parent="ObjectLayer/Bricks" instance=ExtResource( 7 )]
+position = Vector2( 48, 60 )
+_flashDuration = 0.1
+
+[node name="Brick7" parent="ObjectLayer/Bricks" instance=ExtResource( 7 )]
+position = Vector2( 384, 60 )
+_flashDuration = 0.1
+
+[node name="Brick8" parent="ObjectLayer/Bricks" instance=ExtResource( 7 )]
+position = Vector2( 576, 60 )
+_flashDuration = 0.1
+
+[node name="Brick14" parent="ObjectLayer/Bricks" instance=ExtResource( 16 )]
+position = Vector2( 464, 84 )
+_flashDuration = 0.1
 
 [node name="ShadowLayer" type="CanvasLayer" parent="."]
 layer = -50
