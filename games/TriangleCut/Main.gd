@@ -35,7 +35,9 @@ func set_player_hp(new_val):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-    pass
+    if $CanvasLayer/GameOver.visible:
+        if Input.is_action_just_released("action1"):
+            get_tree().reload_current_scene()
 
 
 func _on_Grid_actions(atk, def, extra) -> void:
@@ -74,6 +76,8 @@ func _on_Grid_actions(atk, def, extra) -> void:
         else:
             pass # todo play some shield sound
         self.player_hp -= max($Enemy.attacking_for - curr_def, 0)
+        if player_hp <= 0:
+            game_over()
         $Enemy.next_turn()
         $Grid.update_active_option()
         
@@ -91,3 +95,7 @@ func enemy_dmg_num():
     dmg_num.get_node("Label").text = "-"+str(self.curr_atk)
     dmg_num.global_position = $Enemy.global_position
     add_child(dmg_num)
+
+func game_over():
+    $Grid.queue_free()
+    $CanvasLayer/GameOver.visible = true
