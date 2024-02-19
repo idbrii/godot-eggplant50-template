@@ -15,6 +15,8 @@ var triangles = {}
 var active_option setget set_active_option  # player's choice to cut
 var player_turn: bool = true
 var player_loc: Vector2
+#var line_default_color = Color("#7884ab")
+var line_default_color = Color("#3e375c")
 
 
 # Called when the node enters the scene tree for the first time.
@@ -36,7 +38,7 @@ func _ready() -> void:
                     adjacencies[n].append(curr)
                     new_nodes.append(n)
                     var line = Line2D.new()
-                    line.default_color = Color("#7884ab")
+                    line.default_color = line_default_color
                     line.width = 2
                     line.joint_mode = Line2D.LINE_JOINT_ROUND
                     line.add_point(curr)
@@ -103,7 +105,7 @@ func set_active_option(new_val):
     var curr = find_line($Player.position, active_option)
     if curr != null:
         curr.width = 2
-        curr.default_color = Color("#7884ab")
+        curr.default_color = line_default_color
     active_option = new_val
     var new = find_line($Player.position, active_option)
 #    new.width = 4
@@ -141,6 +143,7 @@ func traverse_active_edge():
     $Tween.interpolate_property($Player, "position", null, active_option, 0.5, Tween.TRANS_ELASTIC, Tween.EASE_IN_OUT)
     $Tween.start()
     $Player/AnimationPlayer.play("Move")
+    $Player/AnimationPlayer.queue("idle")
     
     yield($Tween, "tween_completed")
     adjacencies[player_loc].sort_custom(self, "sort_points_cw")
@@ -186,6 +189,6 @@ func set_player_loc(new_loc):
     # reset lines
     for line in $Edges.get_children():
         line.width = 2
-        line.default_color = Color("#7884ab")
+        line.default_color = line_default_color
     update_active_option()
     adjacencies[player_loc].sort_custom(self, "sort_points_cw")
