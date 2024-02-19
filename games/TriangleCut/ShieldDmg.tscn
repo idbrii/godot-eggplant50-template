@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://games/TriangleCut/shield.png" type="Texture" id=1]
+[ext_resource path="res://games/TriangleCut/shield.wav" type="AudioStream" id=2]
 
 [sub_resource type="Animation" id=1]
 length = 0.001
@@ -45,6 +46,20 @@ tracks/1/keys = {
 "method": "queue_free"
 } ]
 }
+tracks/2/type = "audio"
+tracks/2/path = NodePath("AudioStreamPlayer")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 2 )
+} ],
+"times": PoolRealArray( 0.2 )
+}
 
 [node name="Node2D" type="Node2D"]
 modulate = Color( 1, 1, 1, 0 )
@@ -57,3 +72,6 @@ texture = ExtResource( 1 )
 autoplay = "main"
 anims/RESET = SubResource( 1 )
 anims/main = SubResource( 2 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )

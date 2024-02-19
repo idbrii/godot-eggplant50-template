@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/song_fg.mp3-7cb4d9b850ed17696060970fda26dfe0.mp3str"
+
+[deps]
+
+source_file="res://games/TriangleCut/song_fg.mp3"
+dest_files=[ "res://.import/song_fg.mp3-7cb4d9b850ed17696060970fda26dfe0.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

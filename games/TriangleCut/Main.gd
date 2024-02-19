@@ -26,7 +26,7 @@ func _ready() -> void:
         $Enemy.set_level(game_state.level)
     else:
         if ResourceLoader.exists("user://triangle_cut.tres"):
-            game_state = ResourceLoader.load("user://triangle_cut.tres")
+            game_state.best = ResourceLoader.load("user://triangle_cut.tres").best
     $CanvasLayer/LvlHud/VBoxContainer/best.text = "Best: "+str(game_state.best)
     $CanvasLayer/LvlHud/VBoxContainer/level.text = "Level: "+str(game_state.level)
 
@@ -49,6 +49,8 @@ func set_player_hp(new_val):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+    if Input.is_action_just_pressed("action1"):
+        $bg_music.play_fg(8)
     if $CanvasLayer/GameOver.visible:
         if Input.is_action_just_released("action1"):
             get_tree().reload_current_scene()
@@ -84,14 +86,16 @@ func _on_Grid_actions(atk, def, extra) -> void:
                 add_child(pds)
                 yield(pds, "child_exiting_tree")
             next_enemy()
+            return
         $Enemy.attack()
-        yield(get_tree().create_timer(1.5), "timeout")
+        yield(get_tree().create_timer(0.5), "timeout")
         if curr_def > 0:
             $CanvasLayer/HUD/VBoxContainer/HBoxDef/AnimationPlayer.play("main")
             for i in range(curr_def):
                 var sds = shield_dmg_scene.instance()
                 sds.position += Vector2(rand_range(30, 100), rand_range(-100, 100))
                 add_child(sds)
+                yield(get_tree().create_timer(rand_range(0.1, 0.6)), "timeout")
         if $Enemy.attacking_for > curr_def:
             $CanvasLayer/HUD/VBoxContainer/HBoxHp/AnimationPlayer.play("main")
             var pds = player_dmg_number_scene.instance()
@@ -130,6 +134,8 @@ func game_over():
     $CanvasLayer/GameOver.visible = true
 
 func next_enemy():
+    $win_sfx.play()
+    yield($win_sfx, "finished")
     game_state.health = player_hp
     game_state.loc = $Grid.player_loc
     if game_state.level > game_state.best:

@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://games/TriangleCut/song_bg.mp3" type="AudioStream" id=1]
+[ext_resource path="res://games/TriangleCut/song_fg.mp3" type="AudioStream" id=2]
+[ext_resource path="res://games/TriangleCut/BackgroundMusic.gd" type="Script" id=3]
+
+[node name="bg_music" type="AudioStreamPlayer"]
+stream = ExtResource( 1 )
+volume_db = -12.951
+script = ExtResource( 3 )
+
+[node name="fg_music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
+volume_db = -80.0
+
+[node name="Tween" type="Tween" parent="."]
