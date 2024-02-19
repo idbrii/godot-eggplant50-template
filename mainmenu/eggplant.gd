@@ -25,7 +25,7 @@ func start_game(gamedef: GameDef = null):
 		transitioner.show_game_def(gamedef)
 
 
-func transition_to(next_scene: PackedScene, gamedef: GameDef = null):
+func transition_to(next_scene: PackedScene):
 	assert(next_scene, "Need a scene to transition to.")
 	last_played_scene = next_scene
 	var transitioner = transition_scene.instance()
