@@ -33,7 +33,6 @@ func _ready() -> void:
     else:
         var max_amnt = max(level/2.5, 1)
         amount = max(randi() % int(round(max_amnt)), 1)
-        print(amount)
     var tens = amount / 10
     var fives = (amount % 10) / 5
     var ones = amount % 5
