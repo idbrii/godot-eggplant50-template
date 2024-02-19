@@ -8,6 +8,8 @@ export var fallAtZeroHealth = false
 export var points = 1
 export var flashColor = Color.white
 export var flashDuration = .033
+export var baseMoveSpeed = 0.5
+export var gutterFallMaxDelay = 1
 export var fallJumpSpeed = 200.0
 export var maxFallSpeed = 200.0
 export var fallMinAngleOffset = 10.0
@@ -36,6 +38,9 @@ func _ready():
 func _process(delta):
 	if _isFalling:
 		_updateFalling(delta)
+	else:
+		_updateMovement(delta)
+		
 	
 	if _isDestroyed and !_isFlashing:
 		queue_free()
@@ -47,7 +52,12 @@ func onActiveColorChanged(color: int):
 func onBallHit(ball):
 	if _health > 0:
 		_takeDamage(1)
-		
+
+func onGutterEntered():
+	var delay = randf() * gutterFallMaxDelay
+	yield(get_tree().create_timer(delay), "timeout")
+	_startFalling()
+
 func _setActive(active: bool):
 	_isActive = active
 	_activeSprite.visible = active
@@ -102,7 +112,7 @@ func _startFalling():
 	var rotationOffset = rand_range(abs(fallMinAngleOffset), abs(fallMaxAngleOffset))
 	if randf() > .5:
 		rotationOffset *= -1
-	rotation += rotationOffset
+	rotation += deg2rad(rotationOffset)
 	
 	# Disable standard collision
 	_setCollidable(false)
@@ -117,6 +127,10 @@ func _updateFalling(delta: float):
 	_fallSpeed = min(maxFallSpeed, _fallSpeed + fallAcceleration * delta)
 	var offset = Vector2.DOWN * _fallSpeed * delta
 	position = position + offset
+	
+func _updateMovement(delta: float):
+	var movementSpeed = baseMoveSpeed
+	position.y += movementSpeed * delta * 5
 
 func _on_FallingArea_body_entered(body):
 	if !_isActive:
@@ -124,3 +138,12 @@ func _on_FallingArea_body_entered(body):
 	
 	if body.has_method("onFallingBrickHit"):
 		body.onFallingBrickHit(self)
+
+
+func _on_VisibilityNotifier2D_viewport_exited(viewport):
+	queue_free()
+
+
+func _on_GutterDetectionArea_area_entered(area):
+	if area.is_in_group("Gutter"):
+		_startFalling()
