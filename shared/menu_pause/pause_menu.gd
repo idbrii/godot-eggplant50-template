@@ -1,4 +1,10 @@
 extends Popup
+# A common pause menu that lets you restart or quit. Shows the inputs for your
+# game (set labels in your GameDef).
+#
+# If you run your game scene directly, the input widget won't show. But it
+# works so long as the game is launched from the main menu.
+
 
 export var supports_restart := true
 export var help_title := ""  # Optional
