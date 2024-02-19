@@ -17,3 +17,8 @@ static func transition_to(tree : SceneTree, next_scene : PackedScene):
 	var result = tree.change_scene_to(next_scene)
 	if result != OK:
 		printt("Failed to transition to scene.", result)
+
+
+func show_game_def(gamedef):
+	$"%InputDisplay".set_game_def(gamedef)
+	$"%InputDisplay".visible = true
