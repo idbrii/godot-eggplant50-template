@@ -7,4 +7,4 @@
 
 [resource]
 script = ExtResource( 1 )
-games = [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ) ]
+games = [ ExtResource( 4 ), ExtResource( 3 ), ExtResource( 2 ) ]
