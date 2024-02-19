@@ -139,13 +139,13 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="primary" type="VBoxContainer" parent="VBoxContainer/Actions"]
-margin_right = 88.0
+margin_right = 100.0
 margin_bottom = 88.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Icon" type="TextureRect" parent="VBoxContainer/Actions/primary"]
-margin_right = 88.0
+margin_right = 100.0
 margin_bottom = 64.0
 rect_min_size = Vector2( 64, 64 )
 size_flags_horizontal = 3
@@ -154,26 +154,20 @@ stretch_mode = 6
 
 [node name="Label" type="Label" parent="VBoxContainer/Actions/primary"]
 margin_top = 68.0
-margin_right = 88.0
+margin_right = 100.0
 margin_bottom = 88.0
 text = "Jump"
 align = 1
 
-[node name="padding" type="Control" parent="VBoxContainer/Actions"]
-margin_left = 92.0
-margin_right = 112.0
-margin_bottom = 88.0
-rect_min_size = Vector2( 20, 0 )
-
 [node name="secondary" type="VBoxContainer" parent="VBoxContainer/Actions"]
-margin_left = 116.0
+margin_left = 104.0
 margin_right = 205.0
 margin_bottom = 88.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Icon" type="TextureRect" parent="VBoxContainer/Actions/secondary"]
-margin_right = 89.0
+margin_right = 101.0
 margin_bottom = 64.0
 rect_min_size = Vector2( 64, 64 )
 size_flags_horizontal = 3
@@ -182,7 +176,7 @@ stretch_mode = 6
 
 [node name="Label" type="Label" parent="VBoxContainer/Actions/secondary"]
 margin_top = 68.0
-margin_right = 89.0
+margin_right = 101.0
 margin_bottom = 88.0
 text = "Dash"
 align = 1
