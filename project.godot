@@ -28,12 +28,18 @@ _global_script_classes=[ {
 "class": "PpShape",
 "language": "GDScript",
 "path": "res://games/polygonal_pasture/Shape.gd"
+}, {
+"base": "Resource",
+"class": "TriangleGameState",
+"language": "GDScript",
+"path": "res://games/TriangleCut/GameState.gd"
 } ]
 _global_script_class_icons={
 "GameDef": "",
 "GameList": "",
 "GrownShape": "",
-"PpShape": ""
+"PpShape": "",
+"TriangleGameState": ""
 }
 
 [application]
