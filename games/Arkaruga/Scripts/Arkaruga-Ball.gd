@@ -72,3 +72,8 @@ func _setColor(color: int):
 		Types.ElementColor.GREEN:
 			_sprite.texture = textureGreen
 	pass
+
+
+func _on_VisibilityNotifier2D_viewport_exited(viewport):
+	print("Lost one!")
+	queue_free()

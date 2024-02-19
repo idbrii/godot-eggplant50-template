@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://games/Arkaruga/Objects/Arkaruga-Ball.tscn" type="PackedScene" id=1]
 [ext_resource path="res://games/Arkaruga/Objects/Arkaruga-Paddle.tscn" type="PackedScene" id=2]
@@ -20,6 +20,7 @@
 [ext_resource path="res://games/Arkaruga/Objects/Bricks/Diamond/Brick-Diamond-Blue.tscn" type="PackedScene" id=18]
 [ext_resource path="res://games/Arkaruga/Sprites/Decoration/gutter-spike.png" type="Texture" id=19]
 [ext_resource path="res://games/Arkaruga/Scripts/Arkaruga-GutterSpikes.gd" type="Script" id=20]
+[ext_resource path="res://games/Arkaruga/Scripts/Arkaruga-Brick.gd" type="Script" id=21]
 
 [sub_resource type="ConvexPolygonShape2D" id=5]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
@@ -125,6 +126,9 @@ extents = Vector2( 21, 191 )
 [sub_resource type="ViewportTexture" id=3]
 viewport_path = NodePath("ViewportContainer/Viewport")
 
+[sub_resource type="RectangleShape2D" id=10]
+extents = Vector2( 325, 54 )
+
 [node name="Window" type="Control"]
 margin_right = 640.0
 margin_bottom = 360.0
@@ -174,6 +178,10 @@ tile_data = PoolIntArray( 0, 0, 0, 1, 2, 0, 2, 2, 0, 3, 2, 0, 4, 2, 0, 5, 2, 0, 
 
 [node name="PaddleBlockers" type="StaticBody2D" parent="ObjectLayer/Walls"]
 collision_layer = 256
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ObjectLayer/Walls/PaddleBlockers"]
 position = Vector2( 9, 180 )
@@ -187,81 +195,107 @@ shape = SubResource( 9 )
 
 [node name="Brick-Diamond" parent="ObjectLayer/Bricks" instance=ExtResource( 16 )]
 position = Vector2( 160, 84 )
+script = ExtResource( 21 )
 
 [node name="Brick" parent="ObjectLayer/Bricks" instance=ExtResource( 15 )]
 position = Vector2( 96, 60 )
+script = ExtResource( 21 )
 
 [node name="Brick2" parent="ObjectLayer/Bricks" instance=ExtResource( 15 )]
 position = Vector2( 144, 60 )
+script = ExtResource( 21 )
 
 [node name="Brick3" parent="ObjectLayer/Bricks" instance=ExtResource( 7 )]
 position = Vector2( 192, 60 )
+script = ExtResource( 21 )
 
 [node name="Brick4" parent="ObjectLayer/Bricks" instance=ExtResource( 7 )]
 position = Vector2( 240, 60 )
+script = ExtResource( 21 )
 
 [node name="Brick5" parent="ObjectLayer/Bricks" instance=ExtResource( 15 )]
 position = Vector2( 288, 60 )
+script = ExtResource( 21 )
 
 [node name="Brick6" parent="ObjectLayer/Bricks" instance=ExtResource( 15 )]
 position = Vector2( 336, 60 )
+script = ExtResource( 21 )
 
 [node name="Brick9" parent="ObjectLayer/Bricks" instance=ExtResource( 7 )]
 position = Vector2( 432, 60 )
+script = ExtResource( 21 )
 
 [node name="Brick10" parent="ObjectLayer/Bricks" instance=ExtResource( 15 )]
 position = Vector2( 480, 60 )
+script = ExtResource( 21 )
 
 [node name="Brick11" parent="ObjectLayer/Bricks" instance=ExtResource( 15 )]
 position = Vector2( 528, 60 )
+script = ExtResource( 21 )
 
 [node name="Brick12" parent="ObjectLayer/Bricks" instance=ExtResource( 7 )]
 position = Vector2( 48, 60 )
+script = ExtResource( 21 )
 
 [node name="Brick7" parent="ObjectLayer/Bricks" instance=ExtResource( 7 )]
 position = Vector2( 384, 60 )
+script = ExtResource( 21 )
 
 [node name="Brick8" parent="ObjectLayer/Bricks" instance=ExtResource( 7 )]
 position = Vector2( 576, 60 )
+script = ExtResource( 21 )
 
 [node name="Brick14" parent="ObjectLayer/Bricks" instance=ExtResource( 16 )]
 position = Vector2( 464, 84 )
+script = ExtResource( 21 )
 
 [node name="Brick15" parent="ObjectLayer/Bricks" instance=ExtResource( 18 )]
 position = Vector2( 96, 96 )
+script = ExtResource( 21 )
 
 [node name="Brick-Diamond-Blue" parent="ObjectLayer/Bricks" instance=ExtResource( 18 )]
 position = Vector2( 128, 132 )
+script = ExtResource( 21 )
 
 [node name="Brick-Diamond-Blue2" parent="ObjectLayer/Bricks" instance=ExtResource( 18 )]
 position = Vector2( 160, 168 )
+script = ExtResource( 21 )
 
 [node name="Brick-Diamond-Green" parent="ObjectLayer/Bricks" instance=ExtResource( 17 )]
 position = Vector2( 224, 120 )
+script = ExtResource( 21 )
 
 [node name="Brick-Diamond-Green2" parent="ObjectLayer/Bricks" instance=ExtResource( 17 )]
 position = Vector2( 256, 156 )
+script = ExtResource( 21 )
 
 [node name="Brick-Diamond-Green3" parent="ObjectLayer/Bricks" instance=ExtResource( 17 )]
 position = Vector2( 288, 192 )
+script = ExtResource( 21 )
 
 [node name="Brick-Diamond-Blue3" parent="ObjectLayer/Bricks" instance=ExtResource( 18 )]
 position = Vector2( 320, 120 )
+script = ExtResource( 21 )
 
 [node name="Brick-Diamond-Green4" parent="ObjectLayer/Bricks" instance=ExtResource( 17 )]
 position = Vector2( 352, 156 )
+script = ExtResource( 21 )
 
 [node name="Brick-Diamond-Blue4" parent="ObjectLayer/Bricks" instance=ExtResource( 18 )]
 position = Vector2( 384, 192 )
+script = ExtResource( 21 )
 
 [node name="Brick-Diamond-Green5" parent="ObjectLayer/Bricks" instance=ExtResource( 17 )]
 position = Vector2( 400, 108 )
+script = ExtResource( 21 )
 
 [node name="Brick-Diamond-Blue5" parent="ObjectLayer/Bricks" instance=ExtResource( 18 )]
 position = Vector2( 432, 144 )
+script = ExtResource( 21 )
 
 [node name="Brick-Diamond-Green6" parent="ObjectLayer/Bricks" instance=ExtResource( 17 )]
 position = Vector2( 464, 180 )
+script = ExtResource( 21 )
 
 [node name="ShadowLayer" type="CanvasLayer" parent="."]
 layer = -50
@@ -293,12 +327,28 @@ _flashStrength = 0.1
 _blueBgColor = Color( 0.243137, 0.215686, 0.360784, 1 )
 _greenBgColor = Color( 0.215686, 0.145098, 0.219608, 1 )
 
+[node name="GutterArea" type="Area2D" parent="BackgroundLayer" groups=["Gutter"]]
+collision_layer = 0
+collision_mask = 4
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BackgroundLayer/GutterArea"]
+position = Vector2( 315, 306 )
+shape = SubResource( 10 )
+
 [node name="Gutter" type="ColorRect" parent="BackgroundLayer"]
-modulate = Color( 0, 0, 0, 0.0588235 )
+modulate = Color( 0, 0, 0, 0.137255 )
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = -96.0
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
 
 [node name="Spikes1" type="TextureRect" parent="BackgroundLayer/Gutter"]
 anchor_right = 1.0
@@ -308,6 +358,9 @@ texture = ExtResource( 19 )
 stretch_mode = 2
 flip_v = true
 script = ExtResource( 20 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="Spikes2" type="TextureRect" parent="BackgroundLayer/Gutter"]
 anchor_right = 1.0
