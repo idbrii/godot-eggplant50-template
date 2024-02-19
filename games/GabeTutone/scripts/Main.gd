@@ -19,10 +19,12 @@ var diagonal1_sum : int
 var diagonal2_sum : int
 var winner : int
 var moves : int
+onready var boardAnim = $BoardAnim
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	board_size = $Board.texture.get_width()
+	boardAnim.play("run")
+	board_size = 360
 	# divide board size by 3 to get individual cells
 	cell_size = board_size / 3
 	# get coordinates of player panel on right side of window
@@ -90,11 +92,13 @@ func create_marker(player, position, temp = false):
 	# create a marker node and add it as a child
 	if player == 1:
 		var circle = circle_scene.instance()
+		circle.play("run")
 		circle.position = position
 		add_child(circle)
 		if temp: temp_marker = circle
 	else:
 		var cross = cross_scene.instance()
+		cross.play("run")
 		cross.position = position
 		add_child(cross)
 		if temp: temp_marker = cross
@@ -106,7 +110,6 @@ func check_win():
 		col_sum = grid_data[0][i] + grid_data[1][i] + grid_data[2][i]
 		diagonal1_sum = grid_data[0][0] + grid_data[1][1] + grid_data[2][2]
 		diagonal2_sum = grid_data[0][2] + grid_data[1][1] + grid_data[2][0]
-		# print("Row sum is: ", row_sum, ", Col sum is: ", col_sum, ", diag1 sum is: ", diagonal1_sum, ", diag2 sum is: ", diagonal2_sum)
 		if row_sum == 3 or col_sum == 3 or diagonal1_sum == 3 or diagonal2_sum == 3:
 			winner = 1
 		elif row_sum == -3 or col_sum == -3 or diagonal1_sum == -3 or diagonal2_sum == -3:

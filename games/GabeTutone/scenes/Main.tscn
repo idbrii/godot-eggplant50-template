@@ -1,15 +1,17 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://font/FallingSky-JKwK.otf" type="DynamicFontData" id=5]
+[ext_resource path="res://mainmenu/art/font/font_kenpixel_high.tres" type="DynamicFont" id=1]
+[ext_resource path="res://games/GabeTutone/scripts/Main.gd" type="Script" id=2]
+[ext_resource path="res://games/GabeTutone/assets/grid.png" type="Texture" id=3]
+[ext_resource path="res://games/GabeTutone/scenes/Eggplant.tscn" type="PackedScene" id=4]
+[ext_resource path="res://games/GabeTutone/scenes/UFO.tscn" type="PackedScene" id=5]
+[ext_resource path="res://games/GabeTutone/scenes/GameOverMenu.tscn" type="PackedScene" id=6]
+[ext_resource path="res://games/GabeTutone/scenes/BoardAnim.tscn" type="PackedScene" id=7]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.407843, 0.168627, 0.509804, 1 )
 border_width_left = 5
 border_color = Color( 0, 0, 0, 1 )
-
-[sub_resource type="DynamicFont" id=2]
-size = 46
-font_data = ExtResource( 5 )
 
 [sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 1, 0.94902, 0.458824, 1 )
@@ -26,38 +28,48 @@ shadow_size = 5
 shadow_offset = Vector2( 5, 5 )
 
 [node name="Main" type="Node"]
-script = null
-circle_scene = null
-cross_scene = null
-
-[node name="Board" parent="."]
-position = Vector2( 300, 300 )
+script = ExtResource( 2 )
+circle_scene = ExtResource( 4 )
+cross_scene = ExtResource( 5 )
 
 [node name="SidePanel" type="Panel" parent="."]
 anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -300.0
+margin_left = -276.0
+margin_top = 1.0
+margin_bottom = 1.0
 custom_styles/panel = SubResource( 1 )
 
 [node name="PlayerLabel" type="Label" parent="."]
-margin_left = 600.0
-margin_top = 120.0
-margin_right = 900.0
-margin_bottom = 187.0
-custom_fonts/font = SubResource( 2 )
+margin_left = 347.0
+margin_top = 80.0
+margin_right = 647.0
+margin_bottom = 147.0
+custom_fonts/font = ExtResource( 1 )
 text = "Next Player:"
 align = 1
 valign = 1
 
 [node name="PlayerPanel" type="Panel" parent="."]
-margin_left = 650.0
-margin_top = 200.0
-margin_right = 850.0
-margin_bottom = 400.0
+margin_left = 438.0
+margin_top = 154.0
+margin_right = 638.0
+margin_bottom = 354.0
+rect_scale = Vector2( 0.6, 0.6 )
 custom_styles/panel = SubResource( 3 )
 
-[node name="GameOverMenu" parent="."]
+[node name="Board" type="Sprite" parent="."]
+visible = false
+position = Vector2( 203, 181 )
+scale = Vector2( 0.6, 0.6 )
+texture = ExtResource( 3 )
+
+[node name="GameOverMenu" parent="." instance=ExtResource( 6 )]
 pause_mode = 2
+visible = false
+
+[node name="BoardAnim" parent="." instance=ExtResource( 7 )]
+position = Vector2( 182, 180 )
 
 [connection signal="restart" from="GameOverMenu" to="." method="_on_GameOverMenu_restart"]

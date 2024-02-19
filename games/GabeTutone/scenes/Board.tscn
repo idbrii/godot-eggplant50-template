@@ -1,6 +1,7 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://assets/grid.png" type="Texture" id=1]
+[ext_resource path="res://games/GabeTutone/assets/grid.png" type="Texture" id=1]
 
 [node name="Board" type="Sprite"]
+scale = Vector2( 0.6, 0.6 )
 texture = ExtResource( 1 )
