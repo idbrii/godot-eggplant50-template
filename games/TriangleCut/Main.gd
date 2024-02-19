@@ -12,7 +12,7 @@ var curr_moves = 1 setget set_curr_moves
 var enemy_dmg_number_scene = preload("res://games/TriangleCut/EnemyDmg.tscn")
 var player_dmg_number_scene = preload("res://games/TriangleCut/PlayerDmg.tscn")
 var shield_dmg_scene = preload("res://games/TriangleCut/ShieldDmg.tscn")
-var game_state = preload("res://games/TriangleCut/state.tres")
+export(Resource) var game_state = preload("res://games/TriangleCut/state.tres")
 
 
 # Called when the node enters the scene tree for the first time.
@@ -81,7 +81,8 @@ func _on_Grid_actions(atk, def, extra) -> void:
         if $Enemy.hp <= 0:
             # overkill: heal player up to max
             var overkill_heal = min(-1*$Enemy.hp, max_player_hp-player_hp)
-            player_hp += overkill_heal
+            self.player_hp += overkill_heal
+            $CanvasLayer/HUD/VBoxContainer/HBoxHp/AnimationPlayer.play("main")
             if overkill_heal > 0:
                 var pds = player_dmg_number_scene.instance()
                 pds.get_node("Label").text = "+"+str(-1*$Enemy.hp)
@@ -94,23 +95,26 @@ func _on_Grid_actions(atk, def, extra) -> void:
         yield(get_tree().create_timer(0.5), "timeout")
         if curr_def > 0:
             $CanvasLayer/HUD/VBoxContainer/HBoxDef/AnimationPlayer.play("main")
-            for i in range(curr_def):
+            for i in range(min(curr_def, $Enemy.attacking_for)):
                 var sds = shield_dmg_scene.instance()
                 sds.position += Vector2(rand_range(30, 100), rand_range(-100, 100))
                 add_child(sds)
-                yield(get_tree().create_timer(rand_range(0.1, 0.6)), "timeout")
+                yield(get_tree().create_timer(rand_range(0.1/curr_def, 0.6/curr_def)), "timeout")
         if $Enemy.attacking_for > curr_def:
             $CanvasLayer/HUD/VBoxContainer/HBoxHp/AnimationPlayer.play("main")
             var pds = player_dmg_number_scene.instance()
             pds.get_node("Label").text = "-"+str(max($Enemy.attacking_for - curr_def, 0))
             pds.global_position = Vector2()
             add_child(pds)
-        else:
-            pass # todo play some shield sound
+
         self.player_hp -= max($Enemy.attacking_for - curr_def, 0)
         if player_hp <= 0:
             game_over()
         $Enemy.next_turn()
+        # check if player stranded
+        if $Grid.is_player_stuck():
+            game_over()
+            return
         $Grid.update_active_option()
         
         self.curr_atk = 0
@@ -118,8 +122,10 @@ func _on_Grid_actions(atk, def, extra) -> void:
         self.curr_moves = 1
         $Grid.player_turn = true
     else:
+        $Grid.player_turn = false
         yield(get_tree().create_timer(0.5), "timeout")
         $Grid.update_active_option()
+        $Grid.player_turn = true
     
 
 func enemy_dmg_num():
@@ -147,7 +153,6 @@ func next_enemy():
         game_state.best = game_state.level
         
     game_state.level += 1
-#    Eggplant.transition_to(this_scene)
     yield($CanvasLayer/Fade/Tween, "tween_completed")
     get_tree().reload_current_scene()
     
