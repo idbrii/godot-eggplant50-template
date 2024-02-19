@@ -7,7 +7,8 @@ public enum ShapeType
     Circle,
     Square,
     Triangle,
-    Heart
+    Heart,
+    Jam
 }
 
 public class MovingShape : Area2D
@@ -20,6 +21,8 @@ public class MovingShape : Area2D
     public Color squareColor;
     [Export]
     public Color heartColor;
+    [Export]
+    public Color jamColor;
 
     [Signal]
     public delegate void ShapeHitEventHandler(ShapeType shapeType);
@@ -44,6 +47,11 @@ public class MovingShape : Area2D
         if (heartChance == 1) {
             shapeType = ShapeType.Heart;
         }
+        int jamChance = (int)GD.RandRange(0, 20);
+        if (jamChance == 1) {
+            shapeType = ShapeType.Jam;
+        }
+
         switch (shapeType) {
             case ShapeType.Circle:
                 sprite.Texture = GD.Load<Texture>("res://games/CodyMace/Assets/circle.png");
@@ -61,6 +69,10 @@ public class MovingShape : Area2D
                 sprite.Texture = GD.Load<Texture>("res://games/CodyMace/Assets/heart.png");
                 sprite.Modulate = heartColor;
                 break;
+            case ShapeType.Jam:
+                sprite.Texture = GD.Load<Texture>("res://games/CodyMace/Assets/eggplant-jam-bordered.png");
+                sprite.Modulate = new Color(1, 1, 1, 1);
+                break;
         }
     }
 
@@ -70,7 +82,7 @@ public class MovingShape : Area2D
         Position = new Vector2(Position.x, Position.y - velocity * delta);
     }
 
-    public void OnPlayerBodyEntered(Node body)
+    public async void OnPlayerBodyEntered(Node body)
     {
         if (body.Name == "Player" && !popped) {
             popped = true;
@@ -81,17 +93,21 @@ public class MovingShape : Area2D
             EmitSignal(nameof(ShapeHitEventHandler), shapeType);
             explosion.Emitting = true;
             explosion.Color = sprite.Modulate;
-            Timer timer = new Timer();
-            timer.WaitTime = 1.0f;
-            timer.OneShot = true;
-            AddChild(timer);
-            timer.Start();
-            timer.Connect("timeout", this, nameof(OnExplosionFinished));
+            if (shapeType == ShapeType.Jam) {
+                explosion.Color = jamColor;
+            }
+		    await ToSignal(GetTree().CreateTimer(1.0f), "timeout");
+            OnExplosionFinished();
         }
     }
 
     void OnExplosionFinished()
     {
         QueueFree();
+    }
+
+    void GameOverDude()
+    {
+        GD.Print("Game over dude");
     }
 }

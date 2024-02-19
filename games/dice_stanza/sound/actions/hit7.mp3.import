@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/hit7.mp3-d358cc277d6adceb57505c7fb495b2f6.mp3str"
+
+[deps]
+
+source_file="res://games/dice_stanza/sound/actions/hit7.mp3"
+dest_files=[ "res://.import/hit7.mp3-d358cc277d6adceb57505c7fb495b2f6.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

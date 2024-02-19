@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/basshit1.mp3-db205ed551ae4e85bfc836fe954dae38.mp3str"
+
+[deps]
+
+source_file="res://games/dice_stanza/sound/score/basshit1.mp3"
+dest_files=[ "res://.import/basshit1.mp3-db205ed551ae4e85bfc836fe954dae38.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

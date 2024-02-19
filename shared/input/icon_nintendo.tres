@@ -1,0 +1,12 @@
+[gd_resource type="Resource" load_steps=5 format=2]
+
+[ext_resource path="res://shared/input/device_icons.gd" type="Script" id=1]
+[ext_resource path="res://shared/input/art/xbox/y.png" type="Texture" id=2]
+[ext_resource path="res://shared/input/art/xbox/b.png" type="Texture" id=3]
+[ext_resource path="res://shared/input/art/nintendo/plus.png" type="Texture" id=4]
+
+[resource]
+script = ExtResource( 1 )
+primary = ExtResource( 2 )
+secondary = ExtResource( 3 )
+pause = ExtResource( 4 )
