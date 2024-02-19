@@ -1,6 +1,7 @@
 extends Node
 
 signal input_device_changed(name, icons);
+signal restart_game()
 
 const DeviceIcons = preload("res://shared/input/device_icons.gd")
 const transition_scene = preload("res://mainmenu/scene_transition.tscn")
@@ -54,6 +55,7 @@ func transition_to(next_scene: PackedScene):
 
 
 func restart_scene():
+	emit_signal("restart_game")
 	transition_to(last_played_scene)
 
 
