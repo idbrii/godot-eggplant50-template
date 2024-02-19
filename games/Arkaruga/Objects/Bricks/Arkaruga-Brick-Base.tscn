@@ -10,6 +10,7 @@ extents = Vector2( 24, 12 )
 
 [node name="Brick" type="KinematicBody2D" groups=["Colorized"]]
 position = Vector2( 248, 40 )
+collision_layer = 4
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true
