@@ -6,5 +6,5 @@
 [resource]
 script = ExtResource( 1 )
 initial_scene = ExtResource( 2 )
-game_name = "Triangle Cut"
+game_name = "TriEdge Hack"
 game_author = "Nishchal Bhandari"
