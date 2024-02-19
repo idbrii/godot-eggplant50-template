@@ -187,121 +187,81 @@ shape = SubResource( 9 )
 
 [node name="Brick-Diamond" parent="ObjectLayer/Bricks" instance=ExtResource( 16 )]
 position = Vector2( 160, 84 )
-collision_layer = 1
-_flashDuration = 0.1
 
 [node name="Brick" parent="ObjectLayer/Bricks" instance=ExtResource( 15 )]
 position = Vector2( 96, 60 )
-collision_layer = 1
-_flashDuration = 0.1
 
 [node name="Brick2" parent="ObjectLayer/Bricks" instance=ExtResource( 15 )]
 position = Vector2( 144, 60 )
-collision_layer = 1
-_flashDuration = 0.1
 
 [node name="Brick3" parent="ObjectLayer/Bricks" instance=ExtResource( 7 )]
 position = Vector2( 192, 60 )
-collision_layer = 1
-_flashDuration = 0.1
 
 [node name="Brick4" parent="ObjectLayer/Bricks" instance=ExtResource( 7 )]
 position = Vector2( 240, 60 )
-collision_layer = 1
-_flashDuration = 0.1
 
 [node name="Brick5" parent="ObjectLayer/Bricks" instance=ExtResource( 15 )]
 position = Vector2( 288, 60 )
-collision_layer = 1
-_flashDuration = 0.1
 
 [node name="Brick6" parent="ObjectLayer/Bricks" instance=ExtResource( 15 )]
 position = Vector2( 336, 60 )
-collision_layer = 1
-_flashDuration = 0.1
 
 [node name="Brick9" parent="ObjectLayer/Bricks" instance=ExtResource( 7 )]
 position = Vector2( 432, 60 )
-collision_layer = 1
-_flashDuration = 0.1
 
 [node name="Brick10" parent="ObjectLayer/Bricks" instance=ExtResource( 15 )]
 position = Vector2( 480, 60 )
-collision_layer = 1
-_flashDuration = 0.1
 
 [node name="Brick11" parent="ObjectLayer/Bricks" instance=ExtResource( 15 )]
 position = Vector2( 528, 60 )
-collision_layer = 1
-_flashDuration = 0.1
 
 [node name="Brick12" parent="ObjectLayer/Bricks" instance=ExtResource( 7 )]
 position = Vector2( 48, 60 )
-collision_layer = 1
-_flashDuration = 0.1
 
 [node name="Brick7" parent="ObjectLayer/Bricks" instance=ExtResource( 7 )]
 position = Vector2( 384, 60 )
-collision_layer = 1
-_flashDuration = 0.1
 
 [node name="Brick8" parent="ObjectLayer/Bricks" instance=ExtResource( 7 )]
 position = Vector2( 576, 60 )
-collision_layer = 1
-_flashDuration = 0.1
 
 [node name="Brick14" parent="ObjectLayer/Bricks" instance=ExtResource( 16 )]
 position = Vector2( 464, 84 )
-collision_layer = 1
-_flashDuration = 0.1
 
 [node name="Brick15" parent="ObjectLayer/Bricks" instance=ExtResource( 18 )]
 position = Vector2( 96, 96 )
-collision_layer = 1
 
 [node name="Brick-Diamond-Blue" parent="ObjectLayer/Bricks" instance=ExtResource( 18 )]
 position = Vector2( 128, 132 )
-collision_layer = 1
 
 [node name="Brick-Diamond-Blue2" parent="ObjectLayer/Bricks" instance=ExtResource( 18 )]
 position = Vector2( 160, 168 )
-collision_layer = 1
 
 [node name="Brick-Diamond-Green" parent="ObjectLayer/Bricks" instance=ExtResource( 17 )]
 position = Vector2( 224, 120 )
-collision_layer = 1
 
 [node name="Brick-Diamond-Green2" parent="ObjectLayer/Bricks" instance=ExtResource( 17 )]
 position = Vector2( 256, 156 )
-collision_layer = 1
 
 [node name="Brick-Diamond-Green3" parent="ObjectLayer/Bricks" instance=ExtResource( 17 )]
 position = Vector2( 288, 192 )
-collision_layer = 1
 
 [node name="Brick-Diamond-Blue3" parent="ObjectLayer/Bricks" instance=ExtResource( 18 )]
 position = Vector2( 320, 120 )
-collision_layer = 1
 
 [node name="Brick-Diamond-Green4" parent="ObjectLayer/Bricks" instance=ExtResource( 17 )]
 position = Vector2( 352, 156 )
-collision_layer = 1
 
 [node name="Brick-Diamond-Blue4" parent="ObjectLayer/Bricks" instance=ExtResource( 18 )]
 position = Vector2( 384, 192 )
-collision_layer = 1
 
 [node name="Brick-Diamond-Green5" parent="ObjectLayer/Bricks" instance=ExtResource( 17 )]
 position = Vector2( 400, 108 )
-collision_layer = 1
 
 [node name="Brick-Diamond-Blue5" parent="ObjectLayer/Bricks" instance=ExtResource( 18 )]
 position = Vector2( 432, 144 )
-collision_layer = 1
 
 [node name="Brick-Diamond-Green6" parent="ObjectLayer/Bricks" instance=ExtResource( 17 )]
 position = Vector2( 464, 180 )
-collision_layer = 1
 
 [node name="ShadowLayer" type="CanvasLayer" parent="."]
 layer = -50

@@ -1,10 +1,15 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://games/Arkaruga/Scripts/Arkaruga-Paddle.gd" type="Script" id=1]
 [ext_resource path="res://games/Arkaruga/Sprites/Paddle/paddle-body.png" type="Texture" id=2]
 [ext_resource path="res://games/Arkaruga/Sprites/Paddle/paddle-bumper-dark.png" type="Texture" id=3]
 [ext_resource path="res://games/Arkaruga/Sprites/Paddle/paddle-alarm-dark.png" type="Texture" id=4]
 [ext_resource path="res://games/Arkaruga/Sprites/Paddle/paddle-bumper-light.png" type="Texture" id=5]
+[ext_resource path="res://games/Arkaruga/Sprites/Paddle/paddle-bumper-hit.png" type="Texture" id=6]
+[ext_resource path="res://games/Arkaruga/Sprites/Paddle/paddle-alarm-alert-2.png" type="Texture" id=7]
+[ext_resource path="res://games/Arkaruga/Sprites/Paddle/paddle-alarm-alert-1.png" type="Texture" id=8]
+[ext_resource path="res://games/Arkaruga/Sprites/Paddle/paddle-bumper-alert-1.png" type="Texture" id=9]
+[ext_resource path="res://games/Arkaruga/Sprites/Paddle/paddle-bumper-alert-2.png" type="Texture" id=10]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 46, 4 )
@@ -40,6 +45,16 @@ patch_margin_top = 8
 patch_margin_right = 32
 patch_margin_bottom = 8
 
+[node name="HitBumper" type="NinePatchRect" parent="Body/Bumper"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 6 )
+patch_margin_left = 32
+patch_margin_top = 8
+patch_margin_right = 32
+patch_margin_bottom = 8
+
 [node name="Alarm" type="NinePatchRect" parent="Body"]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -48,3 +63,59 @@ patch_margin_left = 32
 patch_margin_top = 8
 patch_margin_right = 32
 patch_margin_bottom = 8
+
+[node name="Alert" type="Control" parent="Body"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Frame1" type="Control" parent="Body/Alert"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Alarm" type="NinePatchRect" parent="Body/Alert/Frame1"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 8 )
+patch_margin_left = 32
+patch_margin_top = 8
+patch_margin_right = 32
+patch_margin_bottom = 8
+
+[node name="Bumper" type="NinePatchRect" parent="Body/Alert/Frame1"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 9 )
+patch_margin_left = 32
+patch_margin_top = 8
+patch_margin_right = 32
+patch_margin_bottom = 8
+
+[node name="Frame2" type="Control" parent="Body/Alert"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Alarm" type="NinePatchRect" parent="Body/Alert/Frame2"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 7 )
+patch_margin_left = 32
+patch_margin_top = 8
+patch_margin_right = 32
+patch_margin_bottom = 8
+
+[node name="Bumper" type="NinePatchRect" parent="Body/Alert/Frame2"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 10 )
+patch_margin_left = 32
+patch_margin_top = 8
+patch_margin_right = 32
+patch_margin_bottom = 8
+
+[node name="Timer" type="Timer" parent="Body/Alert"]
+wait_time = 0.25
+autostart = true
+
+[connection signal="timeout" from="Body/Alert/Timer" to="." method="_on_AlertTimer_timeout"]

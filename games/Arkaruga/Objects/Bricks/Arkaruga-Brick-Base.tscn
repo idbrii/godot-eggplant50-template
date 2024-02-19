@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://games/Arkaruga/Sprites/Bricks/Wide/brick-wide-blue.png" type="Texture" id=1]
 [ext_resource path="res://games/Arkaruga/Scripts/Arkaruga-Brick.gd" type="Script" id=2]
@@ -8,14 +8,17 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 24, 12 )
 
-[node name="Brick" type="KinematicBody2D" groups=["Colorized"]]
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 20, 10 )
+
+[node name="Brick" type="KinematicBody2D" groups=["Bricks", "Colorized"]]
 position = Vector2( 248, 40 )
 collision_layer = 4
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true
 }
-_flashDuration = 0.033
+fallAtZeroHealth = true
 
 [node name="ActiveSprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
@@ -30,3 +33,13 @@ texture = ExtResource( 4 )
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
+
+[node name="FallingDamageArea" type="Area2D" parent="."]
+collision_layer = 4
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FallingDamageArea"]
+shape = SubResource( 2 )
+
+[connection signal="body_entered" from="FallingDamageArea" to="." method="_on_FallingArea_body_entered"]
