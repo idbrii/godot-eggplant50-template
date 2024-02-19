@@ -171,6 +171,7 @@ func _process(delta: float) -> void:
         self.active_option = adjacencies[player_loc][(curr_idx-1) % num_adj]
     if Input.is_action_just_pressed("action1"):
         traverse_active_edge()
+        $SelectPlayer.play()
 
 
 func _on_Grid_actions(atk, def, extra) -> void:
