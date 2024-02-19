@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/pickup1.mp3-b5e2677bb383b6ae335d8b0a0ceeef8d.mp3str"
+
+[deps]
+
+source_file="res://games/dice_stanza/sound/actions/pickup1.mp3"
+dest_files=[ "res://.import/pickup1.mp3-b5e2677bb383b6ae335d8b0a0ceeef8d.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

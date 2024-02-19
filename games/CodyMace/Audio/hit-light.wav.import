@@ -1,0 +1,23 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/hit-light.wav-cb78868c7630a7bdf4265f8abcab73bb.sample"
+
+[deps]
+
+source_file="res://games/CodyMace/Audio/hit-light.wav"
+dest_files=[ "res://.import/hit-light.wav-cb78868c7630a7bdf4265f8abcab73bb.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

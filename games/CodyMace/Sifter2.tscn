@@ -1,0 +1,63 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://games/CodyMace/SifterGame2.cs" type="Script" id=1]
+[ext_resource path="res://games/CodyMace/Assets/sand-background.png" type="Texture" id=2]
+[ext_resource path="res://mainmenu/art/font/font_kenpixel_mini.tres" type="DynamicFont" id=7]
+[ext_resource path="res://games/movement2/ui/GameMenu.tscn" type="PackedScene" id=9]
+
+[sub_resource type="PhysicsMaterial" id=1]
+friction = 0.0
+
+[node name="Sifter" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="Background" type="ColorRect" parent="."]
+margin_left = -265.0
+margin_top = -154.0
+margin_right = 271.0
+margin_bottom = 175.0
+color = Color( 0.301961, 0.301961, 0.301961, 1 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+modulate = Color( 1, 0.0392157, 0.0392157, 1 )
+current = true
+zoom = Vector2( 0.75, 0.75 )
+
+[node name="Background2" type="Node2D" parent="."]
+position = Vector2( 1, 6 )
+rotation = 0.00238436
+
+[node name="Sprite" type="Sprite" parent="Background2"]
+position = Vector2( -0.999996, -2.99999 )
+scale = Vector2( 0.746875, 0.733333 )
+texture = ExtResource( 2 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Background2"]
+physics_material_override = SubResource( 1 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Background2/StaticBody2D"]
+visible = false
+polygon = PoolVector2Array( -21, -43, -6, 46, -14, 55, -21, 70, -21, 92, -11, 112, 1, 121, 9, 125, 16, 126, 22, 127, 29, 127, 37, 125, 47, 122, 52, 118, 59, 112, 63, 105, 67, 98, 69, 92, 70, 86, 70, 76, 68, 66, 60, 53, 49, 43, 30, 36, 23, 36, 12, -33, 81, -13, 90.1261, 52.7853, 85.1428, 59.7972, 80.1762, 73.809, 80.2191, 91.809, 86.2525, 105.795, 97, 118, 117.302, 126.721, 128.305, 127.694, 138.298, 124.671, 147.29, 121.649, 157.274, 114.625, 166.243, 101.604, 169.19, 79.5968, 163.135, 56.6112, 138.095, 39.6708, 133.007, 2.68287, 237.08, 33.4348, 237.309, 129.435, 57, 130, 1, 132, -240.692, 129.574, -276.312, -130.342, -239.257, -107.43, -197.226, -94.53, -189.911, 37.4529, -205.895, 44.4911, -218.859, 59.522, -222.818, 76.5315, -221.775, 94.5291, -216.751, 104.517, -212.737, 110.508, -206.723, 116.493, -199.713, 120.477, -194.706, 123.465, -188.701, 125.45, -181.699, 126.434, -173.699, 126.415, -165.704, 124.395, -156.711, 121.374, -148.723, 116.355, -140.74, 109.336, -133.775, 94.3192, -130.804, 82.3121, -131.818, 76.3145, -135.857, 60.3241, -144.883, 49.3456, -152.899, 42.3647, -171.916, 35.41, -183.916, 35.4386, -192.224, -93.5419, -102.159, -66.7566, -91.9163, 35.2193, -108.892, 45.2598, -120.854, 61.2883, -124.807, 81.2978, -119.754, 103.286, -108.723, 116.26, -98.7112, 121.236, -88.7041, 124.212, -79.6993, 126.19, -72.7018, 125.174, -60.7089, 122.145, -49.7209, 117.119, -37.7519, 104.09, -32.7829, 91.0784, -30, 73, -38.8735, 53.0928, -51.8997, 42.1239, -72.9235, 32.174, -83.1452, -60.8019 )
+
+[node name="Score" type="RichTextLabel" parent="."]
+margin_left = -181.0
+margin_top = -34.0
+margin_right = -87.0
+margin_bottom = 12.0
+custom_fonts/normal_font = ExtResource( 7 )
+bbcode_text = "Press and Hold Z"
+meta_underlined = false
+text = "Press and Hold Z"
+scroll_active = false
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="GameMenu" parent="UI" instance=ExtResource( 9 )]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -22.2865
+margin_top = -110.0
+margin_right = 22.2865
+margin_bottom = 110.0

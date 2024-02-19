@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/stage_gain2.mp3-9f7560e6e30748931bcab00d3b3608a5.mp3str"
+
+[deps]
+
+source_file="res://games/dice_stanza/sound/gameover/stage_gain2.mp3"
+dest_files=[ "res://.import/stage_gain2.mp3-9f7560e6e30748931bcab00d3b3608a5.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
