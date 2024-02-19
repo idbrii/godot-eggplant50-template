@@ -13,7 +13,7 @@
 [ext_resource path="res://games/TriangleCut/BackgroundMusic.tscn" type="PackedScene" id=11]
 [ext_resource path="res://games/TriangleCut/hitHurt.wav" type="AudioStream" id=12]
 [ext_resource path="res://games/TriangleCut/winfight.wav" type="AudioStream" id=13]
-[ext_resource path="res://games/movement2/ui/GameMenu.tscn" type="PackedScene" id=14]
+[ext_resource path="res://shared/menu_pause/PauseMenu.tscn" type="PackedScene" id=14]
 [ext_resource path="res://games/TriangleCut/eggplant.png" type="Texture" id=15]
 [ext_resource path="res://games/TriangleCut/eggplant_white.png" type="Texture" id=16]
 [ext_resource path="res://games/TriangleCut/state.tres" type="Resource" id=17]
@@ -631,16 +631,10 @@ theme = ExtResource( 4 )
 text = "Best: 0"
 
 [node name="GameMenu" parent="CanvasLayer" instance=ExtResource( 14 )]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -83.5
-margin_top = -110.0
-margin_right = 83.5
-margin_bottom = 110.0
+visible = true
 
 [node name="Fade" type="ColorRect" parent="CanvasLayer"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0.0901961, 0.0666667, 0.101961, 1 )
