@@ -116,6 +116,5 @@ patch_margin_bottom = 8
 
 [node name="Timer" type="Timer" parent="Body/Alert"]
 wait_time = 0.25
-autostart = true
 
 [connection signal="timeout" from="Body/Alert/Timer" to="." method="_on_AlertTimer_timeout"]

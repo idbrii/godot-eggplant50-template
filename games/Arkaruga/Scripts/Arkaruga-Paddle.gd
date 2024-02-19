@@ -11,7 +11,7 @@ export var bumperTextureBlue : Texture
 export var bumperTextureGreen : Texture
 export var alarmTextureBlue : Texture
 export var alarmTextureGreen : Texture
-export var damageFreezeDuration = 1.5
+export var damageFreezeDuration = 1
 export var hitBumperFlashDuration = .2
 
 onready var _collisionShape : CollisionShape2D = $Collision
@@ -19,6 +19,7 @@ onready var _bumper : NinePatchRect = $Body/Bumper
 onready var _hitBumper : NinePatchRect = $Body/Bumper/HitBumper
 onready var _alarm : NinePatchRect = $Body/Alarm
 onready var _alertGroup : Control = $Body/Alert
+onready var _alertTimer : Timer = $Body/Alert/Timer
 onready var _alertFrame1 : Control = $Body/Alert/Frame1
 onready var _alertFrame2 : Control = $Body/Alert/Frame2
 
@@ -116,11 +117,15 @@ func _freeze(duration: float):
 		
 	_isFrozen = true
 	_alertGroup.visible = true
+	_alertFrame1.visible = true
+	_alertFrame2.visible = false
+	_alertTimer.start()
 	_speed = 0
 	
 	yield(get_tree().create_timer(duration), "timeout")
 	
 	_alertGroup.visible = false
+	_alertTimer.stop()
 	_isFrozen = false
 
 func _flashHitBumper(duration: float):
