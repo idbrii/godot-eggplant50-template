@@ -9,6 +9,14 @@ static func ok(err):
 	assert(err == OK)
 
 
+# When you hit game over, you can call this to show without the option to
+# continue.
+func popup_without_continue():
+	var continue_btn = get_node("%ContinueButton")
+	continue_btn.visible = false
+	popup()
+
+
 func _ready():
 	var restart_btn = get_node("%RestartButton")
 	var help_btn = get_node("%HelpButton")
