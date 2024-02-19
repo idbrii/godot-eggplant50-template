@@ -2,6 +2,10 @@
 
 Created for Eggplant50.
 
+Throw dice into the alcoves to compete against an unseen opponent. Get higher
+on most rows to win, but don't leave any rows unfilled or they'll overflow and
+add dice to other rows!
+
 
 # Credits
 
