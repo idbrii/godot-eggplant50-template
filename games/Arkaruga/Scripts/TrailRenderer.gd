@@ -12,7 +12,7 @@ var minTimeDelta = 0.0
 func _ready():
 	lastPointAddTime = -1
 
-func _process(delta):
+func _process(_delta):
 	# keep us at the origin so our points are effectively in world space
 	global_position = Vector2(0,0)
 	global_rotation = 0

@@ -11,17 +11,32 @@ export var bumperTextureBlue : Texture
 export var bumperTextureGreen : Texture
 export var alarmTextureBlue : Texture
 export var alarmTextureGreen : Texture
+export var damageFreezeDuration = 1.5
+export var hitBumperFlashDuration = .2
 
-var _speed : float = 0
 onready var _collisionShape : CollisionShape2D = $Collision
 onready var _bumper : NinePatchRect = $Body/Bumper
+onready var _hitBumper : NinePatchRect = $Body/Bumper/HitBumper
 onready var _alarm : NinePatchRect = $Body/Alarm
+onready var _alertGroup : Control = $Body/Alert
+onready var _alertFrame1 : Control = $Body/Alert/Frame1
+onready var _alertFrame2 : Control = $Body/Alert/Frame2
+
+var _speed : float = 0
+var _isFrozen = false
+var _isFlashingHitBumper = false
 var _color
 
 func _ready():
+	_hitBumper.visible = false
 	pass
 	
 func _process(delta):
+	var canMove = !_isFrozen
+	if canMove:
+		_processMovement(delta)
+	
+func _processMovement(delta: float):
 	var direction = 0
 	if Input.is_action_pressed("move_left"):
 		direction = -1
@@ -29,8 +44,8 @@ func _process(delta):
 		direction = 1
 		
 	var isBoosting = Input.is_action_pressed("action2")
-	var modifier = boostModifier if isBoosting else 1
-	
+	var modifier = boostModifier if isBoosting else 1.0
+
 	if direction == 0:
 		# slow back down to 0
 		_speed = move_toward(_speed, 0, acceleration * delta)
@@ -47,7 +62,7 @@ func _process(delta):
 	var activeMaxSpeed = maxSpeed * modifier
 	_speed = clamp(_speed, -activeMaxSpeed, activeMaxSpeed)
 	
-	
+	var prevPosition = position
 	var collision = move_and_collide(Vector2.RIGHT * _speed * delta)
 	if collision != null:
 		if collision.collider.is_in_group("Balls"):
@@ -58,11 +73,19 @@ func _process(delta):
 		else:
 			# stop our velocity
 			_speed = 0
-		
-	return
+			
+	# don't allow move-and-collide to push us vertically
+	if position.y != prevPosition.y:
+		position.y = prevPosition.y
 	
 func onActiveColorChanged(color: int):
 	_setColor(color)
+	
+func onBallHit(_ball):
+	_flashHitBumper(hitBumperFlashDuration)
+
+func onFallingBrickHit(_block):
+	_freeze(damageFreezeDuration)
 
 func getVelocity() -> Vector2:
 	return Vector2.RIGHT * _speed
@@ -86,5 +109,31 @@ func _setColor(color: int):
 			_bumper.texture = bumperTextureGreen
 			_alarm.texture = alarmTextureGreen
 	pass
+
+func _freeze(duration: float):
+	if _isFrozen:
+		return
+		
+	_isFrozen = true
+	_alertGroup.visible = true
+	_speed = 0
 	
+	yield(get_tree().create_timer(duration), "timeout")
 	
+	_alertGroup.visible = false
+	_isFrozen = false
+
+func _flashHitBumper(duration: float):
+	if _isFlashingHitBumper:
+		return
+	
+	_isFlashingHitBumper = true
+	_hitBumper.visible = true
+	yield(get_tree().create_timer(duration), "timeout")
+	
+	_hitBumper.visible = false
+	_isFlashingHitBumper = false
+
+func _on_AlertTimer_timeout():
+	_alertFrame1.visible = !_alertFrame1.visible
+	_alertFrame2.visible = !_alertFrame2.visible

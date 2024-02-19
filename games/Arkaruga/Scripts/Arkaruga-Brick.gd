@@ -4,19 +4,29 @@ const Types = preload("res://games/Arkaruga/Scripts/Arkaruga-Types.gd")
 
 export(Types.ElementColor) var color = Types.ElementColor.BLUE
 export var maxHealth = 1
+export var fallAtZeroHealth = false
 export var points = 1
-export var _flashColor : Color = Color.white
-export var _flashDuration : float = .25
+export var flashColor = Color.white
+export var flashDuration = .033
+export var fallJumpSpeed = 200.0
+export var maxFallSpeed = 200.0
+export var fallMinAngleOffset = 10.0
+export var fallMaxAngleOffset = 40.0
+export var fallAcceleration = 600
 
 onready var _activeSprite : Sprite = $ActiveSprite
 onready var _inactiveSprite : Sprite = $InactiveSprite
 onready var _flashSprite : Sprite = $FlashSprite
 onready var _collision : CollisionShape2D = $Collision
+onready var _fallingArea : Area2D = $FallingDamageArea
 
 onready var _health = maxHealth
 
+var _isActive = true
 var _isFlashing = false
 var _isDestroyed = false
+var _isFalling = false
+var _fallSpeed = 0.0
 
 func _ready():
 	_flashSprite.visible = false
@@ -24,6 +34,9 @@ func _ready():
 	pass
 	
 func _process(delta):
+	if _isFalling:
+		_updateFalling(delta)
+	
 	if _isDestroyed and !_isFlashing:
 		queue_free()
 	
@@ -36,6 +49,7 @@ func onBallHit(ball):
 		_takeDamage(1)
 		
 func _setActive(active: bool):
+	_isActive = active
 	_activeSprite.visible = active
 	_inactiveSprite.visible = !active
 	_setCollidable(active)
@@ -46,12 +60,14 @@ func _canChangeColor() -> bool:
 func _takeDamage(damage: int):
 	if _health > 0:
 		_health = max(_health - damage, 0)
-		_playFlash(_flashDuration)
+		_playFlash(flashDuration)
 		if _health == 0:
-			_onDestroyed()
+			if fallAtZeroHealth:
+				_startFalling()
+			else:
+				_onDestroyed()
 			
 func _onDestroyed():
-	# TODO: Sometimes drop bricks instead of destroying them
 	# TODO: Give points
 	_setCollidable(false)
 	_isDestroyed = true
@@ -61,9 +77,11 @@ func _playFlash(duration: float):
 		return
 	
 	_isFlashing = true
-	_flashSprite.self_modulate = _flashColor
+	_flashSprite.self_modulate = flashColor
 	_flashSprite.visible = true
-	yield(get_tree().create_timer(_flashDuration), "timeout")
+	yield(get_tree().create_timer(duration), "timeout")
+	
+	_flashSprite.visible = false
 	_isFlashing = false
 	
 func _setCollidable(collidable: bool):
@@ -73,5 +91,36 @@ func _setCollidable(collidable: bool):
 	
 	_collision.set_deferred("disabled", !collidable)
 	
-
+func _startFalling():
+	if _isFalling:
+		return
 	
+	# Do an initial jump when we start falling
+	_fallSpeed = -fallJumpSpeed
+	
+	# Rotate ourselves slightly to indicate that we're falling
+	var rotationOffset = rand_range(abs(fallMinAngleOffset), abs(fallMaxAngleOffset))
+	if randf() > .5:
+		rotationOffset *= -1
+	rotation += rotationOffset
+	
+	# Disable standard collision
+	_setCollidable(false)
+	
+	# Enable our damage area
+	_fallingArea.monitoring = true
+	
+	_isFalling = true
+	pass
+	
+func _updateFalling(delta: float):
+	_fallSpeed = min(maxFallSpeed, _fallSpeed + fallAcceleration * delta)
+	var offset = Vector2.DOWN * _fallSpeed * delta
+	position = position + offset
+
+func _on_FallingArea_body_entered(body):
+	if !_isActive:
+		return
+	
+	if body.has_method("onFallingBrickHit"):
+		body.onFallingBrickHit(self)
