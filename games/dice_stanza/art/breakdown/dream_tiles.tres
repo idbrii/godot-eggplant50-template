@@ -40,7 +40,7 @@ points = PoolVector2Array( 0, 0, 8, 0, 8, 8, 0, 8 )
 points = PoolVector2Array( 0, 0, 8, 0, 8, 8, 0, 8 )
 
 [sub_resource type="StreamTexture" id=109]
-load_path = "res://.import/facility_tiles.png-1f8cef5ce665c080f5537539f8d895e9.stex"
+load_path = "res://.import/facility_tiles.png-ca69fe6fbda88fafa73c6213b4c97067.stex"
 
 [sub_resource type="ConvexPolygonShape2D" id=12]
 points = PoolVector2Array( 8, 8, 0, 8, 0, 0, 8, 0 )
