@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://games/Arkaruga/Objects/Bricks/Arkaruga-Brick-Base.tscn" type="PackedScene" id=1]
 [ext_resource path="res://games/Arkaruga/Sprites/Bricks/Diamond/brick-diamond-hit.png" type="Texture" id=2]
@@ -7,6 +7,8 @@
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 12, 12 )
+
+[sub_resource type="RectangleShape2D" id=2]
 
 [node name="Brick" instance=ExtResource( 1 )]
 position = Vector2( 0, 0 )
@@ -23,3 +25,7 @@ texture = ExtResource( 2 )
 [node name="Collision" parent="." index="3"]
 rotation = 0.785398
 shape = SubResource( 1 )
+
+[node name="CollisionShape2D" parent="FallingDamageArea" index="0"]
+rotation = 0.785398
+shape = SubResource( 2 )
