@@ -18,10 +18,16 @@ _global_script_classes=[ {
 "class": "GameList",
 "language": "GDScript",
 "path": "res://mainmenu/gamelist.gd"
+}, {
+"base": "Resource",
+"class": "TriangleGameState",
+"language": "GDScript",
+"path": "res://games/TriangleCut/GameState.gd"
 } ]
 _global_script_class_icons={
 "GameDef": "",
-"GameList": ""
+"GameList": "",
+"TriangleGameState": ""
 }
 
 [application]
