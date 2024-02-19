@@ -10,6 +10,7 @@ func set_game_def(def):
 	_apply_label(def.input_pause, $"%pause/Label", $"%pause")
 	_apply_label(def.input_directions, $move/move_omni/Label, $move)
 	_apply_label(def.input_directions, $move/move_cardinal/Label, $move)
+	visible = true
 
 
 static func ok(err):
@@ -17,6 +18,7 @@ static func ok(err):
 
 
 func _ready():
+	visible = false
 	ok(Eggplant.connect("input_device_changed", self, "_on_input_device_changed"))
 	ok(self.connect("visibility_changed", self, "_on_visibility_changed"))
 
