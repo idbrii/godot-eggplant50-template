@@ -49,6 +49,7 @@ func set_player_hp(new_val):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+    $ParallaxBackground.scroll_offset += Vector2(1.0, 1.0)*2*delta
     if Input.is_action_just_pressed("action1"):
         $bg_music.play_fg(8)
     if $CanvasLayer/GameOver.visible:
