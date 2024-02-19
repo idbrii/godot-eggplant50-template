@@ -28,13 +28,14 @@ func _get_label(label, default):
 func _input(event):
 	var is_gamepad_device = event is InputEventJoypadButton
 	var want_gamepad = is_gamepad_device
+	var is_mouse_drift = event is InputEventMouseMotion and event.speed.length_squared() < 3000
 	if event is InputEventJoypadMotion:
 		is_gamepad_device = true
 		# Big deadzone for auto switching visuals.
 		want_gamepad = event.axis_value > 0.4
 	if want_gamepad and Input.is_joy_known(event.device):
 		last_input_joy = event.device
-	elif not is_gamepad_device:
+	elif not is_gamepad_device and not is_mouse_drift:
 		# Only disable gamepad if we definitely didn't receive input from a gamepad.
 		last_input_joy = -1
 
