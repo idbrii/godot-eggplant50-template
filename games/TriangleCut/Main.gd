@@ -29,6 +29,8 @@ func _ready() -> void:
             game_state.best = ResourceLoader.load("user://triangle_cut.tres").best
     $CanvasLayer/LvlHud/VBoxContainer/best.text = "Best: "+str(game_state.best)
     $CanvasLayer/LvlHud/VBoxContainer/level.text = "Level: "+str(game_state.level)
+    $CanvasLayer/Fade/Tween.interpolate_property($CanvasLayer/Fade, "color", null, Color(0,0,0,0), 0.5)
+    $CanvasLayer/Fade/Tween.start()
 
 func set_curr_moves(new_val):
     curr_moves = new_val
@@ -137,11 +139,15 @@ func game_over():
 func next_enemy():
     $win_sfx.play()
     yield($win_sfx, "finished")
+    $CanvasLayer/Fade/Tween.interpolate_property($CanvasLayer/Fade, "color", null, Color("#17111a"), 0.5)
+    $CanvasLayer/Fade/Tween.start()
     game_state.health = player_hp
     game_state.loc = $Grid.player_loc
     if game_state.level > game_state.best:
         game_state.best = game_state.level
         
     game_state.level += 1
+#    Eggplant.transition_to(this_scene)
+    yield($CanvasLayer/Fade/Tween, "tween_completed")
     get_tree().reload_current_scene()
     

@@ -177,11 +177,6 @@ func _process(delta: float) -> void:
         $SelectPlayer.play()
 
 
-func _on_Grid_actions(atk, def, extra) -> void:
-    print("atk: "+str(atk))
-    print("def: "+str(def))
-    print("extra: "+str(extra))
-
 func set_player_loc(new_loc):
     
     $Player.position = new_loc

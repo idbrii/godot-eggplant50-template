@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://games/TriangleCut/Grid.tscn" type="PackedScene" id=1]
 [ext_resource path="res://games/TriangleCut/Main.gd" type="Script" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://games/TriangleCut/winfight.wav" type="AudioStream" id=13]
 [ext_resource path="res://games/movement2/ui/GameMenu.tscn" type="PackedScene" id=14]
 [ext_resource path="res://games/TriangleCut/eggplant.png" type="Texture" id=15]
+[ext_resource path="res://games/TriangleCut/eggplant_white.png" type="Texture" id=16]
 
 [sub_resource type="Shader" id=31]
 code = "shader_type canvas_item;
@@ -26,17 +27,6 @@ void fragment(){
 
 [sub_resource type="ShaderMaterial" id=32]
 shader = SubResource( 31 )
-
-[sub_resource type="Shader" id=33]
-code = "shader_type canvas_item;
-
-void fragment(){
-    COLOR = texture(TEXTURE, UV);
-    COLOR.rgb = COLOR.a*vec3(.09,.07,.10);
-}"
-
-[sub_resource type="ShaderMaterial" id=34]
-shader = SubResource( 33 )
 
 [sub_resource type="Shader" id=28]
 code = "shader_type canvas_item;
@@ -458,9 +448,9 @@ motion_scale = Vector2( 2, 2 )
 motion_offset = Vector2( 4, 4 )
 
 [node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer2"]
-material = SubResource( 34 )
+modulate = Color( 0.0901961, 0.0666667, 0.101961, 1 )
 scale = Vector2( 5, 5 )
-texture = ExtResource( 15 )
+texture = ExtResource( 16 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 2560, 1440 )
 
@@ -648,6 +638,13 @@ margin_left = -83.5
 margin_top = -110.0
 margin_right = 83.5
 margin_bottom = 110.0
+
+[node name="Fade" type="ColorRect" parent="CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.0901961, 0.0666667, 0.101961, 1 )
+
+[node name="Tween" type="Tween" parent="CanvasLayer/Fade"]
 
 [node name="Grid" parent="." instance=ExtResource( 1 )]
 
