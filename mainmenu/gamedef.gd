@@ -11,7 +11,20 @@ export(PackedScene) var initial_scene
 export(String) var game_name
 export(String) var game_author
 
-func _init(p_initial_scene = null, p_game_name = "", p_game_author = ""):
+# Label your inputs. If left blank, input_widget will use defaults.
+export(String) var input_primary_action := "Primary"
+export(String) var input_secondary_action := "Secondary"
+export(String) var input_pause := "Pause"
+export(String) var input_directions := "Movement"
+
+
+func _init(p_initial_scene = null, p_game_name = "", p_game_author = "", p_input_primary_action = "", p_input_secondary_action = "", p_input_pause = "", p_input_directions = ""):
 	initial_scene = p_initial_scene
 	game_name = p_game_name
 	game_author = p_game_author
+
+	input_primary_action = p_input_primary_action
+	input_secondary_action = p_input_secondary_action
+	input_pause = p_input_pause
+	input_directions = p_input_directions
+

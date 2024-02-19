@@ -1,0 +1,20 @@
+[gd_resource type="Resource" load_steps=9 format=2]
+
+[ext_resource path="res://shared/input/device_icons.gd" type="Script" id=1]
+[ext_resource path="res://shared/input/art/keyboard/char_x.png" type="Texture" id=2]
+[ext_resource path="res://shared/input/art/keyboard/char_z.png" type="Texture" id=3]
+[ext_resource path="res://shared/input/art/keyboard/char_p.png" type="Texture" id=4]
+[ext_resource path="res://shared/input/art/keyboard/arrow_up.png" type="Texture" id=5]
+[ext_resource path="res://shared/input/art/keyboard/arrow_down.png" type="Texture" id=6]
+[ext_resource path="res://shared/input/art/keyboard/arrow_left.png" type="Texture" id=7]
+[ext_resource path="res://shared/input/art/keyboard/arrow_right.png" type="Texture" id=8]
+
+[resource]
+script = ExtResource( 1 )
+primary = ExtResource( 3 )
+secondary = ExtResource( 2 )
+pause = ExtResource( 4 )
+move_up = ExtResource( 5 )
+move_left = ExtResource( 7 )
+move_right = ExtResource( 8 )
+move_down = ExtResource( 6 )
