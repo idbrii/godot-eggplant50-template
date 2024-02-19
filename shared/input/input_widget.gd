@@ -5,11 +5,11 @@ export(Theme) var contrast_theme := Theme.LightOnDark
 
 
 func set_game_def(def):
-	$"%Actions/primary/Label".text = _get_label(def.input_primary_action, "Primary")
-	$"%Actions/secondary/Label".text = _get_label(def.input_secondary_action, "Secondary")
-	$"%pause/Label".text = _get_label(def.input_pause, "Pause")
-	$move_omni/Label.text = _get_label(def.input_directions, "Movement")
-	$move_cardinal/Label.text = $move_omni/Label.text
+	_apply_label(def.input_primary_action, $"%Actions/primary/Label", $"%Actions/primary")
+	_apply_label(def.input_secondary_action, $"%Actions/secondary/Label", $"%Actions/secondary")
+	_apply_label(def.input_pause, $"%pause/Label", $"%pause")
+	_apply_label(def.input_directions, $move/move_omni/Label, $move)
+	_apply_label(def.input_directions, $move/move_cardinal/Label, $move)
 
 
 static func ok(err):
@@ -25,14 +25,14 @@ func _ready():
 		$"%Actions/primary/Label".add_color_override("font_color", c)
 		$"%Actions/secondary/Label".add_color_override("font_color", c)
 		$"%pause/Label".add_color_override("font_color", c)
-		$move_omni/Label.add_color_override("font_color", c)
-		$move_cardinal/Label.add_color_override("font_color", c)
+		$move/move_omni/Label.add_color_override("font_color", c)
+		$move/move_cardinal/Label.add_color_override("font_color", c)
 
 
-func _get_label(label, default):
-	if label and label.length() > 0:
-		return label
-	return default
+func _apply_label(label, text_widget, root):
+	root.visible = label and label.length() > 0
+	if root.visible:
+		text_widget.text = label
 
 
 func _on_visibility_changed():
@@ -45,13 +45,13 @@ func _on_input_device_changed(_new_device, icons):
 	$"%Actions/secondary/Icon".texture = icons.secondary
 	$"%pause/Icon".texture = icons.pause
 	var has_omni = icons.move_omni != null
-	$move_omni.visible = has_omni
-	$move_cardinal.visible = not has_omni
+	$move/move_omni.visible = has_omni
+	$move/move_cardinal.visible = not has_omni
 	if icons.move_omni:
-		$move_omni/Icon.texture = icons.move_omni
+		$move/move_omni/Icon.texture = icons.move_omni
 	else:
-		$move_cardinal/upper/up.texture = icons.move_up
-		$move_cardinal/lower/left.texture = icons.move_left
-		$move_cardinal/lower/down.texture = icons.move_down
-		$move_cardinal/lower/right.texture = icons.move_right
+		$move/move_cardinal/upper/up.texture = icons.move_up
+		$move/move_cardinal/lower/left.texture = icons.move_left
+		$move/move_cardinal/lower/down.texture = icons.move_down
+		$move/move_cardinal/lower/right.texture = icons.move_right
 

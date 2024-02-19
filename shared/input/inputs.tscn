@@ -14,21 +14,25 @@ margin_bottom = -60.0
 theme = ExtResource( 4 )
 script = ExtResource( 1 )
 
-[node name="move_cardinal" type="VBoxContainer" parent="."]
+[node name="move" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="move_cardinal" type="VBoxContainer" parent="move"]
 margin_right = 200.0
 margin_bottom = 180.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 0
 
-[node name="upper" type="HBoxContainer" parent="move_cardinal"]
+[node name="upper" type="HBoxContainer" parent="move/move_cardinal"]
 margin_right = 200.0
 margin_bottom = 80.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = -10
 
-[node name="pad" type="TextureRect" parent="move_cardinal/upper"]
+[node name="pad" type="TextureRect" parent="move/move_cardinal/upper"]
 modulate = Color( 1, 1, 1, 0 )
 margin_right = 73.0
 margin_bottom = 80.0
@@ -37,7 +41,7 @@ size_flags_horizontal = 3
 texture = ExtResource( 5 )
 stretch_mode = 6
 
-[node name="up" type="TextureRect" parent="move_cardinal/upper"]
+[node name="up" type="TextureRect" parent="move/move_cardinal/upper"]
 margin_left = 63.0
 margin_right = 136.0
 margin_bottom = 80.0
@@ -46,7 +50,7 @@ size_flags_horizontal = 3
 texture = ExtResource( 5 )
 stretch_mode = 6
 
-[node name="pad2" type="TextureRect" parent="move_cardinal/upper"]
+[node name="pad2" type="TextureRect" parent="move/move_cardinal/upper"]
 modulate = Color( 1, 1, 1, 0 )
 margin_left = 126.0
 margin_right = 200.0
@@ -56,7 +60,7 @@ size_flags_horizontal = 3
 texture = ExtResource( 5 )
 stretch_mode = 6
 
-[node name="lower" type="HBoxContainer" parent="move_cardinal"]
+[node name="lower" type="HBoxContainer" parent="move/move_cardinal"]
 margin_top = 80.0
 margin_right = 200.0
 margin_bottom = 160.0
@@ -64,7 +68,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = -8
 
-[node name="left" type="TextureRect" parent="move_cardinal/lower"]
+[node name="left" type="TextureRect" parent="move/move_cardinal/lower"]
 margin_right = 72.0
 margin_bottom = 80.0
 rect_min_size = Vector2( 64, 64 )
@@ -72,7 +76,7 @@ size_flags_horizontal = 3
 texture = ExtResource( 5 )
 stretch_mode = 6
 
-[node name="down" type="TextureRect" parent="move_cardinal/lower"]
+[node name="down" type="TextureRect" parent="move/move_cardinal/lower"]
 margin_left = 64.0
 margin_right = 136.0
 margin_bottom = 80.0
@@ -81,7 +85,7 @@ size_flags_horizontal = 3
 texture = ExtResource( 5 )
 stretch_mode = 6
 
-[node name="right" type="TextureRect" parent="move_cardinal/lower"]
+[node name="right" type="TextureRect" parent="move/move_cardinal/lower"]
 margin_left = 128.0
 margin_right = 200.0
 margin_bottom = 80.0
@@ -90,14 +94,14 @@ size_flags_horizontal = 3
 texture = ExtResource( 5 )
 stretch_mode = 6
 
-[node name="Label" type="Label" parent="move_cardinal"]
+[node name="Label" type="Label" parent="move/move_cardinal"]
 margin_top = 160.0
 margin_right = 200.0
 margin_bottom = 180.0
 text = "Movement"
 align = 1
 
-[node name="move_omni" type="VBoxContainer" parent="."]
+[node name="move_omni" type="VBoxContainer" parent="move"]
 visible = false
 margin_top = 52.0
 margin_right = 200.0
@@ -105,7 +109,7 @@ margin_bottom = 152.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Icon" type="TextureRect" parent="move_omni"]
+[node name="Icon" type="TextureRect" parent="move/move_omni"]
 margin_right = 200.0
 margin_bottom = 64.0
 rect_min_size = Vector2( 64, 64 )
@@ -113,7 +117,7 @@ size_flags_horizontal = 3
 texture = ExtResource( 3 )
 stretch_mode = 6
 
-[node name="Label" type="Label" parent="move_omni"]
+[node name="Label" type="Label" parent="move/move_omni"]
 margin_top = 68.0
 margin_right = 200.0
 margin_bottom = 88.0
