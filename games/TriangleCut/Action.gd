@@ -3,6 +3,8 @@ extends Node2D
 
 # Declare member variables here. Examples:
 var type
+var amount: int
+var level: int = 1
 var sword_tex = preload("res://games/TriangleCut/sword.png")
 var shield_tex = preload("res://games/TriangleCut/shield.png")
 var triangle_tex = preload("res://games/TriangleCut/triangle_cut.png")
@@ -24,6 +26,23 @@ func _ready() -> void:
     else:
         type = "extra"
         $Sprite.texture = triangle_tex
+        $Sprite/Amount.text = ""
+    # set amount depending on level and type
+    if type == "extra":
+        amount = 1
+    else:
+        var max_amnt = max(level/2.5, 1)
+        amount = max(randi() % int(round(max_amnt)), 1)
+        print(amount)
+    var tens = amount / 10
+    var fives = (amount % 10) / 5
+    var ones = amount % 5
+    for i in range(tens):
+        $Sprite/Amount.text += "#"
+    for i in range(fives):
+        $Sprite/Amount.text += "+"
+    for i in range(ones):
+        $Sprite/Amount.text += "-"
     yield(get_tree().create_timer(rand_range(0, 1.0)), "timeout")
     $AnimationPlayer.play("spawn")
 

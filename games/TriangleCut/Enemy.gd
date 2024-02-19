@@ -38,7 +38,6 @@ var weird_chars = "¿,À,Á,Â,Ã,Ä,Å,Æ,Ç,È,É,Ê,Ë,Ì,Í,Î,Ï,Ð,Ñ,Ò,�
 
 func _ready() -> void:
     self.hp = hp
-    self.attacking_for = 1
     randomize()
     colors.shuffle()
     gradient.gradient.colors = colors.slice(0, 6)
@@ -56,13 +55,11 @@ func set_attacking_for(new_val):
 func set_hp(new_val):
     hp = new_val
     $Label.text = "HP: "+str(hp)+"\nATK: "+str(attacking_for)
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta: float) -> void:
-#    pass
 
 func next_turn():
     # update attack
-    self.attacking_for = (randi() % level) + 1
+    var scale = pow(randf(), 2)
+    self.attacking_for = max(int(round((scale*level))), 1)
     
 func attack():
     $Eyes/AnimationPlayer.play("attacking")
@@ -80,3 +77,4 @@ func set_level(lvl: int):
     generate_name(min(lvl, 10))
     self.hp = lvl
     self.level = lvl
+    next_turn()

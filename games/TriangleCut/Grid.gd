@@ -6,6 +6,7 @@ signal actions(atk, def, extra)
 const SIDE_LEN = 60
 var center: Vector2 = Vector2.ZERO
 var radius = 3
+export(Resource) var game_state
 
 var action_scene = preload("res://games/TriangleCut/Action.tscn")
 
@@ -15,7 +16,6 @@ var triangles = {}
 var active_option setget set_active_option  # player's choice to cut
 var player_turn: bool = true
 var player_loc: Vector2
-#var line_default_color = Color("#7884ab")
 var line_default_color = Color("#3e375c")
 
 
@@ -98,6 +98,7 @@ func create_triangles():
                     if not tri_key in triangles:
                         var action = action_scene.instance()
                         action.global_position = (n1+n2+o)/3.0
+                        action.level = game_state.level
                         triangles[tri_key] = action
                         $Actions.add_child(action)
 
@@ -128,7 +129,7 @@ func traverse_active_edge():
     var tris_to_del = []
     for tri in triangles:
         if active_option in tri and $Player.position in tri:
-            actions[triangles[tri].type] += 1
+            actions[triangles[tri].type] += triangles[tri].amount
             triangles[tri].activate()
             tris_to_del.append(tri)
         
@@ -149,9 +150,6 @@ func traverse_active_edge():
     adjacencies[player_loc].sort_custom(self, "sort_points_cw")
     
     line.queue_free()
-    
-    # TODO: deal with when player strands themselves
-    
     emit_signal("actions", actions["atk"], actions["def"], actions["extra"])
     
 func update_active_option():
@@ -187,3 +185,6 @@ func set_player_loc(new_loc):
         line.default_color = line_default_color
     update_active_option()
     adjacencies[player_loc].sort_custom(self, "sort_points_cw")
+
+func is_player_stuck() -> bool:
+    return len(adjacencies[player_loc]) < 1
