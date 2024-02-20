@@ -632,6 +632,10 @@ text = "Best: 0"
 
 [node name="GameMenu" parent="CanvasLayer" instance=ExtResource( 14 )]
 visible = true
+help_title = "TriEdge Hack"
+help_body = "Defeat your mysterious foes!
+Build up attack,defense, and action points on your turn.
+Heal if you do damage past zero."
 
 [node name="Fade" type="ColorRect" parent="CanvasLayer"]
 visible = false
