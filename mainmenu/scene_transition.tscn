@@ -84,10 +84,13 @@ anims/fade = SubResource( 1 )
 
 [node name="InputDisplay" parent="." instance=ExtResource( 3 )]
 unique_name_in_owner = true
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 93.0
 margin_top = 96.0
-margin_right = -97.0
-margin_bottom = 36.0
+margin_right = 493.0
+margin_bottom = 96.0
 rect_min_size = Vector2( 400, 0 )
 size_flags_horizontal = 5
 size_flags_vertical = 5
+contrast_theme = 0

@@ -8,7 +8,6 @@ signal player_rolled(value, total_rolls)  # warning-ignore:unused_signal
 signal time_expired()
 signal set_input_block(should_block)
 signal start_round()  # warning-ignore:unused_signal
-signal restart_game()  # warning-ignore:unused_signal
 signal game_over()  # warning-ignore:unused_signal
 
 
@@ -17,7 +16,7 @@ var tuning : Dictionary
 
 func _ready():
 	Validate.ok(Broadcast_idbrii.connect("start_round", self, "_on_start_round"))
-	Validate.ok(Broadcast_idbrii.connect("restart_game", self, "_on_restart_game"))
+	Validate.ok(Eggplant.connect("restart_game", self, "_on_restart_game"))
 	Validate.ok(Broadcast_idbrii.connect("game_over", self, "_on_game_over"))
 
 

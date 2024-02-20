@@ -57,12 +57,16 @@ screen_size = Vector2( 640, 360 )
 
 [node name="UI" type="CanvasLayer" parent="."]
 
-[node name="GameMenu" parent="UI" instance=ExtResource( 1 )]
+[node name="PauseMenu" parent="UI" instance=ExtResource( 1 )]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -301.0
-margin_top = -109.0
-margin_right = -134.0
-margin_bottom = 111.0
+margin_left = -304.0
+margin_top = -143.0
+margin_right = -137.0
+margin_bottom = 77.0
+help_title = "Movement2 Example Game"
+help_body = "There's no goal here: just jump around!
+This example game is a demonstration of how to use the Eggplant50 template and how to make a platformer.
+You can use the code in your games to get a jump start."

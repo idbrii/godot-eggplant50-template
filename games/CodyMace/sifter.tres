@@ -8,3 +8,7 @@ script = ExtResource( 1 )
 initial_scene = ExtResource( 2 )
 game_name = "Sifter"
 game_author = "Cody Mace"
+input_primary_action = ""
+input_secondary_action = "Drop Shapes"
+input_pause = "Pause"
+input_directions = ""
