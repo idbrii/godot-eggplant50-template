@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://mainmenu/art/font/font_kenpixel_high.tres" type="DynamicFont" id=1]
 [ext_resource path="res://games/GabeTutone/scripts/Main.gd" type="Script" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://games/GabeTutone/scenes/UFO.tscn" type="PackedScene" id=5]
 [ext_resource path="res://games/GabeTutone/scenes/GameOverMenu.tscn" type="PackedScene" id=6]
 [ext_resource path="res://games/GabeTutone/scenes/BoardAnim.tscn" type="PackedScene" id=7]
+[ext_resource path="res://shared/menu_pause/PauseMenu.tscn" type="PackedScene" id=8]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.407843, 0.168627, 0.509804, 1 )
@@ -71,5 +72,9 @@ visible = false
 
 [node name="BoardAnim" parent="." instance=ExtResource( 7 )]
 position = Vector2( 182, 180 )
+
+[node name="PauseMenu" parent="." instance=ExtResource( 8 )]
+help_title = "Tic Tac Toe"
+help_body = "Get 3 in a row to win!"
 
 [connection signal="restart" from="GameOverMenu" to="." method="_on_GameOverMenu_restart"]
