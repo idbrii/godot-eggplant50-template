@@ -60,6 +60,8 @@ func _process(delta: float) -> void:
 
 
 func _on_Grid_actions(atk, def, extra) -> void:
+    # pause for a sec for action animation
+    yield(get_tree().create_timer(0.75), "timeout")
     if atk > 0:
         $CanvasLayer/HUD/VBoxContainer/HBoxAtk/AnimationPlayer.play("main")
     if def > 0:
