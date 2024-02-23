@@ -7,7 +7,7 @@ var amount: int
 var level: int = 1
 var sword_tex = preload("res://games/TriangleCut/sword.png")
 var shield_tex = preload("res://games/TriangleCut/shield.png")
-var triangle_tex = preload("res://games/TriangleCut/triangle_cut.png")
+var triangle_tex = preload("res://games/TriangleCut/lightning2.png")
 
 var action_particle_scene = preload("res://games/TriangleCut/ActionParticle.tscn")
 
