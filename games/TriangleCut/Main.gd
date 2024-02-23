@@ -70,6 +70,7 @@ func _on_Grid_actions(atk, def, extra) -> void:
         $CanvasLayer/HUD/VBoxContainer/HBoxAp/AnimationPlayer.play("main")
     self.curr_moves -= 1
     self.curr_moves += extra
+    $CanvasLayer/HUD/VBoxContainer/HBoxAp/AnimationPlayer.play("main")
     self.curr_atk += atk
     self.curr_def += def
     if curr_moves < 1:
