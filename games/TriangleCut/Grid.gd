@@ -17,6 +17,7 @@ var active_option setget set_active_option  # player's choice to cut
 var player_turn: bool = true
 var player_loc: Vector2
 var line_default_color = Color("#3e375c")
+var accept_input: bool = true
 
 
 # Called when the node enters the scene tree for the first time.
@@ -161,9 +162,9 @@ func process_active(delta):
         line.width = (sin(OS.get_ticks_msec()/200.0)+2.0)*4/3.0
 
 func _process(delta: float) -> void:
-    if not player_turn:
-        return
     process_active(delta)
+    if not accept_input:
+        return
     var curr_idx = adjacencies[player_loc].find(active_option)
     var num_adj = len(adjacencies[player_loc])
     if Input.is_action_just_pressed("move_right"):
@@ -171,6 +172,9 @@ func _process(delta: float) -> void:
     if Input.is_action_just_pressed("move_left"):
         self.active_option = adjacencies[player_loc][(curr_idx-1) % num_adj]
     if Input.is_action_just_pressed("action1"):
+        if not accept_input:
+            return
+        accept_input = false
         traverse_active_edge()
         $SelectPlayer.play()
 

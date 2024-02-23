@@ -128,6 +128,7 @@ func _on_Grid_actions(atk, def, extra) -> void:
         yield(get_tree().create_timer(0.5), "timeout")
         $Grid.update_active_option()
         $Grid.player_turn = true
+    $Grid.accept_input = true
     
 
 func enemy_dmg_num():
@@ -146,7 +147,9 @@ func game_over():
 
 func next_enemy():
     $win_sfx.play()
+    $CanvasLayer/LvlUp/AnimationPlayer.play("lvlup")
     yield($win_sfx, "finished")
+    yield($CanvasLayer/LvlUp/AnimationPlayer, "animation_finished")
     $CanvasLayer/Fade/Tween.interpolate_property($CanvasLayer/Fade, "color", null, Color("#17111a"), 0.5)
     $CanvasLayer/Fade/Tween.start()
     game_state.health = player_hp
