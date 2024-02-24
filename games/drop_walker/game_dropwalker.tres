@@ -1,0 +1,14 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://mainmenu/gamedef.gd" type="Script" id=1]
+[ext_resource path="res://games/drop_walker/scenes/drop_world.tscn" type="PackedScene" id=2]
+
+[resource]
+script = ExtResource( 1 )
+initial_scene = ExtResource( 2 )
+game_name = "Drop Walker"
+game_author = "idbrii"
+input_primary_action = "Place Board"
+input_secondary_action = "Place Board"
+input_pause = "Pause"
+input_directions = "Movement"
