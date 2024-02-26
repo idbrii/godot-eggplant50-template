@@ -114,6 +114,13 @@ pip install -r ci/requirements.txt
 python ci/pushbuild.py
 ```
 
+## Help me get started!
+
+Godot has some [great example projects for Godot 3.5](https://github.com/godotengine/godot-demo-projects/tree/3.5 ) to help get you started on different features/genres (use the 3.5 branch and not master).
+Download them all as a zip: [3.5.zip](https://github.com/godotengine/godot-demo-projects/archive/3.5.zip)
+It's often helpful just see a working example.
+
+
 ## Troubleshooting
 
 ### _load: No loader found for resource: res://games/CodyMace/ShapeSwitch.cs
