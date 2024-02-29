@@ -62,11 +62,13 @@ func input_dir_to_delta(input_dir):
 
 func _process(_dt: float):
     var input = get_input()
-    if input.move.length_squared() > 0.3*0.3:
-        #~ printt("Move request:", input.move)
+    # Rotate input closer to iso projection to correctly interpret diagonal inputs.
+    var iso_move = input.move.rotated(TAU * 1/10)
+    if iso_move.length_squared() > 0.3*0.3:
+        #~ printt("Move request:", iso_move)
         block_input = true
 
-        var delta = input_dir_to_delta(input.move)
+        var delta = input_dir_to_delta(iso_move)
 
         var tween := create_tween()
         var t := tween.tween_property(self, "global_position", delta, move_duration)
