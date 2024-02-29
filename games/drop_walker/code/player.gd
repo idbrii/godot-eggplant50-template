@@ -1,5 +1,8 @@
 extends Node2D
 
+const GridWorld = preload("res://games/drop_walker/code/gridworld.gd")
+const Namer = preload("res://games/drop_walker/code/util/namer.gd")
+
 export var gridworld_node : NodePath
 export var move_duration := 0.5
 
@@ -66,17 +69,35 @@ func _process(_dt: float):
     var iso_move = input.move.rotated(TAU * 1/10)
     if iso_move.length_squared() > 0.3*0.3:
         #~ printt("Move request:", iso_move)
-        block_input = true
 
         var delta = input_dir_to_delta(iso_move)
+        var dest = delta + global_position
+        var dest_tile = gridworld.get_world_cellv(dest)
 
+        #~ printt('dest_tile', Namer.enum_as_string(GridWorld.GroundType, dest_tile))
+        #~ gridworld.set_world_cellv(dest, GridWorld.GroundType.SOLID)
+
+        block_input = true
         var tween := create_tween()
-        var t := tween.tween_property(self, "global_position", delta, move_duration)
-        t = t.from_current()
-        t = t.as_relative()
-        t = t.set_ease(Tween.EASE_IN_OUT)
-        t = t.set_trans(Tween.TRANS_SINE)
+        if dest_tile == GridWorld.GroundType.SOLID:
+            var t := tween.tween_property(self, "global_position", delta, move_duration)
+            t = t.from_current()
+            t = t.as_relative()
+            t = t.set_ease(Tween.EASE_IN_OUT)
+            t = t.set_trans(Tween.TRANS_SINE)
 
-        #~ yield(get_tree().create_timer(move_duration * 0.9), "timeout")
+        else:
+            var duration = move_duration * 0.1
+            var current_pos = global_position
+            var t := tween.tween_property(self, "global_position", delta * 0.1, duration)
+            t = t.from_current()
+            t = t.as_relative()
+            t = t.set_ease(Tween.EASE_IN_OUT)
+            t = t.set_trans(Tween.TRANS_SINE)
+            t = tween.chain().tween_property(self, "global_position", current_pos, duration)
+            t = t.from_current()
+            t = t.set_ease(Tween.EASE_IN_OUT)
+            t = t.set_trans(Tween.TRANS_SINE)
+
         yield(tween, "finished")
         block_input = false
