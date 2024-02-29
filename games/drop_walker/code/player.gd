@@ -1,10 +1,15 @@
 extends Node2D
 
+signal fall_through_hole
+
 const GridWorld = preload("res://games/drop_walker/code/gridworld.gd")
 const Namer = preload("res://games/drop_walker/code/util/namer.gd")
 
 export var gridworld_node : NodePath
 export var move_duration := 0.5
+
+export var fall_duration := 1.0
+export var bounce_height := 1.0
 
 var block_input := false
 var tile_width := 64
@@ -76,28 +81,60 @@ func _process(_dt: float):
 
         #~ printt('dest_tile', Namer.enum_as_string(GridWorld.GroundType, dest_tile))
         #~ gridworld.set_world_cellv(dest, GridWorld.GroundType.SOLID)
-
         block_input = true
         var tween := create_tween()
-        if dest_tile == GridWorld.GroundType.SOLID:
-            var t := tween.tween_property(self, "global_position", delta, move_duration)
-            t = t.from_current()
-            t = t.as_relative()
-            t = t.set_ease(Tween.EASE_IN_OUT)
-            t = t.set_trans(Tween.TRANS_SINE)
+        match dest_tile:
+            GridWorld.GroundType.SOLID,GridWorld.GroundType.EMPTY:
+                var t := tween.tween_property(self, "global_position", delta, move_duration)
+                t = t.from_current()
+                t = t.as_relative()
+                t = t.set_ease(Tween.EASE_IN_OUT)
+                t = t.set_trans(Tween.TRANS_SINE)
 
-        else:
-            var duration = move_duration * 0.1
-            var current_pos = global_position
-            var t := tween.tween_property(self, "global_position", delta * 0.1, duration)
-            t = t.from_current()
-            t = t.as_relative()
-            t = t.set_ease(Tween.EASE_IN_OUT)
-            t = t.set_trans(Tween.TRANS_SINE)
-            t = tween.chain().tween_property(self, "global_position", current_pos, duration)
-            t = t.from_current()
-            t = t.set_ease(Tween.EASE_IN_OUT)
-            t = t.set_trans(Tween.TRANS_SINE)
+            _:
+                var duration = move_duration * 0.1
+                var current_pos = global_position
+                var t := tween.tween_property(self, "global_position", delta * 0.1, duration)
+                t = t.from_current()
+                t = t.as_relative()
+                t = t.set_ease(Tween.EASE_IN_OUT)
+                t = t.set_trans(Tween.TRANS_SINE)
+                t = tween.chain().tween_property(self, "global_position", current_pos, duration)
+                t = t.from_current()
+                t = t.set_ease(Tween.EASE_IN_OUT)
+                t = t.set_trans(Tween.TRANS_SINE)
 
         yield(tween, "finished")
         block_input = false
+
+        if dest_tile == GridWorld.GroundType.EMPTY:
+            emit_signal("fall_through_hole")
+
+
+func fall_to_layer(layer):
+    block_input = true
+    var dest = layer.attach_player_to_world(self)
+    var tween := create_tween()
+
+    # TODO: This fall animation doesn't seem to work. We teleport there instead.
+    var t := tween.tween_property(self, "global_position", dest, fall_duration * 0.80)
+    t = t.from_current()
+    t = t.set_ease(Tween.EASE_IN_OUT)
+    t = t.set_trans(Tween.TRANS_SINE)
+    t = tween.chain().tween_property(self, "global_position", dest + Vector2.UP * bounce_height, fall_duration * 0.1)
+    t = t.from_current()
+    t = t.set_ease(Tween.EASE_IN_OUT)
+    t = t.set_trans(Tween.TRANS_SINE)
+    t = tween.chain().tween_property(self, "global_position", dest + Vector2.UP * -bounce_height, fall_duration * 0.1)
+    t = t.from_current()
+    t = t.set_ease(Tween.EASE_IN_OUT)
+    t = t.set_trans(Tween.TRANS_SINE)
+
+    yield(tween, "finished")
+    block_input = false
+
+
+func done_falling():
+    var dest_tile = gridworld.get_world_cellv(global_position)
+    if dest_tile == GridWorld.GroundType.EMPTY:
+        emit_signal("fall_through_hole")

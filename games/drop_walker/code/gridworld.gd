@@ -20,6 +20,7 @@ var ground_to_tile = {
 var tile_to_ground = Container.invert_dict(ground_to_tile)
 
 
+# Returns a global position.
 # https://www.reddit.com/r/godot/comments/fuejci/having_trouble_with_snapping_to_isometric_grid/fmcl07f/
 func snap_global_to_cell(world_pos: Vector2) -> Vector2:
     return to_global(map_to_world(world_to_map(to_local(world_pos))))
@@ -47,4 +48,12 @@ func get_world_cellv(v: Vector2) -> int:
     var cell_space = global_to_cell_pos(v)
     var value = .get_cellv(cell_space)
     return tile_to_ground[value]
+
+
+func attach_player_to_world(player):
+    var dest = snap_global_to_cell(player.global_position)
+    player.get_parent().remove_child(player)
+    $"%YSort".add_child(player)
+    player.gridworld = self
+    return dest
 
