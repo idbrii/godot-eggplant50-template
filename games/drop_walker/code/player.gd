@@ -44,23 +44,21 @@ func matches_grid_angle(input_dir, direction):
     return abs(a) < segment
 
 
-func input_dir_to_direction(input_dir):
+func input_dir_to_delta(input_dir):
+    var delta = gridworld.cell_size / 2
     if matches_grid_angle(input_dir, Vector2.UP):
-        return $Direction/North
-    if matches_grid_angle(input_dir, Vector2.RIGHT):
-        return $Direction/East
-    if matches_grid_angle(input_dir, Vector2.DOWN):
-        return $Direction/South
-    if matches_grid_angle(input_dir, Vector2.LEFT):
-        return $Direction/West
-    printt("input_dir_to_direction: failed to find a match.")
-    return self
-        
+        delta *= -1
+    elif matches_grid_angle(input_dir, Vector2.RIGHT):
+        delta.y *= -1
+    elif matches_grid_angle(input_dir, Vector2.DOWN):
+        delta *= 1
+    elif matches_grid_angle(input_dir, Vector2.LEFT):
+        delta.x *= -1
+    else:
+        printt("input_dir_to_delta: failed to find a match.")
+        delta = Vector2.ZERO
+    return delta
 
-func input_dir_to_position(input_dir):
-    var marker = input_dir_to_direction(input_dir)
-    #~ printt("Going to", marker)
-    return marker.global_position
 
 func _process(_dt: float):
     var input = get_input()
@@ -68,11 +66,12 @@ func _process(_dt: float):
         #~ printt("Move request:", input.move)
         block_input = true
 
-        var dest = input_dir_to_position(input.move)
+        var delta = input_dir_to_delta(input.move)
 
         var tween := create_tween()
-        var t := tween.tween_property(self, "global_position", dest, move_duration)
+        var t := tween.tween_property(self, "global_position", delta, move_duration)
         t = t.from_current()
+        t = t.as_relative()
         t = t.set_ease(Tween.EASE_IN_OUT)
         t = t.set_trans(Tween.TRANS_SINE)
 
