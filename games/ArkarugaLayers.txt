@@ -2,4 +2,5 @@
 2: Ball
 3: Bricks
 4: Walls
+5: BrickGroups
 9: Paddle Blockers

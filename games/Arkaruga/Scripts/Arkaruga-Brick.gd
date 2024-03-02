@@ -8,8 +8,6 @@ export var fallAtZeroHealth = false
 export var points = 1
 export var flashColor = Color.white
 export var flashDuration = .033
-export var baseMoveSpeed = 0.5
-export var maxMoveSpeedModifier = 5.0
 export var gutterFallMaxDelay = 1
 export var fallJumpSpeed = 200.0
 export var maxFallSpeed = 200.0
@@ -31,17 +29,17 @@ var _isFlashing = false
 var _isDestroyed = false
 var _isFalling = false
 var _fallSpeed = 0.0
+var _isReparenting = false
 
 func _ready():
 	_flashSprite.visible = false
-	# PROBABLY NEEDS TO GRAB THE CURRENT COLOR FROM THE MANAGER
+	if _manager:
+		onActiveColorChanged(_manager.activeColor)
 	pass
 	
 func _process(delta):
 	if _isFalling:
 		_updateFalling(delta)
-	else:
-		_updateMovement(delta)
 		
 	if _isDestroyed and !_isFlashing:
 		queue_free()
@@ -118,6 +116,14 @@ func _startFalling():
 	# Disable standard collision
 	_setCollidable(false)
 	
+	# remove ourselves from our group and add ourselves directly to the brick container
+	_isReparenting = true
+	var globalPosition = global_position
+	get_parent().remove_child(self)
+	_manager.brickContainer.add_child(self)
+	_isReparenting = false
+	global_position = globalPosition
+	
 	# Enable our damage area
 	_fallingArea.monitoring = true
 	
@@ -129,17 +135,6 @@ func _updateFalling(delta: float):
 	var offset = Vector2.DOWN * _fallSpeed * delta
 	position = position + offset
 	
-func _updateMovement(delta: float):
-	var movementSpeed = baseMoveSpeed
-	if _manager != null:
-		if !_manager.getAnyBallsActive():
-			# don't move while there are no balls
-			return
-		
-		movementSpeed *= lerp(1.0, maxMoveSpeedModifier, _manager.getSpeedModifierRatio())
-		
-	position.y += movementSpeed * delta * 5
-
 func _on_FallingArea_body_entered(body):
 	if !_isActive:
 		return
@@ -149,7 +144,9 @@ func _on_FallingArea_body_entered(body):
 
 
 func _on_VisibilityNotifier2D_viewport_exited(viewport):
-	queue_free()
+	if !_isReparenting:
+		print("Free!")
+		queue_free()
 
 
 func _on_GutterDetectionArea_area_entered(area):
