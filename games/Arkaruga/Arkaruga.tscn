@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://games/Arkaruga/Objects/Arkaruga-Ball.tscn" type="PackedScene" id=1]
 [ext_resource path="res://games/Arkaruga/Objects/Arkaruga-Paddle.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://games/Arkaruga/Sprites/Wall/wall-horizontal.png" type="Texture" id=4]
 [ext_resource path="res://games/Arkaruga/Scripts/Arkaruga-ObjectLayer.gd" type="Script" id=5]
 [ext_resource path="res://games/Arkaruga/Sprites/Wall/wall-vertical.png" type="Texture" id=6]
+[ext_resource path="res://mainmenu/theme/theme_eggplant.tres" type="Theme" id=7]
 [ext_resource path="res://games/Arkaruga/Sprites/Wall/wall-corner-right.png" type="Texture" id=8]
 [ext_resource path="res://games/Arkaruga/ArkarugaManager.gd" type="Script" id=9]
 [ext_resource path="res://games/Arkaruga/Sprites/Paddle/paddle-alarm-light.png" type="Texture" id=10]
@@ -13,6 +14,9 @@
 [ext_resource path="res://games/Arkaruga/Sprites/Paddle/paddle-bumper-dark.png" type="Texture" id=12]
 [ext_resource path="res://games/Arkaruga/Sprites/Paddle/paddle-alarm-dark.png" type="Texture" id=13]
 [ext_resource path="res://games/Arkaruga/ArkarugaBackground.gd" type="Script" id=14]
+[ext_resource path="res://mainmenu/art/font/kenpixel/blocks.ttf" type="DynamicFontData" id=15]
+[ext_resource path="res://mainmenu/art/font/kenpixel/mini.ttf" type="DynamicFontData" id=16]
+[ext_resource path="res://games/Arkaruga/Objects/UI/Arkaruga-BallUITexture.tscn" type="PackedScene" id=17]
 [ext_resource path="res://games/Arkaruga/Sprites/Decoration/gutter-spike.png" type="Texture" id=19]
 [ext_resource path="res://games/Arkaruga/Scripts/Arkaruga-GutterSpikes.gd" type="Script" id=20]
 
@@ -125,6 +129,21 @@ extents = Vector2( 21, 191 )
 
 [sub_resource type="ViewportTexture" id=3]
 viewport_path = NodePath("ViewportContainer/Viewport")
+
+[sub_resource type="DynamicFont" id=12]
+size = 32
+font_data = ExtResource( 16 )
+
+[sub_resource type="DynamicFont" id=13]
+size = 40
+font_data = ExtResource( 15 )
+
+[sub_resource type="DynamicFontData" id=1]
+font_path = "res://mainmenu/art/font/kenpixel/mini.ttf"
+
+[sub_resource type="DynamicFont" id=14]
+size = 48
+font_data = SubResource( 1 )
 
 [node name="Window" type="Control"]
 margin_right = 640.0
@@ -314,3 +333,171 @@ color = Color( 0.0901961, 0.0666667, 0.101961, 1 )
 anchor_right = 1.0
 margin_bottom = 16.0
 color = Color( 0.0901961, 0.0666667, 0.101961, 1 )
+
+[node name="UILayer" type="CanvasLayer" parent="."]
+layer = 5
+
+[node name="Sidebar" type="Control" parent="UILayer"]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -128.0
+
+[node name="Margins" type="Control" parent="UILayer/Sidebar"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 16.0
+margin_top = 16.0
+margin_right = -6.0
+margin_bottom = -16.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UILayer/Sidebar/Margins"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="ScoreLabel" type="Label" parent="UILayer/Sidebar/Margins/VBoxContainer"]
+margin_right = 106.0
+margin_bottom = 40.0
+theme = ExtResource( 7 )
+custom_fonts/font = SubResource( 12 )
+text = "SCORE"
+align = 1
+valign = 1
+
+[node name="ScoreValueControl" type="Control" parent="UILayer/Sidebar/Margins/VBoxContainer"]
+margin_top = 44.0
+margin_right = 106.0
+margin_bottom = 108.0
+rect_min_size = Vector2( 0, 64 )
+
+[node name="Label" type="Label" parent="UILayer/Sidebar/Margins/VBoxContainer/ScoreValueControl"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 7 )
+custom_fonts/font = SubResource( 13 )
+text = "222"
+align = 1
+valign = 1
+clip_text = true
+
+[node name="Spacer2" type="Control" parent="UILayer/Sidebar/Margins/VBoxContainer"]
+margin_top = 112.0
+margin_right = 106.0
+margin_bottom = 120.0
+size_flags_vertical = 3
+
+[node name="ComboLabel" type="Label" parent="UILayer/Sidebar/Margins/VBoxContainer"]
+margin_top = 124.0
+margin_right = 106.0
+margin_bottom = 164.0
+theme = ExtResource( 7 )
+custom_fonts/font = SubResource( 12 )
+text = "COMBO"
+align = 1
+valign = 1
+
+[node name="ComboValueControl" type="Control" parent="UILayer/Sidebar/Margins/VBoxContainer"]
+margin_top = 168.0
+margin_right = 106.0
+margin_bottom = 232.0
+rect_min_size = Vector2( 0, 64 )
+
+[node name="Label" type="Label" parent="UILayer/Sidebar/Margins/VBoxContainer/ComboValueControl"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 7 )
+custom_fonts/font = SubResource( 13 )
+text = "222"
+align = 1
+valign = 1
+clip_text = true
+
+[node name="Spacer" type="Control" parent="UILayer/Sidebar/Margins/VBoxContainer"]
+margin_top = 236.0
+margin_right = 106.0
+margin_bottom = 244.0
+size_flags_vertical = 3
+
+[node name="Balls" type="Label" parent="UILayer/Sidebar/Margins/VBoxContainer"]
+margin_top = 248.0
+margin_right = 106.0
+margin_bottom = 288.0
+theme = ExtResource( 7 )
+custom_fonts/font = SubResource( 12 )
+text = "BALLS"
+align = 1
+valign = 1
+
+[node name="BallsContainer" type="HFlowContainer" parent="UILayer/Sidebar/Margins/VBoxContainer"]
+margin_top = 292.0
+margin_right = 106.0
+margin_bottom = 328.0
+rect_min_size = Vector2( 0, 36 )
+
+[node name="BallTexture" parent="UILayer/Sidebar/Margins/VBoxContainer/BallsContainer" instance=ExtResource( 17 )]
+
+[node name="BallTexture2" parent="UILayer/Sidebar/Margins/VBoxContainer/BallsContainer" instance=ExtResource( 17 )]
+margin_left = 20.0
+margin_right = 36.0
+
+[node name="BallTexture3" parent="UILayer/Sidebar/Margins/VBoxContainer/BallsContainer" instance=ExtResource( 17 )]
+margin_left = 40.0
+margin_right = 56.0
+
+[node name="BallTexture4" parent="UILayer/Sidebar/Margins/VBoxContainer/BallsContainer" instance=ExtResource( 17 )]
+margin_left = 60.0
+margin_right = 76.0
+
+[node name="BallTexture5" parent="UILayer/Sidebar/Margins/VBoxContainer/BallsContainer" instance=ExtResource( 17 )]
+margin_left = 80.0
+margin_right = 96.0
+
+[node name="BallTexture6" parent="UILayer/Sidebar/Margins/VBoxContainer/BallsContainer" instance=ExtResource( 17 )]
+margin_top = 20.0
+margin_bottom = 36.0
+
+[node name="BallTexture7" parent="UILayer/Sidebar/Margins/VBoxContainer/BallsContainer" instance=ExtResource( 17 )]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 36.0
+margin_bottom = 36.0
+
+[node name="BallTexture8" parent="UILayer/Sidebar/Margins/VBoxContainer/BallsContainer" instance=ExtResource( 17 )]
+margin_left = 40.0
+margin_top = 20.0
+margin_right = 56.0
+margin_bottom = 36.0
+
+[node name="BallTexture9" parent="UILayer/Sidebar/Margins/VBoxContainer/BallsContainer" instance=ExtResource( 17 )]
+margin_left = 60.0
+margin_top = 20.0
+margin_right = 76.0
+margin_bottom = 36.0
+
+[node name="BallTexture10" parent="UILayer/Sidebar/Margins/VBoxContainer/BallsContainer" instance=ExtResource( 17 )]
+margin_left = 80.0
+margin_top = 20.0
+margin_right = 96.0
+margin_bottom = 36.0
+
+[node name="Game" type="Control" parent="UILayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 16.0
+margin_top = 16.0
+margin_right = -128.0
+
+[node name="ToastLabel" type="Label" parent="UILayer/Game"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_top = -48.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_pivot_offset = Vector2( 400, 14 )
+theme = ExtResource( 7 )
+custom_fonts/font = SubResource( 14 )
+text = "BALL GET!"
+align = 1
+valign = 1
