@@ -3,7 +3,6 @@ extends Node2D
 const Types = preload("res://games/Arkaruga/Scripts/Arkaruga-Types.gd")
 
 export (PackedScene) var ballScene
-export var lostBallResetDelay = 1
 export var startLives = 3
 export var secondsToMaxSpeed = 600
 export var secondsLostOnDeath = 60
@@ -11,6 +10,9 @@ export var secondsLostOnDeath = 60
 onready var paddle = get_node("%Paddle")
 onready var ballContainer = get_node("%BallContainer")
 onready var brickContainer = get_node("%BrickContainer")
+
+onready var _startGameTimer : Timer = $StartGameTimer
+onready var _lostBallTimer : Timer = $LostBallTimer
 
 var activeColor = Types.ElementColor.BLUE
 
@@ -23,7 +25,8 @@ func _ready():
 	setActiveColor(Types.ElementColor.GREEN)
 	
 	# TODO: Support actual starting / restarting
-	yield(get_tree().create_timer(.1), "timeout")
+	_startGameTimer.start()
+	yield(_startGameTimer, "timeout")
 	
 	startGame()
 	
@@ -37,14 +40,18 @@ func _process(delta):
 		_gameDurationForSpeed += delta
 		
 		
-func onBallLost(ball):
+func onBallLost(_ball):
 	# there are no balls left -- respawn!
 	if !getAnyBallsActive():
 		loseLife()
 	
 		if _livesRemaining > 0:
-			yield(get_tree().create_timer(lostBallResetDelay), "timeout")
+			_lostBallTimer.start()
+			yield(_lostBallTimer, "timeout")
 			_respawnBall()
+			
+func onBrickSpawnAreaClear():
+	print("CLEAR!")
 		
 func getAnyBallsActive():
 	var balls = get_tree().get_nodes_in_group("Balls")

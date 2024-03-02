@@ -3,6 +3,7 @@ extends KinematicBody2D
 const Types = preload("res://games/Arkaruga/Scripts/Arkaruga-Types.gd")
 const Paddle = preload("res://games/Arkaruga/Scripts/Arkaruga-Paddle.gd")
 
+export var countdownDuration : float = .75
 export var baseSpeed : float = 200
 export var minSpeed : float = 150
 export var maxSpeed : float = 300
@@ -17,6 +18,7 @@ export var textureGreen : Texture
 onready var _manager : Node2D = get_tree().get_nodes_in_group("Manager")[0]
 onready var _sprite : Sprite = $Sprite
 onready var _trail = $Trail
+onready var _countdownTimer : Timer = $CountdownTimer
 
 var _velocity : Vector2
 var _attachedPaddle : KinematicBody2D
@@ -49,7 +51,7 @@ func processCollision(collision):
 	_velocity = _velocity.bounce(collision.normal)
 	
 	var direction = _velocity.normalized()
-	move_and_collide(direction * collision.remainder)
+	var _remainderCollision = move_and_collide(direction * collision.remainder)
 	
 	# modify the velocity based on colliding with the paddle
 	var paddle := collision.collider as Paddle
@@ -84,13 +86,22 @@ func attachToPaddle(paddle: KinematicBody2D):
 
 func startLaunchTimer():
 	# TODO: show countdown in UI
-	yield(get_tree().create_timer(1), "timeout")
+	_countdownTimer.start(countdownDuration)
+	yield(_countdownTimer, "timeout")
 	print("3")
-	yield(get_tree().create_timer(1), "timeout")
+	
+	_countdownTimer.start(countdownDuration)
+	yield(_countdownTimer, "timeout")
+	
 	print("2")
-	yield(get_tree().create_timer(1), "timeout")
+	
+	_countdownTimer.start(countdownDuration)
+	yield(_countdownTimer, "timeout")
+	
 	print("1")
-	yield(get_tree().create_timer(1), "timeout")
+	
+	_countdownTimer.start(countdownDuration)
+	yield(_countdownTimer, "timeout")
 	
 	# detach from paddle
 	var globalPosition = global_position
@@ -123,7 +134,7 @@ func _setColor(color: int):
 	pass
 
 
-func _on_VisibilityNotifier2D_viewport_exited(viewport):
+func _on_VisibilityNotifier2D_viewport_exited(_viewport):
 	if _attachedPaddle == null && !is_queued_for_deletion():
 		queue_free()
 		_manager.onBallLost(self)

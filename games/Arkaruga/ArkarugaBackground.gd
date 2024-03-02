@@ -9,7 +9,7 @@ export var _blueBgColor : Color
 export var _greenBgColor : Color
 
 var _targetColor : Color
-var _flashRoutine : GDScriptFunctionState
+var _flashRoutine
 
 func _process(delta):
 	if _flashRoutine != null and _flashRoutine.is_valid():
