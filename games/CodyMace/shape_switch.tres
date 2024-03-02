@@ -6,5 +6,9 @@
 [resource]
 script = ExtResource( 1 )
 initial_scene = ExtResource( 2 )
-game_name = "Shape Switch"
+game_name = "Shapies"
 game_author = "Cody Mace"
+input_primary_action = "Transform"
+input_secondary_action = "Jump"
+input_pause = "Pause"
+input_directions = "Movement"

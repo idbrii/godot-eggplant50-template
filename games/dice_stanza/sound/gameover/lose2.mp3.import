@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/lose2.mp3-a30ffc033069a26fa7f2069f6cff384b.mp3str"
+
+[deps]
+
+source_file="res://games/dice_stanza/sound/gameover/lose2.mp3"
+dest_files=[ "res://.import/lose2.mp3-a30ffc033069a26fa7f2069f6cff384b.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

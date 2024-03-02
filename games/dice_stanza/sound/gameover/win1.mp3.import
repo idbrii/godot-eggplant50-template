@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/win1.mp3-97010c62ac6462b57e926c95cda256f4.mp3str"
+
+[deps]
+
+source_file="res://games/dice_stanza/sound/gameover/win1.mp3"
+dest_files=[ "res://.import/win1.mp3-97010c62ac6462b57e926c95cda256f4.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0
