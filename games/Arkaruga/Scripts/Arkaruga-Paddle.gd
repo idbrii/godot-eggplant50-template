@@ -23,6 +23,8 @@ onready var _alertGroup : Control = $Body/Alert
 onready var _alertTimer : Timer = $Body/Alert/Timer
 onready var _alertFrame1 : Control = $Body/Alert/Frame1
 onready var _alertFrame2 : Control = $Body/Alert/Frame2
+onready var _freezeTimer : Timer = $FreezeTimer
+onready var _flashTimer : Timer = $FlashTimer
 
 var _speed : float = 0
 var _isFrozen = false
@@ -123,7 +125,8 @@ func _freeze(duration: float):
 	_alertTimer.start()
 	_speed = 0
 	
-	yield(get_tree().create_timer(duration), "timeout")
+	_freezeTimer.start(duration)
+	yield(_freezeTimer, "timeout")
 	
 	_alertGroup.visible = false
 	_alertTimer.stop()
@@ -135,7 +138,9 @@ func _flashHitBumper(duration: float):
 	
 	_isFlashingHitBumper = true
 	_hitBumper.visible = true
-	yield(get_tree().create_timer(duration), "timeout")
+	
+	_flashTimer.start(duration)
+	yield(_flashTimer, "timeout")
 	
 	_hitBumper.visible = false
 	_isFlashingHitBumper = false

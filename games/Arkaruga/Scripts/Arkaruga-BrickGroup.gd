@@ -10,7 +10,7 @@ onready var _visibilityNotifier : VisibilityNotifier2D = $VisibilityNotifier2D
 var _isVisible = false	
 
 func _ready():
-	# move our visibility notifier up to the top of o
+	# move our visibility notifier up to the top of the area so we don't destroy things too early
 	_visibilityNotifier.position.y = _collisionShape.position.y * 2
 	
 
@@ -28,13 +28,17 @@ func _updateMovement(delta: float):
 		
 	position.y += movementSpeed * delta * 5
 
-func _on_VisibilityNotifier2D_viewport_exited(viewport):
-	print ("No vis!")
+func _on_VisibilityNotifier2D_viewport_exited(_viewport):
 	if _isVisible:
 		_isVisible = false
 		queue_free()
 
 
-func _on_VisibilityNotifier2D_viewport_entered(viewport):
+func _on_VisibilityNotifier2D_viewport_entered(_viewport):
 	_isVisible = true
-	print("Vis!")
+
+
+func _on_BrickGroup_area_exited(area):
+	if (area.is_in_group("BrickSpawnArea") && _manager != null):
+		_manager.onBrickSpawnAreaClear()
+		

@@ -54,6 +54,10 @@ shape = SubResource( 3 )
 position = Vector2( -5.72205e-06, 1.43051e-06 )
 scale = Vector2( 3.2, 1.6 )
 
+[node name="FlashTimer" type="Timer" parent="."]
+
+[node name="GutterTimer" type="Timer" parent="."]
+
 [connection signal="body_entered" from="FallingDamageArea" to="." method="_on_FallingArea_body_entered"]
 [connection signal="area_entered" from="GutterDetectionArea" to="." method="_on_GutterDetectionArea_area_entered"]
 [connection signal="viewport_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_viewport_exited"]

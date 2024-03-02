@@ -21,6 +21,8 @@ onready var _inactiveSprite : Sprite = $InactiveSprite
 onready var _flashSprite : Sprite = $FlashSprite
 onready var _collision : CollisionShape2D = $Collision
 onready var _fallingArea : Area2D = $FallingDamageArea
+onready var _flashTimer : Timer = $FlashTimer
+onready var _gutterTimer : Timer = $GutterTimer
 
 onready var _health = maxHealth
 
@@ -44,17 +46,18 @@ func _process(delta):
 	if _isDestroyed and !_isFlashing:
 		queue_free()
 	
-func onActiveColorChanged(color: int):
+func onActiveColorChanged(_color: int):
 	if _canChangeColor():
-		_setActive(color == self.color)
+		_setActive(_color == self.color)
 		
-func onBallHit(ball):
+func onBallHit(_ball):
 	if _health > 0:
 		_takeDamage(1)
 
 func onGutterEntered():
 	var delay = randf() * gutterFallMaxDelay
-	yield(get_tree().create_timer(delay), "timeout")
+	_gutterTimer.start(delay)
+	yield(_gutterTimer, "timeout")
 	_startFalling()
 
 func _setActive(active: bool):
@@ -88,7 +91,9 @@ func _playFlash(duration: float):
 	_isFlashing = true
 	_flashSprite.self_modulate = flashColor
 	_flashSprite.visible = true
-	yield(get_tree().create_timer(duration), "timeout")
+	
+	_flashTimer.start(duration)
+	yield(_flashTimer, "timeout")
 	
 	_flashSprite.visible = false
 	_isFlashing = false
@@ -143,9 +148,8 @@ func _on_FallingArea_body_entered(body):
 		body.onFallingBrickHit(self)
 
 
-func _on_VisibilityNotifier2D_viewport_exited(viewport):
+func _on_VisibilityNotifier2D_viewport_exited(_viewport):
 	if !_isReparenting:
-		print("Free!")
 		queue_free()
 
 
