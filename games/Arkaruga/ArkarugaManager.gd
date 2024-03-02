@@ -7,11 +7,14 @@ export var lostBallResetDelay = 1
 export var startLives = 3
 export var secondsToMaxSpeed = 600
 export var secondsLostOnDeath = 60
+
 onready var paddle = get_node("%Paddle")
 onready var ballContainer = get_node("%BallContainer")
+onready var brickContainer = get_node("%BrickContainer")
+
+var activeColor = Types.ElementColor.BLUE
 
 var _isGameRunning = false
-var _activeColor = Types.ElementColor.BLUE
 var _livesRemaining : int
 var _totalGameDuration : float
 var _gameDurationForSpeed : float
@@ -32,8 +35,6 @@ func _process(delta):
 	if _isGameRunning && getAnyBallsActive():
 		_totalGameDuration += delta
 		_gameDurationForSpeed += delta
-		
-	print(str(_gameDurationForSpeed))
 		
 		
 func onBallLost(ball):
@@ -69,14 +70,14 @@ func loseLife():
 		_gameDurationForSpeed = max(0.0, _gameDurationForSpeed - secondsLostOnDeath)
 
 func swapActiveColor():
-	match _activeColor:
+	match activeColor:
 		Types.ElementColor.BLUE:
 			setActiveColor(Types.ElementColor.GREEN)
 		Types.ElementColor.GREEN:
 			setActiveColor(Types.ElementColor.BLUE)
 
 func setActiveColor(color: int):
-	_activeColor = color
+	activeColor = color
 	get_tree().call_group("Colorized", "onActiveColorChanged", color)
 	
 func getSpeedModifierRatio():
