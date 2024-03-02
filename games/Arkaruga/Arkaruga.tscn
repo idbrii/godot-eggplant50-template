@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://games/Arkaruga/Objects/Arkaruga-Ball.tscn" type="PackedScene" id=1]
 [ext_resource path="res://games/Arkaruga/Objects/Arkaruga-Paddle.tscn" type="PackedScene" id=2]
@@ -21,6 +21,7 @@
 [ext_resource path="res://games/Arkaruga/Sprites/Decoration/gutter-spike.png" type="Texture" id=19]
 [ext_resource path="res://games/Arkaruga/Scripts/Arkaruga-GutterSpikes.gd" type="Script" id=20]
 [ext_resource path="res://games/Arkaruga/Scripts/Arkaruga-UIManager.gd" type="Script" id=21]
+[ext_resource path="res://shared/menu_pause/PauseMenu.tscn" type="PackedScene" id=22]
 
 [sub_resource type="RectangleShape2D" id=10]
 extents = Vector2( 260, 33 )
@@ -522,3 +523,11 @@ custom_fonts/font = SubResource( 14 )
 text = "BALL GET!"
 align = 1
 valign = 1
+
+[node name="PauseMenu" parent="UILayer" instance=ExtResource( 22 )]
+margin_left = 19.0
+margin_top = 36.0
+margin_right = 186.0
+margin_bottom = 258.0
+help_title = "Arkaruga"
+help_body = "Bounce the ball to break the blocks! Swap dimensions, avoid falling blocks, and rack up big combos for bonus balls!"
