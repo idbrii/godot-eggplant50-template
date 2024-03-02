@@ -146,4 +146,4 @@ func _on_VisibilityNotifier2D_viewport_exited(viewport):
 
 func _on_GutterDetectionArea_area_entered(area):
 	if area.is_in_group("Gutter"):
-		_startFalling()
+		onGutterEntered()

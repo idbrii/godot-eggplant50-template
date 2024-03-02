@@ -28,6 +28,7 @@ texture = ExtResource( 1 )
 shape = SubResource( 1 )
 
 [node name="Trail" parent="." instance=ExtResource( 3 )]
+emitting = false
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
 

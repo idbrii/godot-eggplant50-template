@@ -14,6 +14,7 @@ export var alarmTextureGreen : Texture
 export var damageFreezeDuration = 1
 export var hitBumperFlashDuration = .2
 
+onready var ballAnchor : Node2D = $BallAnchor
 onready var _collisionShape : CollisionShape2D = $Collision
 onready var _bumper : NinePatchRect = $Body/Bumper
 onready var _hitBumper : NinePatchRect = $Body/Bumper/HitBumper
