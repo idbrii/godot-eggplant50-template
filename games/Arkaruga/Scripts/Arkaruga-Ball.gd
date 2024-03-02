@@ -23,6 +23,10 @@ onready var _countdownTimer : Timer = $CountdownTimer
 var _velocity : Vector2
 var _attachedPaddle : KinematicBody2D
 var _color
+
+func _ready():
+	if _manager:
+		onActiveColorChanged(_manager.activeColor)
 	
 func _process(delta):
 	if _attachedPaddle == null:
