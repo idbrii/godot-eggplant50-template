@@ -80,7 +80,9 @@ func _takeDamage(damage: int):
 				_onDestroyed()
 			
 func _onDestroyed():
-	# TODO: Give points
+	if _manager:
+		_manager.addScore(points)
+	
 	_setCollidable(false)
 	_isDestroyed = true
 	
