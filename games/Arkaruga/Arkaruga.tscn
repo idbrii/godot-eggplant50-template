@@ -203,6 +203,18 @@ position = Vector2( 24, 0 )
 [node name="Brick-Diamond-Blue" parent="ObjectLayer/BrickContainer" instance=ExtResource( 18 )]
 position = Vector2( 192, 108 )
 
+[node name="Brick-Diamond-Blue2" parent="ObjectLayer/BrickContainer" instance=ExtResource( 18 )]
+position = Vector2( 272, 108 )
+
+[node name="Brick-Diamond-Blue3" parent="ObjectLayer/BrickContainer" instance=ExtResource( 18 )]
+position = Vector2( 336, 108 )
+
+[node name="Brick-Diamond-Blue4" parent="ObjectLayer/BrickContainer" instance=ExtResource( 18 )]
+position = Vector2( 384, 108 )
+
+[node name="Brick-Diamond-Blue5" parent="ObjectLayer/BrickContainer" instance=ExtResource( 18 )]
+position = Vector2( 416, 108 )
+
 [node name="Areas" type="Node2D" parent="ObjectLayer"]
 
 [node name="GutterArea" type="Area2D" parent="ObjectLayer/Areas" groups=["Gutter"]]

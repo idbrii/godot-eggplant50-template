@@ -3,9 +3,12 @@ extends Node2D
 const Types = preload("res://games/Arkaruga/Scripts/Arkaruga-Types.gd")
 
 export (PackedScene) var ballScene
-export var startLives = 3
+export (int) var startLives = 5
 export var secondsToMaxSpeed = 600
 export var secondsLostOnDeath = 60
+export (int) var bonusLifePoints = 100
+export (int) var multiballCombo = 10
+export (float) var multiballAngleOffset = 45
 
 onready var uiManager = get_node("%UILayer")
 onready var paddle = get_node("%Paddle")
@@ -53,6 +56,9 @@ func _processUI(_delta):
 	uiManager.setLives(_livesRemaining)
 		
 func onBallLost(_ball):
+	# reset our combo whenever a ball goes offscreen
+	_combo = 0 
+	
 	# there are no balls left -- respawn!
 	if !getAnyBallsActive():
 		loseLife()
@@ -86,18 +92,37 @@ func endGame():
 	_isGameRunning = false
 	
 func addScore(points : int):
+	var prevLiveIncrement = _score / bonusLifePoints
 	_score += points
 	
-func addCombo(value : int = 1):
+	if _score / bonusLifePoints > prevLiveIncrement:
+		# TODO: Play sound
+		gainLife()
+		if uiManager:
+			uiManager.playToast("BALL GET!")
+		
+	
+func addCombo(ball, value : int = 1):
+	var comboForNextMultiball = getComboForNextMultiball()
 	_combo += value
+	
+	if _combo >= comboForNextMultiball:
+		# TODO: Play sound
+		_spawnMultiball(ball)
+		if uiManager:
+			uiManager.playToast("MULTI BALL!")
 
 func resetCombo():
 	_combo = 0
 	
-func loseLife():
+func loseLife(): 
 	if _livesRemaining > 0:
 		_livesRemaining -= 1
+		# slow the game down after losing a life
 		_gameDurationForSpeed = max(0.0, _gameDurationForSpeed - secondsLostOnDeath)
+	
+func gainLife():
+	_livesRemaining += 1
 
 func swapActiveColor():
 	match activeColor:
@@ -110,11 +135,26 @@ func setActiveColor(color: int):
 	activeColor = color
 	get_tree().call_group("Colorized", "onActiveColorChanged", color)
 	
-func getSpeedModifierRatio():
+func getSpeedModifierRatio() -> float:
 	return inverse_lerp(0.0, secondsToMaxSpeed, _gameDurationForSpeed)
-	
+
+func getComboForNextMultiball() -> int:
+	var ballCount = get_tree().get_nodes_in_group("Balls").size()
+	var minCombo = multiballCombo * max(1, ballCount)
+	return minCombo
+
 func _respawnBall():
 	var ballInstance = ballScene.instance()
 	ballInstance.attachToPaddle(paddle)
 	ballInstance.startLaunchTimer()
-	return
+	
+func _spawnMultiball(ball):
+	var newBall = ballScene.instance()
+	ballContainer.add_child(newBall)
+	newBall.global_position = ball.global_position
+	var velocity = -ball.velocity
+	var angleOffset = multiballAngleOffset
+	if randf() > .5:
+		angleOffset *= -1
+	velocity = velocity.rotated(deg2rad(angleOffset))
+	newBall.velocity = velocity

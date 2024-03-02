@@ -11,7 +11,7 @@ radius = 6.0
 [node name="Ball" type="KinematicBody2D" groups=["Balls", "Colorized"]]
 position = Vector2( 300, 101 )
 collision_layer = 2
-collision_mask = 15
+collision_mask = 13
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true
@@ -28,7 +28,6 @@ texture = ExtResource( 1 )
 shape = SubResource( 1 )
 
 [node name="Trail" parent="." instance=ExtResource( 3 )]
-emitting = false
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
 
