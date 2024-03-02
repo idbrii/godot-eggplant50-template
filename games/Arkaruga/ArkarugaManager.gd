@@ -5,12 +5,16 @@ const Types = preload("res://games/Arkaruga/Scripts/Arkaruga-Types.gd")
 export (PackedScene) var ballScene
 export var lostBallResetDelay = 1
 export var startLives = 3
+export var secondsToMaxSpeed = 600
+export var secondsLostOnDeath = 60
+onready var paddle = get_node("%Paddle")
+onready var ballContainer = get_node("%BallContainer")
 
-onready var _ballContainer = get_node("%Balls")
-onready var _paddle = get_node("%Paddle")
-
+var _isGameRunning = false
 var _activeColor = Types.ElementColor.BLUE
 var _livesRemaining : int
+var _totalGameDuration : float
+var _gameDurationForSpeed : float
 
 func _ready():
 	setActiveColor(Types.ElementColor.GREEN)
@@ -24,21 +28,45 @@ func _input(event):
 	if event.is_action_pressed("action1"):
 		swapActiveColor()
 		
+func _process(delta):
+	if _isGameRunning && getAnyBallsActive():
+		_totalGameDuration += delta
+		_gameDurationForSpeed += delta
+		
+	print(str(_gameDurationForSpeed))
+		
 		
 func onBallLost(ball):
-	loseLife()
+	# there are no balls left -- respawn!
+	if !getAnyBallsActive():
+		loseLife()
 	
-	if _livesRemaining > 0:
-		yield(get_tree().create_timer(lostBallResetDelay), "timeout")
-		_respawnBall()
+		if _livesRemaining > 0:
+			yield(get_tree().create_timer(lostBallResetDelay), "timeout")
+			_respawnBall()
+		
+func getAnyBallsActive():
+	var balls = get_tree().get_nodes_in_group("Balls")
+	for ball in balls:
+		if ball.getIsActive():
+			return true
+			
+	return false
 	
 func startGame():
+	_isGameRunning = true
 	_livesRemaining = startLives
+	_totalGameDuration = 0
+	_gameDurationForSpeed = 0
 	_respawnBall()
+	
+func endGame():
+	_isGameRunning = false
 	
 func loseLife():
 	if _livesRemaining > 0:
 		_livesRemaining -= 1
+		_gameDurationForSpeed = max(0.0, _gameDurationForSpeed - secondsLostOnDeath)
 
 func swapActiveColor():
 	match _activeColor:
@@ -51,9 +79,11 @@ func setActiveColor(color: int):
 	_activeColor = color
 	get_tree().call_group("Colorized", "onActiveColorChanged", color)
 	
+func getSpeedModifierRatio():
+	return inverse_lerp(0.0, secondsToMaxSpeed, _gameDurationForSpeed)
+	
 func _respawnBall():
 	var ballInstance = ballScene.instance()
-	ballInstance.initialize(self, _ballContainer)
-	ballInstance.attachToPaddle(_paddle)
+	ballInstance.attachToPaddle(paddle)
 	ballInstance.startLaunchTimer()
 	return

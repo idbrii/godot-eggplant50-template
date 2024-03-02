@@ -166,7 +166,7 @@ bumperTextureGreen = ExtResource( 12 )
 alarmTextureBlue = ExtResource( 10 )
 alarmTextureGreen = ExtResource( 13 )
 
-[node name="Balls" type="Node2D" parent="ObjectLayer"]
+[node name="BallContainer" type="Node2D" parent="ObjectLayer"]
 unique_name_in_owner = true
 
 [node name="Walls" type="Node2D" parent="ObjectLayer"]
