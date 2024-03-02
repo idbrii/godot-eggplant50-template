@@ -9,6 +9,7 @@ export var points = 1
 export var flashColor = Color.white
 export var flashDuration = .033
 export var baseMoveSpeed = 0.5
+export var maxMoveSpeedModifier = 5.0
 export var gutterFallMaxDelay = 1
 export var fallJumpSpeed = 200.0
 export var maxFallSpeed = 200.0
@@ -16,6 +17,7 @@ export var fallMinAngleOffset = 10.0
 export var fallMaxAngleOffset = 40.0
 export var fallAcceleration = 600
 
+onready var _manager : Node2D = get_tree().get_nodes_in_group("Manager")[0]
 onready var _activeSprite : Sprite = $ActiveSprite
 onready var _inactiveSprite : Sprite = $InactiveSprite
 onready var _flashSprite : Sprite = $FlashSprite
@@ -41,7 +43,6 @@ func _process(delta):
 	else:
 		_updateMovement(delta)
 		
-	
 	if _isDestroyed and !_isFlashing:
 		queue_free()
 	
@@ -130,6 +131,13 @@ func _updateFalling(delta: float):
 	
 func _updateMovement(delta: float):
 	var movementSpeed = baseMoveSpeed
+	if _manager != null:
+		if !_manager.getAnyBallsActive():
+			# don't move while there are no balls
+			return
+		
+		movementSpeed *= lerp(1.0, maxMoveSpeedModifier, _manager.getSpeedModifierRatio())
+		
 	position.y += movementSpeed * delta * 5
 
 func _on_FallingArea_body_entered(body):

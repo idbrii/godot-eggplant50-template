@@ -6,6 +6,7 @@ const Paddle = preload("res://games/Arkaruga/Scripts/Arkaruga-Paddle.gd")
 export var baseSpeed : float = 200
 export var minSpeed : float = 150
 export var maxSpeed : float = 300
+export var maxSpeedModifier : float = 2.5
 export var gravity : float = 10
 export var paddleSpeedRatio : float = .5
 export var paddlePositionRatio : float = .5
@@ -13,11 +14,9 @@ export var minPaddleComponentBounceVerticalComponent : float = .25
 export var textureBlue : Texture
 export var textureGreen : Texture
 
+onready var _manager : Node2D = get_tree().get_nodes_in_group("Manager")[0]
 onready var _sprite : Sprite = $Sprite
 onready var _trail = $Trail
-
-var _manager
-var _ballContainer
 
 var _velocity : Vector2
 var _attachedPaddle : KinematicBody2D
@@ -26,6 +25,10 @@ var _color
 func _process(delta):
 	if _attachedPaddle == null:
 		var offset = _velocity * delta
+		if _manager != null:
+			var speedModifier = lerp(1.0, maxSpeedModifier, _manager.getSpeedModifierRatio())
+			offset *= speedModifier
+		
 		var collision := move_and_collide(offset)
 		if collision != null:
 			if collision.travel.length_squared() > 0:
@@ -34,13 +37,12 @@ func _process(delta):
 				position += offset
 				
 		_velocity.y += gravity * delta
-		
-func initialize(manager, ballContainer):
-	_manager = manager
-	_ballContainer = ballContainer
-			
+				
 func onActiveColorChanged(color: int):
 	_setColor(color)
+	
+func getIsActive():
+	return _attachedPaddle == null && !is_queued_for_deletion()
 
 func processCollision(collision):
 	# perform default bouncing
@@ -74,9 +76,6 @@ func processCollision(collision):
 	if collision.collider.has_method("onBallHit"):
 		collision.collider.onBallHit(self)
 
-func setVelocity(velocity: Vector2):
-	_velocity = velocity
-
 func attachToPaddle(paddle: KinematicBody2D):
 	# attach ourselves to the paddle's anchor
 	_attachedPaddle = paddle
@@ -99,7 +98,7 @@ func startLaunchTimer():
 		get_parent().remove_child(self)
 
 	# add to ball container, preserving our position
-	_ballContainer.add_child(self)
+	_manager.ballContainer.add_child(self)
 	global_position = globalPosition
 	
 	# set our velocity
@@ -126,5 +125,6 @@ func _setColor(color: int):
 
 func _on_VisibilityNotifier2D_viewport_exited(viewport):
 	if _attachedPaddle == null && !is_queued_for_deletion():
-		_manager.onBallLost(self)
 		queue_free()
+		_manager.onBallLost(self)
+
