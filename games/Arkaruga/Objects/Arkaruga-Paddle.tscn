@@ -23,6 +23,9 @@ reverseAcceleration = 900.0
 bumperTextureBlue = ExtResource( 3 )
 bumperTextureGreen = ExtResource( 5 )
 
+[node name="BallAnchor" type="Node2D" parent="."]
+position = Vector2( 50, -8 )
+
 [node name="Collision" type="CollisionShape2D" parent="."]
 position = Vector2( 50, 5 )
 shape = SubResource( 2 )
