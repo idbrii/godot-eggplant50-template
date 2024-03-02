@@ -15,12 +15,13 @@ export var minPaddleComponentBounceVerticalComponent : float = .25
 export var textureBlue : Texture
 export var textureGreen : Texture
 
+var velocity : Vector2
+
 onready var _manager : Node2D = get_tree().get_nodes_in_group("Manager")[0]
 onready var _sprite : Sprite = $Sprite
 onready var _trail = $Trail
 onready var _countdownTimer : Timer = $CountdownTimer
 
-var _velocity : Vector2
 var _attachedPaddle : KinematicBody2D
 var _color
 
@@ -30,7 +31,7 @@ func _ready():
 	
 func _process(delta):
 	if _attachedPaddle == null:
-		var offset = _velocity * delta
+		var offset = velocity * delta
 		if _manager != null:
 			var speedModifier = lerp(1.0, maxSpeedModifier, _manager.getSpeedModifierRatio())
 			offset *= speedModifier
@@ -42,7 +43,7 @@ func _process(delta):
 			else:
 				position += offset
 				
-		_velocity.y += gravity * delta
+		velocity.y += gravity * delta
 				
 func onActiveColorChanged(color: int):
 	_setColor(color)
@@ -52,9 +53,9 @@ func getIsActive():
 
 func processCollision(collision):
 	# perform default bouncing
-	_velocity = _velocity.bounce(collision.normal)
+	velocity = velocity.bounce(collision.normal)
 	
-	var direction = _velocity.normalized()
+	var direction = velocity.normalized()
 	var _remainderCollision = move_and_collide(direction * collision.remainder)
 	
 	# modify the velocity based on colliding with the paddle
@@ -64,19 +65,19 @@ func processCollision(collision):
 		var bounceDirection = paddle.getBounceDirectionFromPosition(collision.position)
 		bounceDirection = lerp(direction, bounceDirection, paddlePositionRatio)
 		if bounceDirection.length_squared() > 0:
-			_velocity = bounceDirection.normalized() * _velocity.length()
+			velocity = bounceDirection.normalized() * velocity.length()
 		
 		# add the paddle's own velocity to our bounce
-		_velocity += (paddle.getVelocity() * paddleSpeedRatio)
+		velocity += (paddle.getVelocity() * paddleSpeedRatio)
 	
 	# cap our max speed
-	var finalSpeed = clamp(_velocity.length(), minSpeed, maxSpeed)
-	var finalDirection = _velocity.normalized()
+	var finalSpeed = clamp(velocity.length(), minSpeed, maxSpeed)
+	var finalDirection = velocity.normalized()
 	if paddle != null && finalDirection.y > -minPaddleComponentBounceVerticalComponent:
 		finalDirection.y = -minPaddleComponentBounceVerticalComponent
 		finalDirection = finalDirection.normalized()
 	
-	_velocity = finalDirection * finalSpeed
+	velocity = finalDirection * finalSpeed
 	
 	# notify the other collider
 	if collision.collider.has_method("onBallHit"):
@@ -87,13 +88,17 @@ func processCollision(collision):
 		if paddle:
 			_manager.resetCombo()
 		else:
-			_manager.addCombo()
+			_manager.addCombo(self)
 
 func attachToPaddle(paddle: KinematicBody2D):
 	# attach ourselves to the paddle's anchor
 	_attachedPaddle = paddle
 	_attachedPaddle.ballAnchor.add_child(self)
 	position = Vector2.ZERO
+	
+	# disable our trail
+	if _trail:
+		_trail.emitting = false
 
 func startLaunchTimer():
 	# TODO: show countdown in UI
@@ -131,9 +136,9 @@ func startLaunchTimer():
 	global_position = globalPosition
 	
 	# set our velocity
-	_velocity = Vector2.UP * baseSpeed
+	velocity = Vector2.UP * baseSpeed
 	if _attachedPaddle != null:
-		_velocity += _attachedPaddle.getVelocity()
+		velocity += _attachedPaddle.getVelocity()
 		
 	# enable our trail
 	if _trail:
