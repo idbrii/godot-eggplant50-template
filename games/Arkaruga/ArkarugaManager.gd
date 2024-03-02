@@ -7,6 +7,7 @@ export var startLives = 3
 export var secondsToMaxSpeed = 600
 export var secondsLostOnDeath = 60
 
+onready var uiManager = get_node("%UILayer")
 onready var paddle = get_node("%Paddle")
 onready var ballContainer = get_node("%BallContainer")
 onready var brickContainer = get_node("%BrickContainer")
@@ -18,6 +19,8 @@ var activeColor = Types.ElementColor.BLUE
 
 var _isGameRunning = false
 var _livesRemaining : int
+var _score : int
+var _combo : int
 var _totalGameDuration : float
 var _gameDurationForSpeed : float
 
@@ -38,7 +41,16 @@ func _process(delta):
 	if _isGameRunning && getAnyBallsActive():
 		_totalGameDuration += delta
 		_gameDurationForSpeed += delta
-		
+	
+	_processUI(delta)
+	
+func _processUI(_delta):
+	if !uiManager:
+		return
+	
+	uiManager.setScoreValue(_score)
+	uiManager.setComboValue(_combo)
+	uiManager.setLives(_livesRemaining)
 		
 func onBallLost(_ball):
 	# there are no balls left -- respawn!
@@ -66,10 +78,21 @@ func startGame():
 	_livesRemaining = startLives
 	_totalGameDuration = 0
 	_gameDurationForSpeed = 0
+	_score = 0
+	_combo = 0
 	_respawnBall()
 	
 func endGame():
 	_isGameRunning = false
+	
+func addScore(points : int):
+	_score += points
+	
+func addCombo(value : int = 1):
+	_combo += value
+
+func resetCombo():
+	_combo = 0
 	
 func loseLife():
 	if _livesRemaining > 0:

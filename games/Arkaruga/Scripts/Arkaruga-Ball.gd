@@ -3,7 +3,7 @@ extends KinematicBody2D
 const Types = preload("res://games/Arkaruga/Scripts/Arkaruga-Types.gd")
 const Paddle = preload("res://games/Arkaruga/Scripts/Arkaruga-Paddle.gd")
 
-export var countdownDuration : float = .75
+export var countdownDuration : float = 1
 export var baseSpeed : float = 200
 export var minSpeed : float = 150
 export var maxSpeed : float = 300
@@ -81,6 +81,13 @@ func processCollision(collision):
 	# notify the other collider
 	if collision.collider.has_method("onBallHit"):
 		collision.collider.onBallHit(self)
+		
+	# increase our combo
+	if _manager:
+		if paddle:
+			_manager.resetCombo()
+		else:
+			_manager.addCombo()
 
 func attachToPaddle(paddle: KinematicBody2D):
 	# attach ourselves to the paddle's anchor
@@ -92,20 +99,27 @@ func startLaunchTimer():
 	# TODO: show countdown in UI
 	_countdownTimer.start(countdownDuration)
 	yield(_countdownTimer, "timeout")
-	print("3")
+	
+	if _manager:
+		_manager.uiManager.playToast(str(3))
 	
 	_countdownTimer.start(countdownDuration)
 	yield(_countdownTimer, "timeout")
 	
-	print("2")
+	if _manager:
+		_manager.uiManager.playToast(str(2))
 	
 	_countdownTimer.start(countdownDuration)
 	yield(_countdownTimer, "timeout")
 	
-	print("1")
+	if _manager:
+		_manager.uiManager.playToast(str(1))
 	
 	_countdownTimer.start(countdownDuration)
 	yield(_countdownTimer, "timeout")
+	
+	if _manager:
+		_manager.uiManager.playToast("Go!")
 	
 	# detach from paddle
 	var globalPosition = global_position
