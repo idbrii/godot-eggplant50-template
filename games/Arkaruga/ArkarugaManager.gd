@@ -30,15 +30,13 @@ var _gameDurationForSpeed : float
 func _ready():
 	setActiveColor(Types.ElementColor.GREEN)
 	
-	# TODO: Support actual starting / restarting
-	_startGameTimer.start()
-	yield(_startGameTimer, "timeout")
-	
-	startGame()
+	if uiManager:
+		uiManager.setStartScreenVisible(true)
 	
 func _input(event):
 	if event.is_action_pressed("action1"):
-		swapActiveColor()
+		if _isGameRunning:
+			swapActiveColor()
 		
 func _process(delta):
 	if _isGameRunning && getAnyBallsActive():
@@ -80,6 +78,12 @@ func getAnyBallsActive():
 	return false
 	
 func startGame():
+	if uiManager:
+		uiManager.setStartScreenVisible(false)
+	
+	_startGameTimer.start()
+	yield(_startGameTimer, "timeout")
+	
 	_isGameRunning = true
 	_livesRemaining = startLives
 	_totalGameDuration = 0
@@ -134,7 +138,10 @@ func swapActiveColor():
 func setActiveColor(color: int):
 	activeColor = color
 	get_tree().call_group("Colorized", "onActiveColorChanged", color)
-	
+
+func getIsGameRunning() -> bool:
+	return _isGameRunning
+
 func getSpeedModifierRatio() -> float:
 	return inverse_lerp(0.0, secondsToMaxSpeed, _gameDurationForSpeed)
 

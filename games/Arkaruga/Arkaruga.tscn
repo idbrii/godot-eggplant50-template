@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=43 format=2]
 
 [ext_resource path="res://games/Arkaruga/Objects/Arkaruga-Ball.tscn" type="PackedScene" id=1]
 [ext_resource path="res://games/Arkaruga/Objects/Arkaruga-Paddle.tscn" type="PackedScene" id=2]
@@ -22,6 +22,11 @@
 [ext_resource path="res://games/Arkaruga/Scripts/Arkaruga-GutterSpikes.gd" type="Script" id=20]
 [ext_resource path="res://games/Arkaruga/Scripts/Arkaruga-UIManager.gd" type="Script" id=21]
 [ext_resource path="res://shared/menu_pause/PauseMenu.tscn" type="PackedScene" id=22]
+[ext_resource path="res://mainmenu/art/font/font_kenpixel_mini.tres" type="DynamicFont" id=23]
+[ext_resource path="res://shared/input/input_icon.gd" type="Script" id=24]
+[ext_resource path="res://shared/input/art/playstation/cross.png" type="Texture" id=25]
+[ext_resource path="res://games/Arkaruga/Scripts/Arkaruga-Flash.gd" type="Script" id=26]
+[ext_resource path="res://games/Arkaruga/Scripts/Arkaruga-StartScreen.gd" type="Script" id=27]
 
 [sub_resource type="RectangleShape2D" id=10]
 extents = Vector2( 260, 33 )
@@ -147,6 +152,13 @@ font_path = "res://mainmenu/art/font/kenpixel/mini.ttf"
 [sub_resource type="DynamicFont" id=14]
 size = 48
 font_data = SubResource( 1 )
+
+[sub_resource type="DynamicFontData" id=15]
+font_path = "res://mainmenu/art/font/kenpixel/blocks.ttf"
+
+[sub_resource type="DynamicFont" id=16]
+size = 64
+font_data = SubResource( 15 )
 
 [node name="Window" type="Control"]
 margin_right = 640.0
@@ -523,6 +535,85 @@ custom_fonts/font = SubResource( 14 )
 text = "BALL GET!"
 align = 1
 valign = 1
+
+[node name="StartGame" type="Control" parent="UILayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -118.0
+script = ExtResource( 27 )
+
+[node name="ColorRect" type="ColorRect" parent="UILayer/StartGame"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.0901961, 0.0666667, 0.101961, 0.576471 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UILayer/StartGame"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -245.0
+margin_top = -108.0
+margin_right = 251.0
+margin_bottom = 108.0
+
+[node name="Title" type="Label" parent="UILayer/StartGame/VBoxContainer"]
+margin_right = 496.0
+margin_bottom = 96.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_pivot_offset = Vector2( 400, 14 )
+theme = ExtResource( 7 )
+custom_fonts/font = SubResource( 16 )
+text = "ARKARUGA"
+align = 1
+valign = 1
+
+[node name="Description" type="Label" parent="UILayer/StartGame/VBoxContainer"]
+margin_top = 100.0
+margin_right = 496.0
+margin_bottom = 120.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_pivot_offset = Vector2( 400, 14 )
+theme = ExtResource( 7 )
+custom_fonts/font = ExtResource( 23 )
+text = "Break blocks. Break Reality."
+align = 1
+valign = 1
+
+[node name="Spacer" type="Control" parent="UILayer/StartGame/VBoxContainer"]
+margin_top = 124.0
+margin_right = 496.0
+margin_bottom = 156.0
+rect_min_size = Vector2( 0, 32 )
+
+[node name="Press to Start" type="Label" parent="UILayer/StartGame/VBoxContainer"]
+margin_top = 160.0
+margin_right = 496.0
+margin_bottom = 180.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_pivot_offset = Vector2( 400, 14 )
+theme = ExtResource( 7 )
+custom_fonts/font = ExtResource( 23 )
+text = "Press       TO START!"
+align = 1
+valign = 1
+script = ExtResource( 26 )
+
+[node name="Icon" type="TextureRect" parent="UILayer/StartGame/VBoxContainer/Press to Start"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -20.0
+margin_top = -8.0
+margin_right = -4.0
+margin_bottom = 8.0
+rect_pivot_offset = Vector2( 8, 8 )
+texture = ExtResource( 25 )
+script = ExtResource( 24 )
 
 [node name="PauseMenu" parent="UILayer" instance=ExtResource( 22 )]
 margin_left = 19.0

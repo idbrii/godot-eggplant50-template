@@ -14,6 +14,8 @@ export var alarmTextureGreen : Texture
 export var damageFreezeDuration = 1
 export var hitBumperFlashDuration = .2
 
+onready var _manager : Node2D = get_tree().get_nodes_in_group("Manager")[0]
+
 onready var ballAnchor : Node2D = $BallAnchor
 onready var _collisionShape : CollisionShape2D = $Collision
 onready var _bumper : NinePatchRect = $Body/Bumper
@@ -42,10 +44,11 @@ func _process(delta):
 	
 func _processMovement(delta: float):
 	var direction = 0
-	if Input.is_action_pressed("move_left"):
-		direction = -1
-	if Input.is_action_pressed("move_right"):
-		direction = 1
+	if _manager && _manager.getIsGameRunning():
+		if Input.is_action_pressed("move_left"):
+			direction = -1
+		if Input.is_action_pressed("move_right"):
+			direction = 1
 		
 	var isBoosting = Input.is_action_pressed("action2")
 	var modifier = boostModifier if isBoosting else 1.0
