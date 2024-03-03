@@ -1,7 +1,8 @@
 extends Node2D
 
-signal fall_through_hole
 signal player_moved(player, pos)
+signal fall_through_hole
+signal reached_goal
 
 const GridWorld = preload("res://games/drop_walker/code/gridworld.gd")
 const Namer = preload("res://games/drop_walker/code/util/namer.gd")
@@ -80,7 +81,7 @@ func _process(_dt: float):
         block_input = true
         var tween := create_tween()
         match dest_tile:
-            GridWorld.GroundType.SOLID,GridWorld.GroundType.EMPTY:
+            GridWorld.GroundType.SOLID,GridWorld.GroundType.EMPTY,GridWorld.GroundType.GOAL:
                 var t := tween.tween_property(self, "global_position", delta, move_duration)
                 t = t.from_current()
                 t = t.as_relative()
@@ -112,6 +113,8 @@ func _process(_dt: float):
 
         if dest_tile == GridWorld.GroundType.EMPTY:
             emit_signal("fall_through_hole")
+        elif dest_tile == GridWorld.GroundType.GOAL:
+            emit_signal("reached_goal")
 
 
 func fall_to_layer(layer, dest):

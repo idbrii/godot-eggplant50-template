@@ -19,6 +19,7 @@ onready var camera_offset : Vector2 = camera.global_position - gridworlds[0].glo
 
 func _ready():
 	Validate.ok(player.connect("fall_through_hole", self, "_on_fall_through_hole"))
+	Validate.ok(player.connect("reached_goal", self, "_on_reached_goal"))
 	Validate.ok(player.connect("player_moved", self, "_on_player_moved"))
 	set_world_layer(current_layer, true)
 
@@ -53,6 +54,12 @@ func set_world_layer(index, snap):
 		yield(tween, "finished")
 		player.done_falling()
 
+
+func _on_reached_goal():
+	$UI/gameover.visible = true
+	var goals = get_tree().get_nodes_in_group("goal")
+	for g in goals:
+		g.play_win()
 
 func _on_fall_through_hole():
 	current_layer += 1

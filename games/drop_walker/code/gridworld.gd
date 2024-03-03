@@ -10,14 +10,24 @@ enum GroundType {
     EMPTY,
     SOLID,
     BORDER,
+    GOAL,
 }
 
 var ground_to_tile = {
     GroundType.EMPTY: -1,
     GroundType.SOLID: 0,
     GroundType.BORDER: 19,
+    GroundType.GOAL: 20,
 }
 var tile_to_ground = Container.invert_dict(ground_to_tile)
+
+
+func _ready():
+    var layer := get_parent() as Node
+    var goals = get_tree().get_nodes_in_group("goal")
+    for g in goals:
+        if layer.is_a_parent_of(g):
+            set_world_cellv(g.global_position, GroundType.GOAL)
 
 
 # Returns a global position.
