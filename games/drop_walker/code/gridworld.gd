@@ -70,3 +70,19 @@ func attach_player_to_world(player):
         dest = cell_to_global_pos(old_grid.global_to_cell_pos(dest))
     return dest
 
+
+func debug_draw_tiles(pen):
+    var ground_to_color = {
+        GroundType.EMPTY:  Color.white,
+        GroundType.SOLID:  Color.red,
+        GroundType.BORDER: Color.blue,
+        GroundType.GOAL:   Color.purple,
+    }
+    var size = Vector2(5, 5)
+    for x in range(-100, 100):
+        for y in range(-100, 100):
+            var cell = Vector2(x, y)
+            var pos = cell_to_global_pos(cell)
+            var ground = get_world_cellv(pos)
+            var c = ground_to_color[ground]
+            pen.draw_rect(Rect2(pos, size), c)
