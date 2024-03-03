@@ -92,6 +92,10 @@ margin_left = 18.0
 margin_top = 60.0
 margin_right = 185.0
 margin_bottom = 280.0
+help_title = "Work in Progress"
+help_body = "Navigate the world and get to the eggplant jam!
+
+Placing boards is not yet implemented, so just fall through the right holes."
 
 [editable path="Layers/layer0"]
 [editable path="Layers/layer1"]
