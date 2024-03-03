@@ -2,7 +2,7 @@ extends Node2D
 
 const BrickGroupLibrary = preload("res://games/Arkaruga/Scripts/Arkaruga-BrickGroupLibrary.gd")
 const Types = preload("res://games/Arkaruga/Scripts/Arkaruga-Types.gd")
-const InitialGroupSpawnCount : int = 3
+const InitialGroupSpawnCount : int = 5
 
 export (Resource) var brickGroupLibrary
 export (PackedScene) var ballScene
@@ -12,6 +12,8 @@ export var secondsLostOnDeath = 60
 export (int) var bonusLifePoints = 100
 export (int) var multiballCombo = 10
 export (float) var multiballAngleOffset = 45.0
+export (float) var mediumGroupChanceIncrement = .1
+export (float) var hardGroupChanceIncrement = .05
 
 onready var uiManager = get_node("%UILayer")
 onready var paddle = get_node("%Paddle")
@@ -32,6 +34,8 @@ var _combo : int
 var _totalGameDuration : float
 var _gameDurationForSpeed : float
 var _lastSpawnedBrickGroup : Node2D
+var _mediumGroupChance : float
+var _hardGroupChance : float
 
 func _ready():
 	setActiveColor(Types.ElementColor.GREEN)
@@ -59,6 +63,10 @@ func _processUI(_delta):
 	uiManager.setTime(int(_totalGameDuration))
 		
 func onBallLost(_ball):
+	# this can get called while the scene is being torn down
+	if !is_inside_tree():
+		return
+	
 	# reset our combo whenever a ball goes offscreen
 	_combo = 0 
 	
@@ -72,9 +80,13 @@ func onBallLost(_ball):
 		else:
 			endGame()
 			
-func onBrickSpawnAreaClear(brickGroup):
-	if brickGroup == _lastSpawnedBrickGroup:
-		_spawnBrickGroup()
+func onBrickSpawnAreaClear(brickGroup : Node2D):
+	# this can get called while the scene is being torn down
+	if !is_inside_tree():
+		return
+	
+	if brickGroup == _lastSpawnedBrickGroup && is_instance_valid(brickGroup):
+			call_deferred("_spawnBrickGroup")
 		
 func getAnyBallsActive():
 	var balls = get_tree().get_nodes_in_group("Balls")
@@ -88,6 +100,8 @@ func startGame():
 	if uiManager:
 		uiManager.setStartScreenVisible(false)
 		uiManager.setSidebarResultsVisible(false)
+		
+	randomize()
 		
 	_lastSpawnedBrickGroup = null
 	_clearBricks()
@@ -103,6 +117,8 @@ func startGame():
 	_gameDurationForSpeed = 0
 	_score = 0
 	_combo = 0
+	_mediumGroupChance = 0
+	_hardGroupChance = 0
 	
 	# spend a life on the initial ball so the UI matches the desired count
 	loseLife()
@@ -199,7 +215,17 @@ func _clearBricks():
 		
 func _spawnBrickGroup():
 	var library : BrickGroupLibrary = brickGroupLibrary
-	var group = library.getRandomEasyGroup()
+	var group = null
+	if randf() < _hardGroupChance:
+		group = library.getRandomHardGroup()
+		_hardGroupChance = 0
+	elif randf() < _mediumGroupChance:
+		group = library.getRandomMedGroup()
+		_mediumGroupChance = 0
+	else:
+		group = library.getRandomEasyGroup()
+		_mediumGroupChance += mediumGroupChanceIncrement
+		_hardGroupChance += hardGroupChanceIncrement
 	
 	var spawnPosition = brickGroupSpawnPoint.global_position
 	if _lastSpawnedBrickGroup:
