@@ -2,9 +2,6 @@ extends TileMap
 
 const Container = preload("res://games/drop_walker/code/util/container.gd")
 
-# Funky offset because my tiles render one position below where they look like they should be.
-const TILE_OFFSET := Vector2.ONE * 2
-
 
 enum GroundType {
     EMPTY,
@@ -27,21 +24,30 @@ func _ready():
     var goals = get_tree().get_nodes_in_group("goal")
     for g in goals:
         if layer.is_a_parent_of(g):
-            set_world_cellv(g.global_position, GroundType.GOAL)
+            var pos = snap_global_to_cell(g.global_position)
+            set_world_cellv(pos, GroundType.GOAL)
+            g.global_position = center_global_pos_in_cell(pos)
 
 
-# Returns a global position.
+# Returns a global position that's the bottom corner of a tile.
 # https://www.reddit.com/r/godot/comments/fuejci/having_trouble_with_snapping_to_isometric_grid/fmcl07f/
 func snap_global_to_cell(world_pos: Vector2) -> Vector2:
     return to_global(map_to_world(world_to_map(to_local(world_pos))))
 
 
 func global_to_cell_pos(world_pos: Vector2) -> Vector2:
-    return world_to_map(to_local(world_pos)) - TILE_OFFSET
+    return world_to_map(to_local(world_pos))
 
 
 func cell_to_global_pos(cell_pos: Vector2) -> Vector2:
-    return to_global(map_to_world(cell_pos + TILE_OFFSET))
+    return to_global(map_to_world(cell_pos))
+
+
+# Adjusts a global cell position (bottom corner) to be centred within the cell.
+func center_global_pos_in_cell(world_pos: Vector2) -> Vector2:
+    var half = cell_size / 2
+    half.x = 0
+    return world_pos + half
 
 
 # https://github.com/gdquest-demos/godot-3-demos/blob/master/2017/final/09-Isometric%20grid-based%20movement/Player.gd
@@ -68,7 +74,7 @@ func attach_player_to_world(player):
     player.gridworld = self
     if old_grid:
         dest = cell_to_global_pos(old_grid.global_to_cell_pos(dest))
-    return dest
+    return center_global_pos_in_cell(dest)
 
 
 func debug_draw_tiles(pen):
