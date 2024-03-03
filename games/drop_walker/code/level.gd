@@ -7,21 +7,26 @@ onready var player := get_node_or_null(player_node) as Node2D
 
 var current_layer := 0
 
-onready var gridworlds := [
-	$layer0/Grid_Ground,
-	$layer1/Grid_Ground,
-	$layer2/Grid_Ground,
-]
+onready var gridworlds := collect_layers()
 
 onready var camera := $Camera2D as Camera2D
 onready var camera_offset : Vector2 = camera.global_position - gridworlds[0].global_position
+
+
+func collect_layers() -> Array:
+	var w = []
+	var roots = $Layers.get_children()
+	for layer_root in roots:
+		w.append(layer_root.get_node("Grid_Ground"))
+	return w
 
 
 func _ready():
 	Validate.ok(player.connect("fall_through_hole", self, "_on_fall_through_hole"))
 	Validate.ok(player.connect("reached_goal", self, "_on_reached_goal"))
 	Validate.ok(player.connect("player_moved", self, "_on_player_moved"))
-	set_world_layer(current_layer, true)
+
+	set_world_layer(current_layer, true, false)
 
 	# Adjust z index so player looks like they fall through holes and appear behind world.
 	var z = gridworlds[0].z_index
@@ -31,9 +36,12 @@ func _ready():
 		z -= 1
 
 
-func set_world_layer(index, snap):
+func set_world_layer(index, snap, is_game_over):
 	var layer = gridworlds[index]
 	var camera_dest = layer.global_position + camera_offset
+	if is_game_over:
+		camera_dest = camera.global_position
+
 	var player_pos = player.global_position
 	var player_dest = layer.attach_player_to_world(player)
 	if snap:
@@ -52,7 +60,8 @@ func set_world_layer(index, snap):
 		player.fall_to_layer(layer, player_dest)
 
 		yield(tween, "finished")
-		player.done_falling()
+		if not is_game_over:
+			player.done_falling()
 
 
 func _on_reached_goal():
@@ -61,11 +70,14 @@ func _on_reached_goal():
 	for g in goals:
 		g.play_win()
 
+
 func _on_fall_through_hole():
 	current_layer += 1
-	if current_layer < gridworlds.size():
-		set_world_layer(current_layer, false)
-	else:
+	var can_continue := current_layer < gridworlds.size() - 1
+	var is_game_over := not can_continue
+	set_world_layer(current_layer, false, is_game_over)
+	if is_game_over:
+		yield(get_tree().create_timer(0.5), "timeout")
 		$UI/gameover.visible = true
 
 
