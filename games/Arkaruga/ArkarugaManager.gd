@@ -19,6 +19,7 @@ export (float) var hardGroupChanceIncrement = .1
 
 onready var uiManager = get_node("%UILayer")
 onready var paddle = get_node("%Paddle")
+onready var particlesContainer = get_node("%ParticlesContainer")
 onready var ballContainer = get_node("%BallContainer")
 onready var brickContainer = get_node("%BrickContainer")
 onready var brickGroupSpawnPoint = get_node("%BrickGroupSpawnPoint")
@@ -33,6 +34,7 @@ onready var _countdownGoSFX : AudioStreamPlayer = $SFX/CountdownGoSFX
 onready var _multiballSFX : AudioStreamPlayer = $SFX/MultiballSFX
 onready var _loseLifeSFX : AudioStreamPlayer = $SFX/LoseLifeSFX
 onready var _bonusLifeSFX : AudioStreamPlayer = $SFX/BonusLifeSFX
+onready var _colorSwapSFX : AudioStreamPlayer = $SFX/ColorSwapSFX
 
 var activeColor = Types.ElementColor.BLUE
 
@@ -211,6 +213,8 @@ func swapActiveColor():
 			setActiveColor(Types.ElementColor.GREEN)
 		Types.ElementColor.GREEN:
 			setActiveColor(Types.ElementColor.BLUE)
+			
+	_colorSwapSFX.play()
 
 func setActiveColor(color: int):
 	activeColor = color
@@ -294,6 +298,14 @@ func _saveHighScores():
 	config.save(ConfigSavePath)
 	pass
 	
+func playParticles(particles : PackedScene, position : Vector2):
+	if !particles:
+		return
+	
+	var instance = particles.instance()
+	particlesContainer.add_child(instance)
+	instance.global_position = position
+
 func playCountdownSFX():
 	_countdownSFX.play()
 	

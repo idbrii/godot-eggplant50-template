@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://games/Arkaruga/Sprites/Bricks/Wide/brick-wide-blue.png" type="Texture" id=1]
 [ext_resource path="res://games/Arkaruga/Scripts/Arkaruga-Brick.gd" type="Script" id=2]
 [ext_resource path="res://games/Arkaruga/Sprites/Bricks/Wide/brick-wide-blue-outline.png" type="Texture" id=3]
 [ext_resource path="res://games/Arkaruga/Sprites/Bricks/Wide/brick-wide-hit.png" type="Texture" id=4]
 [ext_resource path="res://games/Arkaruga/Sounds/SFX/block_fall2.wav" type="AudioStream" id=5]
+[ext_resource path="res://games/Arkaruga/Objects/Bricks/Arkaruga-Brick-DestructionParticles.tscn" type="PackedScene" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 24, 12 )
@@ -21,6 +22,7 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true
 }
+destructionParticles = ExtResource( 6 )
 
 [node name="ActiveSprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
