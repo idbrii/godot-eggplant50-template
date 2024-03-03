@@ -19,6 +19,10 @@ var _toastTween : SceneTreeTween = null
 
 func _ready():
 	_toastLabel.hide()
+	
+func setStartScreenVisible(visible):
+	 $StartGame.visible = visible
+	 $StartGame.set_process_input(visible)
 
 func setScoreValue(value):
 	if _scoreValue == value:
