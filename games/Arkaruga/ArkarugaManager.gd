@@ -14,8 +14,8 @@ export var secondsLostOnDeath = 60
 export (int) var bonusLifePoints = 100
 export (int) var multiballCombo = 10
 export (float) var multiballAngleOffset = 45.0
-export (float) var mediumGroupChanceIncrement = .1
-export (float) var hardGroupChanceIncrement = .05
+export (float) var mediumGroupChanceIncrement = .2
+export (float) var hardGroupChanceIncrement = .1
 
 onready var uiManager = get_node("%UILayer")
 onready var paddle = get_node("%Paddle")
@@ -235,10 +235,10 @@ func _spawnBrickGroup():
 	var group = null
 	if randf() < _hardGroupChance:
 		group = library.getRandomHardGroup()
-		_hardGroupChance = 0
+		_hardGroupChance -= 1
 	elif randf() < _mediumGroupChance:
 		group = library.getRandomMedGroup()
-		_mediumGroupChance = 0
+		_mediumGroupChance -= 1
 	else:
 		group = library.getRandomEasyGroup()
 		_mediumGroupChance += mediumGroupChanceIncrement
