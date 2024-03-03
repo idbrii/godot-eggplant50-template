@@ -13,14 +13,10 @@ export var bounce_height := 1.0
 
 var block_input := false
 var tile_width := 64
-var initial_offset : Vector2
 
 onready var gridworld := get_node_or_null(gridworld_node) as TileMap
 onready var player_visual = get_node("%PlayerVisual")
 
-
-func _ready():
-    initial_offset = gridworld.world_to_map(position)
 
 func get_input() -> Dictionary:
     if block_input:

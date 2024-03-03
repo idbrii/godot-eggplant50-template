@@ -3,7 +3,7 @@ extends TileMap
 const Container = preload("res://games/drop_walker/code/util/container.gd")
 
 # Funky offset because my tiles render one position below where they look like they should be.
-const TILE_OFFSET := Vector2.ONE
+const TILE_OFFSET := Vector2.ONE * 2
 
 
 enum GroundType {

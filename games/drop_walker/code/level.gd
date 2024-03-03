@@ -24,14 +24,16 @@ func _ready():
 
 func set_world_layer(index, snap):
 	var layer = gridworlds[index]
-	var dest = layer.global_position + camera_offset
-	layer.attach_player_to_world(player)
+	var camera_dest = layer.global_position + camera_offset
+	var player_pos = player.global_position
+	var player_dest = layer.attach_player_to_world(player)
 	if snap:
-		camera.global_position = dest
+		camera.global_position = camera_dest
+		player.global_position = player_dest
 	else:
 		var tween := create_tween()
 		# TODO: How can I make this camera pan slower, but prevent game over until it's done?
-		var t := tween.tween_property(camera, "global_position", dest, player.fall_duration)
+		var t := tween.tween_property(camera, "global_position", camera_dest, player.fall_duration)
 		t = t.from_current()
 		t = t.set_ease(Tween.EASE_IN_OUT)
 		t = t.set_trans(Tween.TRANS_SINE)
