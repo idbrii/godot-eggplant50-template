@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Ludum Dare 28 - 04.ogg-a1e86682a18ce513978a2d2b9690b3de.oggstr"
+
+[deps]
+
+source_file="res://games/Arkaruga/Sounds/Music/Ludum Dare 28 - 04.ogg"
+dest_files=[ "res://.import/Ludum Dare 28 - 04.ogg-a1e86682a18ce513978a2d2b9690b3de.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

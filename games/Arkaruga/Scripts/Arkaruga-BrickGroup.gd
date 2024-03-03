@@ -1,6 +1,6 @@
 extends Area2D
 
-export var baseMoveSpeed = 0.5
+export var baseMoveSpeed = 0.55
 export var maxMoveSpeedModifier = 5.0
 
 onready var _manager : Node2D = get_tree().get_nodes_in_group("Manager")[0]

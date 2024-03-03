@@ -23,6 +23,7 @@ onready var _collision : CollisionShape2D = $Collision
 onready var _fallingArea : Area2D = $FallingDamageArea
 onready var _flashTimer : Timer = $FlashTimer
 onready var _gutterTimer : Timer = $GutterTimer
+onready var _fallSFX : AudioStreamPlayer = $BlockFallSFX
 
 onready var _health = maxHealth
 
@@ -53,6 +54,8 @@ func onActiveColorChanged(_color: int):
 func onBallHit(_ball):
 	if _health > 0:
 		_takeDamage(1)
+		return true
+	return false
 
 func onGutterEntered():
 	var delay = randf() * gutterFallMaxDelay
@@ -74,15 +77,15 @@ func _takeDamage(damage: int):
 		_health = max(_health - damage, 0)
 		_playFlash(flashDuration)
 		if _health == 0:
+			if _manager:
+				_manager.addScore(points)
+			
 			if fallAtZeroHealth:
 				_startFalling()
 			else:
 				_onDestroyed()
 			
 func _onDestroyed():
-	if _manager:
-		_manager.addScore(points)
-	
 	_setCollidable(false)
 	_isDestroyed = true
 	
@@ -133,6 +136,9 @@ func _startFalling():
 	
 	# Enable our damage area
 	_fallingArea.monitoring = true
+	
+	# Play our SFX
+	_fallSFX.play()
 	
 	_isFalling = true
 	pass

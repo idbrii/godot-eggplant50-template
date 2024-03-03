@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://games/Arkaruga/Scripts/Arkaruga-Paddle.gd" type="Script" id=1]
 [ext_resource path="res://games/Arkaruga/Sprites/Paddle/paddle-body.png" type="Texture" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://games/Arkaruga/Sprites/Paddle/paddle-alarm-alert-1.png" type="Texture" id=8]
 [ext_resource path="res://games/Arkaruga/Sprites/Paddle/paddle-bumper-alert-1.png" type="Texture" id=9]
 [ext_resource path="res://games/Arkaruga/Sprites/Paddle/paddle-bumper-alert-2.png" type="Texture" id=10]
+[ext_resource path="res://games/Arkaruga/Sounds/SFX/damage.wav" type="AudioStream" id=11]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 46, 4 )
@@ -123,5 +124,9 @@ wait_time = 0.25
 [node name="FreezeTimer" type="Timer" parent="."]
 
 [node name="FlashTimer" type="Timer" parent="."]
+
+[node name="DamageSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 11 )
+volume_db = 4.0
 
 [connection signal="timeout" from="Body/Alert/Timer" to="." method="_on_AlertTimer_timeout"]

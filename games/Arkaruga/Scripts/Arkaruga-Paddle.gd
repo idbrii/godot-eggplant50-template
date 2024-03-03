@@ -5,7 +5,7 @@ const Types = preload("res://games/Arkaruga/Scripts/Arkaruga-Types.gd")
 export var maxSpeed : float = 450
 export var acceleration : float = 300
 export var reverseAcceleration : float = 450
-export var boostModifier : float = 1.6
+export var boostModifier : float = 1.8
 export var maxBounceAngle : float = 80
 export var bumperTextureBlue : Texture
 export var bumperTextureGreen : Texture
@@ -27,6 +27,7 @@ onready var _alertFrame1 : Control = $Body/Alert/Frame1
 onready var _alertFrame2 : Control = $Body/Alert/Frame2
 onready var _freezeTimer : Timer = $FreezeTimer
 onready var _flashTimer : Timer = $FlashTimer
+onready var _damageSFX : AudioStreamPlayer = $DamageSFX
 
 var _speed : float = 0
 var _isFrozen = false
@@ -90,6 +91,7 @@ func onActiveColorChanged(color: int):
 	
 func onBallHit(_ball):
 	_flashHitBumper(hitBumperFlashDuration)
+	return false
 
 func onFallingBrickHit(_block):
 	_freeze(damageFreezeDuration)
@@ -127,6 +129,8 @@ func _freeze(duration: float):
 	_alertFrame2.visible = false
 	_alertTimer.start()
 	_speed = 0
+	
+	_damageSFX.play()
 	
 	_freezeTimer.start(duration)
 	yield(_freezeTimer, "timeout")
