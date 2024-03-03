@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id=11]
 extents = Vector2( 240, 48 )
 
-[node name="BrickGroup" type="Area2D"]
+[node name="BrickGroup" type="Area2D" groups=["BrickGroups"]]
 collision_layer = 4
 collision_mask = 0
 monitoring = false

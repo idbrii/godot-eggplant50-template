@@ -8,7 +8,7 @@ export var secondsToMaxSpeed = 600
 export var secondsLostOnDeath = 60
 export (int) var bonusLifePoints = 100
 export (int) var multiballCombo = 10
-export (float) var multiballAngleOffset = 45
+export (float) var multiballAngleOffset = 45.0
 
 onready var uiManager = get_node("%UILayer")
 onready var paddle = get_node("%Paddle")
@@ -82,6 +82,8 @@ func startGame():
 	if uiManager:
 		uiManager.setStartScreenVisible(false)
 		uiManager.setSidebarResultsVisible(false)
+		
+	_clearBricks()
 	
 	_startGameTimer.start()
 	yield(_startGameTimer, "timeout")
@@ -176,3 +178,12 @@ func _spawnMultiball(ball):
 		angleOffset *= -1
 	velocity = velocity.rotated(deg2rad(angleOffset))
 	newBall.velocity = velocity
+
+func _clearBricks():
+	var brickGroups = get_tree().get_nodes_in_group("BrickGroups")
+	for group in brickGroups:
+		group.queue_free()
+
+	var bricks = get_tree().get_nodes_in_group("Bricks")	
+	for brick in bricks:
+		brick.queue_free()

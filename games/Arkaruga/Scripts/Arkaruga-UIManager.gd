@@ -90,7 +90,7 @@ func setTime(seconds : int):
 	if _seconds == seconds:
 		return
 	
-	var minutes = seconds / 60
+	var minutes = floor(seconds / 60.0)
 	var remainder = seconds % 60
 	var string = "{0}:{1}".format({0: "%02d" % minutes, 1: "%02d" % remainder})
 	_timeValueLabel.text = string
