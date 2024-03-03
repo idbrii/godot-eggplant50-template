@@ -7,7 +7,7 @@ const InitialGroupSpawnCount : int = 5
 export (Resource) var brickGroupLibrary
 export (PackedScene) var ballScene
 export (int) var startLives = 5
-export var secondsToMaxSpeed = 600
+export var secondsToMaxSpeed = 360
 export var secondsLostOnDeath = 60
 export (int) var bonusLifePoints = 100
 export (int) var multiballCombo = 10
