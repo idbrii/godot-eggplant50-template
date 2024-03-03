@@ -27,18 +27,18 @@ func _updateMovement(delta: float):
 		movementSpeed *= lerp(1.0, maxMoveSpeedModifier, _manager.getSpeedModifierRatio())
 		
 	position.y += movementSpeed * delta * 5
+	
+func getNextGroupSpawnGlobalPosition() -> Vector2:
+	return _visibilityNotifier.global_position
 
 func _on_VisibilityNotifier2D_viewport_exited(_viewport):
 	if _isVisible:
 		_isVisible = false
 		queue_free()
 
-
 func _on_VisibilityNotifier2D_viewport_entered(_viewport):
 	_isVisible = true
 
-
 func _on_BrickGroup_area_exited(area):
 	if (area.is_in_group("BrickSpawnArea") && _manager != null):
-		_manager.onBrickSpawnAreaClear()
-		
+		_manager.onBrickSpawnAreaClear(self)

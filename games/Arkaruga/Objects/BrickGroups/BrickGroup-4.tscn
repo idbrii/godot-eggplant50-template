@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://games/Arkaruga/Objects/BrickGroups/Arkaruga-BrickGroup-Base.tscn" type="PackedScene" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 240, 48 )
+
+[node name="BrickGroup" instance=ExtResource( 3 )]
+
+[node name="CollisionShape2D" parent="." index="0"]
+shape = SubResource( 1 )

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://games/Arkaruga/Scripts/Arkaruga-BrickGroupLibrary.gd" type="Script" id=1]
+[ext_resource path="res://games/Arkaruga/Objects/BrickGroups/Easy/BrickGroup-Easy-Checkers.tscn" type="PackedScene" id=2]
+
+[resource]
+script = ExtResource( 1 )
+easyGroups = [ ExtResource( 2 ) ]
+medGroups = [  ]
+hardGroups = [  ]
