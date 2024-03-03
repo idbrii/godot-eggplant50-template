@@ -1,8 +1,7 @@
-[gd_resource type="Resource" load_steps=26 format=2]
+[gd_resource type="Resource" load_steps=25 format=2]
 
 [ext_resource path="res://games/Arkaruga/Scripts/Arkaruga-BrickGroupLibrary.gd" type="Script" id=1]
 [ext_resource path="res://games/Arkaruga/Objects/BrickGroups/Easy/BrickGroup-Easy-Checkers.tscn" type="PackedScene" id=2]
-[ext_resource path="res://games/Arkaruga/Objects/BrickGroups/Easy/BrickGroup-Easy-Blank.tscn" type="PackedScene" id=3]
 [ext_resource path="res://games/Arkaruga/Objects/BrickGroups/Easy/BrickGroup-Easy-Columns.tscn" type="PackedScene" id=4]
 [ext_resource path="res://games/Arkaruga/Objects/BrickGroups/Medium/BrickGroup-Medium-ColumnsAndDiamonds.tscn" type="PackedScene" id=5]
 [ext_resource path="res://games/Arkaruga/Objects/BrickGroups/Hard/BrickGroup-Hard-SolidBlue.tscn" type="PackedScene" id=6]
@@ -28,6 +27,6 @@
 
 [resource]
 script = ExtResource( 1 )
-easyGroups = [ ExtResource( 3 ), ExtResource( 2 ), ExtResource( 4 ), ExtResource( 12 ), ExtResource( 20 ), ExtResource( 22 ), ExtResource( 10 ), ExtResource( 9 ), ExtResource( 21 ), ExtResource( 24 ), ExtResource( 23 ) ]
+easyGroups = [ ExtResource( 2 ), ExtResource( 4 ), ExtResource( 12 ), ExtResource( 20 ), ExtResource( 22 ), ExtResource( 10 ), ExtResource( 9 ), ExtResource( 21 ), ExtResource( 24 ), ExtResource( 23 ) ]
 medGroups = [ ExtResource( 5 ), ExtResource( 8 ), ExtResource( 19 ), ExtResource( 17 ), ExtResource( 15 ), ExtResource( 16 ), ExtResource( 25 ), ExtResource( 14 ), ExtResource( 18 ) ]
 hardGroups = [ ExtResource( 7 ), ExtResource( 11 ), ExtResource( 6 ), ExtResource( 13 ) ]
