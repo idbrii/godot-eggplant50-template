@@ -70,9 +70,10 @@ func _on_fall_through_hole():
 
 
 func _on_player_moved(_player, dest_pos, delta):
-	printt("Player moved:", dest_pos, delta)
-	for layer in gridworlds:
-		printt("layer:", layer, layer.snap_global_to_cell(dest_pos))
+	pass
+	#~ printt("Player moved:", dest_pos, delta)
+	#~ for layer in gridworlds:
+	#~ 	printt("layer:", layer, layer.snap_global_to_cell(dest_pos))
 
 
 

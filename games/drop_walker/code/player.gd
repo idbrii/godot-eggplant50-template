@@ -118,7 +118,7 @@ func _process(_dt: float):
 
 
 func fall_to_layer(layer, dest):
-    printt("Player fall_to_layer", layer, "falling:", global_position, "->", dest)
+    #~ printt("Player fall_to_layer", layer, "falling:", global_position, "->", dest)
     block_input = true
     var tween := create_tween()
 
@@ -145,7 +145,7 @@ func fall_to_layer(layer, dest):
         t = t.set_trans(Tween.TRANS_CUBIC)
 
     yield(tween, "finished")
-    printt("Player fall_to_layer. fell", global_position)
+    #~ printt("Player fall_to_layer. fell", global_position)
     # Don't restore block_input. We'll do that in done_falling when level is done transition.
 
 
