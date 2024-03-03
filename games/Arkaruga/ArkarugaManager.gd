@@ -3,6 +3,8 @@ extends Node2D
 const BrickGroupLibrary = preload("res://games/Arkaruga/Scripts/Arkaruga-BrickGroupLibrary.gd")
 const Types = preload("res://games/Arkaruga/Scripts/Arkaruga-Types.gd")
 const InitialGroupSpawnCount : int = 5
+const ConfigSavePath : String = "user://arkaruga.cfg"
+const HighScoreSaveCategory : String = "HighScores"
 
 export (Resource) var brickGroupLibrary
 export (PackedScene) var ballScene
@@ -36,9 +38,14 @@ var _gameDurationForSpeed : float
 var _lastSpawnedBrickGroup : Node2D
 var _mediumGroupChance : float
 var _hardGroupChance : float
+var _bestScore : int
+var _bestTime : float
 
 func _ready():
+	_loadHighScores()
 	setActiveColor(Types.ElementColor.GREEN)
+	
+	# set our initial lives so the UI fills out
 	_livesRemaining = startLives
 	
 func _input(event):
@@ -100,6 +107,8 @@ func startGame():
 	if uiManager:
 		uiManager.setStartScreenVisible(false)
 		uiManager.setSidebarResultsVisible(false)
+		uiManager.setBestScoreVisible(false)
+		uiManager.setBestTimeVisible(false)
 		
 	randomize()
 		
@@ -132,6 +141,14 @@ func endGame():
 	
 	uiManager.setEndScreenVisible(true)
 	uiManager.setSidebarResultsVisible(true)
+	
+	uiManager.setBestScoreVisible(_score > _bestScore)
+	uiManager.setBestTimeVisible(_totalGameDuration > _bestTime)
+	
+	_bestScore = max(_bestScore, _score)
+	_bestTime = max(_totalGameDuration, _bestTime)
+	
+	_saveHighScores()
 	
 func addScore(points : int):
 	var prevLiveIncrement = _score / bonusLifePoints
@@ -236,3 +253,21 @@ func _spawnBrickGroup():
 	brickContainer.add_child(groupInstance)
 	
 	_lastSpawnedBrickGroup = groupInstance
+
+func _loadHighScores():
+	var config = ConfigFile.new()
+	var err = config.load(ConfigSavePath)
+
+	if err == OK:
+		_bestScore = config.get_value(HighScoreSaveCategory, "Score")
+		_bestTime = config.get_value(HighScoreSaveCategory, "Time")
+	else:
+		_bestScore = 0
+		_bestTime = 0
+
+func _saveHighScores():
+	var config = ConfigFile.new()
+	config.set_value(HighScoreSaveCategory, "Score", _bestScore)
+	config.set_value(HighScoreSaveCategory, "Time", _bestTime)
+	config.save(ConfigSavePath)
+	pass
