@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=2]
+[gd_scene load_steps=57 format=2]
 
 [ext_resource path="res://games/Arkaruga/Objects/Arkaruga-Ball.tscn" type="PackedScene" id=1]
 [ext_resource path="res://games/Arkaruga/Objects/Arkaruga-Paddle.tscn" type="PackedScene" id=2]
@@ -38,6 +38,7 @@
 [ext_resource path="res://games/Arkaruga/Sounds/SFX/multiball.wav" type="AudioStream" id=36]
 [ext_resource path="res://games/Arkaruga/Sounds/SFX/bonus_life.wav" type="AudioStream" id=37]
 [ext_resource path="res://games/Arkaruga/Sounds/SFX/lose_life.wav" type="AudioStream" id=38]
+[ext_resource path="res://games/Arkaruga/Sounds/SFX/color_swap2.wav" type="AudioStream" id=39]
 
 [sub_resource type="RectangleShape2D" id=10]
 extents = Vector2( 260, 33 )
@@ -212,6 +213,9 @@ bumperTextureBlue = ExtResource( 11 )
 bumperTextureGreen = ExtResource( 12 )
 alarmTextureBlue = ExtResource( 10 )
 alarmTextureGreen = ExtResource( 13 )
+
+[node name="ParticlesContainer" type="Node2D" parent="ObjectLayer"]
+unique_name_in_owner = true
 
 [node name="BallContainer" type="Node2D" parent="ObjectLayer"]
 unique_name_in_owner = true
@@ -830,4 +834,8 @@ volume_db = 2.0
 
 [node name="LoseLifeSFX" type="AudioStreamPlayer" parent="Manager/SFX"]
 stream = ExtResource( 38 )
+volume_db = 2.0
+
+[node name="ColorSwapSFX" type="AudioStreamPlayer" parent="Manager/SFX"]
+stream = ExtResource( 39 )
 volume_db = 2.0

@@ -27,7 +27,9 @@ onready var _alertFrame1 : Control = $Body/Alert/Frame1
 onready var _alertFrame2 : Control = $Body/Alert/Frame2
 onready var _freezeTimer : Timer = $FreezeTimer
 onready var _flashTimer : Timer = $FlashTimer
+
 onready var _damageSFX : AudioStreamPlayer = $DamageSFX
+onready var _damageParticles : CPUParticles2D = $DamageParticles
 
 var _speed : float = 0
 var _isFrozen = false
@@ -131,6 +133,7 @@ func _freeze(duration: float):
 	_speed = 0
 	
 	_damageSFX.play()
+	_damageParticles.emitting = true
 	
 	_freezeTimer.start(duration)
 	yield(_freezeTimer, "timeout")

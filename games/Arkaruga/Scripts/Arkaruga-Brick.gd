@@ -14,6 +14,7 @@ export var maxFallSpeed = 200.0
 export var fallMinAngleOffset = 10.0
 export var fallMaxAngleOffset = 40.0
 export var fallAcceleration = 600
+export (PackedScene) var destructionParticles
 
 onready var _manager : Node2D = get_tree().get_nodes_in_group("Manager")[0]
 onready var _activeSprite : Sprite = $ActiveSprite
@@ -88,6 +89,8 @@ func _takeDamage(damage: int):
 func _onDestroyed():
 	_setCollidable(false)
 	_isDestroyed = true
+	if _manager:
+		_manager.playParticles(destructionParticles, global_position)
 	
 func _playFlash(duration: float):
 	if _isFlashing:
