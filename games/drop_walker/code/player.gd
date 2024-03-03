@@ -1,6 +1,7 @@
 extends Node2D
 
 signal fall_through_hole
+signal player_moved(player, pos)
 
 const GridWorld = preload("res://games/drop_walker/code/gridworld.gd")
 const Namer = preload("res://games/drop_walker/code/util/namer.gd")
@@ -8,8 +9,7 @@ const Namer = preload("res://games/drop_walker/code/util/namer.gd")
 export var gridworld_node : NodePath
 export var move_duration := 0.5
 
-export var fall_duration := 1.0
-export var bounce_height := 1.0
+export var drop_duration := 1.0
 
 var block_input := false
 var tile_width := 64
@@ -75,7 +75,7 @@ func _process(_dt: float):
         var dest = delta + global_position
         var dest_tile = gridworld.get_world_cellv(dest)
 
-        #~ printt('dest_tile', Namer.enum_as_string(GridWorld.GroundType, dest_tile))
+        #~ printt('dest_tile', Namer.enum_as_string(GridWorld.GroundType, dest_tile), dest)
         #~ gridworld.set_world_cellv(dest, GridWorld.GroundType.SOLID)
         block_input = true
         var tween := create_tween()
@@ -101,36 +101,55 @@ func _process(_dt: float):
                 t = t.set_trans(Tween.TRANS_SINE)
 
         yield(tween, "finished")
+
+        # Uncomment to tune fall_to_layer by triggering every frame.
+        #~ global_position += Vector2.UP * 500
+        #~ fall_to_layer("layer", dest)
+
         block_input = false
+
+        emit_signal("player_moved", self, dest, delta)
 
         if dest_tile == GridWorld.GroundType.EMPTY:
             emit_signal("fall_through_hole")
 
 
-func fall_to_layer(layer):
+func fall_to_layer(layer, dest):
+    printt("Player fall_to_layer", layer, "falling:", global_position, "->", dest)
     block_input = true
-    var dest = layer.attach_player_to_world(self)
     var tween := create_tween()
 
-    # TODO: This fall animation doesn't seem to work. We teleport there instead.
-    var t := tween.tween_property(self, "global_position", dest, fall_duration * 0.80)
+    var fall_duration = drop_duration * 0.75
+    var bounce_duration = drop_duration - fall_duration
+    var fall_speed = dest.distance_to(global_position) / fall_duration
+    var n_bounces = 2
+    var bounce_height = fall_speed * bounce_duration / n_bounces * 0.5
+
+    var t := tween.tween_property(self, "global_position", dest, fall_duration)
     t = t.from_current()
-    t = t.set_ease(Tween.EASE_IN_OUT)
-    t = t.set_trans(Tween.TRANS_SINE)
-    t = tween.chain().tween_property(self, "global_position", dest + Vector2.UP * bounce_height, fall_duration * 0.1)
-    t = t.from_current()
-    t = t.set_ease(Tween.EASE_IN_OUT)
-    t = t.set_trans(Tween.TRANS_SINE)
-    t = tween.chain().tween_property(self, "global_position", dest + Vector2.UP * -bounce_height, fall_duration * 0.1)
-    t = t.from_current()
-    t = t.set_ease(Tween.EASE_IN_OUT)
-    t = t.set_trans(Tween.TRANS_SINE)
+    t = t.set_ease(Tween.EASE_IN)
+    t = t.set_trans(Tween.TRANS_CIRC)
+    for i in range(n_bounces-1):
+        bounce_duration *= 2
+        var bounce_peak = dest + Vector2.UP * bounce_height / pow(2, i - 1)
+        t = tween.chain().tween_property(self, "global_position", bounce_peak, bounce_duration * 0.5)
+        t = t.from(dest)
+        t = t.set_ease(Tween.EASE_OUT)
+        t = t.set_trans(Tween.TRANS_SINE)
+        t = tween.chain().tween_property(self, "global_position", dest, bounce_duration * 0.5)
+        t = t.from(bounce_peak)
+        t = t.set_ease(Tween.EASE_IN_OUT)
+        t = t.set_trans(Tween.TRANS_CUBIC)
 
     yield(tween, "finished")
-    block_input = false
+    printt("Player fall_to_layer. fell", global_position)
+    # Don't restore block_input. We'll do that in done_falling when level is done transition.
 
 
 func done_falling():
+    block_input = false
     var dest_tile = gridworld.get_world_cellv(global_position)
+    printt("Player done_falling. dest", global_position, dest_tile)
     if dest_tile == GridWorld.GroundType.EMPTY:
+        yield(get_tree().create_timer(drop_duration * 0.1), "timeout")
         emit_signal("fall_through_hole")

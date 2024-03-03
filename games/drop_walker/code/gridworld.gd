@@ -31,7 +31,7 @@ func global_to_cell_pos(world_pos: Vector2) -> Vector2:
 
 
 func cell_to_global_pos(cell_pos: Vector2) -> Vector2:
-    return map_to_world(to_global(cell_pos + TILE_OFFSET))
+    return to_global(map_to_world(cell_pos + TILE_OFFSET))
 
 
 # https://github.com/gdquest-demos/godot-3-demos/blob/master/2017/final/09-Isometric%20grid-based%20movement/Player.gd
@@ -51,9 +51,12 @@ func get_world_cellv(v: Vector2) -> int:
 
 
 func attach_player_to_world(player):
+    var old_grid = player.gridworld
     var dest = snap_global_to_cell(player.global_position)
     player.get_parent().remove_child(player)
     $"%YSort".add_child(player)
     player.gridworld = self
+    if old_grid:
+        dest = cell_to_global_pos(old_grid.global_to_cell_pos(dest))
     return dest
 
