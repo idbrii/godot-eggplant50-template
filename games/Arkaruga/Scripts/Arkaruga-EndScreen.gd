@@ -1,0 +1,9 @@
+extends CanvasItem
+	
+onready var _manager : Node2D = get_tree().get_nodes_in_group("Manager")[0]
+	
+func _input(event):
+	if event.is_action_pressed("action2"):
+		if _manager:
+			_manager.uiManager.setStartScreenVisible(true)
+			_manager.uiManager.setEndScreenVisible(false)
