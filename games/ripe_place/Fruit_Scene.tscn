@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://games/ripe_place/art/monochrome-transparent.png" type="Texture" id=1]
+
+[sub_resource type="CircleShape2D" id=1]
+
+[node name="Fruit_Scene" type="Node2D"]
+
+[node name="Fruit" type="RigidBody2D" parent="."]
+
+[node name="Sprite" type="Sprite" parent="Fruit"]
+scale = Vector2( 4, 4 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 578, 306, 16, 16 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Fruit"]
+scale = Vector2( 3, 3 )
+shape = SubResource( 1 )
