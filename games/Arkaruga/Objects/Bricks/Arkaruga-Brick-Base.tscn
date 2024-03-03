@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://games/Arkaruga/Sprites/Bricks/Wide/brick-wide-blue.png" type="Texture" id=1]
 [ext_resource path="res://games/Arkaruga/Scripts/Arkaruga-Brick.gd" type="Script" id=2]
 [ext_resource path="res://games/Arkaruga/Sprites/Bricks/Wide/brick-wide-blue-outline.png" type="Texture" id=3]
 [ext_resource path="res://games/Arkaruga/Sprites/Bricks/Wide/brick-wide-hit.png" type="Texture" id=4]
+[ext_resource path="res://games/Arkaruga/Sounds/SFX/block_fall2.wav" type="AudioStream" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 24, 12 )
@@ -57,6 +58,9 @@ scale = Vector2( 3.2, 1.6 )
 [node name="FlashTimer" type="Timer" parent="."]
 
 [node name="GutterTimer" type="Timer" parent="."]
+
+[node name="BlockFallSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
 
 [connection signal="body_entered" from="FallingDamageArea" to="." method="_on_FallingArea_body_entered"]
 [connection signal="area_entered" from="GutterDetectionArea" to="." method="_on_GutterDetectionArea_area_entered"]

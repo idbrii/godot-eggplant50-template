@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Stream Loops 2024-02-14_L01.ogg-1e89e26002f71e79957dd1bc8edea62b.oggstr"
+
+[deps]
+
+source_file="res://games/Arkaruga/Sounds/Music/Stream Loops 2024-02-14_L01.ogg"
+dest_files=[ "res://.import/Stream Loops 2024-02-14_L01.ogg-1e89e26002f71e79957dd1bc8edea62b.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

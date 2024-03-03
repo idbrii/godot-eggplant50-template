@@ -2,7 +2,7 @@ extends Node2D
 
 const BrickGroupLibrary = preload("res://games/Arkaruga/Scripts/Arkaruga-BrickGroupLibrary.gd")
 const Types = preload("res://games/Arkaruga/Scripts/Arkaruga-Types.gd")
-const InitialGroupSpawnCount : int = 5
+const InitialGroupSpawnCount : int = 10
 const ConfigSavePath : String = "user://arkaruga.cfg"
 const HighScoreSaveCategory : String = "HighScores"
 
@@ -26,6 +26,13 @@ onready var brickGroupSpawnPoint = get_node("%BrickGroupSpawnPoint")
 onready var _startGameTimer : Timer = $StartGameTimer
 onready var _endGameTimer : Timer = $EndGameTimer
 onready var _lostBallTimer : Timer = $LostBallTimer
+onready var _musicNode : Node2D = $Music
+onready var _gameOverSFX : AudioStreamPlayer = $SFX/GameOverSFX
+onready var _countdownSFX : AudioStreamPlayer = $SFX/CountdownSFX
+onready var _countdownGoSFX : AudioStreamPlayer = $SFX/CountdownGoSFX
+onready var _multiballSFX : AudioStreamPlayer = $SFX/MultiballSFX
+onready var _loseLifeSFX : AudioStreamPlayer = $SFX/LoseLifeSFX
+onready var _bonusLifeSFX : AudioStreamPlayer = $SFX/BonusLifeSFX
 
 var activeColor = Types.ElementColor.BLUE
 
@@ -40,6 +47,7 @@ var _mediumGroupChance : float
 var _hardGroupChance : float
 var _bestScore : int
 var _bestTime : float
+var _activeMusic : String
 
 func _ready():
 	_loadHighScores()
@@ -47,6 +55,8 @@ func _ready():
 	
 	# set our initial lives so the UI fills out
 	_livesRemaining = startLives
+	
+	playStartScreenMusic()
 	
 func _input(event):
 	if event.is_action_pressed("action1"):
@@ -68,6 +78,9 @@ func _processUI(_delta):
 	uiManager.setComboValue(_combo)
 	uiManager.setLives(_livesRemaining)
 	uiManager.setTime(int(_totalGameDuration))
+	
+func onBallLaunched(_ball):
+	playGameplayMusic()
 		
 func onBallLost(_ball):
 	# this can get called while the scene is being torn down
@@ -75,7 +88,8 @@ func onBallLost(_ball):
 		return
 	
 	# reset our combo whenever a ball goes offscreen
-	_combo = 0 
+	_combo = 0
+	_loseLifeSFX.play() 
 	
 	# there are no balls left -- respawn!
 	if !getAnyBallsActive():
@@ -139,6 +153,9 @@ func endGame():
 	_endGameTimer.start()
 	yield(_endGameTimer, "timeout")
 	
+	_gameOverSFX.play()
+	playEndScreenMusic()
+	
 	uiManager.setEndScreenVisible(true)
 	uiManager.setSidebarResultsVisible(true)
 	
@@ -150,12 +167,17 @@ func endGame():
 	
 	_saveHighScores()
 	
+func closeEndGameScreen():
+	uiManager.setStartScreenVisible(true)
+	uiManager.setEndScreenVisible(false)
+	playStartScreenMusic()
+	
 func addScore(points : int):
 	var prevLiveIncrement = _score / bonusLifePoints
 	_score += points
 	
 	if _score / bonusLifePoints > prevLiveIncrement:
-		# TODO: Play sound
+		_bonusLifeSFX.play()
 		gainLife()
 		if uiManager:
 			uiManager.playToast("BALL GET!")
@@ -166,7 +188,7 @@ func addCombo(ball, value : int = 1):
 	_combo += value
 	
 	if _combo >= comboForNextMultiball:
-		# TODO: Play sound
+		_multiballSFX.play()
 		_spawnMultiball(ball)
 		if uiManager:
 			uiManager.playToast("MULTI BALL!")
@@ -271,3 +293,33 @@ func _saveHighScores():
 	config.set_value(HighScoreSaveCategory, "Time", _bestTime)
 	config.save(ConfigSavePath)
 	pass
+	
+func playCountdownSFX():
+	_countdownSFX.play()
+	
+func playCountdownGoSFX():
+	_countdownGoSFX.play()
+	
+func playStartScreenMusic():
+	_playMusic("StartScreenMusic")
+
+func playEndScreenMusic():
+	_playMusic("EndScreenMusic")
+	
+func playGameplayMusic():
+	_playMusic("GameplayMusic")
+	
+func _playMusic(music):
+	if music == _activeMusic:
+		return
+	
+	for node in _musicNode.get_children():
+		if node is AudioStreamPlayer:
+			if node.name == music:
+				node.play()
+			else:
+				node.stop()
+				
+	_activeMusic = music
+	
+	

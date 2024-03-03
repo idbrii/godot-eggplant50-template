@@ -22,6 +22,9 @@ onready var _manager : Node2D = get_tree().get_nodes_in_group("Manager")[0]
 onready var _sprite : Sprite = $Sprite
 onready var _trail = $Trail
 onready var _countdownTimer : Timer = $CountdownTimer
+onready var _bounceSFX : AudioStreamPlayer = $SFX/BounceSFX
+onready var _bounceWallSFX : AudioStreamPlayer = $SFX/BounceWallSFX
+onready var _bouncePaddleSFX : AudioStreamPlayer = $SFX/BouncePaddleSFX
 
 var _attachedPaddle : KinematicBody2D
 var _color
@@ -84,8 +87,9 @@ func processCollision(collision):
 	velocity = finalDirection * finalSpeed
 	
 	# notify the other collider
+	var validCollision = false
 	if collision.collider.has_method("onBallHit"):
-		collision.collider.onBallHit(self)
+		validCollision = collision.collider.onBallHit(self)
 		
 	# increase our combo
 	if _manager:
@@ -94,6 +98,13 @@ func processCollision(collision):
 		elif _remainingComboCooldown <= 0:
 			_remainingComboCooldown = comboCooldown
 			_manager.addCombo(self)
+			
+	if paddle:
+		_bouncePaddleSFX.play()
+	elif validCollision:
+		_bounceSFX.play()
+	else:
+		_bounceWallSFX.play()
 
 func attachToPaddle(paddle: KinematicBody2D):
 	# attach ourselves to the paddle's anchor
@@ -106,30 +117,35 @@ func attachToPaddle(paddle: KinematicBody2D):
 		_trail.emitting = false
 
 func startLaunchTimer():
-	# TODO: show countdown in UI
+	# show countdown in UI
 	_countdownTimer.start(countdownDuration)
 	yield(_countdownTimer, "timeout")
 	
 	if _manager:
 		_manager.uiManager.playToast(str(3))
+		_manager.playCountdownSFX()
 	
 	_countdownTimer.start(countdownDuration)
 	yield(_countdownTimer, "timeout")
 	
 	if _manager:
 		_manager.uiManager.playToast(str(2))
+		_manager.playCountdownSFX()
 	
 	_countdownTimer.start(countdownDuration)
 	yield(_countdownTimer, "timeout")
 	
 	if _manager:
 		_manager.uiManager.playToast(str(1))
+		_manager.playCountdownSFX()
 	
 	_countdownTimer.start(countdownDuration)
 	yield(_countdownTimer, "timeout")
 	
 	if _manager:
 		_manager.uiManager.playToast("Go!")
+		_manager.playCountdownGoSFX()
+		_manager.onBallLaunched(self)
 	
 	# detach from paddle
 	var globalPosition = global_position

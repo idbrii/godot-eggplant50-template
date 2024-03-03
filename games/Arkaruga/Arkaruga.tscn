@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=2]
+[gd_scene load_steps=56 format=2]
 
 [ext_resource path="res://games/Arkaruga/Objects/Arkaruga-Ball.tscn" type="PackedScene" id=1]
 [ext_resource path="res://games/Arkaruga/Objects/Arkaruga-Paddle.tscn" type="PackedScene" id=2]
@@ -29,6 +29,15 @@
 [ext_resource path="res://games/Arkaruga/Scripts/Arkaruga-StartScreen.gd" type="Script" id=27]
 [ext_resource path="res://shared/input/art/playstation/circle.png" type="Texture" id=28]
 [ext_resource path="res://games/Arkaruga/Scripts/Arkaruga-EndScreen.gd" type="Script" id=29]
+[ext_resource path="res://games/Arkaruga/Sounds/Music/Ludum Dare 38 - 10.ogg" type="AudioStream" id=30]
+[ext_resource path="res://games/Arkaruga/Sounds/Music/Stream Loops 2024-02-14_L03.ogg" type="AudioStream" id=31]
+[ext_resource path="res://games/Arkaruga/Sounds/Music/Ludum Dare 30 - 09.ogg" type="AudioStream" id=32]
+[ext_resource path="res://games/Arkaruga/Sounds/SFX/game_over.wav" type="AudioStream" id=33]
+[ext_resource path="res://games/Arkaruga/Sounds/SFX/countdown.wav" type="AudioStream" id=34]
+[ext_resource path="res://games/Arkaruga/Sounds/SFX/countdown_go.wav" type="AudioStream" id=35]
+[ext_resource path="res://games/Arkaruga/Sounds/SFX/multiball.wav" type="AudioStream" id=36]
+[ext_resource path="res://games/Arkaruga/Sounds/SFX/bonus_life.wav" type="AudioStream" id=37]
+[ext_resource path="res://games/Arkaruga/Sounds/SFX/lose_life.wav" type="AudioStream" id=38]
 
 [sub_resource type="RectangleShape2D" id=10]
 extents = Vector2( 260, 33 )
@@ -212,7 +221,7 @@ unique_name_in_owner = true
 
 [node name="BrickGroupSpawnPoint" type="Node2D" parent="ObjectLayer/BrickContainer"]
 unique_name_in_owner = true
-position = Vector2( 24, 128 )
+position = Vector2( 24, 144 )
 
 [node name="Areas" type="Node2D" parent="ObjectLayer"]
 
@@ -616,7 +625,7 @@ anchor_bottom = 0.5
 margin_left = -245.0
 margin_top = -108.0
 margin_right = 251.0
-margin_bottom = 108.0
+margin_bottom = 168.0
 
 [node name="Title" type="Label" parent="UILayer/StartGame/VBoxContainer"]
 margin_right = 496.0
@@ -676,7 +685,27 @@ rect_pivot_offset = Vector2( 8, 8 )
 texture = ExtResource( 25 )
 script = ExtResource( 24 )
 
+[node name="Spacer2" type="Control" parent="UILayer/StartGame/VBoxContainer"]
+margin_top = 184.0
+margin_right = 496.0
+margin_bottom = 252.0
+rect_min_size = Vector2( 0, 32 )
+size_flags_vertical = 3
+
+[node name="Credits" type="Label" parent="UILayer/StartGame/VBoxContainer"]
+margin_top = 256.0
+margin_right = 496.0
+margin_bottom = 276.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 0, 16 )
+rect_pivot_offset = Vector2( 400, 14 )
+theme = ExtResource( 7 )
+text = "Game by Jon Gill                                  MUSIC BY ABSTRACTION"
+align = 1
+
 [node name="EndGame" type="Control" parent="UILayer"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = -118.0
@@ -764,3 +793,41 @@ wait_time = 0.5
 wait_time = 2.0
 
 [node name="LostBallTimer" type="Timer" parent="Manager"]
+
+[node name="Music" type="Node2D" parent="Manager"]
+
+[node name="StartScreenMusic" type="AudioStreamPlayer" parent="Manager/Music"]
+stream = ExtResource( 30 )
+volume_db = -4.0
+
+[node name="GameplayMusic" type="AudioStreamPlayer" parent="Manager/Music"]
+stream = ExtResource( 32 )
+volume_db = -8.0
+
+[node name="EndScreenMusic" type="AudioStreamPlayer" parent="Manager/Music"]
+stream = ExtResource( 31 )
+volume_db = -4.0
+
+[node name="SFX" type="Node2D" parent="Manager"]
+
+[node name="GameOverSFX" type="AudioStreamPlayer" parent="Manager/SFX"]
+stream = ExtResource( 33 )
+volume_db = 2.0
+
+[node name="CountdownSFX" type="AudioStreamPlayer" parent="Manager/SFX"]
+stream = ExtResource( 34 )
+
+[node name="CountdownGoSFX" type="AudioStreamPlayer" parent="Manager/SFX"]
+stream = ExtResource( 35 )
+
+[node name="MultiballSFX" type="AudioStreamPlayer" parent="Manager/SFX"]
+stream = ExtResource( 36 )
+volume_db = 2.0
+
+[node name="BonusLifeSFX" type="AudioStreamPlayer" parent="Manager/SFX"]
+stream = ExtResource( 37 )
+volume_db = 2.0
+
+[node name="LoseLifeSFX" type="AudioStreamPlayer" parent="Manager/SFX"]
+stream = ExtResource( 38 )
+volume_db = 2.0
