@@ -16,6 +16,7 @@ onready var ballContainer = get_node("%BallContainer")
 onready var brickContainer = get_node("%BrickContainer")
 
 onready var _startGameTimer : Timer = $StartGameTimer
+onready var _endGameTimer : Timer = $EndGameTimer
 onready var _lostBallTimer : Timer = $LostBallTimer
 
 var activeColor = Types.ElementColor.BLUE
@@ -29,9 +30,7 @@ var _gameDurationForSpeed : float
 
 func _ready():
 	setActiveColor(Types.ElementColor.GREEN)
-	
-	if uiManager:
-		uiManager.setStartScreenVisible(true)
+	_livesRemaining = startLives
 	
 func _input(event):
 	if event.is_action_pressed("action1"):
@@ -52,6 +51,7 @@ func _processUI(_delta):
 	uiManager.setScoreValue(_score)
 	uiManager.setComboValue(_combo)
 	uiManager.setLives(_livesRemaining)
+	uiManager.setTime(int(_totalGameDuration))
 		
 func onBallLost(_ball):
 	# reset our combo whenever a ball goes offscreen
@@ -59,12 +59,13 @@ func onBallLost(_ball):
 	
 	# there are no balls left -- respawn!
 	if !getAnyBallsActive():
-		loseLife()
-	
 		if _livesRemaining > 0:
 			_lostBallTimer.start()
 			yield(_lostBallTimer, "timeout")
+			loseLife()
 			_respawnBall()
+		else:
+			endGame()
 			
 func onBrickSpawnAreaClear():
 	print("CLEAR!")
@@ -80,6 +81,7 @@ func getAnyBallsActive():
 func startGame():
 	if uiManager:
 		uiManager.setStartScreenVisible(false)
+		uiManager.setSidebarResultsVisible(false)
 	
 	_startGameTimer.start()
 	yield(_startGameTimer, "timeout")
@@ -90,10 +92,19 @@ func startGame():
 	_gameDurationForSpeed = 0
 	_score = 0
 	_combo = 0
+	
+	# spend a life on the initial ball so the UI matches the desired count
+	loseLife()
 	_respawnBall()
 	
 func endGame():
 	_isGameRunning = false
+	
+	_endGameTimer.start()
+	yield(_endGameTimer, "timeout")
+	
+	uiManager.setEndScreenVisible(true)
+	uiManager.setSidebarResultsVisible(true)
 	
 func addScore(points : int):
 	var prevLiveIncrement = _score / bonusLifePoints
