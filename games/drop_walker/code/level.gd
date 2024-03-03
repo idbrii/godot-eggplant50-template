@@ -66,6 +66,7 @@ func set_world_layer(index, snap, is_game_over):
 
 func _on_reached_goal():
 	$UI/gameover.visible = true
+	$UI/gameover/Label.text = "Win!"
 	var goals = get_tree().get_nodes_in_group("goal")
 	for g in goals:
 		g.play_win()
