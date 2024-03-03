@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=2]
+[gd_scene load_steps=47 format=2]
 
 [ext_resource path="res://games/Arkaruga/Objects/Arkaruga-Ball.tscn" type="PackedScene" id=1]
 [ext_resource path="res://games/Arkaruga/Objects/Arkaruga-Paddle.tscn" type="PackedScene" id=2]
@@ -17,6 +17,7 @@
 [ext_resource path="res://mainmenu/art/font/kenpixel/blocks.ttf" type="DynamicFontData" id=15]
 [ext_resource path="res://mainmenu/art/font/kenpixel/mini.ttf" type="DynamicFontData" id=16]
 [ext_resource path="res://games/Arkaruga/Objects/UI/Arkaruga-BallUITexture.tscn" type="PackedScene" id=17]
+[ext_resource path="res://games/Arkaruga/Resources/Arkaruga-BrickGroupLibrary.tres" type="Resource" id=18]
 [ext_resource path="res://games/Arkaruga/Sprites/Decoration/gutter-spike.png" type="Texture" id=19]
 [ext_resource path="res://games/Arkaruga/Scripts/Arkaruga-GutterSpikes.gd" type="Script" id=20]
 [ext_resource path="res://games/Arkaruga/Scripts/Arkaruga-UIManager.gd" type="Script" id=21]
@@ -210,7 +211,8 @@ unique_name_in_owner = true
 unique_name_in_owner = true
 
 [node name="BrickGroupSpawnPoint" type="Node2D" parent="ObjectLayer/BrickContainer"]
-position = Vector2( 24, 0 )
+unique_name_in_owner = true
+position = Vector2( 24, 128 )
 
 [node name="Areas" type="Node2D" parent="ObjectLayer"]
 
@@ -229,7 +231,7 @@ shape = SubResource( 10 )
 [node name="BrickSpawnArea" type="Area2D" parent="ObjectLayer/Areas" groups=["BrickSpawnArea"]]
 position = Vector2( 1, -360 )
 collision_layer = 0
-collision_mask = 8
+collision_mask = 16
 __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true
@@ -238,6 +240,27 @@ __meta__ = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ObjectLayer/Areas/BrickSpawnArea"]
 position = Vector2( 255, 210 )
 shape = SubResource( 11 )
+
+[node name="Black" type="Control" parent="ObjectLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="ColorRect" type="ColorRect" parent="ObjectLayer/Black"]
+anchor_bottom = 1.0
+margin_right = 20.0
+color = Color( 0.0901961, 0.0666667, 0.101961, 1 )
+
+[node name="ColorRect2" type="ColorRect" parent="ObjectLayer/Black"]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -128.0
+color = Color( 0.0901961, 0.0666667, 0.101961, 1 )
+
+[node name="ColorRect3" type="ColorRect" parent="ObjectLayer/Black"]
+anchor_right = 1.0
+margin_bottom = 16.0
+color = Color( 0.0901961, 0.0666667, 0.101961, 1 )
 
 [node name="Walls" type="Node2D" parent="ObjectLayer"]
 
@@ -326,27 +349,6 @@ texture = ExtResource( 19 )
 stretch_mode = 2
 flip_v = true
 script = ExtResource( 20 )
-
-[node name="Black" type="Control" parent="BackgroundLayer"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-
-[node name="ColorRect" type="ColorRect" parent="BackgroundLayer/Black"]
-anchor_bottom = 1.0
-margin_right = 20.0
-color = Color( 0.0901961, 0.0666667, 0.101961, 1 )
-
-[node name="ColorRect2" type="ColorRect" parent="BackgroundLayer/Black"]
-anchor_left = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -128.0
-color = Color( 0.0901961, 0.0666667, 0.101961, 1 )
-
-[node name="ColorRect3" type="ColorRect" parent="BackgroundLayer/Black"]
-anchor_right = 1.0
-margin_bottom = 16.0
-color = Color( 0.0901961, 0.0666667, 0.101961, 1 )
 
 [node name="UILayer" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
@@ -752,6 +754,7 @@ help_body = "Bounce the ball to break the blocks! Swap dimensions, avoid falling
 [node name="Manager" type="Node2D" parent="." groups=["Manager"]]
 unique_name_in_owner = true
 script = ExtResource( 9 )
+brickGroupLibrary = ExtResource( 18 )
 ballScene = ExtResource( 1 )
 
 [node name="StartGameTimer" type="Timer" parent="Manager"]

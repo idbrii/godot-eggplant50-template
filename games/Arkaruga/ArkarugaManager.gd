@@ -1,7 +1,10 @@
 extends Node2D
 
+const BrickGroupLibrary = preload("res://games/Arkaruga/Scripts/Arkaruga-BrickGroupLibrary.gd")
 const Types = preload("res://games/Arkaruga/Scripts/Arkaruga-Types.gd")
+const InitialGroupSpawnCount : int = 3
 
+export (Resource) var brickGroupLibrary
 export (PackedScene) var ballScene
 export (int) var startLives = 5
 export var secondsToMaxSpeed = 600
@@ -14,6 +17,7 @@ onready var uiManager = get_node("%UILayer")
 onready var paddle = get_node("%Paddle")
 onready var ballContainer = get_node("%BallContainer")
 onready var brickContainer = get_node("%BrickContainer")
+onready var brickGroupSpawnPoint = get_node("%BrickGroupSpawnPoint")
 
 onready var _startGameTimer : Timer = $StartGameTimer
 onready var _endGameTimer : Timer = $EndGameTimer
@@ -27,6 +31,7 @@ var _score : int
 var _combo : int
 var _totalGameDuration : float
 var _gameDurationForSpeed : float
+var _lastSpawnedBrickGroup : Node2D
 
 func _ready():
 	setActiveColor(Types.ElementColor.GREEN)
@@ -67,8 +72,9 @@ func onBallLost(_ball):
 		else:
 			endGame()
 			
-func onBrickSpawnAreaClear():
-	print("CLEAR!")
+func onBrickSpawnAreaClear(brickGroup):
+	if brickGroup == _lastSpawnedBrickGroup:
+		_spawnBrickGroup()
 		
 func getAnyBallsActive():
 	var balls = get_tree().get_nodes_in_group("Balls")
@@ -83,7 +89,10 @@ func startGame():
 		uiManager.setStartScreenVisible(false)
 		uiManager.setSidebarResultsVisible(false)
 		
+	_lastSpawnedBrickGroup = null
 	_clearBricks()
+	for n in InitialGroupSpawnCount:
+		_spawnBrickGroup()
 	
 	_startGameTimer.start()
 	yield(_startGameTimer, "timeout")
@@ -187,3 +196,17 @@ func _clearBricks():
 	var bricks = get_tree().get_nodes_in_group("Bricks")	
 	for brick in bricks:
 		brick.queue_free()
+		
+func _spawnBrickGroup():
+	var library : BrickGroupLibrary = brickGroupLibrary
+	var group = library.getRandomEasyGroup()
+	
+	var spawnPosition = brickGroupSpawnPoint.global_position
+	if _lastSpawnedBrickGroup:
+		spawnPosition = _lastSpawnedBrickGroup.getNextGroupSpawnGlobalPosition()
+	
+	var groupInstance = group.instance()
+	groupInstance.global_position = spawnPosition
+	brickContainer.add_child(groupInstance)
+	
+	_lastSpawnedBrickGroup = groupInstance

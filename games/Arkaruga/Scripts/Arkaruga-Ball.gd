@@ -14,6 +14,7 @@ export var paddlePositionRatio : float = .5
 export var minPaddleComponentBounceVerticalComponent : float = .25
 export var textureBlue : Texture
 export var textureGreen : Texture
+export var comboCooldown : float = .06
 
 var velocity : Vector2
 
@@ -24,6 +25,7 @@ onready var _countdownTimer : Timer = $CountdownTimer
 
 var _attachedPaddle : KinematicBody2D
 var _color
+var _remainingComboCooldown : float = 0
 
 func _ready():
 	if _manager:
@@ -44,6 +46,8 @@ func _process(delta):
 				position += offset
 				
 		velocity.y += gravity * delta
+	
+	_remainingComboCooldown = max(0, _remainingComboCooldown - delta)
 				
 func onActiveColorChanged(color: int):
 	_setColor(color)
@@ -87,7 +91,8 @@ func processCollision(collision):
 	if _manager:
 		if paddle:
 			_manager.resetCombo()
-		else:
+		elif _remainingComboCooldown <= 0:
+			_remainingComboCooldown = comboCooldown
 			_manager.addCombo(self)
 
 func attachToPaddle(paddle: KinematicBody2D):
