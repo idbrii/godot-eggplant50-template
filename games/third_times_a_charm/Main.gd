@@ -83,12 +83,14 @@ func check_matches():
 			if v_matches.size() >= 3:
 				matches.v.append(v_matches)
 
-	for m in matches.h:
-		remove_match(m)
-	for m in matches.v:
-		remove_match(m)
+	if not matches.h.empty() or not matches.v.empty():
+		for m in matches.h:
+			remove_match(m)
+		for m in matches.v:
+			remove_match(m)
 
-	fill_gaps(matches)
+		yield(get_tree().create_timer(0.5), 'timeout')
+		fill_gaps(matches)
 
 const SWELL_PERIOD = 0.25
 const SHRINK_PERIOD = 0.2
@@ -115,10 +117,50 @@ func remove_match(matched_shapes):
 		)
 		shrink.set_ease(Tween.EASE_IN)
 		s.set_meta('removing2', true)
-	yield(get_tree().create_timer(SHRINK_PERIOD), 'timeout')
+
+	# TODO
+#	for s in matched_shapes:
+#		s.queue_free()
 
 func fill_gaps(matches):
-	pass
+	# Dedupe all shapes
+	var all_gaps = []
+	for m in matches.h:
+		for s in m:
+			if not all_gaps.has(s):
+				all_gaps.append(s)
+				s.set_meta('filling', true)
+
+	for row in grid:
+		for s in row:
+			if not s.has_meta('filling'):
+				var grid_pos = shape_to_grid_pos(s)
+				var move_count = 0
+				var row_idx = grid_pos.y + 1
+				while row_idx < grid[grid_pos.x].size():
+					if grid[grid_pos.x][row_idx].has_meta('filling'):
+						move_count += 1
+					row_idx += 1
+				if move_count > 0:
+					slide_down(s, move_count)
+
+func slide_down(shape, move_count):
+	var move_to = Vector2(shape.global_position.x, shape.global_position.y + (64 * move_count))
+	var slide_tween = get_tree().create_tween()
+	slide_tween.tween_property(
+		shape, "global_position", move_to, MOVE_PERIOD*move_count
+	)
+	slide_tween.set_ease(Tween.EASE_OUT)
+
+	yield(slide_tween, 'finished')
+
+	var new_pos = shape_to_grid_pos(shape)
+	grid[new_pos.x][new_pos.y] = shape
+
+func shape_to_grid_pos(shape) -> Vector2:
+	var pos = shape.global_position
+	return Vector2((pos.x / 64) - 1, (pos.y / 64) - 1)
+
 const MOVE_PERIOD = 0.2
 func move_cursor(from, to):
 	$Cursor/Tween.interpolate_property(
