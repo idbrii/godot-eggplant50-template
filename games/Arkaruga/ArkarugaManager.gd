@@ -2,7 +2,8 @@ extends Node2D
 
 const BrickGroupLibrary = preload("res://games/Arkaruga/Scripts/Arkaruga-BrickGroupLibrary.gd")
 const Types = preload("res://games/Arkaruga/Scripts/Arkaruga-Types.gd")
-const InitialGroupSpawnCount : int = 10
+const InitialEasyGroupSpawnCount : int = 5
+const InitialRandomGroupSpawnCount : int = 5
 const ConfigSavePath : String = "user://arkaruga.cfg"
 const HighScoreSaveCategory : String = "HighScores"
 
@@ -109,7 +110,7 @@ func onBrickSpawnAreaClear(brickGroup : Node2D):
 		return
 	
 	if brickGroup == _lastSpawnedBrickGroup && is_instance_valid(brickGroup):
-			call_deferred("_spawnBrickGroup")
+			call_deferred("_spawnRandomBrickGroup")
 		
 func getAnyBallsActive():
 	var balls = get_tree().get_nodes_in_group("Balls")
@@ -130,8 +131,12 @@ func startGame():
 		
 	_lastSpawnedBrickGroup = null
 	_clearBricks()
-	for n in InitialGroupSpawnCount:
-		_spawnBrickGroup()
+	
+	for n in InitialEasyGroupSpawnCount:
+		_spawnEasyBrickGroup()
+	
+	for n in InitialRandomGroupSpawnCount:
+		_spawnRandomBrickGroup()
 	
 	_startGameTimer.start()
 	yield(_startGameTimer, "timeout")
@@ -256,7 +261,7 @@ func _clearBricks():
 	for brick in bricks:
 		brick.queue_free()
 		
-func _spawnBrickGroup():
+func _spawnRandomBrickGroup():
 	var library : BrickGroupLibrary = brickGroupLibrary
 	var group = null
 	if randf() < _hardGroupChance:
@@ -269,7 +274,17 @@ func _spawnBrickGroup():
 		group = library.getRandomEasyGroup()
 		_mediumGroupChance += mediumGroupChanceIncrement
 		_hardGroupChance += hardGroupChanceIncrement
+		
+	_spawnBrickGroup(group)
 	
+func _spawnEasyBrickGroup():
+	var library : BrickGroupLibrary = brickGroupLibrary
+	var group = library.getRandomEasyGroup()
+		
+	_spawnBrickGroup(group)
+	
+	
+func _spawnBrickGroup(group):
 	var spawnPosition = brickGroupSpawnPoint.global_position
 	if _lastSpawnedBrickGroup:
 		spawnPosition = _lastSpawnedBrickGroup.getNextGroupSpawnGlobalPosition()
