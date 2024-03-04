@@ -10,8 +10,8 @@ func _ready():
 	drop_new_fruit()
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
-	print('occupants', occupants)
+#func _process(_delta):
+#	print('occupants', occupants)
 
 func drop_new_fruit():
 	var fruit = fruit_scene.instance()
