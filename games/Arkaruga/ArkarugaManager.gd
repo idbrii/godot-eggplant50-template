@@ -2,7 +2,7 @@ extends Node2D
 
 const BrickGroupLibrary = preload("res://games/Arkaruga/Scripts/Arkaruga-BrickGroupLibrary.gd")
 const Types = preload("res://games/Arkaruga/Scripts/Arkaruga-Types.gd")
-const InitialEasyGroupSpawnCount : int = 5
+const InitialEasyGroupSpawnCount : int = 2
 const InitialRandomGroupSpawnCount : int = 5
 const ConfigSavePath : String = "user://arkaruga.cfg"
 const HighScoreSaveCategory : String = "HighScores"
@@ -11,11 +11,11 @@ export (Resource) var brickGroupLibrary
 export (PackedScene) var ballScene
 export (int) var startLives = 5
 export var secondsToMaxSpeed = 360
-export var secondsLostOnDeath = 60
+export var timeRatioLostOnDeath = .33
 export (int) var bonusLifePoints = 100
 export (int) var multiballCombo = 10
 export (float) var multiballAngleOffset = 45.0
-export (float) var mediumGroupChanceIncrement = .2
+export (float) var mediumGroupChanceIncrement = .5
 export (float) var hardGroupChanceIncrement = .1
 
 onready var uiManager = get_node("%UILayer")
@@ -207,7 +207,7 @@ func loseLife():
 	if _livesRemaining > 0:
 		_livesRemaining -= 1
 		# slow the game down after losing a life
-		_gameDurationForSpeed = max(0.0, _gameDurationForSpeed - secondsLostOnDeath)
+		_gameDurationForSpeed = max(0.0, _gameDurationForSpeed * (1.0 - timeRatioLostOnDeath))
 	
 func gainLife():
 	_livesRemaining += 1
