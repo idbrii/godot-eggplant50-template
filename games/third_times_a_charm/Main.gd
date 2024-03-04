@@ -7,13 +7,15 @@ func _ready() -> void:
 	for x in range(8):
 		grid.append([])
 		for y in range(4):
-			var s : Sprite = $Shapes.get_children()[randi() % $Shapes.get_child_count()].duplicate()
-			s.global_position = Vector2(32+(x+1) * 64, 32+(y+1) * 64)
-			s.scale = Vector2(0.9, 0.9)
-			s.set_meta("shape", _sprite_to_name(s))
-			$Grid.add_child(s)
-			
-			grid[x].insert(y, s)
+			grid[x].insert(y, make_shape(x, y))
+
+func make_shape(x, y):
+	var s : Sprite = $Shapes.get_children()[randi() % $Shapes.get_child_count()].duplicate()
+	s.global_position = Vector2(32+(x+1) * 64, 32+(y+1) * 64)
+	s.scale = Vector2(0.9, 0.9)
+	s.set_meta("shape", _sprite_to_name(s))
+	$Grid.add_child(s)
+	return s
 
 func _sprite_to_name(s: Sprite):
 	var rp = s.texture.resource_path
@@ -118,23 +120,34 @@ func remove_match(matched_shapes):
 		shrink.set_ease(Tween.EASE_IN)
 		s.set_meta('removing2', true)
 
-	# TODO
-#	for s in matched_shapes:
-#		s.queue_free()
-
 func fill_gaps(matches):
-	# Dedupe all shapes
+	# Dedupe all shapes and annotate which are being filled in.
 	var all_gaps = []
 	for m in matches.h:
 		for s in m:
 			if not all_gaps.has(s):
 				all_gaps.append(s)
 				s.set_meta('filling', true)
+	for m in matches.v:
+		for s in m:
+			if not all_gaps.has(s):
+				all_gaps.append(s)
+				s.set_meta('filling', true)
 
+	var gap_counts = {}
+	# Figure out where shapes need to be added once all gaps are considered
+	for s in all_gaps:
+		var grid_pos = shape_to_grid_pos(s)
+		if grid_pos.x in gap_counts:
+			gap_counts[grid_pos.x] += 1
+		else:
+			gap_counts[grid_pos.x] = 1
+
+	# Move existing shapes down
 	for row in grid:
 		for s in row:
+			var grid_pos = shape_to_grid_pos(s)
 			if not s.has_meta('filling'):
-				var grid_pos = shape_to_grid_pos(s)
 				var move_count = 0
 				var row_idx = grid_pos.y + 1
 				while row_idx < grid[grid_pos.x].size():
@@ -143,6 +156,11 @@ func fill_gaps(matches):
 					row_idx += 1
 				if move_count > 0:
 					slide_down(s, move_count)
+
+	for idx in gap_counts.keys():
+		for n in gap_counts[idx]:
+			var s = make_shape(idx, -n - 1)
+			slide_down(s, gap_counts[idx])
 
 func slide_down(shape, move_count):
 	var move_to = Vector2(shape.global_position.x, shape.global_position.y + (64 * move_count))
@@ -159,7 +177,7 @@ func slide_down(shape, move_count):
 
 func shape_to_grid_pos(shape) -> Vector2:
 	var pos = shape.global_position
-	return Vector2((pos.x / 64) - 1, (pos.y / 64) - 1)
+	return Vector2(((pos.x-32) / 64) - 1, ((pos.y-32) / 64) - 1)
 
 const MOVE_PERIOD = 0.2
 func move_cursor(from, to):
