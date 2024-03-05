@@ -19,8 +19,155 @@ gravity_vec = Vector2( 320, 180 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="gravityArea"]
 light_mask = 0
-position = Vector2( 320, 180 )
+position = Vector2( 320, 182 )
 shape = SubResource( 1 )
 
 [node name="Fruit_Spawn_Scene" parent="." instance=ExtResource( 3 )]
-position = Vector2( 64, 64 )
+position = Vector2( 32, 58 )
+
+[node name="Fruit_Spawn_Scene2" parent="." instance=ExtResource( 3 )]
+position = Vector2( 96, 58 )
+
+[node name="Fruit_Spawn_Scene3" parent="." instance=ExtResource( 3 )]
+position = Vector2( 160, 58 )
+
+[node name="Fruit_Spawn_Scene4" parent="." instance=ExtResource( 3 )]
+position = Vector2( 224, 58 )
+
+[node name="Fruit_Spawn_Scene5" parent="." instance=ExtResource( 3 )]
+position = Vector2( 288, 58 )
+
+[node name="Fruit_Spawn_Scene6" parent="." instance=ExtResource( 3 )]
+position = Vector2( 352, 58 )
+
+[node name="Fruit_Spawn_Scene7" parent="." instance=ExtResource( 3 )]
+position = Vector2( 416, 58 )
+
+[node name="Fruit_Spawn_Scene8" parent="." instance=ExtResource( 3 )]
+position = Vector2( 480, 58 )
+
+[node name="Fruit_Spawn_Scene9" parent="." instance=ExtResource( 3 )]
+position = Vector2( 544, 58 )
+
+[node name="Fruit_Spawn_Scene10" parent="." instance=ExtResource( 3 )]
+position = Vector2( 608, 58 )
+
+[node name="Fruit_Spawn_Scene11" parent="." instance=ExtResource( 3 )]
+position = Vector2( 32, 122 )
+
+[node name="Fruit_Spawn_Scene12" parent="." instance=ExtResource( 3 )]
+position = Vector2( 96, 122 )
+
+[node name="Fruit_Spawn_Scene13" parent="." instance=ExtResource( 3 )]
+position = Vector2( 160, 122 )
+
+[node name="Fruit_Spawn_Scene14" parent="." instance=ExtResource( 3 )]
+position = Vector2( 224, 122 )
+
+[node name="Fruit_Spawn_Scene15" parent="." instance=ExtResource( 3 )]
+position = Vector2( 288, 122 )
+
+[node name="Fruit_Spawn_Scene16" parent="." instance=ExtResource( 3 )]
+position = Vector2( 352, 122 )
+
+[node name="Fruit_Spawn_Scene17" parent="." instance=ExtResource( 3 )]
+position = Vector2( 416, 122 )
+
+[node name="Fruit_Spawn_Scene18" parent="." instance=ExtResource( 3 )]
+position = Vector2( 480, 122 )
+
+[node name="Fruit_Spawn_Scene19" parent="." instance=ExtResource( 3 )]
+position = Vector2( 544, 122 )
+
+[node name="Fruit_Spawn_Scene20" parent="." instance=ExtResource( 3 )]
+position = Vector2( 608, 122 )
+
+[node name="Fruit_Spawn_Scene21" parent="." instance=ExtResource( 3 )]
+position = Vector2( 32, 186 )
+
+[node name="Fruit_Spawn_Scene22" parent="." instance=ExtResource( 3 )]
+position = Vector2( 96, 186 )
+
+[node name="Fruit_Spawn_Scene23" parent="." instance=ExtResource( 3 )]
+position = Vector2( 160, 186 )
+
+[node name="Fruit_Spawn_Scene24" parent="." instance=ExtResource( 3 )]
+position = Vector2( 224, 186 )
+
+[node name="Fruit_Spawn_Scene25" parent="." instance=ExtResource( 3 )]
+position = Vector2( 288, 186 )
+
+[node name="Fruit_Spawn_Scene26" parent="." instance=ExtResource( 3 )]
+position = Vector2( 352, 186 )
+
+[node name="Fruit_Spawn_Scene27" parent="." instance=ExtResource( 3 )]
+position = Vector2( 416, 186 )
+
+[node name="Fruit_Spawn_Scene28" parent="." instance=ExtResource( 3 )]
+position = Vector2( 480, 186 )
+
+[node name="Fruit_Spawn_Scene29" parent="." instance=ExtResource( 3 )]
+position = Vector2( 544, 186 )
+
+[node name="Fruit_Spawn_Scene30" parent="." instance=ExtResource( 3 )]
+position = Vector2( 608, 186 )
+
+[node name="Fruit_Spawn_Scene31" parent="." instance=ExtResource( 3 )]
+position = Vector2( 32, 250 )
+
+[node name="Fruit_Spawn_Scene32" parent="." instance=ExtResource( 3 )]
+position = Vector2( 96, 250 )
+
+[node name="Fruit_Spawn_Scene33" parent="." instance=ExtResource( 3 )]
+position = Vector2( 160, 250 )
+
+[node name="Fruit_Spawn_Scene34" parent="." instance=ExtResource( 3 )]
+position = Vector2( 224, 250 )
+
+[node name="Fruit_Spawn_Scene35" parent="." instance=ExtResource( 3 )]
+position = Vector2( 288, 250 )
+
+[node name="Fruit_Spawn_Scene36" parent="." instance=ExtResource( 3 )]
+position = Vector2( 352, 250 )
+
+[node name="Fruit_Spawn_Scene37" parent="." instance=ExtResource( 3 )]
+position = Vector2( 416, 250 )
+
+[node name="Fruit_Spawn_Scene38" parent="." instance=ExtResource( 3 )]
+position = Vector2( 480, 250 )
+
+[node name="Fruit_Spawn_Scene39" parent="." instance=ExtResource( 3 )]
+position = Vector2( 544, 250 )
+
+[node name="Fruit_Spawn_Scene40" parent="." instance=ExtResource( 3 )]
+position = Vector2( 608, 250 )
+
+[node name="Fruit_Spawn_Scene41" parent="." instance=ExtResource( 3 )]
+position = Vector2( 32, 314 )
+
+[node name="Fruit_Spawn_Scene42" parent="." instance=ExtResource( 3 )]
+position = Vector2( 96, 314 )
+
+[node name="Fruit_Spawn_Scene43" parent="." instance=ExtResource( 3 )]
+position = Vector2( 160, 314 )
+
+[node name="Fruit_Spawn_Scene44" parent="." instance=ExtResource( 3 )]
+position = Vector2( 224, 314 )
+
+[node name="Fruit_Spawn_Scene45" parent="." instance=ExtResource( 3 )]
+position = Vector2( 288, 314 )
+
+[node name="Fruit_Spawn_Scene46" parent="." instance=ExtResource( 3 )]
+position = Vector2( 352, 314 )
+
+[node name="Fruit_Spawn_Scene47" parent="." instance=ExtResource( 3 )]
+position = Vector2( 416, 314 )
+
+[node name="Fruit_Spawn_Scene48" parent="." instance=ExtResource( 3 )]
+position = Vector2( 480, 314 )
+
+[node name="Fruit_Spawn_Scene49" parent="." instance=ExtResource( 3 )]
+position = Vector2( 544, 314 )
+
+[node name="Fruit_Spawn_Scene50" parent="." instance=ExtResource( 3 )]
+position = Vector2( 608, 314 )
