@@ -7,10 +7,12 @@ enum State {
 }
 var state : int
 var grid : Array
+var combo_count : int
 
 func _ready() -> void:
 	change_state('ready', State.WAITING)
 	grid = []
+	combo_count = 0
 
 	for x in range(8):
 		grid.append([])
@@ -72,6 +74,8 @@ func _process(_delta: float) -> void:
 			move.y = cpos.y + 64
 		
 		if move != cpos:
+			combo_count = 0
+			update_combo_count(0)
 			change_state('starting swap', State.SWAPPING)
 			move_cursor(cpos, move)
 			if input.move:
@@ -83,6 +87,18 @@ func _process(_delta: float) -> void:
 func update_score(score_delta):
 	var new_score = int($UI/Status/Score.text) + score_delta
 	$UI/Status/Score.text = str(new_score)
+
+func update_matched(matched_delta):
+	var new_matched = int($UI/Status/MatchedValue.text) + matched_delta
+	$UI/Status/MatchedValue.text = str(new_matched)
+
+func update_combo_count(combo_count):
+	$UI/Status/ComboCount.text = '(x%d)' % combo_count
+
+func update_combo_value(combo_delta):
+	var new_count = int($UI/Status/ComboValue.text) + combo_delta
+	$UI/Status/ComboValue.text = str(new_count)
+
 
 const MATCH_SCORE = {
 	3: 10,
@@ -127,21 +143,28 @@ func check_matches():
 
 		var match_count = 0
 		var score = 0
-		print("removing: ", matches)
+		combo_count += 1
 		for m in matches.h:
 			var matched = m.size()
 			match_count += matched
-			score += MATCH_SCORE[matched] if matched in MATCH_SCORE else 1000 # Don't think it can be more than 5???
+			var scored = MATCH_SCORE[matched] if matched in MATCH_SCORE else 1000 # Don't think it can be more than 5???
+			score += combo_count * scored
 			remove_match(m)
+
 		for m in matches.v:
 			var matched = m.size()
 			match_count += matched
-			score += MATCH_SCORE[matched] if matched in MATCH_SCORE else 1000 # Don't think it can be more than 5???
+			var scored = MATCH_SCORE[matched] if matched in MATCH_SCORE else 1000 # Don't think it can be more than 5???
+			score += combo_count * scored
 			remove_match(m)
 
 		yield(get_tree().create_timer(0.5), 'timeout')
 
 		update_score(score)
+		update_matched(match_count)
+		update_combo_count(combo_count)
+		if combo_count > 1:
+			update_combo_value(1)
 		fill_gaps(matches)
 
 const SWELL_PERIOD = 0.25

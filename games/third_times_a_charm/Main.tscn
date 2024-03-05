@@ -78,7 +78,7 @@ margin_right = 70.0
 margin_bottom = 30.0
 text = "matches"
 
-[node name="MatchCount" type="Label" parent="UI/Status"]
+[node name="MatchedValue" type="Label" parent="UI/Status"]
 margin_left = 74.0
 margin_top = 10.0
 margin_right = 84.0
@@ -97,7 +97,7 @@ margin_right = 158.0
 margin_bottom = 30.0
 text = "combos"
 
-[node name="ComboCount" type="Label" parent="UI/Status"]
+[node name="ComboValue" type="Label" parent="UI/Status"]
 margin_left = 162.0
 margin_top = 10.0
 margin_right = 172.0
@@ -122,3 +122,10 @@ margin_top = 10.0
 margin_right = 248.0
 margin_bottom = 30.0
 text = "0"
+
+[node name="ComboCount" type="Label" parent="UI/Status"]
+margin_left = 252.0
+margin_top = 10.0
+margin_right = 284.0
+margin_bottom = 30.0
+text = "(x0)"
