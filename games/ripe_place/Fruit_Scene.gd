@@ -22,7 +22,6 @@ func highlightFruit():
 	$FruitBody/GlowPolygon.visible = true
 	
 func unhighlightFruit():
-	var fruit_sprite: Sprite = self.get_node("FruitBody/Sprite")
 	fruit_sprite.set_scale(fruit_sprite.get_scale() / highlight_scale)
 	$FruitBody/GlowPolygon.visible = false
 	
