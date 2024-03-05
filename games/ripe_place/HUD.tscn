@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://mainmenu/art/font/font_kenpixel_mini.tres" type="DynamicFont" id=1]
 [ext_resource path="res://games/ripe_place/HUD.gd" type="Script" id=2]
 [ext_resource path="res://mainmenu/art/font/font_kenpixel_high.tres" type="DynamicFont" id=3]
+[ext_resource path="res://mainmenu/art/font/font_kenpixel_blocks.tres" type="DynamicFont" id=4]
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource( 2 )
@@ -48,4 +49,31 @@ margin_bottom = 68.0
 align = 1
 autowrap = true
 
+[node name="newGameButton" type="Button" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -102.0
+margin_top = -40.0
+margin_right = 102.0
+margin_bottom = 40.0
+custom_colors/font_color = Color( 0.972549, 0.898039, 0.0823529, 1 )
+custom_fonts/font = ExtResource( 4 )
+text = "New Game"
+
+[node name="youDiedLabel" type="Label" parent="."]
+visible = false
+anchor_right = 1.0
+margin_top = 64.0
+margin_right = -320.0
+margin_bottom = 104.0
+rect_scale = Vector2( 2, 2 )
+custom_colors/font_color = Color( 1, 0.819608, 0, 1 )
+text = "You have run out of nutrition. Unfortunate!"
+align = 1
+autowrap = true
+
 [connection signal="timeout" from="MessageTimer" to="." method="_on_MessageTimer_timeout"]
+[connection signal="button_up" from="newGameButton" to="." method="_on_newGameButton_button_up"]

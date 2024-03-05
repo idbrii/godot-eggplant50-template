@@ -173,4 +173,6 @@ position = Vector2( 544, 314 )
 [node name="Fruit_Spawn_Scene50" parent="." instance=ExtResource( 3 )]
 position = Vector2( 608, 314 )
 
-[node name="HUD" parent="." instance=ExtResource( 4 )]
+[node name="hud" parent="." instance=ExtResource( 4 )]
+
+[connection signal="start_game" from="hud" to="." method="_on_HUD_start_game"]

@@ -3,14 +3,18 @@ extends Node2D
 
 export(Vector2) var screen_size
 export(int) var move_size
-export(int) var nutrition
+export(int) var initial_nutrition
 export(int) var move_cost
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+var hud
 var covered_fruit_scene: PackedScene
+var nutrition
 
+func _ready():
+	hud = self.get_parent().get_node('hud');
+	hud.connect('start_game', self, 'reset')
+	reset()
+	
 func _process(_delta):
 	handle_bat_move()
 	handle_bat_action()
@@ -48,4 +52,10 @@ func handle_bat_action():
 
 func change_nutrition(delta: int):
 	self.nutrition += delta
-	self.get_parent().get_node('HUD').update_score(self.nutrition)
+	hud.update_score(self.nutrition)
+	if self.nutrition < 1:
+		hud.show_game_over()
+
+func reset():
+	self.nutrition = initial_nutrition
+	change_nutrition(0)
