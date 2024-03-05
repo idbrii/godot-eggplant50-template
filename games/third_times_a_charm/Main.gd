@@ -1,9 +1,17 @@
 extends Node2D
 
-var is_swapping = false
-var grid = []
+enum State {
+	WAITING,
+	SWAPPING,
+	DROPPING,
+}
+var state : int
+var grid : Array
 
 func _ready() -> void:
+	change_state('ready', State.WAITING)
+	grid = []
+
 	for x in range(8):
 		grid.append([])
 		for y in range(4):
@@ -40,9 +48,16 @@ func get_input() -> Dictionary:
 #		"just_change": Input.is_action_just_pressed("action2"),#
 	}
 
+func debug(msg):
+	print("[%d] %s" % [Time.get_ticks_msec(), msg])
+
+func change_state(reason, new_state):
+	debug("changing state because '%s' from %s to %s" % [reason, State.keys()[state], State.keys()[new_state]])
+	state = new_state
+
 func _process(_delta: float) -> void:
 	var input = get_input()
-	if not is_swapping and (input.x != 0 or input.y != 0):
+	if state == State.WAITING and (input.x != 0 or input.y != 0):
 		var cpos = $Cursor.global_position
 		var move = Vector2(cpos.x, cpos.y)
 		if input.x < 0 and cpos.x > 64:
@@ -55,11 +70,13 @@ func _process(_delta: float) -> void:
 			move.y = cpos.y + 64
 		
 		if move != cpos:
-			is_swapping = true
+			change_state('starting swap', State.SWAPPING)
 			move_cursor(cpos, move)
-#			print("move from ", (cpos.x/64), 'x', (cpos.y/64), " ", cpos, " to ", (move.x/64), 'x', (move.y/64), " ", move)
 			if input.move:
 				try_swap(cpos, move)
+
+	if state == State.WAITING:
+		check_matches()
 
 func check_matches():
 	var matches = { h = [], v = [] }
@@ -86,12 +103,15 @@ func check_matches():
 				matches.v.append(v_matches)
 
 	if not matches.h.empty() or not matches.v.empty():
+		change_state('new drops', State.DROPPING)
+
 		for m in matches.h:
 			remove_match(m)
 		for m in matches.v:
 			remove_match(m)
 
 		yield(get_tree().create_timer(0.5), 'timeout')
+
 		fill_gaps(matches)
 
 const SWELL_PERIOD = 0.25
@@ -157,10 +177,16 @@ func fill_gaps(matches):
 				if move_count > 0:
 					slide_down(s, move_count)
 
+	var highest_count = 0
 	for idx in gap_counts.keys():
+		highest_count = max(highest_count, gap_counts[idx])
 		for n in gap_counts[idx]:
 			var s = make_shape(idx, -n - 1)
 			slide_down(s, gap_counts[idx])
+
+	yield(get_tree().create_timer(0.2 + (MOVE_PERIOD * highest_count)), 'timeout')
+
+	change_state('finished dropping', State.WAITING)
 
 func slide_down(shape, move_count):
 	var move_to = Vector2(shape.global_position.x, shape.global_position.y + (64 * move_count))
@@ -187,7 +213,7 @@ func move_cursor(from, to):
 	$Cursor/Tween.start()
 
 	yield($Cursor/Tween, 'tween_completed')
-	is_swapping = false
+	change_state('finished cursor move', State.WAITING)
 	check_matches()
 
 func try_swap(move_from: Vector2, move_to: Vector2):
