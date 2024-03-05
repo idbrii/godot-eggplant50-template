@@ -19,8 +19,8 @@ extents = Vector2( 46, 4 )
 [node name="Paddle" type="KinematicBody2D" groups=["Colorized"]]
 position = Vector2( 277, 330 )
 script = ExtResource( 1 )
-maxSpeed = 250.0
-acceleration = 600.0
+maxSpeed = 275.0
+acceleration = 700.0
 reverseAcceleration = 1200.0
 bumperTextureBlue = ExtResource( 3 )
 bumperTextureGreen = ExtResource( 5 )

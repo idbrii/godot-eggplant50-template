@@ -39,20 +39,14 @@ position = Vector2( 216, -36 )
 [node name="Brick-Wide-Gray2" parent="Bricks" index="9" instance=ExtResource( 2 )]
 position = Vector2( 264, -36 )
 
-[node name="Brick-Wide-Gray3" parent="Bricks" index="10" instance=ExtResource( 2 )]
-position = Vector2( 168, -36 )
-
-[node name="Brick-Wide-Gray4" parent="Bricks" index="11" instance=ExtResource( 2 )]
-position = Vector2( 312, -36 )
-
-[node name="Brick-Diamond-Blue" parent="Bricks" index="12" instance=ExtResource( 3 )]
+[node name="Brick-Diamond-Blue" parent="Bricks" index="10" instance=ExtResource( 3 )]
 position = Vector2( 40, -36 )
 
-[node name="Brick-Diamond-Green" parent="Bricks" index="13" instance=ExtResource( 4 )]
+[node name="Brick-Diamond-Green" parent="Bricks" index="11" instance=ExtResource( 4 )]
 position = Vector2( 104, -36 )
 
-[node name="Brick-Diamond-Green2" parent="Bricks" index="14" instance=ExtResource( 4 )]
+[node name="Brick-Diamond-Green2" parent="Bricks" index="12" instance=ExtResource( 4 )]
 position = Vector2( 376, -36 )
 
-[node name="Brick-Diamond-Blue2" parent="Bricks" index="15" instance=ExtResource( 3 )]
+[node name="Brick-Diamond-Blue2" parent="Bricks" index="13" instance=ExtResource( 3 )]
 position = Vector2( 440, -36 )
