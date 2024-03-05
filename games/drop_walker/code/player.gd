@@ -36,12 +36,9 @@ func get_input() -> Dictionary:
     var move := Input.get_vector("move_left", "move_right", "move_up", "move_down")
     return {
         move = move,
-        just_plank = Input.is_action_just_pressed("action1"),
-        plank = Input.is_action_pressed("action1"),
-        released_plank = Input.is_action_just_released("action1"),
-        just_dash = Input.is_action_just_pressed("action2"),
-        hold_dash = Input.is_action_pressed("action2"),
-        released_dash = Input.is_action_just_released("action2"),
+        just_plank     = Input.is_action_just_pressed("action1")  or Input.is_action_just_pressed("action2"),
+        plank          = Input.is_action_pressed("action1")       or Input.is_action_pressed("action2"),
+        released_plank = Input.is_action_just_released("action1") or Input.is_action_just_released("action2"),
     }
 
 func matches_grid_angle(input_dir, direction):

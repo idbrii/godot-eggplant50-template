@@ -96,10 +96,10 @@ margin_left = 18.0
 margin_top = 60.0
 margin_right = 185.0
 margin_bottom = 280.0
-help_title = "Work in Progress"
+help_title = "How To Play"
 help_body = "Navigate the world and get to the eggplant jam!
 
-Placing boards is not yet implemented, so just fall through the right holes."
+Place planks to cross over gaps, but you only have 3! Fall through the right hole to reach further below."
 
 [node name="Inventory" type="Control" parent="UI"]
 unique_name_in_owner = true
