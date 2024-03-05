@@ -1,4 +1,5 @@
 extends Node2D
+#signal overlapping
 
 export(Vector2) var screen_size
 export(int) var move_size
@@ -32,21 +33,21 @@ func handle_bat_move():
 
 func handle_bat_action():
 	if Input.is_action_just_released("action1"):
-		var intersecting_bodies = self.get_node('Area2D').get_overlapping_bodies()
+		var intersecting_bodies = self.get_node("RigidBody2D").get_overlapping_bodies()
 		print('colliding: ', intersecting_bodies)
 
-
-func _on_Area2D_body_entered(body):
-	var entered_parent: Node2D = body.get_parent()
-	print('entered: ', entered_parent)
-	if entered_parent.get('is_a_fruit'):
-		print('Bat is covering fruit ', entered_parent)
-		var fruit_sprite: Sprite = entered_parent.get_node('Fruit/Sprite')
-		fruit_sprite.set_scale(fruit_sprite.get_scale() * 2)
-
-func _on_Area2D_body_exited(body):
-	var exited_parent = body.get_parent()
-	if exited_parent.get('is_a_fruit'):
-		print('Bat is no longer over fruit ', exited_parent)
-		var fruit_sprite: Sprite = exited_parent.get_node('Fruit/Sprite')
-		fruit_sprite.set_scale(fruit_sprite.get_scale() / 2)
+#
+#func _on_Area2D_body_entered(body):
+#	var entered_parent: Node2D = body.get_parent()
+#	print('entered: ', entered_parent)
+##	emit_signal('overlapping')
+#	if entered_parent.get('is_a_fruit'):
+#		print('Bat is covering fruit ', entered_parent)
+#		entered_parent.highlight_fruit()
+#
+#func _on_Area2D_body_exited(body):
+#	var exited_parent = body.get_parent()
+#	if exited_parent.get('is_a_fruit'):
+#		print('Bat is no longer over fruit ', exited_parent)
+#		var fruit_sprite: Sprite = exited_parent.get_node('Fruit/Sprite')
+#		fruit_sprite.set_scale(fruit_sprite.get_scale() / 2)
