@@ -3,14 +3,13 @@ extends Node2D
 export(bool) var is_a_fruit = true
 export(float) var highlight_scale = 1.1
 export(int) var ripeness = 0
-export(int) var rot_threshold = 3
 
 var fruit_sprite: Sprite
 
-var colors_for_ripenesses = {
-	0: Color(1.0, 1.0, 1.0),
-	1: Color(1.0, 0.8, 0.4),
-	2: Color(0.6, 0.6, 0.6)
+var colors_for_ripeness_categories = {
+	'unripe': Color(1.0, 1.0, 1.0),
+	'ripe': Color(1.0, 0.8, 0.4),
+	'overripe': Color(0.6, 0.6, 0.6)
 }
 
 # Called when the node enters the scene tree for the first time.
@@ -44,10 +43,11 @@ func harvest():
 
 func _on_ripenessTimer_timeout():
 	ripeness += 1
-	var color = colors_for_ripenesses.get(ripeness)
+	var category = get_category_for_ripeness(ripeness)
+	var color = colors_for_ripeness_categories.get(category)
 	if color:
 		fruit_sprite.modulate = color
-	if ripeness >= rot_threshold:
+	if category == 'decayed':
 		start_explode()
 
 func start_explode():
@@ -60,3 +60,12 @@ func finish_explode():
 	
 func _on_AnimatedSprite_animation_finished():
 	finish_explode()
+
+func get_category_for_ripeness(r: int):
+	if r >= 0 && r <= 2:
+		return 'unripe'
+	if r >= 3 && r <= 4:
+		return 'ripe'
+	if r >= 5 && r <= 7:
+		return 'overripe'
+	return 'decayed'
