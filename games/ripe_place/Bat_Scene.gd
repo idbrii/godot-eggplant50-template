@@ -3,6 +3,8 @@ extends Node2D
 
 export(Vector2) var screen_size
 export(int) var move_size
+export(int) var nutrition
+export(int) var move_cost
 
 # Declare member variables here. Examples:
 # var a = 2
@@ -31,6 +33,9 @@ func handle_bat_move():
 	self.position.x = clamp(self.position.x, 0, screen_size.x)
 	self.position.y = clamp(self.position.y, 0, screen_size.y)
 
+	if (move.length() > 0):
+		change_nutrition(-move_cost)
+
 func handle_bat_action():
 	if Input.is_action_just_released("action1"):
 		var intersecting_bodies = self.get_node("batArea2D").get_overlapping_bodies()
@@ -39,19 +44,8 @@ func handle_bat_action():
 		for body in intersecting_bodies:
 			fruits.append(body.get_parent())
 		for fruit in fruits:
-			fruit.harvest()
+			fruit.harvest(self)
 
-#func _on_Area2D_body_entered(body):
-#	var entered_parent: Node2D = body.get_parent()
-#	print('entered: ', entered_parent)
-##	emit_signal('overlapping')
-#	if entered_parent.get('is_a_fruit'):
-#		print('Bat is covering fruit ', entered_parent)
-#		entered_parent.highlight_fruit()
-#
-#func _on_Area2D_body_exited(body):
-#	var exited_parent = body.get_parent()
-#	if exited_parent.get('is_a_fruit'):
-#		print('Bat is no longer over fruit ', exited_parent)
-#		var fruit_sprite: Sprite = exited_parent.get_node('Fruit/Sprite')
-#		fruit_sprite.set_scale(fruit_sprite.get_scale() / 2)
+func change_nutrition(delta: int):
+	self.nutrition += delta
+	self.get_parent().get_node('HUD').update_score(self.nutrition)
