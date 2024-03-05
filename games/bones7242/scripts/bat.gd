@@ -21,7 +21,9 @@ var power_increment = 1
 var initial_state = State.STAND
 var current_state : int
 var last_state : int
+
 var batter_sprite : Sprite
+var baseball_object : Area2D
 
 func change_state(new_state):
 	# store the current state as last state, if it exists
@@ -32,8 +34,6 @@ func change_state(new_state):
 	pass
 
 func check_for_hit():
-	#get position of ball
-	var baseball_object = $"../baseball_area2d"
 	#see if ball within radius of hitting sphere
 	var distance_to_ball_center = position.distance_to(baseball_object.position)
 	print('distance to ball = ' + str(distance_to_ball_center))
@@ -43,6 +43,7 @@ func _ready():
 	change_state(initial_state)
 	batter_sprite = get_node("Sprite")
 	batter_sprite.texture = load("res://games/bones7242/sprites/batter-test-05.png") # set initial sprite
+	baseball_object = $"../baseball_area2d"
 	pass
 	
 func _process(delta):
@@ -55,7 +56,7 @@ func _process(delta):
 				# change to next state
 				change_state(State.CROUCH)
 				batter_sprite.texture = load("res://games/bones7242/sprites/batter-test-06.png")
-				# tBD: change sprite
+				baseball_object.change_state(baseball_object.State.WINDUP)
 		State.CROUCH:
 			# Build up power
 			if throw_power < max_throw_power:
@@ -63,11 +64,12 @@ func _process(delta):
 			# listen for input
 			if Input.is_action_just_released("action1"):
 				print("batter is releasing")
+				print("batter throw_power: " + str(throw_power));
 				# change to next state
 				change_state(State.RELEASE)
-				# tBD: change sprite
 				batter_sprite.texture = load("res://games/bones7242/sprites/batter-test-07.png")
-				# TBD: apply power to the ball and relase it
+				baseball_object.change_state(baseball_object.State.RELEASED)
+				baseball_object.y_power = throw_power * 20
 				throw_power = start_throw_power
 		State.RELEASE:
 			#TBD: pause for a second?
@@ -99,6 +101,7 @@ func _process(delta):
 			if true: #placeholder - replace with timer after ball hits ground.
 				change_state(State.STAND)
 				batter_sprite.texture = load("res://games/bones7242/sprites/batter-test-05.png")
+				baseball_object.change_state(baseball_object.State.HELD)
 		_:
 			print("I am not a bat state I know of!")
 		

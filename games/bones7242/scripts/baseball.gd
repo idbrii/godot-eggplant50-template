@@ -13,7 +13,7 @@ var current_state : int
 var last_state : int
 # tbd: set up with enter and exit state functions to set state.
 
-var power = 0
+var y_power = 0
 var power_increment = 40
 var grav = power_increment
 var max_fall_speed = 100
@@ -39,46 +39,22 @@ func _process(delta):
 	
 	match current_state:
 		State.HELD:
-			#print("i am HELD")
-			#wait around
-			# movement
-			var move_x := Input.get_axis("move_left", "move_right")
-			position.x += move_x * h_move_speed
-			#listen for change to windup
-			if Input.is_action_pressed("action2"):
-				change_state(State.WINDUP)
-				#print("i am winding up")
+			position.y = 100
 		State.WINDUP:
-			#print("i am WINDUP")
-			# do windup stuff
-			var potential_move = 1 * windup_speed * delta
-			if (position.y + potential_move) < 300:
-				position.y += potential_move
-				power += power_increment
-				#print('power:' + str(power))
-				windup_speed += (max_windup_speed - windup_speed) / 2 #tweening to max
-			#listen for change to released
-			if Input.is_action_just_released("action2"):
-				#print("i am RELEASED")
-				change_state(State.RELEASED)
-				windup_speed = starting_windup_speed #reset windup speed
+			position.y = 200
 		State.RELEASED:
 			# do released stuff
-			power -= grav
+			y_power -= grav
 			#print('power:' + str(power))
-			var next_movement = -1 * power * delta
+			var next_movement = -1 * y_power * delta
 			if next_movement <= max_fall_speed:
 				position.y += next_movement # move ball the ball
-			
 			# also listen for hitting the ground
 			if position.y >= 300:
 				change_state(State.GROUNDED)
-				power = 0 #reset power
+				y_power = 0 #reset power
 		State.GROUNDED:
-			#if Input.is_action_just_released("action1"):
-			if true: #placeholder - replace with timer after "strike" or hit or whatever.
-				change_state(State.HELD)
-				position.y = 199
+			position.y = 300
 		_:
 			print("I am not a baseball state I know of!")
 		
