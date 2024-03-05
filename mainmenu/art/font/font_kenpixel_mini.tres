@@ -4,4 +4,6 @@
 font_path = "res://mainmenu/art/font/kenpixel/mini.ttf"
 
 [resource]
+outline_size = 1
+outline_color = Color( 0.45098, 0.45098, 0.45098, 1 )
 font_data = SubResource( 1 )

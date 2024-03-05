@@ -3,6 +3,7 @@ extends Node2D
 export(bool) var is_a_fruit = true
 export(float) var highlight_scale = 1.1
 export(int) var ripeness = 0
+export(Dictionary) var nutritions_for_ripeness_categories
 
 var fruit_sprite: Sprite
 
@@ -38,7 +39,10 @@ func _on_FruitArea_area_exited(area):
 	if body_parent.name == 'bat':
 		unhighlightFruit()
 
-func harvest():
+func harvest(harvester):
+	var category = get_category_for_ripeness(ripeness)
+	var nutrition = nutritions_for_ripeness_categories[category]
+	harvester.change_nutrition(nutrition)
 	self.get_parent().remove_child(self)
 
 func _on_ripenessTimer_timeout():

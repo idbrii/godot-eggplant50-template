@@ -1,0 +1,51 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://mainmenu/art/font/font_kenpixel_mini.tres" type="DynamicFont" id=1]
+[ext_resource path="res://games/ripe_place/HUD.gd" type="Script" id=2]
+[ext_resource path="res://mainmenu/art/font/font_kenpixel_high.tres" type="DynamicFont" id=3]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource( 2 )
+
+[node name="nutritionDescLabel" type="Label" parent="."]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = 12.0
+margin_top = 120.0
+margin_right = -528.0
+margin_bottom = 150.0
+rect_scale = Vector2( 3, 2 )
+custom_fonts/font = ExtResource( 3 )
+text = "Nutrition:"
+autowrap = true
+
+[node name="nutritionLabel" type="Label" parent="."]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = 320.0
+margin_top = 105.0
+margin_right = -280.0
+margin_bottom = 125.0
+rect_scale = Vector2( 4, 4 )
+custom_colors/font_color = Color( 0.984314, 0.0901961, 0.258824, 1 )
+custom_fonts/font = ExtResource( 1 )
+text = "10"
+autowrap = true
+
+[node name="MessageTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="Message" type="Label" parent="."]
+visible = false
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_top = -86.0
+margin_bottom = 68.0
+align = 1
+autowrap = true
+
+[connection signal="timeout" from="MessageTimer" to="." method="_on_MessageTimer_timeout"]
