@@ -1,19 +1,40 @@
 extends Node2D
 
+export(Vector2) var screen_size
+export(int) var move_size
 
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
 var covered_fruit_scene: PackedScene
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+func _process(_delta):
+	handle_bat_move()
+	handle_bat_action()
 
+func handle_bat_move():
+	var x = 0
+	var y = 0
+	if Input.is_action_just_released("move_left"):
+		x -= 1
+	if Input.is_action_just_released("move_right"):
+		x += 1
+	if Input.is_action_just_released("move_up"):
+		y -= 1
+	if Input.is_action_just_released("move_down"):
+		y += 1
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+	var move = Vector2(x * move_size, y * move_size)
+
+	self.position += move
+	self.position.x = clamp(self.position.x, 0, screen_size.x)
+	self.position.y = clamp(self.position.y, 0, screen_size.y)
+
+func handle_bat_action():
+	if Input.is_action_just_released("action1"):
+		var intersecting_bodies = self.get_node('Area2D').get_overlapping_bodies()
+		print('colliding: ', intersecting_bodies)
+
 
 func _on_Area2D_body_entered(body):
 	var entered_parent: Node2D = body.get_parent()
