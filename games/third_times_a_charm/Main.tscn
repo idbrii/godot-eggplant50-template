@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://games/polygonal_pasture/assets/square-large.png" type="Texture" id=1]
 [ext_resource path="res://games/polygonal_pasture/assets/circle-large.png" type="Texture" id=2]
 [ext_resource path="res://games/polygonal_pasture/assets/triangle-large.png" type="Texture" id=3]
 [ext_resource path="res://games/third_times_a_charm/Main.gd" type="Script" id=4]
 [ext_resource path="res://games/polygonal_pasture/assets/hexagon-large.png" type="Texture" id=5]
+[ext_resource path="res://games/third_times_a_charm/cursor.png" type="Texture" id=6]
 
 [node name="Main" type="Node2D"]
 script = ExtResource( 4 )
@@ -46,9 +47,14 @@ texture = ExtResource( 5 )
 position = Vector2( 128, 128 )
 
 [node name="ColorRect" type="ColorRect" parent="Cursor"]
+visible = false
 margin_right = 64.0
 margin_bottom = 64.0
 rect_min_size = Vector2( 64, 64 )
 color = Color( 1, 1, 1, 0.196078 )
 
 [node name="Tween" type="Tween" parent="Cursor"]
+
+[node name="Sprite" type="Sprite" parent="Cursor"]
+position = Vector2( 31, 32 )
+texture = ExtResource( 6 )
