@@ -33,10 +33,14 @@ func handle_bat_move():
 
 func handle_bat_action():
 	if Input.is_action_just_released("action1"):
-		var intersecting_bodies = self.get_node("RigidBody2D").get_overlapping_bodies()
+		var intersecting_bodies = self.get_node("batArea2D").get_overlapping_bodies()
 		print('colliding: ', intersecting_bodies)
+		var fruits = []
+		for body in intersecting_bodies:
+			fruits.append(body.get_parent())
+		for fruit in fruits:
+			fruit.harvest()
 
-#
 #func _on_Area2D_body_entered(body):
 #	var entered_parent: Node2D = body.get_parent()
 #	print('entered: ', entered_parent)
