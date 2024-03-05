@@ -8,6 +8,7 @@ enum GroundType {
     SOLID,
     BORDER,
     GOAL,
+    PLANK,
 }
 
 var ground_to_tile = {
@@ -15,6 +16,7 @@ var ground_to_tile = {
     GroundType.SOLID: 0,
     GroundType.BORDER: 19,
     GroundType.GOAL: 20,
+    GroundType.PLANK: 21,
 }
 var tile_to_ground = Container.invert_dict(ground_to_tile)
 

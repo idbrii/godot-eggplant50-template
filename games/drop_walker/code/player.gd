@@ -10,11 +10,10 @@ const Namer = preload("res://games/drop_walker/code/util/namer.gd")
 
 export var gridworld_node : NodePath
 export var move_duration := 0.5
-
 export var drop_duration := 1.0
 
 var block_input := false
-var tile_width := 64
+var can_plank := true
 
 onready var gridworld := get_node_or_null(gridworld_node) as TileMap
 onready var player_visual = get_node("%PlayerVisual")
@@ -24,9 +23,9 @@ func get_input() -> Dictionary:
     if block_input:
         return {
             move = Vector2.ZERO,
-            just_jump = false,
-            jump = false,
-            released_jump = false,
+            just_plank = false,
+            plank = false,
+            released_plank = false,
             walk = false,
             just_dash = false,
             hold_dash = false,
@@ -35,10 +34,9 @@ func get_input() -> Dictionary:
     var move := Input.get_vector("move_left", "move_right", "move_up", "move_down")
     return {
         move = move,
-        just_jump = Input.is_action_just_pressed("action1"),
-        jump = Input.is_action_pressed("action1"),
-        released_jump = Input.is_action_just_released("action1"),
-        walk = false,  # Input.is_action_pressed("action2"),
+        just_plank = Input.is_action_just_pressed("action1"),
+        plank = Input.is_action_pressed("action1"),
+        released_plank = Input.is_action_just_released("action1"),
         just_dash = Input.is_action_just_pressed("action2"),
         hold_dash = Input.is_action_pressed("action2"),
         released_dash = Input.is_action_just_released("action2"),
@@ -68,6 +66,8 @@ func input_dir_to_delta(input_dir):
 
 func _process(_dt: float):
     var input = get_input()
+    $PlayerVisual/Plank.visible = input.plank
+
     # Rotate input closer to iso projection to correctly interpret diagonal inputs.
     var iso_move = input.move.rotated(TAU * 1/10)
     if iso_move.length_squared() > 0.3*0.3:
@@ -78,11 +78,15 @@ func _process(_dt: float):
         var dest_tile = gridworld.get_world_cellv(dest)
 
         #~ printt('dest_tile', Namer.enum_as_string(GroundType, dest_tile), dest)
-        #~ gridworld.set_world_cellv(dest, GroundType.SOLID)
+        if input.plank and dest_tile == GroundType.EMPTY:
+            gridworld.set_world_cellv(dest, GroundType.PLANK)
+            dest_tile = GroundType.PLANK
+            can_plank = false
+
         block_input = true
         var tween := create_tween()
         match dest_tile:
-            GroundType.SOLID,GroundType.EMPTY,GroundType.GOAL:
+            GroundType.SOLID, GroundType.EMPTY, GroundType.GOAL, GroundType.PLANK:
                 var t := tween.tween_property(self, "global_position", delta, move_duration)
                 t = t.from_current()
                 t = t.as_relative()
@@ -109,6 +113,7 @@ func _process(_dt: float):
         #~ fall_to_layer("layer", dest)
 
         block_input = false
+        can_plank = true
 
         emit_signal("player_moved", self, dest, delta)
 

@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=21 format=2]
+[gd_resource type="TileSet" load_steps=22 format=2]
 
 [ext_resource path="res://games/drop_walker/art/isometric-space-interior/PNG/walls/wall_spaceInterior_030_2.png" type="Texture" id=1]
 [ext_resource path="res://games/drop_walker/art/isometric-space-interior/PNG/walls/wall_spaceInterior_013_0.png" type="Texture" id=2]
@@ -19,6 +19,7 @@
 [ext_resource path="res://games/drop_walker/art/isometric-space-interior/PNG/decoration/deco_spaceInterior_001_0.png" type="Texture" id=17]
 [ext_resource path="res://games/drop_walker/art/isometric-space-interior/PNG/ground/ground_spaceInterior_050_0.png" type="Texture" id=18]
 [ext_resource path="res://games/drop_walker/art/isometric-space-interior/PNG/ground/ground_spaceInterior_047_3.png" type="Texture" id=19]
+[ext_resource path="res://games/drop_walker/art/isometric-space-interior/PNG/plank.png" type="Texture" id=20]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 111, 0, 111, 60, 74, 120, 111, 60, 148, 60, 148 )
@@ -297,3 +298,17 @@ points = PoolVector2Array( 0, 111, 0, 111, 60, 74, 120, 111, 60, 148, 60, 148 )
 20/shape_one_way_margin = 0.0
 20/shapes = [  ]
 20/z_index = 0
+21/name = "plank"
+21/texture = ExtResource( 20 )
+21/tex_offset = Vector2( 0, -75 )
+21/modulate = Color( 1, 1, 1, 1 )
+21/region = Rect2( 60, 15, 120, 148 )
+21/tile_mode = 0
+21/occluder_offset = Vector2( 0, 0 )
+21/navigation_offset = Vector2( 0, 0 )
+21/shape_offset = Vector2( 0, 0 )
+21/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+21/shape_one_way = false
+21/shape_one_way_margin = 0.0
+21/shapes = [  ]
+21/z_index = 0
