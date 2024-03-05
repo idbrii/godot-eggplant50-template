@@ -21,7 +21,7 @@ position = Vector2( 277, 330 )
 script = ExtResource( 1 )
 maxSpeed = 250.0
 acceleration = 600.0
-reverseAcceleration = 900.0
+reverseAcceleration = 1200.0
 bumperTextureBlue = ExtResource( 3 )
 bumperTextureGreen = ExtResource( 5 )
 

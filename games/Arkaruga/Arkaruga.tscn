@@ -23,7 +23,7 @@
 [ext_resource path="res://games/Arkaruga/Scripts/Arkaruga-UIManager.gd" type="Script" id=21]
 [ext_resource path="res://shared/menu_pause/PauseMenu.tscn" type="PackedScene" id=22]
 [ext_resource path="res://mainmenu/art/font/font_kenpixel_mini.tres" type="DynamicFont" id=23]
-[ext_resource path="res://shared/input/input_icon.gd" type="Script" id=24]
+[ext_resource path="res://shared/input/buttonicon.gd" type="Script" id=24]
 [ext_resource path="res://shared/input/art/playstation/cross.png" type="Texture" id=25]
 [ext_resource path="res://games/Arkaruga/Scripts/Arkaruga-Flash.gd" type="Script" id=26]
 [ext_resource path="res://games/Arkaruga/Scripts/Arkaruga-StartScreen.gd" type="Script" id=27]
@@ -751,7 +751,7 @@ margin_right = 496.0
 margin_bottom = 116.0
 rect_min_size = Vector2( 0, 32 )
 
-[node name="Press to Start" type="Label" parent="UILayer/EndGame/VBoxContainer"]
+[node name="Press to Restart" type="Label" parent="UILayer/EndGame/VBoxContainer"]
 margin_top = 120.0
 margin_right = 496.0
 margin_bottom = 140.0
@@ -765,7 +765,7 @@ align = 1
 valign = 1
 script = ExtResource( 26 )
 
-[node name="Icon" type="TextureRect" parent="UILayer/EndGame/VBoxContainer/Press to Start"]
+[node name="Icon" type="TextureRect" parent="UILayer/EndGame/VBoxContainer/Press to Restart"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -777,7 +777,7 @@ margin_bottom = 8.0
 rect_pivot_offset = Vector2( 8, 8 )
 texture = ExtResource( 28 )
 script = ExtResource( 24 )
-input = "secondary"
+input = 1
 
 [node name="PauseMenu" parent="UILayer" instance=ExtResource( 22 )]
 margin_left = 19.0
