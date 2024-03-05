@@ -25,10 +25,11 @@ radius = 16.0
 [node name="Bat_Scene" type="Node2D"]
 scale = Vector2( 4, 4 )
 script = ExtResource( 2 )
+screen_size = Vector2( 640, 320 )
+move_size = 64
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )
-frame = 1
 playing = true
 
 [node name="Area2D" type="Area2D" parent="."]
