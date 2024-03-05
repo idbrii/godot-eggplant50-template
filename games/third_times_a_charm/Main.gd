@@ -22,6 +22,8 @@ func make_shape(x, y):
 	s.global_position = Vector2(32+(x+1) * 64, 32+(y+1) * 64)
 	s.scale = Vector2(0.9, 0.9)
 	s.set_meta("shape", _sprite_to_name(s))
+	s.set_meta("h_matched", false)
+	s.set_meta("v_matched", false)
 	$Grid.add_child(s)
 	return s
 
@@ -78,6 +80,16 @@ func _process(_delta: float) -> void:
 	if state == State.WAITING:
 		check_matches()
 
+func update_score(score_delta):
+	var new_score = int($UI/Status/Score.text) + score_delta
+	$UI/Status/Score.text = str(new_score)
+
+const MATCH_SCORE = {
+	3: 10,
+	4: 20,
+	5: 40
+}
+
 func check_matches():
 	var matches = { h = [], v = [] }
 	for x in range(grid.size()):
@@ -87,31 +99,49 @@ func check_matches():
 			# scan horizontally
 			var i = x
 			var h_matches = []
-			while i < grid.size() and grid[i][y].get_meta('shape') == shape:
+			while i < grid.size() and grid[i][y].get_meta('shape') == shape and not grid[i][y].get_meta('h_matched'):
 				h_matches.append(grid[i][y])
+				grid[i][y].set_meta('h_matched', true)
 				i += 1
 			if h_matches.size() >= 3:
 				matches.h.append(h_matches)
+			else:
+				for s in h_matches:
+					s.set_meta('h_matched', false)
 
 			# scan horizontally
 			var j = y
 			var v_matches = []
-			while j < grid[x].size() and grid[x][j].get_meta('shape') == shape:
+			while j < grid[x].size() and grid[x][j].get_meta('shape') == shape and not grid[x][j].get_meta('v_matched'):
 				v_matches.append(grid[x][j])
+				grid[x][j].set_meta('v_matched', true)
 				j += 1
 			if v_matches.size() >= 3:
 				matches.v.append(v_matches)
+			else:
+				for s in v_matches:
+					s.set_meta('v_matched', false)
 
 	if not matches.h.empty() or not matches.v.empty():
 		change_state('new drops', State.DROPPING)
 
+		var match_count = 0
+		var score = 0
+		print("removing: ", matches)
 		for m in matches.h:
+			var matched = m.size()
+			match_count += matched
+			score += MATCH_SCORE[matched] if matched in MATCH_SCORE else 1000 # Don't think it can be more than 5???
 			remove_match(m)
 		for m in matches.v:
+			var matched = m.size()
+			match_count += matched
+			score += MATCH_SCORE[matched] if matched in MATCH_SCORE else 1000 # Don't think it can be more than 5???
 			remove_match(m)
 
 		yield(get_tree().create_timer(0.5), 'timeout')
 
+		update_score(score)
 		fill_gaps(matches)
 
 const SWELL_PERIOD = 0.25
@@ -185,6 +215,9 @@ func fill_gaps(matches):
 			slide_down(s, gap_counts[idx])
 
 	yield(get_tree().create_timer(0.2 + (MOVE_PERIOD * highest_count)), 'timeout')
+
+	for s in all_gaps:
+		s.queue_free()
 
 	change_state('finished dropping', State.WAITING)
 
