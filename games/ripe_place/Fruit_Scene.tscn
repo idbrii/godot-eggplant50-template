@@ -4,6 +4,7 @@
 [ext_resource path="res://games/ripe_place/Fruit_Scene.gd" type="Script" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
+radius = 20.0
 
 [sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 1 )
