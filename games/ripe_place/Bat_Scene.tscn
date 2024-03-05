@@ -20,7 +20,7 @@ animations = [ {
 } ]
 
 [sub_resource type="CircleShape2D" id=4]
-radius = 16.0
+radius = 4.0
 
 [node name="bat" type="Node2D"]
 scale = Vector2( 4, 4 )
