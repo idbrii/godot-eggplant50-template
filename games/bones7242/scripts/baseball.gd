@@ -45,9 +45,9 @@ func _process(delta):
 			var move_x := Input.get_axis("move_left", "move_right")
 			position.x += move_x * h_move_speed
 			#listen for change to windup
-			if Input.is_action_pressed("action1"):
+			if Input.is_action_pressed("action2"):
 				change_state(State.WINDUP)
-				print("i am winding up")
+				#print("i am winding up")
 		State.WINDUP:
 			#print("i am WINDUP")
 			# do windup stuff
@@ -55,11 +55,11 @@ func _process(delta):
 			if (position.y + potential_move) < 300:
 				position.y += potential_move
 				power += power_increment
-				print('power:' + str(power))
+				#print('power:' + str(power))
 				windup_speed += (max_windup_speed - windup_speed) / 2 #tweening to max
 			#listen for change to released
-			if Input.is_action_just_released("action1"):
-				print("i am RELEASED")
+			if Input.is_action_just_released("action2"):
+				#print("i am RELEASED")
 				change_state(State.RELEASED)
 				windup_speed = starting_windup_speed #reset windup speed
 		State.RELEASED:

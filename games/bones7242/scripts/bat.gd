@@ -1,41 +1,27 @@
-extends Node2D
+extends Node2D 
 
-const State = {IDLE = 0, WINDUP = 1, SWING = 2, FOLLOWTHROUGH = 3}
+const State = {
+	STAND = 0,
+	CROUCH = 1, 
+	RELEASE = 2, 
+	WINDUP = 3,
+	SWING = 4,
+	FOLLOWTHROUGH = 5
+	}
 # Access values with State.HELD, etc.
 
-
-var starting_windup_speed = 10
-var windup_speed = starting_windup_speed
-var max_windup_speed = 100
-var initial_power = 0
-var power = initial_power
+var start_throw_power = 0
+var throw_power = start_throw_power
+var max_throw_power = 100
+var start_swing_power = 0
+var swing_power = start_swing_power
+var max_swing_power = 100
 var power_increment = 1
-var max_power = 100
 
-# variables for swinging
-var bat_x = 640 / 4
-var bat_y = 320 / 4
-var start_swing_x = 0
-var swing_x = start_swing_x
-var max_swing_x = 300
-var start_swing_y = 0
-var swing_y = start_swing_y
-var max_swing_y = 100
-var bat_start_radius = 64
-var bat_radius = bat_start_radius
-var min_bat_radius = 16
-const RED = Color(1,0,0)
-const GREEN = Color( 0, 1, 0, 1 )
-var color = GREEN
-var swing_center : Vector2
-
-var initial_state = State.IDLE
+var initial_state = State.STAND
 var current_state : int
 var last_state : int
-
-var swing_x_swing_increment : int
-var swing_y_swing_increment : int
-var bat_radius_increment : int
+var batter_sprite : Sprite
 
 func change_state(new_state):
 	# store the current state as last state, if it exists
@@ -55,77 +41,69 @@ func check_for_hit():
 
 func _ready():
 	change_state(initial_state)
+	batter_sprite = get_node("Sprite")
+	batter_sprite.texture = load("res://games/bones7242/sprites/batter-test-05.png") # set initial sprite
 	pass
 	
 func _process(delta):
 	
 	match current_state:
-		State.IDLE:
-			#print("i am HELD")
-			#wait around
-			#listen for change to windup
-			if Input.is_action_pressed("action2"):
+		State.STAND:
+			#listen for input
+			if Input.is_action_pressed("action1"):
+				print("batter is crouching")
+				# change to next state
+				change_state(State.CROUCH)
+				batter_sprite.texture = load("res://games/bones7242/sprites/batter-test-06.png")
+				# tBD: change sprite
+		State.CROUCH:
+			# Build up power
+			if throw_power < max_throw_power:
+					throw_power += power_increment
+			# listen for input
+			if Input.is_action_just_released("action1"):
+				print("batter is releasing")
+				# change to next state
+				change_state(State.RELEASE)
+				# tBD: change sprite
+				batter_sprite.texture = load("res://games/bones7242/sprites/batter-test-07.png")
+				# TBD: apply power to the ball and relase it
+				throw_power = start_throw_power
+		State.RELEASE:
+			#TBD: pause for a second?
+			if Input.is_action_pressed("action1"):
+				print("batter is winding up")
+				# change to next state
 				change_state(State.WINDUP)
-				print("i am winding up the bat")
+				batter_sprite.texture = load("res://games/bones7242/sprites/batter-test-02.png")
 		State.WINDUP:
-			# do windup stuff
-			#make circle bigger
-			bat_radius -= (bat_radius - min_bat_radius) / 10
-			#change x and y to pull circle back on an arc
-			swing_x += (max_swing_x - swing_x) / 10
-			swing_y += (max_swing_y - swing_y) / 40
-			#print('winding up bat:' + str(bat_radius))
-			position = Vector2(bat_x - swing_x, bat_y - swing_y)
 			# build up power
-			if power < max_power:
-				power += power_increment
+			if swing_power < max_swing_power:
+				swing_power += power_increment
 			#listen for change to released
-			if Input.is_action_just_released("action2"):
+			if Input.is_action_just_released("action1"):
 				print("i am SWING the bat")
-				print('swing power:' + str(power))
+				print('swing power:' + str(swing_power))
 				change_state(State.SWING)
-				# set vars for swing
-				#var speed = 110 - power
-				swing_x_swing_increment = (swing_x - start_swing_x) / 5
-				swing_y_swing_increment = (swing_y - start_swing_y) / 5
+				batter_sprite.texture = load("res://games/bones7242/sprites/batter-test-03.png")
 		State.SWING:
-			# do swing stuff
-			#bat_radius -= bat_radius_increment
-			swing_x -= swing_x_swing_increment
-			swing_y -= swing_y_swing_increment
-			position = Vector2(bat_x - swing_x, bat_y - swing_y)	
-			# check if a hit, 
 			# if so, then initiate the hit state on baseball
 			if check_for_hit():
 				print("YOU GOT A HIT!")
-			# check for end of contact zone
-			# if so move on to follow through
-			if swing_x <= start_swing_x:
-				change_state(State.FOLLOWTHROUGH) #should go to follow through.
-				color = RED
+				#TBD: add velocity to ball for hit
+			change_state(State.FOLLOWTHROUGH) #should go to follow through.
+			batter_sprite.texture = load("res://games/bones7242/sprites/batter-test-04.png")
+			swing_power = start_swing_power # reset swing power
 		State.FOLLOWTHROUGH:
-			# tbd: move ball up and left, hold for a moment
-			# when done, go back to idle
-			if swing_x < max_swing_x:
-				swing_x += swing_x_swing_increment
-				swing_y += swing_y_swing_increment
-			position = Vector2(bat_x - swing_x, bat_y - swing_y)
 			#if Input.is_action_just_released("action2"):
-			if true: #placeholder - replace with timer after "strike" or hit or whatever.
-				change_state(State.IDLE)
-				color = GREEN
-				#reset vars
-				swing_x = start_swing_x
-				swing_y = start_swing_y
-				bat_radius = bat_start_radius
+			if true: #placeholder - replace with timer after ball hits ground.
+				change_state(State.STAND)
+				batter_sprite.texture = load("res://games/bones7242/sprites/batter-test-05.png")
 		_:
 			print("I am not a bat state I know of!")
 		
 	#print('power:' + str(power))
 	update()
 
-func _draw():
-	#draw bat circle
-	swing_center = position
-	#print('swing_center draw:' + str(swing_center))
-	draw_circle(swing_center, bat_radius, color)
+#func _draw():
+#	draw_circle(swing_center, bat_radius, color)
