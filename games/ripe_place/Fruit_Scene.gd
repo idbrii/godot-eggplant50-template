@@ -9,7 +9,7 @@ var fruit_sprite: Sprite
 
 var colors_for_ripenesses = {
 	0: Color(1.0, 1.0, 1.0),
-	1: Color(0.4, 1.0, 0.2),
+	1: Color(1.0, 0.8, 0.4),
 	2: Color(0.6, 0.6, 0.6)
 }
 
@@ -48,3 +48,15 @@ func _on_ripenessTimer_timeout():
 	var color = colors_for_ripenesses.get(ripeness)
 	if color:
 		fruit_sprite.modulate = color
+	if ripeness >= rot_threshold:
+		start_explode()
+
+func start_explode():
+	$FruitBody/AnimatedSprite.visible = true
+	$FruitBody/AnimatedSprite.playing = true
+	
+func finish_explode():
+	self.get_parent().remove_child(self)
+	
+func _on_AnimatedSprite_animation_finished():
+	finish_explode()
