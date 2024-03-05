@@ -20,7 +20,6 @@ func unhighlightFruit():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
-
 func _on_FruitArea_area_entered(area):
 #	print('area shape entered', area)
 	var body_parent = area.get_parent()
@@ -31,3 +30,6 @@ func _on_FruitArea_area_exited(area):
 	var body_parent = area.get_parent()
 	if body_parent.name == 'bat':
 		unhighlightFruit()
+
+func harvest():
+	self.get_parent().remove_child(self)
