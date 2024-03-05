@@ -5,6 +5,7 @@ signal fall_through_hole
 signal reached_goal
 
 const GridWorld = preload("res://games/drop_walker/code/gridworld.gd")
+const GroundType := GridWorld.GroundType
 const Namer = preload("res://games/drop_walker/code/util/namer.gd")
 
 export var gridworld_node : NodePath
@@ -76,12 +77,12 @@ func _process(_dt: float):
         var dest = delta + global_position
         var dest_tile = gridworld.get_world_cellv(dest)
 
-        #~ printt('dest_tile', Namer.enum_as_string(GridWorld.GroundType, dest_tile), dest)
-        #~ gridworld.set_world_cellv(dest, GridWorld.GroundType.SOLID)
+        #~ printt('dest_tile', Namer.enum_as_string(GroundType, dest_tile), dest)
+        #~ gridworld.set_world_cellv(dest, GroundType.SOLID)
         block_input = true
         var tween := create_tween()
         match dest_tile:
-            GridWorld.GroundType.SOLID,GridWorld.GroundType.EMPTY,GridWorld.GroundType.GOAL:
+            GroundType.SOLID,GroundType.EMPTY,GroundType.GOAL:
                 var t := tween.tween_property(self, "global_position", delta, move_duration)
                 t = t.from_current()
                 t = t.as_relative()
@@ -111,9 +112,9 @@ func _process(_dt: float):
 
         emit_signal("player_moved", self, dest, delta)
 
-        if dest_tile == GridWorld.GroundType.EMPTY:
+        if dest_tile == GroundType.EMPTY:
             emit_signal("fall_through_hole")
-        elif dest_tile == GridWorld.GroundType.GOAL:
+        elif dest_tile == GroundType.GOAL:
             emit_signal("reached_goal")
 
 
@@ -153,6 +154,6 @@ func done_falling():
     block_input = false
     var dest_tile = gridworld.get_world_cellv(global_position)
     printt("Player done_falling. dest", global_position, dest_tile)
-    if dest_tile == GridWorld.GroundType.EMPTY:
+    if dest_tile == GroundType.EMPTY:
         yield(get_tree().create_timer(drop_duration * 0.1), "timeout")
         emit_signal("fall_through_hole")
