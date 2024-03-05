@@ -86,7 +86,7 @@ func _check_device(event):
 
 
 func _compute_input_device() -> String:
-	if Input.is_joy_known(_last_input_joy):
+	if _last_input_joy >= 0 && Input.is_joy_known(_last_input_joy):
 		var name = Input.get_joy_name(_last_input_joy)
 		var appearance = get_simplified_device_name(name)
 		#~ printt("Detected", name, "as", appearance)
