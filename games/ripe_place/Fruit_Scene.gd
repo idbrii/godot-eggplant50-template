@@ -52,6 +52,7 @@ func _on_ripenessTimer_timeout():
 
 func start_explode():
 	$FruitBody/AnimatedSprite.visible = true
+	$FruitBody/Sprite.visible = false
 	$FruitBody/AnimatedSprite.playing = true
 	
 func finish_explode():

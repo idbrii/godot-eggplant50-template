@@ -51,6 +51,6 @@ func decrement_occupants():
 #	print('overlapping_bodies: ', overlapping_bodies)
 
 func _on_spawn_timer_timeout():
-	print('timer done for ', self)
+#	print('timer done for ', self)
 #	self.call_deferred('drop_new_fruit')
 	self.drop_new_fruit()
