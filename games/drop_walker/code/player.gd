@@ -9,6 +9,7 @@ const GroundType := GridWorld.GroundType
 const Namer = preload("res://games/drop_walker/code/util/namer.gd")
 
 export var gridworld_node : NodePath
+export var inventory_node : NodePath
 export var move_duration := 0.5
 export var drop_duration := 1.0
 
@@ -16,6 +17,7 @@ var block_input := false
 var can_plank := true
 
 onready var gridworld := get_node_or_null(gridworld_node) as TileMap
+onready var inventory = get_node_or_null(inventory_node)
 onready var player_visual = get_node("%PlayerVisual")
 
 
@@ -66,7 +68,9 @@ func input_dir_to_delta(input_dir):
 
 func _process(_dt: float):
     var input = get_input()
-    $PlayerVisual/Plank.visible = input.plank
+    var has_plank = inventory.has_remaining_pips()
+    var want_plank = input.plank and has_plank
+    $PlayerVisual/Plank.visible = want_plank
 
     # Rotate input closer to iso projection to correctly interpret diagonal inputs.
     var iso_move = input.move.rotated(TAU * 1/10)
@@ -78,10 +82,11 @@ func _process(_dt: float):
         var dest_tile = gridworld.get_world_cellv(dest)
 
         #~ printt('dest_tile', Namer.enum_as_string(GroundType, dest_tile), dest)
-        if input.plank and dest_tile == GroundType.EMPTY:
+        if want_plank and dest_tile == GroundType.EMPTY:
             gridworld.set_world_cellv(dest, GroundType.PLANK)
             dest_tile = GroundType.PLANK
             can_plank = false
+            inventory.remove_pip()
 
         block_input = true
         var tween := create_tween()

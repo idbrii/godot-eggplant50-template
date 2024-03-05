@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://games/drop_walker/code/level.gd" type="Script" id=1]
 [ext_resource path="res://games/drop_walker/scenes/player.tscn" type="PackedScene" id=2]
@@ -6,6 +6,9 @@
 [ext_resource path="res://games/drop_walker/scenes/world_layer.tscn" type="PackedScene" id=4]
 [ext_resource path="res://mainmenu/theme/theme_eggplant.tres" type="Theme" id=5]
 [ext_resource path="res://shared/menu_pause/PauseMenu.tscn" type="PackedScene" id=6]
+[ext_resource path="res://mainmenu/theme/style_panel_light.tres" type="StyleBox" id=7]
+[ext_resource path="res://games/drop_walker/art/isometric-space-interior/PNG/plank_ui.png" type="Texture" id=8]
+[ext_resource path="res://games/drop_walker/code/inventory.gd" type="Script" id=9]
 
 [node name="World" type="Node2D"]
 script = ExtResource( 1 )
@@ -59,6 +62,7 @@ tile_data = PoolIntArray(  )
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 421, -129 )
 gridworld_node = NodePath("../Layers/layer0/Grid_Ground")
+inventory_node = NodePath("../UI/Inventory")
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -96,6 +100,68 @@ help_title = "Work in Progress"
 help_body = "Navigate the world and get to the eggplant jam!
 
 Placing boards is not yet implemented, so just fall through the right holes."
+
+[node name="Inventory" type="Control" parent="UI"]
+unique_name_in_owner = true
+anchor_left = 0.1
+anchor_right = 0.9
+anchor_bottom = 0.9
+margin_left = -54.0
+margin_top = 10.0
+margin_right = 54.0
+margin_bottom = 26.0
+theme = ExtResource( 5 )
+script = ExtResource( 9 )
+
+[node name="PanelContainer" type="PanelContainer" parent="UI/Inventory"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -78.0
+margin_right = 227.0
+custom_styles/panel = ExtResource( 7 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Inventory/PanelContainer"]
+margin_left = 15.0
+margin_top = 15.0
+margin_right = 212.0
+margin_bottom = 63.0
+
+[node name="Padding" type="Control" parent="UI/Inventory/PanelContainer/VBoxContainer"]
+margin_right = 197.0
+size_flags_vertical = 3
+
+[node name="Planks" type="HBoxContainer" parent="UI/Inventory/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+margin_top = 4.0
+margin_right = 197.0
+margin_bottom = 44.0
+size_flags_vertical = 4
+
+[node name="Plank1" type="TextureRect" parent="UI/Inventory/PanelContainer/VBoxContainer/Planks"]
+margin_right = 63.0
+margin_bottom = 40.0
+texture = ExtResource( 8 )
+stretch_mode = 6
+
+[node name="Plank2" type="TextureRect" parent="UI/Inventory/PanelContainer/VBoxContainer/Planks"]
+margin_left = 67.0
+margin_right = 130.0
+margin_bottom = 40.0
+texture = ExtResource( 8 )
+stretch_mode = 6
+
+[node name="Plank3" type="TextureRect" parent="UI/Inventory/PanelContainer/VBoxContainer/Planks"]
+margin_left = 134.0
+margin_right = 197.0
+margin_bottom = 40.0
+texture = ExtResource( 8 )
+stretch_mode = 6
+
+[node name="Padding2" type="Control" parent="UI/Inventory/PanelContainer/VBoxContainer"]
+margin_top = 48.0
+margin_right = 197.0
+margin_bottom = 48.0
+size_flags_vertical = 3
 
 [editable path="Layers/layer0"]
 [editable path="Layers/layer1"]
