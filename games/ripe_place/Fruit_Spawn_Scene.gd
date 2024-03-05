@@ -7,6 +7,10 @@ var gravityArea
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	gravityArea = self.get_parent().find_node('gravityArea')
+	self.get_parent().find_node('hud').connect('start_game', self, 'reset')
+	reset()
+
+func reset():
 	var first_spawn_time = rand_range(1.0, 30.0)
 	$spawn_timer.start(first_spawn_time)
 	

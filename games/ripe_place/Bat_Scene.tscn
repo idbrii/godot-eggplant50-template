@@ -27,7 +27,7 @@ scale = Vector2( 4, 4 )
 script = ExtResource( 2 )
 screen_size = Vector2( 640, 320 )
 move_size = 64
-nutrition = 10
+initial_nutrition = 12
 move_cost = 2
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
