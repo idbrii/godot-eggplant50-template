@@ -5,25 +5,38 @@
 
 [sub_resource type="CircleShape2D" id=1]
 
-[node name="Fruit_Scene" type="Node2D"]
+[node name="Fruit" type="Node2D"]
 script = ExtResource( 2 )
 
-[node name="Fruit" type="RigidBody2D" parent="."]
+[node name="FruitBody" type="RigidBody2D" parent="."]
 contacts_reported = 10
+contact_monitor = true
 
-[node name="GlowPolygon" type="Polygon2D" parent="Fruit"]
+[node name="FruitArea" type="Area2D" parent="FruitBody"]
+__meta__ = {
+"_editor_description_": "This is needed to detect collisions with the bat area."
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FruitBody/FruitArea"]
+scale = Vector2( 3, 3 )
+shape = SubResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FruitBody"]
+scale = Vector2( 3, 3 )
+shape = SubResource( 1 )
+
+[node name="GlowPolygon" type="Polygon2D" parent="FruitBody"]
 visible = false
 position = Vector2( -3.10714, 0.964284 )
 scale = Vector2( 1.30357, 1.23214 )
 color = Color( 1, 0.964706, 0.12549, 1 )
 polygon = PoolVector2Array( -16, -16, -11, -28, 9, -30, 26, -24, 26, -15, 27, -6, 30, 9, 26, 16, 13, 23, -4, 25, -14, 26, -22, 22, -23, 12, -26, -2, -21, -9 )
 
-[node name="Sprite" type="Sprite" parent="Fruit"]
+[node name="Sprite" type="Sprite" parent="FruitBody"]
 scale = Vector2( 4, 4 )
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 578, 306, 16, 16 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Fruit"]
-scale = Vector2( 3, 3 )
-shape = SubResource( 1 )
+[connection signal="area_entered" from="FruitBody/FruitArea" to="." method="_on_FruitArea_area_entered"]
+[connection signal="area_exited" from="FruitBody/FruitArea" to="." method="_on_FruitArea_area_exited"]

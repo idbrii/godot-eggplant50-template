@@ -12,6 +12,7 @@ script = ExtResource( 2 )
 BatScene = ExtResource( 1 )
 
 [node name="gravityArea" type="Area2D" parent="."]
+monitorable = false
 space_override = 3
 gravity_point = true
 gravity_vec = Vector2( 320, 180 )

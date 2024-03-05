@@ -16,5 +16,8 @@ monitorable = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SpawnArea"]
 shape = SubResource( 1 )
 
-[connection signal="body_entered" from="SpawnArea" to="." method="_on_SpawnArea_body_entered"]
-[connection signal="body_exited" from="SpawnArea" to="." method="_on_SpawnArea_body_exited"]
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="area_shape_entered" from="SpawnArea" to="." method="_on_SpawnArea_area_shape_entered"]
+[connection signal="area_shape_exited" from="SpawnArea" to="." method="_on_SpawnArea_area_shape_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

@@ -22,7 +22,7 @@ animations = [ {
 [sub_resource type="CircleShape2D" id=4]
 radius = 16.0
 
-[node name="Bat_Scene" type="Node2D"]
+[node name="bat" type="Node2D"]
 scale = Vector2( 4, 4 )
 script = ExtResource( 2 )
 screen_size = Vector2( 640, 320 )
@@ -32,10 +32,7 @@ move_size = 64
 frames = SubResource( 1 )
 playing = true
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="batArea2D" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="batArea2D"]
 shape = SubResource( 4 )
-
-[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
-[connection signal="body_exited" from="Area2D" to="." method="_on_Area2D_body_exited"]
