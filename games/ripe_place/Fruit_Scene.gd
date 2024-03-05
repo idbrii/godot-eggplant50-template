@@ -2,13 +2,22 @@ extends Node2D
 
 export(bool) var is_a_fruit = true
 export(float) var highlight_scale = 1.1
+export(int) var ripeness = 0
+export(int) var rot_threshold = 3
+
+var fruit_sprite: Sprite
+
+var colors_for_ripenesses = {
+	0: Color(1.0, 1.0, 1.0),
+	1: Color(0.4, 1.0, 0.2),
+	2: Color(0.6, 0.6, 0.6)
+}
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	fruit_sprite = self.get_node("FruitBody/Sprite")
 
 func highlightFruit():
-	var fruit_sprite: Sprite = self.get_node("FruitBody/Sprite")
 	fruit_sprite.set_scale(fruit_sprite.get_scale() * highlight_scale)
 	$FruitBody/GlowPolygon.visible = true
 	
@@ -33,3 +42,9 @@ func _on_FruitArea_area_exited(area):
 
 func harvest():
 	self.get_parent().remove_child(self)
+
+func _on_ripenessTimer_timeout():
+	ripeness += 1
+	var color = colors_for_ripenesses.get(ripeness)
+	if color:
+		fruit_sprite.modulate = color
