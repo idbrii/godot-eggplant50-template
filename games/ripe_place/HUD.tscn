@@ -89,6 +89,9 @@ margin_top = -24.0
 margin_bottom = 16.0
 rect_scale = Vector2( 2, 2 )
 custom_colors/font_color = Color( 1, 0.819608, 0, 1 )
+__meta__ = {
+"_editor_description_": ""
+}
 
 [connection signal="timeout" from="MessageTimer" to="." method="_on_MessageTimer_timeout"]
 [connection signal="button_up" from="gameOverRect/newGameButton" to="." method="_on_newGameButton_button_up"]
