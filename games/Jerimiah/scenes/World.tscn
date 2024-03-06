@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=2]
+[gd_scene load_steps=44 format=2]
 
 [ext_resource path="res://mainmenu/art/font/kenpixel/kenpixel.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://shared/menu_pause/PauseMenu.tscn" type="PackedScene" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://games/Jerimiah/assets/MeterAttendant.png" type="Texture" id=7]
 [ext_resource path="res://games/Jerimiah/scripts/World.gd" type="Script" id=8]
 [ext_resource path="res://games/Jerimiah/assets/DetailMeterGaugeArm.png" type="Texture" id=9]
+[ext_resource path="res://games/Jerimiah/assets/cash.png" type="Texture" id=10]
 [ext_resource path="res://shared/input/button_icon.tscn" type="PackedScene" id=11]
 [ext_resource path="res://games/Jerimiah/scenes/Meter.tscn" type="PackedScene" id=12]
 [ext_resource path="res://games/Jerimiah/assets/expiredTag.png" type="Texture" id=13]
@@ -95,6 +96,458 @@ font_data = SubResource( 31 )
 [sub_resource type="DynamicFont" id=36]
 extra_spacing_char = 1
 font_data = SubResource( 31 )
+
+[sub_resource type="DynamicFontData" id=39]
+font_path = "res://mainmenu/art/font/kenpixel/mini.ttf"
+
+[sub_resource type="DynamicFont" id=40]
+size = 14
+font_data = SubResource( 39 )
+
+[sub_resource type="DynamicFont" id=41]
+size = 14
+font_data = SubResource( 39 )
+
+[sub_resource type="Animation" id=42]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Cash1:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 564.201, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Cash1:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 327.201, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("Cash1:scale:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 3.59006, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("Cash1:scale:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 3.59006, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/4/type = "bezier"
+tracks/4/path = NodePath("Cash2:position:x")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"points": PoolRealArray( 569.201, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/5/type = "bezier"
+tracks/5/path = NodePath("Cash2:position:y")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"points": PoolRealArray( 331.201, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/6/type = "bezier"
+tracks/6/path = NodePath("Cash2:scale:x")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"points": PoolRealArray( 3.43026, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/7/type = "bezier"
+tracks/7/path = NodePath("Cash2:scale:y")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"points": PoolRealArray( 3.43026, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/8/type = "bezier"
+tracks/8/path = NodePath("Cash3:position:x")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"points": PoolRealArray( 579.231, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/9/type = "bezier"
+tracks/9/path = NodePath("Cash3:position:y")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"points": PoolRealArray( 335.232, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/10/type = "bezier"
+tracks/10/path = NodePath("Cash3:scale:x")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"points": PoolRealArray( 3.55413, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/11/type = "bezier"
+tracks/11/path = NodePath("Cash3:scale:y")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"points": PoolRealArray( 3.55413, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("../HBoxContainer/RevenueLabel:custom_colors/font_color")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("../HBoxContainer/Revenue:custom_colors/default_color")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=43]
+resource_name = "addRevenue"
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Cash1:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 564.201, -0.25, 0, 0.25, 0, 564.201, -0.25, 0, 0.25, 0, 564.201, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.4, 0.8 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Cash1:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 327.201, -0.25, 0, 0.25, 0, 319, -0.25, 0, 0.25, 0, 327.201, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.4, 0.8 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("Cash1:scale:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 3.59006, -0.25, 0, 0.25, 0, 3.86038, -0.25, 0, 0.25, 0, 3.59006, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.4, 0.8 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("Cash1:scale:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 3.59006, -0.25, 0, 0.25, 0, 3.86038, -0.25, 0, 0.25, 0, 3.59006, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.4, 0.8 )
+}
+tracks/4/type = "bezier"
+tracks/4/path = NodePath("Cash2:position:x")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"points": PoolRealArray( 569.201, -0.25, 0, 0.25, 0, 569.201, -0.25, 0, 0.25, 0, 569.201, -0.25, 0, 0.25, 0, 569.201, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.1, 0.5, 0.9 )
+}
+tracks/5/type = "bezier"
+tracks/5/path = NodePath("Cash2:position:y")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"points": PoolRealArray( 331.201, -0.25, 0, 0.25, 0, 331.201, -0.25, 0, 0.25, 0, 326, -0.25, 0, 0.25, 0, 331.201, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.1, 0.5, 0.9 )
+}
+tracks/6/type = "bezier"
+tracks/6/path = NodePath("Cash2:scale:x")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"points": PoolRealArray( 3.43026, -0.25, 0, 0.25, 0, 3.43026, -0.25, 0, 0.25, 0, 3.96267, -0.25, 0, 0.25, 0, 3.43026, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.1, 0.5, 0.9 )
+}
+tracks/7/type = "bezier"
+tracks/7/path = NodePath("Cash2:scale:y")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"points": PoolRealArray( 3.43026, -0.25, 0, 0.25, 0, 3.43026, -0.25, 0, 0.25, 0, 3.96267, -0.25, 0, 0.25, 0, 3.43026, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.1, 0.5, 0.9 )
+}
+tracks/8/type = "bezier"
+tracks/8/path = NodePath("Cash3:position:x")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"points": PoolRealArray( 579.231, -0.25, 0, 0.25, 0, 579.231, -0.25, 0, 0.25, 0, 579.231, -0.25, 0, 0.25, 0, 579.231, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.2, 0.6, 1 )
+}
+tracks/9/type = "bezier"
+tracks/9/path = NodePath("Cash3:position:y")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"points": PoolRealArray( 335.232, -0.25, 0, 0.25, 0, 335.232, -0.25, 0, 0.25, 0, 322, -0.25, 0, 0.25, 0, 335.232, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.2, 0.6, 1 )
+}
+tracks/10/type = "bezier"
+tracks/10/path = NodePath("Cash3:scale:x")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"points": PoolRealArray( 3.55413, -0.25, 0, 0.25, 0, 3.55413, -0.25, 0, 0.25, 0, 4.04539, -0.25, 0, 0.25, 0, 3.55413, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.2, 0.6, 1 )
+}
+tracks/11/type = "bezier"
+tracks/11/path = NodePath("Cash3:scale:y")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"points": PoolRealArray( 3.55413, -0.25, 0, 0.25, 0, 3.55413, -0.25, 0, 0.25, 0, 4.04539, -0.25, 0, 0.25, 0, 3.55413, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.2, 0.6, 1 )
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("../HBoxContainer/RevenueLabel:custom_colors/font_color")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0, 0.1, 0.9, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0.513726, 0.878431, 0.298039, 1 ), Color( 0.513726, 0.878431, 0.298039, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("../HBoxContainer/Revenue:custom_colors/default_color")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0, 0.1, 0.9, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0.513726, 0.878431, 0.298039, 1 ), Color( 0.513726, 0.878431, 0.298039, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=44]
+resource_name = "subRevenue"
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Cash1:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 564.201, -0.25, 0, 0.25, 0, 564.201, -0.25, 0, 0.25, 0, 564.201, -0.25, 0, 0.25, 0, 564.201, -0.25, 0, 0.25, 0, 564.201, -0.25, 0, 0.25, 0, 564.201, -0.25, 0, 0.25, 0, 564.201, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.1, 0.3, 0.4, 0.6, 0.7, 1 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Cash1:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 327.201, -0.25, 0, 0.25, 0, 333.083, -0.25, 0, 0.25, 0, 332.125, -0.25, 0, 0.25, 0, 336.712, -0.25, 0, 0.25, 0, 334.497, -0.25, 0, 0.25, 0, 342.777, -0.25, 0, 0.25, 0, 327.201, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.1, 0.3, 0.4, 0.6, 0.7, 1 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("Cash1:scale:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 3.59006, -0.25, 0, 0.25, 0, 3, -0.25, 0, 0.25, 0, 3.09608, -0.25, 0, 0.25, 0, 2.62785, -0.25, 0, 0.25, 0, 2.85195, -0.25, 0, 0.25, 0, 2.45538, -0.25, 0, 0.25, 0, 3.59006, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.1, 0.3, 0.4, 0.6, 0.7, 1 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("Cash1:scale:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 3.59006, -0.25, 0, 0.25, 0, 3, -0.25, 0, 0.25, 0, 3.09608, -0.25, 0, 0.25, 0, 2.62785, -0.25, 0, 0.25, 0, 2.85195, -0.25, 0, 0.25, 0, 2.45538, -0.25, 0, 0.25, 0, 3.59006, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.1, 0.3, 0.4, 0.6, 0.7, 1 )
+}
+tracks/4/type = "bezier"
+tracks/4/path = NodePath("Cash2:position:x")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"points": PoolRealArray( 569.201, -0.25, 0, 0.25, 0, 569.201, -0.25, 0, 0.25, 0, 569.201, -0.25, 0, 0.25, 0, 569.201, -0.25, 0, 0.25, 0, 569.201, -0.25, 0, 0.25, 0, 569.201, -0.25, 0, 0.25, 0, 569.201, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.1, 0.3, 0.4, 0.6, 0.7, 1 )
+}
+tracks/5/type = "bezier"
+tracks/5/path = NodePath("Cash2:position:y")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"points": PoolRealArray( 331.201, -0.25, 0, 0.25, 0, 337.083, -0.25, 0, 0.25, 0, 336.125, -0.25, 0, 0.25, 0, 340.712, -0.25, 0, 0.25, 0, 338.497, -0.25, 0, 0.25, 0, 346.777, -0.25, 0, 0.25, 0, 331.201, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.1, 0.3, 0.4, 0.6, 0.7, 1 )
+}
+tracks/6/type = "bezier"
+tracks/6/path = NodePath("Cash2:scale:x")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"points": PoolRealArray( 3.43026, -0.25, 0, 0.25, 0, 3, -0.25, 0, 0.25, 0, 3.07006, -0.25, 0, 0.25, 0, 2.63502, -0.25, 0, 0.25, 0, 2.82023, -0.25, 0, 0.25, 0, 2.41999, -0.25, 0, 0.25, 0, 3.43026, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.1, 0.3, 0.4, 0.6, 0.7, 1 )
+}
+tracks/7/type = "bezier"
+tracks/7/path = NodePath("Cash2:scale:y")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"points": PoolRealArray( 3.43026, -0.25, 0, 0.25, 0, 3, -0.25, 0, 0.25, 0, 3.07006, -0.25, 0, 0.25, 0, 2.63502, -0.25, 0, 0.25, 0, 2.82023, -0.25, 0, 0.25, 0, 2.41999, -0.25, 0, 0.25, 0, 3.43026, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.1, 0.3, 0.4, 0.6, 0.7, 1 )
+}
+tracks/8/type = "bezier"
+tracks/8/path = NodePath("Cash3:position:x")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"points": PoolRealArray( 579.231, -0.25, 0, 0.25, 0, 579.231, -0.25, 0, 0.25, 0, 579.231, -0.25, 0, 0.25, 0, 579.231, -0.25, 0, 0.25, 0, 579.231, -0.25, 0, 0.25, 0, 579.231, -0.25, 0, 0.25, 0, 579.231, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.1, 0.3, 0.4, 0.6, 0.7, 1 )
+}
+tracks/9/type = "bezier"
+tracks/9/path = NodePath("Cash3:position:y")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"points": PoolRealArray( 335.232, -0.25, 0, 0.25, 0, 341.114, -0.25, 0, 0.25, 0, 340.156, -0.25, 0, 0.25, 0, 344.743, -0.25, 0, 0.25, 0, 342.527, -0.25, 0, 0.25, 0, 350.808, -0.25, 0, 0.25, 0, 335.232, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.1, 0.3, 0.4, 0.6, 0.7, 1 )
+}
+tracks/10/type = "bezier"
+tracks/10/path = NodePath("Cash3:scale:x")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"points": PoolRealArray( 3.55413, -0.25, 0, 0.25, 0, 3, -0.25, 0, 0.25, 0, 3.09023, -0.25, 0, 0.25, 0, 2.53292, -0.25, 0, 0.25, 0, 2.77076, -0.25, 0, 0.25, 0, 2.43073, -0.25, 0, 0.25, 0, 3.55413, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.1, 0.3, 0.4, 0.6, 0.7, 1 )
+}
+tracks/11/type = "bezier"
+tracks/11/path = NodePath("Cash3:scale:y")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"points": PoolRealArray( 3.55413, -0.25, 0, 0.25, 0, 3, -0.25, 0, 0.25, 0, 3.09023, -0.25, 0, 0.25, 0, 2.53292, -0.25, 0, 0.25, 0, 2.77076, -0.25, 0, 0.25, 0, 2.43073, -0.25, 0, 0.25, 0, 3.55413, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.1, 0.3, 0.4, 0.6, 0.7, 1 )
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("../HBoxContainer/RevenueLabel:custom_colors/font_color")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0, 0.1, 0.9, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0.882353, 0.254902, 0.254902, 1 ), Color( 0.882353, 0.254902, 0.254902, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("../HBoxContainer/Revenue:custom_colors/default_color")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0, 0.1, 0.9, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0.882353, 0.254902, 0.254902, 1 ), Color( 0.882353, 0.254902, 0.254902, 1 ), Color( 1, 1, 1, 1 ) ]
+}
 
 [node name="World" type="Node2D"]
 script = ExtResource( 8 )
@@ -485,8 +938,8 @@ __meta__ = {
 }
 
 [node name="ContinuePrompt" type="HBoxContainer" parent="CitationView/Citation/CitationNotice"]
-margin_left = 7.0
-margin_right = 158.0
+margin_left = 6.0
+margin_right = 157.0
 margin_bottom = 25.0
 
 [node name="PromptText" type="Label" parent="CitationView/Citation/CitationNotice/ContinuePrompt"]
@@ -526,6 +979,71 @@ custom_styles/normal = SubResource( 2 )
 text = "Date: 96.03.22"
 fit_content_height = true
 
+[node name="Revenue" type="Node2D" parent="CitationView"]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CitationView/Revenue"]
+anchor_left = 0.025
+anchor_top = 0.076
+anchor_right = 0.975
+anchor_bottom = 0.196
+margin_left = 526.0
+margin_top = 265.0
+margin_right = 650.0
+margin_bottom = 284.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+
+[node name="RevenueLabel" type="Label" parent="CitationView/Revenue/HBoxContainer"]
+margin_right = 65.0
+margin_bottom = 18.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 40 )
+text = "Revenue"
+align = 1
+valign = 1
+
+[node name="Revenue" type="RichTextLabel" parent="CitationView/Revenue/HBoxContainer"]
+margin_left = 69.0
+margin_right = 124.0
+margin_bottom = 19.0
+rect_min_size = Vector2( 55, 10 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_colors/default_color = Color( 1, 1, 1, 1 )
+custom_fonts/normal_font = SubResource( 41 )
+bbcode_enabled = true
+bbcode_text = "$0"
+meta_underlined = false
+text = "$0"
+fit_content_height = true
+scroll_active = false
+
+[node name="Cash" type="Node2D" parent="CitationView/Revenue"]
+
+[node name="Cash1" type="Sprite" parent="CitationView/Revenue/Cash"]
+position = Vector2( 564.201, 327.201 )
+rotation = -0.145363
+scale = Vector2( 3.59006, 3.59006 )
+texture = ExtResource( 10 )
+
+[node name="Cash2" type="Sprite" parent="CitationView/Revenue/Cash"]
+position = Vector2( 569.201, 331.201 )
+rotation = -0.0306676
+scale = Vector2( 3.43026, 3.43026 )
+texture = ExtResource( 10 )
+
+[node name="Cash3" type="Sprite" parent="CitationView/Revenue/Cash"]
+position = Vector2( 579.231, 335.232 )
+rotation = 0.13372
+scale = Vector2( 3.55413, 3.55413 )
+texture = ExtResource( 10 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CitationView/Revenue/Cash"]
+anims/RESET = SubResource( 42 )
+anims/addRevenue = SubResource( 43 )
+anims/subRevenue = SubResource( 44 )
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="PauseMenu" parent="CanvasLayer" instance=ExtResource( 2 )]
@@ -543,3 +1061,7 @@ secondary action -> exit inspection"
 
 [connection signal="area_entered" from="StreetView/MeterAttendant/interacts" to="." method="meter_attendant_area_entered"]
 [connection signal="area_exited" from="StreetView/MeterAttendant/interacts" to="." method="meter_attendant_area_exited"]
+[connection signal="revenue_affected" from="StreetView/ParkingSpace1" to="." method="revenue_affected"]
+[connection signal="revenue_affected" from="StreetView/ParkingSpace2" to="." method="revenue_affected"]
+[connection signal="revenue_affected" from="StreetView/ParkingSpace3" to="." method="revenue_affected"]
+[connection signal="revenue_affected" from="StreetView/ParkingSpace4" to="." method="revenue_affected"]

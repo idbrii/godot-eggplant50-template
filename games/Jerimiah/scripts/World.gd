@@ -7,6 +7,7 @@ export(int) var speed = 2
 var controlStreetPane = true
 var currentDetailType
 var currentParkingSpace: Node2D
+var totalRevenue = 0
 
 func _ready():
 	$StreetView/Border.border_color = HIGHLIGHT_COLOR
@@ -101,3 +102,13 @@ func meter_attendant_area_exited(area):
 			$CitationView/Citation/CitationPrompt.visible = false
 		if parent.detailType == 'meter':
 			$DetailView/InspectPrompt.visible = false
+
+
+func revenue_affected(newRevenue):
+	totalRevenue += newRevenue
+	$CitationView/Revenue/HBoxContainer/Revenue.text = "$" + String(totalRevenue)
+	
+	if newRevenue <= 0.0:
+		$CitationView/Revenue/Cash/AnimationPlayer.play("subRevenue")
+	else:
+		$CitationView/Revenue/Cash/AnimationPlayer.play("addRevenue")
