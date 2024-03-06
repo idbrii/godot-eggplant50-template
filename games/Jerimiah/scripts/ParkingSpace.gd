@@ -14,6 +14,8 @@ onready var citationNotice := get_node(citationNoticePath) as CenterContainer
 export(float) var maxWaitTime = 10.0
 export(float) var maxParkTime = 120.0
 
+signal revenue_affected(newRevenue)
+
 var hasCar = false
 var car: int
 var actualViolations = []
@@ -43,9 +45,12 @@ func car_enters():
 
 	if willPay:
 		parkingMeter.add_time(rand_range(desiredParkingTime - 10.0, desiredParkingTime + 10.0))
-		parkingMeter.timer.connect('timeout', self, "new_actual_violation", [{ 'type': 'meter payment'}])
+		parkingMeter.timer.connect('timeout', self, "new_actual_violation", [{ 'type': 'meter payment', "fine": 10.00 }])
 	else:
-		actualViolations.append({ 'type': 'meter payment' })
+		if parkingMeter.timer.time_left <= 0.0:
+			actualViolations.append({ 'type': 'meter payment', "fine": 10.00 })
+		else:
+			parkingMeter.timer.connect('timeout', self, "new_actual_violation", [{ "type": "meter payment", "fine": 10.00}])
 
 	$parkingTimer.start(desiredParkingTime)
 
@@ -57,11 +62,12 @@ func new_actual_violation(violation):
 
 func car_exits():
 	print(self.name)
-	var citationStatus = ''
 	
 	if actualViolations.size() > 0:
 		if not citationIssued:
 			print('failed - missed citation')
+			$ParkingSpaceArea/AnimationPlayer.play('fail')
+			emit_signal("revenue_affected", -10.0)
 		else:
 			var extra = []
 			var accurateViolations = []
@@ -76,17 +82,23 @@ func car_exits():
 						continue
 				if not found:
 					extra.append(violations[i])
-			if actualViolations.size() != accurateViolations.size() or extra.size():
+			if actualViolations.size() != accurateViolations.size() or extra.size() > 0:
+				$ParkingSpaceArea/AnimationPlayer.play("fail")
+				emit_signal("revenue_affected", -10.0)
 				print('fail - inaccurate citation' )
 				print('missing ', actualViolations)
 				print('extra ', extra)
 			else:
+				$ParkingSpaceArea/AnimationPlayer.play("success")
+				emit_signal("revenue_affected", 10.0)
 				print('success - correct citation')
 
 	else:
 		if not citationIssued:
 			print('success - valid parking')
 		else:
+			$ParkingSpaceArea/AnimationPlayer.play("fail")
+			emit_signal("revenue_affected", -10.0)
 			print('fail - no violation')
 	
 	hasCar = false
