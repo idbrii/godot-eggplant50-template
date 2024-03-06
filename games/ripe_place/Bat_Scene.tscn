@@ -29,6 +29,7 @@ screen_size = Vector2( 640, 320 )
 move_size = 64
 initial_nutrition = 25
 move_cost = 2
+win_threshold = 16
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )

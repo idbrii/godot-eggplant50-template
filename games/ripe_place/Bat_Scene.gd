@@ -6,6 +6,7 @@ export(int) var move_size
 export(int) var initial_nutrition
 export(int) var move_cost
 export(int) var ripe_fruits_eaten
+export(int) var win_threshold
 
 var hud
 var covered_fruit_scene: PackedScene
@@ -52,15 +53,18 @@ func handle_bat_action():
 			fruit.harvest(self)
 			if fruit.get_ripeness_category() == 'ripe':
 				self.ripe_fruits_eaten += 1
+		if ripe_fruits_eaten >= win_threshold:
+			hud.show_game_over(self.ripe_fruits_eaten, true)
 
 func change_nutrition(delta: int):
 	self.nutrition += delta
 	hud.update_score(self.nutrition)
 	if self.nutrition < 1:
-		hud.show_game_over(self.ripe_fruits_eaten)
+		hud.show_game_over(self.ripe_fruits_eaten, false)
 
 func reset():
 	self.nutrition = initial_nutrition
+	self.ripe_fruits_eaten = 0
 	change_nutrition(0)
 
 func _on_nutrition_timer_timeout():
