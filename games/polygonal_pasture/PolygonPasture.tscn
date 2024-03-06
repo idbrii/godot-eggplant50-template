@@ -87,7 +87,6 @@ shape = SubResource( 1 )
 
 [node name="Highlight" type="Sprite" parent="Pasture/Plot"]
 visible = false
-modulate = Color( 1, 1, 1, 0.156863 )
 texture = ExtResource( 5 )
 
 [node name="PlotNodes" type="Node2D" parent="Pasture"]
