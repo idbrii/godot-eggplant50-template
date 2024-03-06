@@ -12,13 +12,11 @@ func show_message(text):
 	$MessageTimer.start()
 
 func show_game_over():
-	$youDiedLabel.visible = true
-	$newGameButton.visible = true
+	$gameOverRect.visible = true
 	
 func update_score(score):
 	$nutritionLabel.text = str(score)
 
 func _on_newGameButton_button_up():
-	$youDiedLabel.visible = false
-	$newGameButton.visible = false
+	$gameOverRect.visible = false
 	emit_signal('start_game')

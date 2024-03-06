@@ -49,22 +49,26 @@ margin_bottom = 68.0
 align = 1
 autowrap = true
 
-[node name="newGameButton" type="Button" parent="."]
+[node name="gameOverRect" type="ColorRect" parent="."]
 visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.192157, 0.321569, 0.176471, 1 )
+
+[node name="newGameButton" type="Button" parent="gameOverRect"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -102.0
-margin_top = -40.0
-margin_right = 102.0
-margin_bottom = 40.0
+margin_top = 20.0
+margin_right = 138.0
+margin_bottom = 100.0
 custom_colors/font_color = Color( 0.972549, 0.898039, 0.0823529, 1 )
 custom_fonts/font = ExtResource( 4 )
 text = "New Game"
 
-[node name="youDiedLabel" type="Label" parent="."]
-visible = false
+[node name="youDiedLabel" type="Label" parent="gameOverRect"]
 anchor_right = 1.0
 margin_top = 64.0
 margin_right = -320.0
@@ -76,4 +80,4 @@ align = 1
 autowrap = true
 
 [connection signal="timeout" from="MessageTimer" to="." method="_on_MessageTimer_timeout"]
-[connection signal="button_up" from="newGameButton" to="." method="_on_newGameButton_button_up"]
+[connection signal="button_up" from="gameOverRect/newGameButton" to="." method="_on_newGameButton_button_up"]
