@@ -1,5 +1,15 @@
 extends RigidBody2D
 
+export(AudioStreamSample) var bounce1 = preload('res://games/keepy_uppy/balloon-bounce1.wav')
+export(AudioStreamSample) var bounce2 = preload('res://games/keepy_uppy/balloon-bounce2.wav')
+export(AudioStreamSample) var bounce3 = preload('res://games/keepy_uppy/balloon-bounce3.wav')
+
+export(AudioStreamSample) var short_bounce1 = preload('res://games/keepy_uppy/balloon-short-bounce1.wav')
+export(AudioStreamSample) var short_bounce2 = preload('res://games/keepy_uppy/balloon-short-bounce2.wav')
+export(AudioStreamSample) var short_bounce3 = preload('res://games/keepy_uppy/balloon-short-bounce3.wav')
+
+export(AudioStreamSample) var explode_sound = preload('res://games/keepy_uppy/explosion.wav')
+
 enum BalloonState {
 	IN_PLAY,
 	POPPED
@@ -11,16 +21,18 @@ signal touch_update(count)
 signal balloon_popped(balloon)
 signal floor_touched()
 
-var knocks = 0
-var keep_up_touches = 0
+var knocks : int = 0
+var keep_up_touches : int = 0
 var previously_touched
 var current_state = BalloonState.IN_PLAY
+var last_bounce : int = 0
 
 func _ready() -> void:
 	knocks = 0
 	keep_up_touches = 0
 	previously_touched = self
 	current_state = BalloonState.IN_PLAY
+	last_bounce = Time.get_ticks_msec()
 
 	$DragTimer.connect('timeout', self, 'drag_timeout')
 	$PopTimer.connect('timeout', self, 'pop_timeout')
@@ -50,6 +62,9 @@ func on_body_entered(body) -> void:
 		emit_signal('touch_update', keep_up_touches)
 		emit_signal('floor_touched')
 
+	play_bounce()
+	last_bounce = Time.get_ticks_msec()
+
 	print("knocked into ", body)
 	if $PopTimer.is_stopped():
 		$PopTimer.start()
@@ -57,10 +72,21 @@ func on_body_entered(body) -> void:
 		print("pop! ", knocks)
 		emit_signal('balloon_popped', self)
 		current_state = BalloonState.POPPED
+		$AudioStreamPlayer.stop()
+		$AudioStreamPlayer.stream = explode_sound
+		$AudioStreamPlayer.play()
 	
 	knocks += 1
 
 	previously_touched = body
+
+onready var normal_sounds = [bounce1, bounce2, bounce3]
+onready var short_sounds  = [short_bounce1, short_bounce2, short_bounce3]
+func play_bounce():
+	var is_short_sound : bool = Time.get_ticks_msec() - last_bounce < 250
+	var sound : AudioStreamSample = (short_sounds if is_short_sound else normal_sounds)[randi() % 3]
+	$AudioStreamPlayer.stream = sound
+	$AudioStreamPlayer.play()
 
 func pop_timeout() -> void:
 	knocks = 0

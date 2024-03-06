@@ -167,6 +167,8 @@ visible = false
 frames = SubResource( 4 )
 frame = 1
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Balloon"]
+
 [node name="LilRobo" type="KinematicBody2D" parent="."]
 position = Vector2( 46, 309 )
 script = ExtResource( 2 )
