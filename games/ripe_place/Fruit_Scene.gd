@@ -49,12 +49,12 @@ func harvest(harvester):
 func _on_ripenessTimer_timeout():
 	ripeness += 1
 	update_color()
-	var category = get_category_for_ripeness(ripeness)	
+	var category = get_ripeness_category()	
 	if category == 'decayed':
 		start_explode()
 
 func update_color():
-	var category = get_category_for_ripeness(ripeness)
+	var category = get_ripeness_category()
 	var color = colors_for_ripeness_categories.get(category)
 	if color:
 		fruit_sprite.modulate = color
@@ -78,3 +78,6 @@ func get_category_for_ripeness(r: int):
 	if r >= 5 && r <= 7:
 		return 'overripe'
 	return 'decayed'
+
+func get_ripeness_category():
+	return get_category_for_ripeness(ripeness)
