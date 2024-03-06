@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://games/ripe_place/art/monochrome-transparent.png" type="Texture" id=1]
 [ext_resource path="res://games/ripe_place/Fruit_Scene.gd" type="Script" id=2]
+[ext_resource path="res://shared/art/snap_scene_to_palette.tscn" type="PackedScene" id=3]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 20.0
@@ -29,6 +30,8 @@ nutritions_for_ripeness_categories = {
 "ripe": 4,
 "unripe": 0
 }
+
+[node name="snap_scene_to_palette" parent="." instance=ExtResource( 3 )]
 
 [node name="FruitBody" type="RigidBody2D" parent="."]
 contacts_reported = 10
