@@ -1,6 +1,7 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=37 format=2]
 
 [ext_resource path="res://mainmenu/art/font/kenpixel/kenpixel.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://shared/menu_pause/PauseMenu.tscn" type="PackedScene" id=2]
 [ext_resource path="res://games/Jerimiah/assets/MetersUpStreet.png" type="Texture" id=3]
 [ext_resource path="res://games/Jerimiah/assets/CitationViewPane.png" type="Texture" id=4]
 [ext_resource path="res://games/Jerimiah/assets/DetailMeter.png" type="Texture" id=5]
@@ -25,25 +26,31 @@ extents = Vector2( 5, 11 )
 [sub_resource type="RectangleShape2D" id=12]
 extents = Vector2( 10, 56.5 )
 
-[sub_resource type="DynamicFontData" id=4]
-antialiased = false
+[sub_resource type="DynamicFontData" id=1]
 font_path = "res://mainmenu/art/font/kenpixel/mini.ttf"
 
-[sub_resource type="DynamicFont" id=13]
-size = 10
-outline_color = Color( 0.0901961, 0.0666667, 0.101961, 1 )
-extra_spacing_space = 5
-font_data = SubResource( 4 )
+[sub_resource type="DynamicFont" id=37]
+size = 14
+font_data = SubResource( 1 )
 
-[sub_resource type="DynamicFont" id=15]
-size = 10
-outline_color = Color( 0.0901961, 0.0666667, 0.101961, 1 )
-extra_spacing_space = 5
-font_data = SubResource( 4 )
+[sub_resource type="DynamicFont" id=38]
+size = 14
+font_data = SubResource( 1 )
 
-[sub_resource type="DynamicFont" id=16]
+[sub_resource type="DynamicFont" id=26]
+font_data = SubResource( 1 )
+
+[sub_resource type="DynamicFont" id=35]
+outline_color = Color( 0.215686, 0.145098, 0.219608, 1 )
+use_filter = true
+font_data = SubResource( 1 )
+
+[sub_resource type="StyleBoxLine" id=3]
+color = Color( 0.0901961, 0.0666667, 0.101961, 1 )
+
+[sub_resource type="DynamicFont" id=18]
 resource_local_to_scene = true
-size = 8
+size = 10
 font_data = ExtResource( 1 )
 
 [sub_resource type="StyleBoxEmpty" id=2]
@@ -51,19 +58,6 @@ content_margin_left = 4.0
 content_margin_right = 4.0
 content_margin_top = 4.0
 content_margin_bottom = 5.0
-
-[sub_resource type="DynamicFont" id=17]
-resource_local_to_scene = true
-size = 8
-font_data = ExtResource( 1 )
-
-[sub_resource type="StyleBoxLine" id=3]
-color = Color( 0.0901961, 0.0666667, 0.101961, 1 )
-
-[sub_resource type="DynamicFont" id=18]
-resource_local_to_scene = true
-size = 8
-font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=19]
 resource_local_to_scene = true
@@ -78,33 +72,29 @@ resource_local_to_scene = true
 size = 8
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=21]
-size = 10
-outline_color = Color( 0.0901961, 0.0666667, 0.101961, 1 )
-extra_spacing_space = 5
-font_data = SubResource( 4 )
+[sub_resource type="DynamicFont" id=28]
+size = 14
+font_data = SubResource( 1 )
 
-[sub_resource type="DynamicFont" id=22]
-size = 10
-outline_color = Color( 0.0901961, 0.0666667, 0.101961, 1 )
-extra_spacing_space = 5
-font_data = SubResource( 4 )
+[sub_resource type="DynamicFont" id=33]
+size = 14
+font_data = SubResource( 1 )
 
-[sub_resource type="DynamicFont" id=23]
-size = 10
-outline_color = Color( 0.0901961, 0.0666667, 0.101961, 1 )
-extra_spacing_space = 5
-font_data = SubResource( 4 )
+[sub_resource type="DynamicFontData" id=31]
+font_path = "res://mainmenu/art/font/kenpixel/high.ttf"
 
-[sub_resource type="DynamicFont" id=24]
-resource_local_to_scene = true
-size = 8
-font_data = ExtResource( 1 )
+[sub_resource type="DynamicFont" id=32]
+size = 27
+extra_spacing_char = 2
+font_data = SubResource( 31 )
 
-[sub_resource type="DynamicFont" id=25]
-resource_local_to_scene = true
-size = 8
-font_data = ExtResource( 1 )
+[sub_resource type="DynamicFont" id=34]
+extra_spacing_char = 1
+font_data = SubResource( 31 )
+
+[sub_resource type="DynamicFont" id=36]
+extra_spacing_char = 1
+font_data = SubResource( 31 )
 
 [node name="World" type="Node2D"]
 script = ExtResource( 8 )
@@ -243,29 +233,29 @@ anchor_left = 0.0185185
 anchor_top = 0.509174
 anchor_right = 0.969136
 anchor_bottom = 0.57387
-margin_left = 254.0
+margin_left = 240.0
 margin_top = 107.0
-margin_right = 311.0
-margin_bottom = 123.0
+margin_right = 316.0
+margin_bottom = 125.0
 __meta__ = {
 "_edit_use_anchors_": true
 }
 
 [node name="ContinuePrompt" type="HBoxContainer" parent="DetailView/InspectPrompt"]
-margin_right = 57.0
-margin_bottom = 16.0
+margin_right = 76.0
+margin_bottom = 18.0
 
 [node name="PromptText" type="Label" parent="DetailView/InspectPrompt/ContinuePrompt"]
-margin_top = 1.0
-margin_right = 37.0
-margin_bottom = 14.0
+margin_right = 56.0
+margin_bottom = 18.0
 custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_fonts/font = SubResource( 13 )
+custom_fonts/font = SubResource( 37 )
 text = "Inspect"
 
 [node name="ButtonIcon" parent="DetailView/InspectPrompt/ContinuePrompt" instance=ExtResource( 11 )]
-margin_left = 41.0
-margin_right = 57.0
+margin_left = 60.0
+margin_right = 76.0
+margin_bottom = 18.0
 texture = ExtResource( 16 )
 
 [node name="ToggleExit" type="CenterContainer" parent="DetailView"]
@@ -274,29 +264,29 @@ anchor_left = 0.0185185
 anchor_top = 0.583087
 anchor_right = 0.969136
 anchor_bottom = 0.65213
-margin_left = 212.0
+margin_left = 185.0
 margin_top = 107.0
-margin_right = 310.0
-margin_bottom = 123.0
+margin_right = 316.0
+margin_bottom = 125.0
 __meta__ = {
 "_edit_use_anchors_": true
 }
 
 [node name="ContinuePrompt" type="HBoxContainer" parent="DetailView/ToggleExit"]
-margin_right = 98.0
-margin_bottom = 16.0
+margin_right = 131.0
+margin_bottom = 18.0
 
 [node name="PromptText" type="Label" parent="DetailView/ToggleExit/ContinuePrompt"]
-margin_top = 1.0
-margin_right = 78.0
-margin_bottom = 14.0
+margin_right = 111.0
+margin_bottom = 18.0
 custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_fonts/font = SubResource( 15 )
+custom_fonts/font = SubResource( 38 )
 text = "Exit inspection"
 
 [node name="ButtonIcon" parent="DetailView/ToggleExit/ContinuePrompt" instance=ExtResource( 11 )]
-margin_left = 82.0
-margin_right = 98.0
+margin_left = 115.0
+margin_right = 131.0
+margin_bottom = 18.0
 texture = ExtResource( 17 )
 input = 1
 
@@ -322,34 +312,35 @@ margin_top = 115.0
 margin_right = 498.0
 margin_bottom = 345.0
 
-[node name="Title" type="RichTextLabel" parent="CitationView/Citation"]
-anchor_left = 0.352
-anchor_top = 0.004
-anchor_right = 0.716
-anchor_bottom = 0.1
-margin_left = -0.0240059
-margin_top = 0.08
-margin_right = 0.00799561
-custom_colors/default_color = Color( 0.0901961, 0.0666667, 0.101961, 1 )
-custom_fonts/normal_font = SubResource( 16 )
-custom_styles/normal = SubResource( 2 )
-text = "Citation"
-fit_content_height = true
+[node name="TitleContainer" type="CenterContainer" parent="CitationView/Citation"]
+anchor_right = 1.0
+anchor_bottom = 0.087
+margin_bottom = 2.99
 
-[node name="ViolationsTitle" type="RichTextLabel" parent="CitationView/Citation"]
-anchor_left = 0.315
+[node name="Title" type="Label" parent="CitationView/Citation/TitleContainer"]
+margin_left = 49.0
+margin_top = 1.0
+margin_right = 113.0
+margin_bottom = 21.0
+custom_colors/font_color = Color( 0.0901961, 0.0666667, 0.101961, 1 )
+custom_fonts/font = SubResource( 26 )
+text = "Citation"
+
+[node name="ViolationsTitleContainer" type="CenterContainer" parent="CitationView/Citation"]
 anchor_top = 0.148
-anchor_right = 0.753
-anchor_bottom = 0.261
-margin_left = -0.0300026
+anchor_right = 1.0
+anchor_bottom = 0.248
 margin_top = -0.0400009
-margin_right = 0.0139999
-margin_bottom = -0.0300026
-custom_colors/default_color = Color( 0.0901961, 0.0666667, 0.101961, 1 )
-custom_fonts/normal_font = SubResource( 17 )
-custom_styles/normal = SubResource( 2 )
+margin_bottom = -0.0400009
+
+[node name="ViolationsTitle" type="Label" parent="CitationView/Citation/ViolationsTitleContainer"]
+margin_left = 38.0
+margin_top = 1.0
+margin_right = 124.0
+margin_bottom = 21.0
+custom_colors/font_color = Color( 0.0901961, 0.0666667, 0.101961, 1 )
+custom_fonts/font = SubResource( 35 )
 text = "Violations"
-fit_content_height = true
 
 [node name="HSeparator" type="HSeparator" parent="CitationView/Citation"]
 anchor_left = 0.117
@@ -417,34 +408,34 @@ custom_styles/normal = SubResource( 2 )
 fit_content_height = true
 
 [node name="TogglePrompt" type="CenterContainer" parent="CitationView/Citation"]
-visible = false
-anchor_left = 0.0185185
+anchor_left = 0.019
 anchor_top = 0.509174
-anchor_right = 0.969136
-anchor_bottom = 0.57387
+anchor_right = 0.994
+anchor_bottom = 0.587
+margin_left = -0.0780034
 margin_top = -0.110016
-margin_right = 2.0
-margin_bottom = 0.00999451
+margin_right = -2.02797
+margin_bottom = -3.00992
 __meta__ = {
 "_edit_use_anchors_": true
 }
 
 [node name="ContinuePrompt" type="HBoxContainer" parent="CitationView/Citation/TogglePrompt"]
-margin_left = 24.0
-margin_right = 131.0
-margin_bottom = 16.0
+margin_left = 6.0
+margin_right = 149.0
+margin_bottom = 18.0
 
 [node name="PromptText" type="Label" parent="CitationView/Citation/TogglePrompt/ContinuePrompt"]
-margin_top = 1.0
-margin_right = 87.0
-margin_bottom = 14.0
+margin_right = 123.0
+margin_bottom = 18.0
 custom_colors/font_color = Color( 0.0901961, 0.0666667, 0.101961, 1 )
-custom_fonts/font = SubResource( 21 )
+custom_fonts/font = SubResource( 28 )
 text = "Toggle violation"
 
 [node name="ButtonIcon" parent="CitationView/Citation/TogglePrompt/ContinuePrompt" instance=ExtResource( 11 )]
-margin_left = 91.0
-margin_right = 107.0
+margin_left = 127.0
+margin_right = 143.0
+margin_bottom = 18.0
 texture = ExtResource( 16 )
 
 [node name="CitationPrompt" type="CenterContainer" parent="CitationView/Citation"]
@@ -456,53 +447,53 @@ anchor_bottom = 0.57387
 margin_top = -0.110016
 margin_right = 2.0
 margin_bottom = 1.0099
-__meta__ = {
-"_edit_use_anchors_": true
-}
 
 [node name="ContinuePrompt" type="HBoxContainer" parent="CitationView/Citation/CitationPrompt"]
-margin_left = 32.0
-margin_right = 124.0
-margin_bottom = 16.0
+margin_left = 17.0
+margin_right = 139.0
+margin_bottom = 18.0
+size_flags_horizontal = 5
+size_flags_vertical = 5
+alignment = 1
 
 [node name="PromptText" type="Label" parent="CitationView/Citation/CitationPrompt/ContinuePrompt"]
-margin_top = 1.0
-margin_right = 72.0
-margin_bottom = 14.0
+margin_right = 102.0
+margin_bottom = 18.0
 custom_colors/font_color = Color( 0.0901961, 0.0666667, 0.101961, 1 )
-custom_fonts/font = SubResource( 22 )
+custom_fonts/font = SubResource( 33 )
 text = "Issue citation"
 
 [node name="ButtonIcon" parent="CitationView/Citation/CitationPrompt/ContinuePrompt" instance=ExtResource( 11 )]
-margin_left = 76.0
-margin_right = 92.0
+margin_left = 106.0
+margin_right = 122.0
+margin_bottom = 18.0
 texture = ExtResource( 16 )
 
 [node name="CitationNotice" type="CenterContainer" parent="CitationView/Citation"]
 visible = false
-anchor_left = 0.135802
-anchor_top = 0.509174
-anchor_right = 0.814815
-anchor_bottom = 0.57387
-margin_top = -0.110016
-margin_right = 2.0
-margin_bottom = 1.0099
+anchor_left = 0.0280001
+anchor_top = 0.349
+anchor_right = 0.971
+anchor_bottom = 0.64
+margin_left = -6.53602
+margin_top = 42.73
+margin_right = 5.69797
+margin_bottom = 0.799988
 rect_rotation = -15.0
 __meta__ = {
 "_edit_use_anchors_": true
 }
 
 [node name="ContinuePrompt" type="HBoxContainer" parent="CitationView/Citation/CitationNotice"]
-margin_left = 17.0
-margin_top = 1.0
-margin_right = 95.0
-margin_bottom = 14.0
+margin_left = 7.0
+margin_right = 158.0
+margin_bottom = 25.0
 
 [node name="PromptText" type="Label" parent="CitationView/Citation/CitationNotice/ContinuePrompt"]
-margin_right = 78.0
-margin_bottom = 13.0
+margin_right = 151.0
+margin_bottom = 25.0
 custom_colors/font_color = Color( 0.478431, 0.129412, 0.227451, 1 )
-custom_fonts/font = SubResource( 23 )
+custom_fonts/font = SubResource( 32 )
 text = "Citation Issued"
 
 [node name="Requirements" type="ColorRect" parent="CitationView"]
@@ -515,7 +506,7 @@ margin_bottom = 168.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_colors/default_color = Color( 0.0901961, 0.0666667, 0.101961, 1 )
-custom_fonts/normal_font = SubResource( 24 )
+custom_fonts/normal_font = SubResource( 34 )
 custom_styles/normal = SubResource( 2 )
 text = "Requirements
 - Pay meter"
@@ -530,10 +521,25 @@ margin_bottom = 199.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_colors/default_color = Color( 0.0901961, 0.0666667, 0.101961, 1 )
-custom_fonts/normal_font = SubResource( 25 )
+custom_fonts/normal_font = SubResource( 36 )
 custom_styles/normal = SubResource( 2 )
 text = "Date: 96.03.22"
 fit_content_height = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource( 2 )]
+margin_left = 24.0
+margin_top = 26.0
+margin_right = 191.0
+margin_bottom = 246.0
+help_title = "Meters up"
+help_body = "Track parking violations and place citations on windshields, but be cautious... once a citation is issued it cannot be removed.
+
+Controls
+move - left / right
+primary action - inspect / toggle violation / issue citation
+secondary action -> exit inspection"
 
 [connection signal="area_entered" from="StreetView/MeterAttendant/interacts" to="." method="meter_attendant_area_entered"]
 [connection signal="area_exited" from="StreetView/MeterAttendant/interacts" to="." method="meter_attendant_area_exited"]
