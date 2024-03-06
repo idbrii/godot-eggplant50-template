@@ -29,7 +29,7 @@ func _ready():
 
 
 func wait_for_next_car():
-	get_tree().create_timer(rand_range(0.0, maxWaitTime)).connect("timeout", self, "car_enters")
+	get_tree().create_timer(rand_range(0.0, maxWaitTime), false).connect("timeout", self, "car_enters")
 
 
 func car_enters():
