@@ -32,10 +32,15 @@ move_cost = 2
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )
-frame = 1
 playing = true
 
 [node name="batArea2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="batArea2D"]
 shape = SubResource( 4 )
+
+[node name="nutrition_timer" type="Timer" parent="."]
+wait_time = 6.0
+autostart = true
+
+[connection signal="timeout" from="nutrition_timer" to="." method="_on_nutrition_timer_timeout"]

@@ -59,3 +59,6 @@ func change_nutrition(delta: int):
 func reset():
 	self.nutrition = initial_nutrition
 	change_nutrition(0)
+
+func _on_nutrition_timer_timeout():
+	change_nutrition(-1)
