@@ -9,7 +9,7 @@ var fruit_sprite: Sprite
 
 var colors_for_ripeness_categories = {
 	'unripe': Color(1.0, 1.0, 1.0),
-	'ripe': Color(1.0, 0.8, 0.4),
+	'ripe': Color(1.0, 1.0, 0.5),
 	'overripe': Color(0.6, 0.6, 0.6)
 }
 
