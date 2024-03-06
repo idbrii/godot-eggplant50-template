@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://games/ripe_place/Bat_Scene.tscn" type="PackedScene" id=1]
 [ext_resource path="res://games/ripe_place/ripe-place.gd" type="Script" id=2]
 [ext_resource path="res://games/ripe_place/Fruit_Spawn_Scene.tscn" type="PackedScene" id=3]
 [ext_resource path="res://games/ripe_place/HUD.tscn" type="PackedScene" id=4]
+[ext_resource path="res://shared/menu_pause/PauseMenu.tscn" type="PackedScene" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 320, 160 )
@@ -174,5 +175,11 @@ position = Vector2( 544, 314 )
 position = Vector2( 608, 314 )
 
 [node name="hud" parent="." instance=ExtResource( 4 )]
+
+[node name="menuCanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PauseMenu" parent="menuCanvasLayer" instance=ExtResource( 5 )]
+help_title = "Ripe Place at the Right Time"
+help_body = "As a fruit bat, you need to eat fruit! Eat ripe fruit (yellow) to gain nutrition. Overripe fruit (gray) will make you lose nutrition. Hovering costs nutrition, and moving costs even more, so be judicious. Eat 16 ripe fruits to win!"
 
 [connection signal="start_game" from="hud" to="." method="_on_HUD_start_game"]
