@@ -12,7 +12,7 @@
 
 [node name="Background" type="ColorRect" parent="."]
 margin_left = -640.0
-margin_right = 640.0
+margin_right = 36.0
 margin_bottom = 360.0
 color = Color( 0.12549, 0.12549, 0.25098, 1 )
 

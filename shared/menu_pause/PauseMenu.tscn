@@ -33,8 +33,10 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer"]
-margin_right = 558.0
-margin_bottom = 268.0
+margin_left = 31.0
+margin_top = 31.0
+margin_right = 527.0
+margin_bottom = 236.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
