@@ -180,6 +180,6 @@ position = Vector2( 608, 314 )
 
 [node name="PauseMenu" parent="menuCanvasLayer" instance=ExtResource( 5 )]
 help_title = "Ripe Place at the Right Time"
-help_body = "As a fruit bat, you need to eat fruit! Eat ripe fruit (yellow) to gain nutrition. Overripe fruit (gray) will make you lose nutrition. Hovering costs nutrition, and moving costs even more, so be judicious. Eat 16 ripe fruits to win!"
+help_body = "You, a fruit bat, need to eat fruit! Use the action button to eat ripe fruit (yellow) to gain nutrition. Overripe fruit (gray) will make you lose nutrition. Hovering costs nutrition, and moving costs even more, so be judicious. Eat 16 ripe fruits to win!"
 
 [connection signal="start_game" from="hud" to="." method="_on_HUD_start_game"]
