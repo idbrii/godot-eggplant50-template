@@ -5,6 +5,7 @@ export(Vector2) var screen_size
 export(int) var move_size
 export(int) var initial_nutrition
 export(int) var move_cost
+export(int) var ripe_fruits_eaten
 
 var hud
 var covered_fruit_scene: PackedScene
@@ -43,18 +44,20 @@ func handle_bat_move():
 func handle_bat_action():
 	if Input.is_action_just_released("action1"):
 		var intersecting_bodies = self.get_node("batArea2D").get_overlapping_bodies()
-		print('colliding: ', intersecting_bodies)
+#		print('colliding: ', intersecting_bodies)
 		var fruits = []
 		for body in intersecting_bodies:
 			fruits.append(body.get_parent())
 		for fruit in fruits:
 			fruit.harvest(self)
+			if fruit.get_ripeness_category() == 'ripe':
+				self.ripe_fruits_eaten += 1
 
 func change_nutrition(delta: int):
 	self.nutrition += delta
 	hud.update_score(self.nutrition)
 	if self.nutrition < 1:
-		hud.show_game_over()
+		hud.show_game_over(self.ripe_fruits_eaten)
 
 func reset():
 	self.nutrition = initial_nutrition

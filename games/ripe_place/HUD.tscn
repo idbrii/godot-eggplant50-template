@@ -79,5 +79,16 @@ text = "You have run out of nutrition. Unfortunate!"
 align = 1
 autowrap = true
 
+[node name="scoreLabel" type="Label" parent="gameOverRect"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -270.0
+margin_top = -80.0
+margin_bottom = -40.0
+rect_scale = Vector2( 2, 2 )
+custom_colors/font_color = Color( 1, 0.819608, 0, 1 )
+
 [connection signal="timeout" from="MessageTimer" to="." method="_on_MessageTimer_timeout"]
 [connection signal="button_up" from="gameOverRect/newGameButton" to="." method="_on_newGameButton_button_up"]

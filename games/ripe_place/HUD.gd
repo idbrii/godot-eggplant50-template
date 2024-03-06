@@ -11,7 +11,9 @@ func show_message(text):
 	$Message.show()
 	$MessageTimer.start()
 
-func show_game_over():
+func show_game_over(fruit_count):
+	$gameOverRect/scoreLabel.text = 'But at least you ate ' + str(fruit_count) \
+	+ ' ripe fruits!'
 	$gameOverRect.visible = true
 	
 func update_score(score):
