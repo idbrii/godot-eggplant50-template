@@ -5,11 +5,18 @@ enum State {
 	SWAPPING,
 	DROPPING,
 }
+
+export(AudioStreamSample) var music1 = preload('res://games/third_times_a_charm/gymnopedie_no1.wav')
+export(AudioStreamSample) var music2 = preload('res://games/third_times_a_charm/gymnopedie_no2.wav')
+export(AudioStreamSample) var music3 = preload('res://games/third_times_a_charm/gymnopedie_no3.wav')
+export(AudioStreamSample) var music4 = preload('res://games/third_times_a_charm/noodle_cafe.wav')
+
 var state : int
 var grid : Array
 var combo_count : int
 
 func _ready() -> void:
+	randomize()
 	change_state('ready', State.WAITING)
 	grid = []
 	combo_count = 0
@@ -18,6 +25,18 @@ func _ready() -> void:
 		grid.append([])
 		for y in range(4):
 			grid[x].insert(y, make_shape(x, y))
+
+	play_music()
+
+func play_music():
+	var tracks = [music1, music2, music3, music4]
+	var pos = 0
+	var ads : AudioStreamPlayer = $MusicPlayer
+	while true:
+		ads.stream = tracks[pos % 4]
+		ads.play()
+		yield(ads, 'finished')
+		pos += 1
 
 func make_shape(x, y):
 	var s : Sprite = $Shapes.get_children()[randi() % $Shapes.get_child_count()].duplicate()
@@ -183,15 +202,26 @@ func remove_match(matched_shapes):
 
 	yield(get_tree().create_timer(SWELL_PERIOD), 'timeout')
 
+	var pnodes = []
 	for s in matched_shapes:
 		if s.has_meta('removing2'):
 			continue
+		var p = $MatchParticles.duplicate()
+		p.emitting = true
+		p.global_position = s.global_position
+		add_child(p)
+		pnodes.append(p)
 		var shrink = get_tree().create_tween()
 		shrink.tween_property(
 			s, "scale", Vector2.ZERO, SHRINK_PERIOD
 		)
 		shrink.set_ease(Tween.EASE_IN)
 		s.set_meta('removing2', true)
+
+	yield(get_tree().create_timer(1), 'timeout')
+	for p in pnodes:
+		p.queue_free()
+
 
 func fill_gaps(matches):
 	# Dedupe all shapes and annotate which are being filled in.
