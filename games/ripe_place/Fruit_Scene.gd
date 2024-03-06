@@ -16,6 +16,7 @@ var colors_for_ripeness_categories = {
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	fruit_sprite = self.get_node("FruitBody/Sprite")
+	update_color()
 
 func highlightFruit():
 	fruit_sprite.set_scale(fruit_sprite.get_scale() * highlight_scale)
@@ -47,13 +48,17 @@ func harvest(harvester):
 
 func _on_ripenessTimer_timeout():
 	ripeness += 1
+	update_color()
+	var category = get_category_for_ripeness(ripeness)	
+	if category == 'decayed':
+		start_explode()
+
+func update_color():
 	var category = get_category_for_ripeness(ripeness)
 	var color = colors_for_ripeness_categories.get(category)
 	if color:
 		fruit_sprite.modulate = color
-	if category == 'decayed':
-		start_explode()
-
+		
 func start_explode():
 	$FruitBody/AnimatedSprite.visible = true
 	$FruitBody/Sprite.visible = false
