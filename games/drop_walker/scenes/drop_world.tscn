@@ -60,7 +60,7 @@ tile_data = PoolIntArray( -655353, 19, 0, -589817, 19, 0, -524281, 19, 0, -45874
 tile_data = PoolIntArray(  )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 421, -129 )
+position = Vector2( 304, -143 )
 gridworld_node = NodePath("../Layers/layer0/Grid_Ground")
 inventory_node = NodePath("../UI/Inventory")
 
