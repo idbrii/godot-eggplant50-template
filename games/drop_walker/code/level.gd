@@ -22,7 +22,7 @@ func collect_layers() -> Array:
 
 
 func _input(_event: InputEvent) -> void:
-	if $UI/gameover.visible and Input.is_action_just_pressed("action1") or Input.is_action_just_pressed("action2"):
+	if $UI/gameover.visible and (Input.is_action_just_pressed("action1") or Input.is_action_just_pressed("action2")):
 		Eggplant.transition_to(load("res://games/drop_walker/scenes/levelselect.tscn"))
 
 
