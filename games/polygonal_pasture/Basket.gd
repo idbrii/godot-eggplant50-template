@@ -12,6 +12,10 @@ var square_small  = preload('res://games/polygonal_pasture/shapes/SquareSmall.ts
 var square_medium = preload('res://games/polygonal_pasture/shapes/SquareMedium.tscn')
 var square_large  = preload('res://games/polygonal_pasture/shapes/SquareLarge.tscn')
 
+var hexagon_small  = preload('res://games/polygonal_pasture/shapes/HexagonSmall.tscn')
+var hexagon_medium = preload('res://games/polygonal_pasture/shapes/HexagonMedium.tscn')
+var hexagon_large  = preload('res://games/polygonal_pasture/shapes/HexagonLarge.tscn')
+
 
 var shape_map = [null, null, null]
 
@@ -26,6 +30,11 @@ func _ready() -> void:
 	smap.insert(PpShape.ShapeSize.MEDIUM, square_medium)
 	smap.insert(PpShape.ShapeSize.LARGE, square_large)
 	shape_map.insert(PpShape.ShapeName.SQUARE, smap)
+	var hmap = [null, null, null]
+	hmap.insert(PpShape.ShapeSize.SMALL, hexagon_small)
+	hmap.insert(PpShape.ShapeSize.MEDIUM, hexagon_medium)
+	hmap.insert(PpShape.ShapeSize.LARGE, hexagon_large)
+	shape_map.insert(PpShape.ShapeName.HEXAGON, hmap)
 	
 func on_shape_gathered(shape):
 	var shape_node : GrownShape = shape_map[shape.shape_name][shape.shape_size].instance()

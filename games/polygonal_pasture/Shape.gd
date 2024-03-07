@@ -1,7 +1,7 @@
 class_name PpShape
 extends Sprite
 
-enum ShapeName { TRIANGLE, SQUARE, RHOMBUS }
+enum ShapeName { TRIANGLE, SQUARE, HEXAGON }
 export(ShapeName) var shape_name
 
 enum ShapeSize { SEED, SMALL, MEDIUM, LARGE, ROTTEN }
@@ -9,12 +9,13 @@ export(ShapeSize) var shape_size
 
 const texture_path_format = 'res://games/polygonal_pasture/assets/%s-%s.png'
 
-const name_map = [null, null]
+const name_map = [null, null, null]
 const size_map = [null, null, null, null, null, null]
 
 func _init():
 	name_map.insert(ShapeName.TRIANGLE, 'triangle')
 	name_map.insert(ShapeName.SQUARE, 'square')
+	name_map.insert(ShapeName.HEXAGON, 'hexagon')
 
 	size_map.insert(ShapeSize.SEED, 'seed')
 	size_map.insert(ShapeSize.SMALL, 'small')

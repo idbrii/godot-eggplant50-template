@@ -6,7 +6,8 @@ const PpShape = preload('res://games/polygonal_pasture/Shape.gd')
 
 const SEED_SHAPES = [
 	PpShape.ShapeName.TRIANGLE,
-	PpShape.ShapeName.SQUARE
+	PpShape.ShapeName.SQUARE,
+	PpShape.ShapeName.HEXAGON
 ]
 
 var current_shape : PpShape
