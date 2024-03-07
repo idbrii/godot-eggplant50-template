@@ -21,6 +21,11 @@ func collect_layers() -> Array:
 	return w
 
 
+func _input(_event: InputEvent) -> void:
+	if $UI/gameover.visible and Input.is_action_just_pressed("action1") or Input.is_action_just_pressed("action2"):
+		Eggplant.transition_to(load("res://games/drop_walker/scenes/levelselect.tscn"))
+
+
 func _ready():
 	Validate.ok(player.connect("fall_through_hole", self, "_on_fall_through_hole"))
 	Validate.ok(player.connect("reached_goal", self, "_on_reached_goal"))
@@ -87,7 +92,6 @@ func _on_player_moved(_player, dest_pos, delta):
 	#~ printt("Player moved:", dest_pos, delta)
 	#~ for layer in gridworlds:
 	#~ 	printt("layer:", layer, layer.snap_global_to_cell(dest_pos))
-
 
 
 #~ func _draw():
