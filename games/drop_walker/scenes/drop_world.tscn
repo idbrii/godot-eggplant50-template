@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://games/drop_walker/code/level.gd" type="Script" id=1]
 [ext_resource path="res://games/drop_walker/scenes/player.tscn" type="PackedScene" id=2]
@@ -9,6 +9,8 @@
 [ext_resource path="res://mainmenu/theme/style_panel_light.tres" type="StyleBox" id=7]
 [ext_resource path="res://games/drop_walker/art/isometric-space-interior/PNG/plank_ui.png" type="Texture" id=8]
 [ext_resource path="res://games/drop_walker/code/inventory.gd" type="Script" id=9]
+[ext_resource path="res://mainmenu/theme/style_panel_bg.tres" type="StyleBox" id=10]
+[ext_resource path="res://games/dice_stanza/art/font_kenpixel_mini_big.tres" type="DynamicFont" id=11]
 
 [node name="World" type="Node2D"]
 script = ExtResource( 1 )
@@ -66,27 +68,25 @@ inventory_node = NodePath("../UI/Inventory")
 
 [node name="UI" type="CanvasLayer" parent="."]
 
-[node name="gameover" type="Panel" parent="UI"]
+[node name="gameover" type="PanelContainer" parent="UI"]
 visible = false
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -142.0
-margin_top = -65.0
-margin_right = 121.0
-margin_bottom = 80.0
+margin_left = -125.0
+margin_top = -40.0
+margin_right = 125.0
+margin_bottom = 40.0
 theme = ExtResource( 5 )
+custom_styles/panel = ExtResource( 10 )
 
 [node name="Label" type="Label" parent="UI/gameover"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -44.0
-margin_top = -10.0
-margin_right = 44.0
-margin_bottom = 10.0
+margin_left = 15.0
+margin_top = 15.0
+margin_right = 235.0
+margin_bottom = 65.0
+custom_fonts/font = ExtResource( 11 )
 text = "Game Over"
 align = 1
 valign = 1
