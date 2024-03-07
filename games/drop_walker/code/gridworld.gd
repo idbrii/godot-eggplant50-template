@@ -34,6 +34,7 @@ func _ready():
 # Returns a global position that's the bottom corner of a tile.
 # https://www.reddit.com/r/godot/comments/fuejci/having_trouble_with_snapping_to_isometric_grid/fmcl07f/
 func snap_global_to_cell(world_pos: Vector2) -> Vector2:
+    # map_to_world says it's top left corner of the cell instead of the centre.
     return to_global(map_to_world(world_to_map(to_local(world_pos))))
 
 
@@ -50,6 +51,13 @@ func center_global_pos_in_cell(world_pos: Vector2) -> Vector2:
     var half = cell_size / 2
     half.x = 0
     return world_pos + half
+
+
+# Adjusts a global position that's in the middle of a cell to the bottom corner.
+func align_global_pos_in_cell(world_pos: Vector2) -> Vector2:
+    var half = cell_size / 2
+    half.x = 0
+    return world_pos - half
 
 
 # https://github.com/gdquest-demos/godot-3-demos/blob/master/2017/final/09-Isometric%20grid-based%20movement/Player.gd
@@ -70,7 +78,14 @@ func get_world_cellv(v: Vector2) -> int:
 
 func attach_player_to_world(player):
     var old_grid = player.gridworld
-    var dest = snap_global_to_cell(player.global_position)
+    var pos = player.global_position
+
+    # HACK: Fix player attached one cell north of expected. I guess because
+    # map_to_world doesn't return the centre? Applying centering again fixes it
+    # although I'd expect to *remove* the centering, but it works.
+    pos = center_global_pos_in_cell(pos)
+
+    var dest = snap_global_to_cell(pos)
     player.get_parent().remove_child(player)
     $"%YSort".add_child(player)
     player.gridworld = self
