@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/8bit Bossa.mp3-5831ea664b51679252e75755749b068f.mp3str"
+
+[deps]
+
+source_file="res://games/Jerimiah/assets/8bit Bossa.mp3"
+dest_files=[ "res://.import/8bit Bossa.mp3-5831ea664b51679252e75755749b068f.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

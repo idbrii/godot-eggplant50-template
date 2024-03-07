@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=2]
+[gd_scene load_steps=56 format=2]
 
 [ext_resource path="res://mainmenu/art/font/kenpixel/kenpixel.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://shared/menu_pause/PauseMenu.tscn" type="PackedScene" id=2]
@@ -18,6 +18,10 @@
 [ext_resource path="res://shared/input/art/keyboard/char_n.png" type="Texture" id=16]
 [ext_resource path="res://shared/input/art/keyboard/char_m.png" type="Texture" id=17]
 [ext_resource path="res://games/Jerimiah/assets/MeterAttendantRunning.png" type="Texture" id=18]
+[ext_resource path="res://games/Jerimiah/assets/Busy Day At The Market-LOOP.wav" type="AudioStream" id=19]
+[ext_resource path="res://games/Jerimiah/assets/ambient_traffic.wav" type="AudioStream" id=20]
+[ext_resource path="res://games/Jerimiah/assets/success.wav" type="AudioStream" id=21]
+[ext_resource path="res://games/Jerimiah/assets/error.mp3" type="AudioStream" id=22]
 
 [sub_resource type="RectangleShape2D" id=8]
 extents = Vector2( 3, 10 )
@@ -1102,10 +1106,34 @@ margin_bottom = 246.0
 help_title = "Meters up"
 help_body = "Track parking violations and place citations on windshields, but be cautious... once a citation is issued it cannot be removed.
 
-Controls
-move - left / right
-primary action - inspect / toggle violation / issue citation
-secondary action -> exit inspection"
+ credits:
+Music and sounds:
+- Bossa Nova by Joth
+- This project contains music created by David McKee (ViRiX) soundcloud.com/virix
+- ambient street noise (unedited) by SFXAFRIK
+- Soft Dreamy Beep (unedited) by Eponn
+- Error Bleep 5 (unedited) by original_sound
+https://creativecommons.org/licenses/by/4.0/
+https://creativecommons.org/licenses/by/3.0/"
+
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 19 )
+volume_db = -6.382
+autoplay = true
+
+[node name="Ambience" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 20 )
+volume_db = -7.509
+autoplay = true
+
+[node name="Success" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 21 )
+volume_db = -3.0
+
+[node name="Fail" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 22 )
+volume_db = -5.0
+pitch_scale = 0.75
 
 [connection signal="area_entered" from="StreetView/MeterAttendant/interacts" to="." method="meter_attendant_area_entered"]
 [connection signal="area_exited" from="StreetView/MeterAttendant/interacts" to="." method="meter_attendant_area_exited"]

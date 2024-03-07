@@ -116,5 +116,7 @@ func revenue_affected(newRevenue):
 	
 	if newRevenue <= 0.0:
 		$CitationView/Revenue/Cash/AnimationPlayer.play("subRevenue")
+		$Fail.play()
 	else:
 		$CitationView/Revenue/Cash/AnimationPlayer.play("addRevenue")
+		$Success.play()
