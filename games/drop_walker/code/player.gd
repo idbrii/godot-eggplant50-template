@@ -119,10 +119,17 @@ func _process(_dt: float):
 
         emit_signal("player_moved", self, dest, delta)
 
-        if dest_tile == GroundType.EMPTY:
-            emit_signal("fall_through_hole")
-        elif dest_tile == GroundType.GOAL:
-            emit_signal("reached_goal")
+        var tile_signal = _evaluate_tile(dest_tile)
+        if tile_signal:
+            emit_signal(tile_signal)
+
+
+func _evaluate_tile(dest_tile):
+    if dest_tile == GroundType.EMPTY:
+        return "fall_through_hole"
+    elif dest_tile == GroundType.GOAL:
+        return "reached_goal"
+    return null
 
 
 func fall_to_layer(layer, dest):
@@ -158,9 +165,11 @@ func fall_to_layer(layer, dest):
 
 
 func done_falling():
-    block_input = false
     var dest_tile = gridworld.get_world_cellv(global_position)
     printt("Player done_falling. dest", global_position, dest_tile)
-    if dest_tile == GroundType.EMPTY:
+    var tile_signal = _evaluate_tile(dest_tile)
+    if tile_signal:
         yield(get_tree().create_timer(drop_duration * 0.1), "timeout")
-        emit_signal("fall_through_hole")
+        emit_signal(tile_signal)
+    else:
+        block_input = false
