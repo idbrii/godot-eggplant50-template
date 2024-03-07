@@ -27,9 +27,14 @@ func handle_street_pane():
 	var move_x := Input.get_axis("move_left", "move_right")
 	$StreetView/MeterAttendant.move_and_collide(Vector2(speed * move_x, 0))
 	if move_x < 0:
-		$StreetView/MeterAttendant/Sprite.flip_h = true
+		$StreetView/MeterAttendant/AnimatedSprite.flip_h = true
 	if move_x > 0:
-		$StreetView/MeterAttendant/Sprite.flip_h = false
+		$StreetView/MeterAttendant/AnimatedSprite.flip_h = false
+		
+	if move_x == 0:
+		$StreetView/MeterAttendant/AnimatedSprite.play("idle")
+	else:
+		$StreetView/MeterAttendant/AnimatedSprite.play("run")
 	
 	if Input.is_action_just_pressed("action1"):
 		var overlapping = $StreetView/MeterAttendant/interacts.get_overlapping_areas()
@@ -74,6 +79,7 @@ func activate_detail_view(parentNode):
 	currentDetailType = parentNode.detailType
 	
 	if currentDetailType == 'meter':
+		$StreetView/MeterAttendant/AnimatedSprite.play("idle")
 		$DetailView/Meter.visible = true
 		if not currentParkingSpace.citationIssued:
 			$CitationView/Citation/TogglePrompt.visible = true

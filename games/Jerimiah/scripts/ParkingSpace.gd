@@ -12,7 +12,7 @@ onready var fineAmount := get_node(fineAmountPath) as RichTextLabel
 onready var citationNotice := get_node(citationNoticePath) as CenterContainer
 
 export(float) var maxWaitTime = 10.0
-export(float) var maxParkTime = 120.0
+export(float) var maxParkTime = 60.0
 
 signal revenue_affected(newRevenue)
 
@@ -39,7 +39,7 @@ func car_enters():
 	car = randi() % 4 + 1
 	get_node("Car/Car" + String(car)).visible = true
 	$Car.visible = true
-	var desiredParkingTime = rand_range(10.0, 120.0)
+	var desiredParkingTime = rand_range(10.0, maxParkTime)
 
 	var willPay = rand_range(0.0, 4.0) < 3.0
 
