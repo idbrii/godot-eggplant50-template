@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=2]
+[gd_scene load_steps=52 format=2]
 
 [ext_resource path="res://mainmenu/art/font/kenpixel/kenpixel.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://shared/menu_pause/PauseMenu.tscn" type="PackedScene" id=2]
@@ -17,9 +17,52 @@
 [ext_resource path="res://games/Jerimiah/scenes/ParkingSpace.tscn" type="PackedScene" id=15]
 [ext_resource path="res://shared/input/art/keyboard/char_n.png" type="Texture" id=16]
 [ext_resource path="res://shared/input/art/keyboard/char_m.png" type="Texture" id=17]
+[ext_resource path="res://games/Jerimiah/assets/MeterAttendantRunning.png" type="Texture" id=18]
 
 [sub_resource type="RectangleShape2D" id=8]
 extents = Vector2( 3, 10 )
+
+[sub_resource type="AtlasTexture" id=52]
+atlas = ExtResource( 18 )
+region = Rect2( 0, 0, 30, 50 )
+
+[sub_resource type="AtlasTexture" id=53]
+atlas = ExtResource( 18 )
+region = Rect2( 30, 0, 30, 50 )
+
+[sub_resource type="AtlasTexture" id=54]
+atlas = ExtResource( 18 )
+region = Rect2( 60, 0, 30, 50 )
+
+[sub_resource type="AtlasTexture" id=55]
+atlas = ExtResource( 18 )
+region = Rect2( 90, 0, 30, 50 )
+
+[sub_resource type="AtlasTexture" id=56]
+atlas = ExtResource( 18 )
+region = Rect2( 120, 0, 30, 50 )
+
+[sub_resource type="AtlasTexture" id=57]
+atlas = ExtResource( 18 )
+region = Rect2( 150, 0, 30, 50 )
+
+[sub_resource type="SpriteFrames" id=51]
+animations = [ {
+"frames": [ ExtResource( 7 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 7 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 52 ), SubResource( 53 ), SubResource( 54 ), SubResource( 55 ), SubResource( 56 ), SubResource( 57 ) ],
+"loop": true,
+"name": "run",
+"speed": 12.0
+} ]
 
 [sub_resource type="RectangleShape2D" id=9]
 extents = Vector2( 5, 11 )
@@ -588,7 +631,12 @@ position = Vector2( 161, 50 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StreetView/MeterAttendant"]
 shape = SubResource( 8 )
 
-[node name="Sprite" type="Sprite" parent="StreetView/MeterAttendant"]
+[node name="AnimatedSprite" type="AnimatedSprite" parent="StreetView/MeterAttendant"]
+frames = SubResource( 51 )
+animation = "idle"
+
+[node name="Idle" type="Sprite" parent="StreetView/MeterAttendant"]
+visible = false
 texture = ExtResource( 7 )
 
 [node name="interacts" type="Area2D" parent="StreetView/MeterAttendant"]
