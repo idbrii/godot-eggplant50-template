@@ -54,7 +54,7 @@
 [ext_resource path="res://games/dice_stanza/sound/actions/pickup9.mp3" type="AudioStream" id=52]
 [ext_resource path="res://games/dice_stanza/code/soundpool.gd" type="Script" id=53]
 [ext_resource path="res://games/dice_stanza/art/kenney_abstract-platformer/PlayerRed/playerRed_hit.png" type="Texture" id=54]
-[ext_resource path="res://games/dice_stanza/art/kenney_abstract-platformer/PlayerRed/playerRed_dead.png" type="Texture" id=55]
+[ext_resource path="res://games/dice_stanza/art/kenney_abstract-platformer/PlayerRed/playerRed_duck.png" type="Texture" id=55]
 [ext_resource path="res://games/dice_stanza/code/player/animgraph/ag_dead.gd" type="Script" id=56]
 
 [sub_resource type="RectangleShape2D" id=2]
