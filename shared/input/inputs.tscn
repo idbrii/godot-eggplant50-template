@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://shared/input/input_widget.gd" type="Script" id=1]
-[ext_resource path="res://shared/input/art/xbox/a.png" type="Texture" id=2]
+[ext_resource path="res://shared/input/art/playstation/circle.png" type="Texture" id=2]
 [ext_resource path="res://shared/input/art/xbox/b.png" type="Texture" id=3]
 [ext_resource path="res://mainmenu/theme/theme_eggplant.tres" type="Theme" id=4]
 [ext_resource path="res://shared/input/art/keyboard/arrow_down.png" type="Texture" id=5]
@@ -171,7 +171,7 @@ margin_right = 101.0
 margin_bottom = 64.0
 rect_min_size = Vector2( 64, 64 )
 size_flags_horizontal = 3
-texture = ExtResource( 3 )
+texture = ExtResource( 2 )
 stretch_mode = 6
 
 [node name="Label" type="Label" parent="VBoxContainer/Actions/secondary"]
@@ -196,7 +196,7 @@ margin_right = 100.0
 margin_bottom = 64.0
 rect_min_size = Vector2( 64, 64 )
 size_flags_horizontal = 3
-texture = ExtResource( 3 )
+texture = ExtResource( 2 )
 stretch_mode = 6
 
 [node name="Label" type="Label" parent="VBoxContainer/pause"]

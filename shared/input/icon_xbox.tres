@@ -8,7 +8,7 @@
 
 [resource]
 script = ExtResource( 1 )
-primary = ExtResource( 3 )
-secondary = ExtResource( 2 )
+primary = ExtResource( 2 )
+secondary = ExtResource( 3 )
 pause = ExtResource( 5 )
 move_omni = ExtResource( 4 )
