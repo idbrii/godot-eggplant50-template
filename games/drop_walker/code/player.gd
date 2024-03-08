@@ -12,9 +12,12 @@ export var gridworld_node : NodePath
 export var inventory_node : NodePath
 export var move_duration := 0.5
 export var drop_duration := 1.0
+export var zoom_duration := 1.0
 
+var camera : Camera2D
 var block_input := false
 var can_plank := true
+var zoom_tween : SceneTreeTween
 
 onready var gridworld := get_node_or_null(gridworld_node) as TileMap
 onready var inventory = get_node_or_null(inventory_node)
@@ -29,16 +32,19 @@ func get_input() -> Dictionary:
             plank = false,
             released_plank = false,
             walk = false,
-            just_dash = false,
-            hold_dash = false,
-            released_dash = false,
+            just_zoom = false,
+            hold_zoom = false,
+            released_zoom = false,
         }
     var move := Input.get_vector("move_left", "move_right", "move_up", "move_down")
     return {
         move = move,
-        just_plank     = Input.is_action_just_pressed("action1")  or Input.is_action_just_pressed("action2"),
-        plank          = Input.is_action_pressed("action1")       or Input.is_action_pressed("action2"),
-        released_plank = Input.is_action_just_released("action1") or Input.is_action_just_released("action2"),
+        just_zoom     = Input.is_action_just_pressed("action2"),
+        zoom          = Input.is_action_pressed("action2"),
+        released_zoom = Input.is_action_just_released("action2"),
+        just_plank     = Input.is_action_just_pressed("action1"),
+        plank          = Input.is_action_pressed("action1"),
+        released_plank = Input.is_action_just_released("action1"),
     }
 
 func matches_grid_angle(input_dir, direction):
@@ -63,11 +69,26 @@ func input_dir_to_delta(input_dir):
     return delta
 
 
+func animate_zoom(zoom_amount: float):
+    if zoom_tween:
+        zoom_tween.kill()
+    zoom_tween = create_tween()
+    var t := zoom_tween.tween_property(camera, "zoom", Vector2.ONE * zoom_amount, zoom_duration)
+    t = t.from_current()
+    t = t.set_ease(Tween.EASE_IN_OUT)
+    t = t.set_trans(Tween.TRANS_SINE)
+
+
 func _process(_dt: float):
     var input = get_input()
     var has_plank = inventory.has_remaining_pips()
     var want_plank = input.plank and has_plank
     $PlayerVisual/Plank.visible = want_plank
+
+    if input.just_zoom:
+        animate_zoom(4)
+    elif input.released_zoom:
+        animate_zoom(2)
 
     # Rotate input closer to iso projection to correctly interpret diagonal inputs.
     var iso_move = input.move.rotated(TAU * 1/10)

@@ -31,6 +31,8 @@ func _ready():
 	Validate.ok(player.connect("reached_goal", self, "_on_reached_goal"))
 	Validate.ok(player.connect("player_moved", self, "_on_player_moved"))
 
+	player.camera = $Camera2D
+
 	set_world_layer(current_layer, true, false)
 
 	# Adjust z index so player looks like they fall through holes and appear behind world.
