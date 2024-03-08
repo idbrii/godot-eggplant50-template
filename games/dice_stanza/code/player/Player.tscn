@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=2]
+[gd_scene load_steps=62 format=2]
 
 [ext_resource path="res://games/dice_stanza/code/player/Player.gd" type="Script" id=1]
 [ext_resource path="res://games/dice_stanza/code/player/player_animgraph.gd" type="Script" id=2]
@@ -54,6 +54,8 @@
 [ext_resource path="res://games/dice_stanza/sound/actions/pickup9.mp3" type="AudioStream" id=52]
 [ext_resource path="res://games/dice_stanza/code/soundpool.gd" type="Script" id=53]
 [ext_resource path="res://games/dice_stanza/art/kenney_abstract-platformer/PlayerRed/playerRed_hit.png" type="Texture" id=54]
+[ext_resource path="res://games/dice_stanza/art/kenney_abstract-platformer/PlayerRed/playerRed_dead.png" type="Texture" id=55]
+[ext_resource path="res://games/dice_stanza/code/player/animgraph/ag_dead.gd" type="Script" id=56]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 9, 11 )
@@ -100,6 +102,11 @@ animations = [ {
 "frames": [ ExtResource( 26 ), ExtResource( 25 ), ExtResource( 24 ) ],
 "loop": true,
 "name": "climb",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 55 ) ],
+"loop": true,
+"name": "dead",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 6 ) ],
@@ -160,7 +167,7 @@ material = SubResource( 5 )
 position = Vector2( 4.52995e-06, -8.00003 )
 scale = Vector2( 0.461539, 0.458333 )
 frames = SubResource( 6 )
-animation = "land"
+animation = "dead"
 
 [node name="StateMachine" type="Node" parent="PlayerVisual"]
 
@@ -169,6 +176,9 @@ script = ExtResource( 17 )
 
 [node name="Climb" type="Node" parent="PlayerVisual/StateMachine"]
 script = ExtResource( 23 )
+
+[node name="Dead" type="Node" parent="PlayerVisual/StateMachine"]
+script = ExtResource( 56 )
 
 [node name="Dash" type="Node" parent="PlayerVisual/StateMachine"]
 script = ExtResource( 22 )
