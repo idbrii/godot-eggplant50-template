@@ -38,7 +38,7 @@ shape = SubResource( 1 )
 [node name="Shrinker" type="Node2D" parent="."]
 scale = Vector2( 0.5, 0.5 )
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="Shrinker"]
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Shrinker" groups=["dice"]]
 unique_name_in_owner = true
 position = Vector2( 0, -32 )
 frames = SubResource( 2 )

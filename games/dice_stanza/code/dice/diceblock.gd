@@ -17,6 +17,7 @@ export(Appearance) var default_appearance := Appearance.IDLE
 
 var value
 var is_fresh_spawn := true
+var _is_counted := false
 
 
 func _ready():
@@ -43,6 +44,14 @@ func set_appearance(appearance):
 		#~ 	sprite.self_modulate = Color(0x3898ffff)
 
 
+func set_is_counted(is_counted):
+	_is_counted = is_counted
+	if is_counted:
+		set_appearance(Appearance.COUNTED)
+	else:
+		set_appearance(Appearance.CARRIED)
+
+
 func set_face_value(v):
 	value = v
 	get_node("%ValueLabel").text = str(v)
@@ -54,7 +63,8 @@ func picked_up_by(owner):
 	set_appearance(Appearance.CARRIED)
 
 func dropped_by(owner):
-	set_appearance(Appearance.IDLE)
+	if not _is_counted:
+		set_appearance(Appearance.IDLE)
 	self.set_mode(RigidBody2D.MODE_RIGID)
 	self.remove_collision_exception_with(owner)
 	emit_signal("dropped", self, owner)
