@@ -141,6 +141,8 @@ z_index = 10
 collision_mask = 14
 collision/safe_margin = 0.04
 script = ExtResource( 1 )
+throw_forward_strength = 170.0
+throw_up_strength = 150.0
 
 [node name="SquareCollisionShape" type="CollisionShape2D" parent="."]
 shape = SubResource( 2 )
