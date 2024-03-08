@@ -169,7 +169,7 @@ material = SubResource( 5 )
 position = Vector2( 4.52995e-06, -8.00003 )
 scale = Vector2( 0.461539, 0.458333 )
 frames = SubResource( 6 )
-animation = "dead"
+animation = "fall"
 
 [node name="StateMachine" type="Node" parent="PlayerVisual"]
 
