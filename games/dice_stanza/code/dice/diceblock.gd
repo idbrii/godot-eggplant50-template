@@ -35,11 +35,11 @@ func set_appearance(appearance):
 	var sprite = $"%AnimatedSprite"
 	match appearance:
 		Appearance.IDLE:
-			sprite.self_modulate = Color(0x83e04cff)
-		Appearance.CARRIED:
-			sprite.self_modulate = Color(0xa0e07bff)
-		Appearance.COUNTED:
 			sprite.self_modulate = Color(0x39855aff)
+		Appearance.CARRIED:
+			sprite.self_modulate = Color(0x59856cff)
+		Appearance.COUNTED:
+			sprite.self_modulate = Color(0x83e04cff)
 		#~ Appearance.OPPO:
 		#~ 	sprite.self_modulate = Color(0x3898ffff)
 

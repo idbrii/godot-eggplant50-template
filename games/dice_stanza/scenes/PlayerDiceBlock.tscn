@@ -60,6 +60,7 @@ target_path = NodePath("../..")
 
 [node name="ValueLabel" type="Label" parent="Shrinker"]
 unique_name_in_owner = true
+modulate = Color( 0.215686, 0.145098, 0.219608, 1 )
 margin_left = -24.0
 margin_top = -59.0
 margin_right = 27.0
