@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://mainmenu/art/button/button_hovered.png" type="Texture" id=1]
+[ext_resource path="res://games/dice_stanza/art/dice/white.png" type="Texture" id=1]
 [ext_resource path="res://games/dice_stanza/art/font_kenpixel_mini_big.tres" type="DynamicFont" id=2]
 [ext_resource path="res://mainmenu/theme/theme_eggplant.tres" type="Theme" id=3]
 [ext_resource path="res://games/dice_stanza/code/dice/diceblock.gd" type="Script" id=4]
@@ -14,7 +14,7 @@ extents = Vector2( 16, 16 )
 animations = [ {
 "frames": [ ExtResource( 1 ) ],
 "loop": true,
-"name": "default",
+"name": "idle",
 "speed": 5.0
 } ]
 
@@ -39,8 +39,10 @@ shape = SubResource( 1 )
 scale = Vector2( 0.5, 0.5 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Shrinker"]
+unique_name_in_owner = true
 position = Vector2( 0, -32 )
 frames = SubResource( 2 )
+animation = "idle"
 
 [node name="Area2D" type="Area2D" parent="Shrinker"]
 position = Vector2( 0, -32 )
