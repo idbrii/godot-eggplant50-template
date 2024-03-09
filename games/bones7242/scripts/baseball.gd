@@ -5,19 +5,21 @@ var delta_counter = 0
 
 var room_height = 360 #TO do replace with actual propery
 var room_width = 640 #TO do replace with actual propery
+var ground = 0 # spot at which ball thinks its on ground.
 
 var initial_state = State.HELD
 var current_state : int
 var last_state : int
 # tbd: set up with enter and exit state functions to set state.
 
-var unprojectedX = 260
-var unprojectedY = 300 # should start up off the ground a bit
-var unprojectedZ = 2
+var unprojectedX = 0
+var unprojectedY = 0 # should start up off the ground a bit
+var unprojectedZ = 0
 var xVelocity = 0 # will be set by creator
 var yVelocity = 0 # will be set by creator
 var zVelocity = 0 # will be set by creator
-var yGravity = -0.5; # should just be set globally so all objects have same gravity.
+var minYVelocity = -1000
+var yGravity = -20; # should just be set globally so all objects have same gravity.
 
 var projectedCoordinates : Array
 var rotationSpeed = 5; # must be multiple of rotateUprightSpeed and 
@@ -35,38 +37,41 @@ func change_state(new_state):
 func change_state_held():
 	last_state = current_state
 	change_state(State.HELD)
-	
-	unprojectedX = 260
+	unprojectedX = 240
 	unprojectedY = 300 # should start up off the ground a bit
-	unprojectedZ = 2
-	set_3d_position()
-	
-	#get_node("spr_baseball").visible = false
+	unprojectedZ = 5
+	get_node("spr_baseball").visible = false
 	pass
 
-func change_state_released():
+func change_state_released(batter_throw_power):
+	yVelocity = batter_throw_power * 10 # multiplying b/c comes in 1-100 but now we will use delta
+	print("RELEASED > y velocity = " + str(yVelocity))
 	last_state = current_state
 	change_state(State.RELEASED)
-	#get_node("spr_baseball").visible = true
+	get_node("spr_baseball").visible = true
 	pass	
 
 func change_state_grounded():
 	last_state = current_state
 	change_state(State.GROUNDED)
+	unprojectedY = ground  # set y to ground
+	xVelocity = 0 # will be set by creator
+	yVelocity = 0 # will be set by creator
+	zVelocity = 0 # will be set by creator
 	pass
 	
 func determineZAsPercent (unprojectedZDistance) :
-	var unprojectedZasPerecentOfRoomHeight = 100 * unprojectedZDistance / (25 + unprojectedZDistance)
+	var unprojectedZasPerecentOfRoomHeight = 100 * float(unprojectedZDistance) / (25 + float(unprojectedZDistance))
 	var zDistanceAsPercent = unprojectedZasPerecentOfRoomHeight / 100
 	return  zDistanceAsPercent
 	
-func convert3dCoordintesTo2d(x_cord, y_cord, z_cord):
+func convert3dCoordintesTo2d():
 	var projectedX : int
 	var projectedY : int 
 	
-	var tX = x_cord # in room top left is 0,0, so tx = mouse_x
-	var tY = y_cord 
-	var tZ = z_cord # in room top left is 0,0, so ty = room height - mouse_y
+	var tX = float(unprojectedX) # in room top left is 0,0, so tx = mouse_x
+	var tY = float(unprojectedY) 
+	var tZ = float(unprojectedZ) # in room top left is 0,0, so ty = room height - mouse_y
 	var t = [tX, tY, tZ]
 
 	# determine size of projected space (trapezoid)
@@ -95,29 +100,32 @@ func convert3dCoordintesTo2d(x_cord, y_cord, z_cord):
 	# DETERMINE X in 2D space
 	# interpolate between two points representing two different widths at two different depths > [x (y value), y (width)] > [0,640] & [360, 520]
 	var WidthAtProjectedDepth = WidthOfProjectedNear + ((t[2] - minimumDepth)/(maximumDepth-minimumDepth)*(WidthOfProjectedFar-WidthOfProjectedNear)) # interpolates between the bottom and top widths, linearly to find the width at the given height (z)
+	#print("T: " + str(t))
+	#print("WidthAtProjectedDepth: " + str(WidthAtProjectedDepth))
 	var unusedSpaceLeftOfWidthAtDepth = (room_width - WidthAtProjectedDepth) / 2
-
-	var XAsPercentOfOriginalWidth = t[0]/room_width
+	#print("unusedSpaceLeftOfWidthAtDepth: " + str(unusedSpaceLeftOfWidthAtDepth))
+	## var XAsPercentOfOriginalWidth : float
+	var XAsPercentOfOriginalWidth = t[0] / room_width
+	#print("XAsPercentOfOriginalWidth: " + str(t[0]) + "/" + str(room_width) + "=" +str(XAsPercentOfOriginalWidth))
 	var XPositionOnWidthAtDepth = XAsPercentOfOriginalWidth * WidthAtProjectedDepth
-
+	#print("XPositionOnWidthAtDepth: " + str(XPositionOnWidthAtDepth))
+	
 	projectedX = unusedSpaceLeftOfWidthAtDepth + XPositionOnWidthAtDepth;
 	#clamp(x,0,room_width);// don't let x leave the screen left or screen right;
 		
 	return [projectedX, projectedY]
 	
 func set_3d_position():
-	var projectedCoordinates = convert3dCoordintesTo2d(unprojectedX, unprojectedY, unprojectedZ)
+	var projectedCoordinates = convert3dCoordintesTo2d()
 	print("projected coordinates: " + str(projectedCoordinates))
 	position.x = projectedCoordinates[0]
 	position.y = projectedCoordinates[1]
-
-func set_3d_position_from_coords (x_cord, y_cord, z_cord):
-	# update the coords
-	unprojectedX = x_cord
-	unprojectedY = y_cord
-	unprojectedZ = z_cord
-	# update the 3d position
-	set_3d_position()
+	
+func set_2d_position():
+	var coords = [unprojectedX, room_height - unprojectedY]
+	print("2d coordinates: " + str(coords))
+	position.x = coords[0]
+	position.y = coords[1]
 
 func determineImageScale () :
 	var imageScale = determineZAsPercent(unprojectedZ);
@@ -130,7 +138,6 @@ func set_3d_image_scale () :
 
 func _ready():
 	change_state_held()
-	set_3d_position()
 	#set_3d_image_scale()
 	pass
 	
@@ -141,15 +148,21 @@ func _process(delta):
 	
 	match current_state:
 		State.HELD:
+			set_3d_position()
+			#set_3d_image_scale()
 			pass
 		State.RELEASED:
 			# apply gravity to upward momentum.
-			yVelocity += yGravity; 
+			#print("y velocity:" + str(yVelocity))
+			#print("y gravity:" + str(yGravity))
+			if (yVelocity + yGravity >= minYVelocity) :
+				yVelocity += yGravity; 
 				# TBD: do the same for x and z to simulate drag?
+			print("x, y, z velocity:" + str(xVelocity) + " " + str(yVelocity) + " " + str(zVelocity))
 			# apply momentums to x, y and z
-			unprojectedY += yVelocity;
-			unprojectedX += xVelocity;
-			unprojectedZ += zVelocity;
+			unprojectedY += yVelocity * delta;
+			unprojectedX += xVelocity * delta;
+			unprojectedZ += zVelocity * delta;
 			# rotate in air
 			#var image_angle = get_node("spr_baseball").rotation_degrees 
 			#image_angle -= rotationSpeed * sign(xVelocity);
@@ -160,9 +173,8 @@ func _process(delta):
 			#set_3d_image_scale()
 			
 			# check to see if we hit the ground	
-			if (unprojectedY + yVelocity < 0) : # for now, stop moving if at ground (y = 0);
+			if (unprojectedY <= 20) : # for now, stop moving if at ground (y = 0);
 				change_state_grounded() # change state
-				unprojectedY = 0;  # set y to ground
 				## game feel fx
 				#obj_sound_manager.play_hit_ground();
 				#obj_displayManager.start_large_shake();

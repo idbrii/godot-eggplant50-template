@@ -70,12 +70,9 @@ func _process(delta):
 				change_state(State.RELEASE)
 				get_node("Sprite").set_texture(spr_batter_release)
 				# affect the ball
-				throw_power = min_throw_power # reset
 				var ball = get_parent().get_node("baseball_area2d")
-				ball.change_state_released() # change state
-				ball.yVelocity = throw_power * 1000; # 10 * ((room_height - mouse_y)/room_height); // 0 to 100
-				ball.yGravity = -30; # should just be set globally so all objects have same gravity.
-				
+				ball.change_state_released(throw_power) # change state
+				throw_power = min_throw_power # reset
 		State.RELEASE:
 			if Input.is_action_pressed("action1"):
 				change_state(State.WINDUP)
