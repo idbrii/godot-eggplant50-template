@@ -16,7 +16,7 @@
 [ext_resource path="res://games/polygonal_pasture/assets/collector1.png" type="Texture" id=14]
 [ext_resource path="res://games/polygonal_pasture/assets/square-selection.png" type="Texture" id=15]
 [ext_resource path="res://games/polygonal_pasture/Status.gd" type="Script" id=16]
-[ext_resource path="res://games/keepy_uppy/PauseMenu.gd" type="Script" id=17]
+[ext_resource path="res://shared/menu_pause/PauseMenu.tscn" type="PackedScene" id=17]
 [ext_resource path="res://games/polygonal_pasture/assets/hexagon-selection.png" type="Texture" id=18]
 
 [sub_resource type="CircleShape2D" id=1]
@@ -154,7 +154,6 @@ texture = ExtResource( 8 )
 modulate = Color( 1, 1, 1, 0 )
 position = Vector2( -149, -20 )
 frames = SubResource( 11 )
-frame = 1
 playing = true
 
 [node name="UI" type="Control" parent="."]
@@ -281,26 +280,7 @@ margin_bottom = 20.0
 custom_colors/font_color = Color( 0.984314, 0.94902, 0.211765, 1 )
 text = "0"
 
-[node name="PauseMenu" type="VBoxContainer" parent="UI"]
-pause_mode = 2
+[node name="PauseMenu" parent="." instance=ExtResource( 17 )]
 visible = false
-margin_left = 224.0
-margin_top = 124.0
-margin_right = 264.0
-margin_bottom = 164.0
-script = ExtResource( 17 )
-
-[node name="Restart" type="Button" parent="UI/PauseMenu"]
-margin_right = 114.0
-margin_bottom = 58.0
-focus_neighbour_top = NodePath("../Quit")
-focus_neighbour_bottom = NodePath("../Quit")
-text = "restart"
-
-[node name="Quit" type="Button" parent="UI/PauseMenu"]
-margin_top = 62.0
-margin_right = 114.0
-margin_bottom = 120.0
-focus_neighbour_top = NodePath("../Restart")
-focus_neighbour_bottom = NodePath("../Restart")
-text = "quit"
+help_title = "Help!"
+help_body = "Plant seeds, watch them grow into different sized shapes, harvest those shapes and maybe they'll grow into different shapes in the basket. Try to feed the whole village with your produce!"

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://mainmenu/gamedef.gd" type="Script" id=1]
+[ext_resource path="res://games/polygonal_pasture/PolygonPasture.tscn" type="PackedScene" id=2]
+
+[resource]
+script = ExtResource( 1 )
+initial_scene = ExtResource( 2 )
+game_name = "Polygonal Pasture"
+game_author = "Dan Brook"
+input_primary_action = "Plant / Harvest"
+input_secondary_action = "Swap seed"
+input_pause = "Pause"
+input_directions = "Movement"
