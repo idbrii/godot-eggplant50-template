@@ -11,6 +11,7 @@ var current_state : int
 var last_state : int
 # tbd: set up with enter and exit state functions to set state.
 
+
 var power = 0
 var grav = 10
 var max_fall_speed = 100
@@ -139,9 +140,9 @@ func _process(delta):
 			pass
 		State.RELEASED:
 			# do released stuff
-			power -= grav
+			y_power -= grav
 			#print('power:' + str(power))
-			var next_movement = -1 * power * delta
+			var next_movement = -1 * y_power * delta
 			if next_movement <= max_fall_speed:
 				position.y += next_movement # move ball the ball
 			# also listen for hitting the ground
