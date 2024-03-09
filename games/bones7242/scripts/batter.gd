@@ -41,7 +41,7 @@ func check_for_hit():
 	#see if ball within radius of hitting sphere
 	var distance_to_ball_center = position.distance_to(baseball_object.position)
 	print('distance to ball = ' + str(distance_to_ball_center))
-	return false
+	return true
 	#return distance_to_ball_center < 100
 
 func _ready():
@@ -93,14 +93,7 @@ func _process(delta):
 			if check_for_hit():
 				print("YOU GOT A HIT!")
 				#to do: affect the ball
-				var ball = get_parent().get_node("baseball_area2d")
-				ball.change_state_released() # change state
-				ball.unprojectedX = 260
-				ball.unprojectedY = 300 # should start up off the ground a bit
-				ball.unprojectedZ = 2  # should start behind you a bit
-				ball.xVelocity = 0
-				ball.yVelocity = 20; # 10 * ((room_height - mouse_y)/room_height); // 0 to 100
-				ball.zVelocity = 100; # will be set by creator
+				get_parent().get_node("baseball_area2d").hit(swing_power) # change state
 			
 			if (delta_counter > 0.1) :
 				change_state(State.FOLLOWTHROUGH)
@@ -108,10 +101,12 @@ func _process(delta):
 			
 		State.FOLLOWTHROUGH:
 			#when ball hits the floor...
-			if (delta_counter > 1) :
-				change_state(State.IDLE)
-				get_parent().get_node("baseball_area2d").change_state_held() # change state
-				get_node("Sprite").set_texture(spr_batter_idle)
+			var ball = get_parent().get_node("baseball_area2d")
+			if ball.current_state == ball.State.GROUNDED :
+				if (delta_counter > 1) :
+					change_state(State.IDLE)
+					get_parent().get_node("baseball_area2d").change_state_held() # change state
+					get_node("Sprite").set_texture(spr_batter_idle)
 		_:
 			print("I am not a bat state I know of!")
 		

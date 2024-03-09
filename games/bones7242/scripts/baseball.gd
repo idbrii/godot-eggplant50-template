@@ -49,7 +49,12 @@ func change_state_released(batter_throw_power):
 	last_state = current_state
 	change_state(State.RELEASED)
 	get_node("spr_baseball").visible = true
-	pass	
+	
+func hit(batter_swing_power):
+	if (State.RELEASED) :
+		yVelocity += batter_swing_power * 10 # multiplying b/c comes in 1-100 but now we will use delta
+		zVelocity = batter_swing_power  # make it a percent of max 20
+		xVelocity += 10
 
 func change_state_grounded():
 	last_state = current_state
@@ -58,6 +63,8 @@ func change_state_grounded():
 	xVelocity = 0 # will be set by creator
 	yVelocity = 0 # will be set by creator
 	zVelocity = 0 # will be set by creator
+	# reset batter's counter
+	get_parent().get_node("batter_area2d").delta_counter = 0 
 	pass
 	
 func determineZAsPercent (unprojectedZDistance) :
@@ -128,7 +135,7 @@ func set_2d_position():
 	position.y = coords[1]
 
 func determineImageScale () :
-	var imageScale = 1 - determineZAsPercent(unprojectedZ);
+	var imageScale = 1 - (determineZAsPercent(unprojectedZ) * 0.9);
 	return  imageScale;
 		
 
@@ -173,7 +180,7 @@ func _process(delta):
 			set_3d_image_scale()
 			
 			# check to see if we hit the ground	
-			if (unprojectedY <= 20) : # for now, stop moving if at ground (y = 0);
+			if (unprojectedY <= ground) : # for now, stop moving if at ground (y = 0);
 				change_state_grounded() # change state
 				## game feel fx
 				#obj_sound_manager.play_hit_ground();
