@@ -39,7 +39,7 @@ func change_state_held():
 	change_state(State.HELD)
 	unprojectedX = 240
 	unprojectedY = 300 # should start up off the ground a bit
-	unprojectedZ = 5
+	unprojectedZ = 4
 	get_node("spr_baseball").visible = false
 	pass
 
@@ -128,7 +128,7 @@ func set_2d_position():
 	position.y = coords[1]
 
 func determineImageScale () :
-	var imageScale = determineZAsPercent(unprojectedZ);
+	var imageScale = 1 - determineZAsPercent(unprojectedZ);
 	return  imageScale;
 		
 
@@ -149,7 +149,7 @@ func _process(delta):
 	match current_state:
 		State.HELD:
 			set_3d_position()
-			#set_3d_image_scale()
+			set_3d_image_scale()
 			pass
 		State.RELEASED:
 			# apply gravity to upward momentum.
@@ -170,7 +170,7 @@ func _process(delta):
 
 			# handle coordinate conversation to 2d space (note: do here, for now, b/c only state with movement)
 			set_3d_position()
-			#set_3d_image_scale()
+			set_3d_image_scale()
 			
 			# check to see if we hit the ground	
 			if (unprojectedY <= 20) : # for now, stop moving if at ground (y = 0);
