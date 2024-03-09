@@ -9,6 +9,21 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "State",
+"class": "BaseballHeld",
+"language": "GDScript",
+"path": "res://games/bones7242/trash/baseball_held.gd"
+}, {
+"base": "State",
+"class": "BaseballRelease",
+"language": "GDScript",
+"path": "res://games/bones7242/trash/baseball_release.gd"
+}, {
+"base": "State",
+"class": "BaseballWindup",
+"language": "GDScript",
+"path": "res://games/bones7242/trash/baseball_windup.gd"
+}, {
 "base": "Resource",
 "class": "GameDef",
 "language": "GDScript",
@@ -18,10 +33,25 @@ _global_script_classes=[ {
 "class": "GameList",
 "language": "GDScript",
 "path": "res://mainmenu/gamelist.gd"
+}, {
+"base": "Node",
+"class": "State",
+"language": "GDScript",
+"path": "res://games/bones7242/scripts/state.gd"
+}, {
+"base": "Node",
+"class": "StateMachine",
+"language": "GDScript",
+"path": "res://games/bones7242/trash/scr_state_machine_2.gd"
 } ]
 _global_script_class_icons={
+"BaseballHeld": "",
+"BaseballRelease": "",
+"BaseballWindup": "",
 "GameDef": "",
-"GameList": ""
+"GameList": "",
+"State": "",
+"StateMachine": ""
 }
 
 [application]

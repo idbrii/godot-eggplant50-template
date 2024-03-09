@@ -24,21 +24,21 @@ public class MovingShape : Area2D
     [Export]
     public Color jamColor;
 
-    [Signal]
-    public delegate void ShapeHitEventHandler(ShapeType shapeType);
+	[Signal]
+	public delegate void ShapeHitEventHandler(ShapeType shapeType);
 
-    [Export]
-    public float velocity = 0;
-    bool popped = false;
+	[Export]
+	public float velocity = 0;
+	bool popped = false;
 
-    ShapeType shapeType = ShapeType.Circle;
-    Sprite sprite;
-    CPUParticles2D explosion;
+	ShapeType shapeType = ShapeType.Circle;
+	Sprite sprite;
+	CPUParticles2D explosion;
 
-    // Called when the node enters the scene tree for the first time.
-    public override void _Ready()
-    {
-        explosion = GetNode<CPUParticles2D>("Explosion");
+	// Called when the node enters the scene tree for the first time.
+	public override void _Ready()
+	{
+		explosion = GetNode<CPUParticles2D>("Explosion");
 
         GD.Randomize();
         shapeType = (ShapeType)(GD.Randi() % 3);
@@ -76,11 +76,11 @@ public class MovingShape : Area2D
         }
     }
 
-    //  // Called every frame. 'delta' is the elapsed time since the previous frame.
-    public override void _Process(float delta)
-    {
-        Position = new Vector2(Position.x, Position.y - velocity * delta);
-    }
+	//  // Called every frame. 'delta' is the elapsed time since the previous frame.
+	public override void _Process(float delta)
+	{
+		Position = new Vector2(Position.x, Position.y - velocity * delta);
+	}
 
     public async void OnPlayerBodyEntered(Node body)
     {

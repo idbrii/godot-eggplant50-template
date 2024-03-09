@@ -1,7 +1,71 @@
-[gd_resource type="Resource" load_steps=3 format=2]
+[gd_resource type="Resource" load_steps=15 format=2]
 
 [ext_resource path="res://mainmenu/gamedef.gd" type="Script" id=1]
-[ext_resource path="res://games/CodyMace/ShapeSwitch.tscn" type="PackedScene" id=2]
+[ext_resource path="res://games/movement2/ui/GameMenu.tscn" type="PackedScene" id=2]
+[ext_resource path="res://mainmenu/art/font/font_kenpixel_mini.tres" type="DynamicFont" id=3]
+[ext_resource path="res://games/CodyMace/ShapeSwitch.cs" type="Script" id=4]
+[ext_resource path="res://games/movement2/Player/Sprite.gd" type="Script" id=5]
+[ext_resource path="res://games/CodyMace/Player.gd" type="Script" id=6]
+[ext_resource path="res://games/CodyMace/Assets/square.png" type="Texture" id=7]
+[ext_resource path="res://games/CodyMace/Audio/heal.wav" type="AudioStream" id=8]
+[ext_resource path="res://games/CodyMace/Assets/heart.png" type="Texture" id=9]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 112, 10 )
+
+[sub_resource type="RectangleShape2D" id=3]
+
+[sub_resource type="Animation" id=4]
+resource_name = "Jump"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.3 ),
+"transitions": PoolRealArray( 1.68179, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0.8, 1.2 ), Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "Land"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 0.241484, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.4, 1 ), Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="PackedScene" id=6]
+_bundled = {
+"conn_count": 1,
+"conns": PoolIntArray( 1073741853, 1073741852, 146, 145, 2, 0 ),
+"editable_instances": [  ],
+"names": PoolStringArray( "ShapeSwitch", "Node2D", "script", "Background", "ColorRect", "margin_left", "margin_top", "margin_right", "margin_bottom", "color", "Platform", "RigidBody2D", "mode", "CollisionShape2D", "CollisionShape2D", "position", "shape", "ColorRect", "ColorRect", "margin_left", "margin_top", "margin_right", "margin_bottom", "color", "Platform2", "RigidBody2D", "position", "rotation", "mode", "CollisionShape2D", "CollisionShape2D", "position", "shape", "ColorRect", "ColorRect", "margin_left", "margin_top", "margin_right", "margin_bottom", "color", "Platform3", "RigidBody2D", "position", "rotation", "mode", "CollisionShape2D", "CollisionShape2D", "position", "shape", "ColorRect", "ColorRect", "margin_left", "margin_top", "margin_right", "margin_bottom", "color", "Camera2D", "Camera2D", "modulate", "current", "zoom", "Player", "KinematicBody2D", "position", "script", "CollisionShape2D", "CollisionShape2D", "shape", "SpriteContainer", "Node2D", "script", "player_path", "AnimationPlayer", "AnimationPlayer", "anims/Jump", "anims/Land", "Visual", "Node2D", "visible", "scale", "Polygon2D", "Polygon2D", "position", "scale", "color", "polygon", "Sprite", "Sprite", "texture", "JumpSound", "AudioStreamPlayer", "stream", "volume_db", "Life1", "Sprite", "position", "texture", "__meta__", "Sprite", "Sprite", "modulate", "scale", "texture", "Life2", "Sprite", "position", "texture", "__meta__", "Sprite", "Sprite", "modulate", "scale", "texture", "Life3", "Sprite", "position", "texture", "__meta__", "Sprite", "Sprite", "modulate", "scale", "texture", "Score", "RichTextLabel", "margin_left", "margin_top", "margin_right", "margin_bottom", "custom_fonts/normal_font", "bbcode_text", "meta_underlined", "text", "scroll_active", "UI", "CanvasLayer", "GameMenu", "anchor_left", "anchor_top", "anchor_right", "anchor_bottom", "margin_left", "margin_top", "margin_right", "margin_bottom", "_on_Player_jump", "jump" ),
+"node_count": 29,
+"node_paths": [ NodePath("."), NodePath("."), NodePath("./Platform"), NodePath("./Platform"), NodePath("."), NodePath("./Platform2"), NodePath("./Platform2"), NodePath("."), NodePath("./Platform3"), NodePath("./Platform3"), NodePath("."), NodePath("."), NodePath("./Player"), NodePath("./Player"), NodePath("./Player/SpriteContainer"), NodePath("./Player/SpriteContainer"), NodePath("./Player/SpriteContainer/Visual"), NodePath("./Player/SpriteContainer"), NodePath("./Player"), NodePath("."), NodePath("./Life1"), NodePath("."), NodePath("./Life2"), NodePath("."), NodePath("./Life3"), NodePath("."), NodePath("."), NodePath("./UI"), NodePath("."), NodePath("Player") ],
+"nodes": PoolIntArray( -1, -1, 1, 0, -1, 1, 2, 0, 0, 1073741824, 0, 4, 3, -1, 5, 5, 1, 6, 2, 7, 3, 8, 4, 9, 5, 0, 1073741825, 0, 11, 10, -1, 1, 12, 6, 0, 1073741826, 0, 14, 13, -1, 2, 15, 7, 16, 8, 0, 1073741827, 0, 18, 17, -1, 5, 19, 9, 20, 10, 21, 11, 22, 12, 23, 13, 0, 1073741828, 0, 25, 24, -1, 3, 26, 14, 27, 15, 28, 16, 0, 1073741829, 0, 30, 29, -1, 2, 31, 17, 32, 18, 0, 1073741830, 0, 34, 33, -1, 5, 35, 19, 36, 20, 37, 21, 38, 22, 39, 23, 0, 1073741831, 0, 41, 40, -1, 3, 42, 24, 43, 25, 44, 26, 0, 1073741832, 0, 46, 45, -1, 2, 47, 27, 48, 28, 0, 1073741833, 0, 50, 49, -1, 5, 51, 29, 52, 30, 53, 31, 54, 32, 55, 33, 0, 1073741834, 0, 57, 56, -1, 3, 58, 34, 59, 35, 60, 36, 0, 1073741835, 0, 62, 61, -1, 2, 63, 37, 64, 38, 0, 1073741836, 0, 66, 65, -1, 1, 67, 39, 0, 1073741837, 0, 69, 68, -1, 2, 70, 40, 71, 41, 0, 1073741838, 0, 73, 72, -1, 2, 74, 42, 75, 43, 0, 1073741839, 0, 77, 76, -1, 2, 78, 44, 79, 45, 0, 1073741840, 0, 81, 80, -1, 4, 82, 46, 83, 47, 84, 48, 85, 49, 0, 1073741841, 0, 87, 86, -1, 1, 88, 50, 0, 1073741842, 0, 90, 89, -1, 2, 91, 51, 92, 52, 0, 1073741843, 0, 94, 93, -1, 3, 95, 53, 96, 54, 97, 55, 0, 1073741844, 0, 99, 98, -1, 3, 100, 56, 101, 57, 102, 58, 0, 1073741845, 0, 104, 103, -1, 3, 105, 59, 106, 60, 107, 61, 0, 1073741846, 0, 109, 108, -1, 3, 110, 62, 111, 63, 112, 64, 0, 1073741847, 0, 114, 113, -1, 3, 115, 65, 116, 66, 117, 67, 0, 1073741848, 0, 119, 118, -1, 3, 120, 68, 121, 69, 122, 70, 0, 1073741849, 0, 124, 123, -1, 9, 125, 71, 126, 72, 127, 73, 128, 74, 129, 75, 130, 76, 131, 77, 132, 78, 133, 79, 0, 1073741850, 0, 135, 134, -1, 0, 0, 1073741851, 0, 2147483647, 136, 80, 8, 137, 81, 138, 82, 139, 83, 140, 84, 141, 85, 142, 86, 143, 87, 144, 88, 0 ),
+"variants": [ ExtResource( 4 ), -269.0, -163.0, 267.0, 166.0, Color( 0.301961, 0.301961, 0.301961, 1 ), 1, Vector2( 1, 0 ), SubResource( 2 ), -111.0, -10.0, 113.0, 10.0, Color( 0.517647, 0.517647, 0.517647, 1 ), Vector2( -122, -82 ), 1.5708, 1, Vector2( 1, 0 ), SubResource( 2 ), -111.0, -10.0, 113.0, 10.0, Color( 1, 1, 1, 0 ), Vector2( 122, -77 ), 1.5708, 1, Vector2( 1, 0 ), SubResource( 2 ), -111.0, -10.0, 113.0, 10.0, Color( 1, 1, 1, 0 ), Color( 1, 0.0392157, 0.0392157, 1 ), true, Vector2( 0.75, 0.75 ), Vector2( 0, -27 ), ExtResource( 6 ), SubResource( 3 ), ExtResource( 5 ), NodePath(".."), SubResource( 4 ), SubResource( 5 ), false, Vector2( 0.25, 0.25 ), Vector2( 9.53674e-07, -6.19888e-06 ), Vector2( 2.5, 2.5 ), Color( 0.909804, 0.917647, 0.290196, 1 ), PoolVector2Array( -16, -16, -16, 16, 13.1243, 16, 16, 12, 16, -11.1929, 12, -16 ), ExtResource( 7 ), ExtResource( 8 ), -5.0, Vector2( -210, -108 ), ExtResource( 9 ), {
+"_editor_description_": ".04"
+}, Color( 0.937255, 0.215686, 0.34902, 1 ), Vector2( 0.8, 0.8 ), ExtResource( 9 ), Vector2( -185, -108 ), ExtResource( 9 ), {
+"_editor_description_": ".04"
+}, Color( 0.937255, 0.215686, 0.34902, 1 ), Vector2( 0.8, 0.8 ), ExtResource( 9 ), Vector2( -160, -108 ), ExtResource( 9 ), {
+"_editor_description_": ".04"
+}, Color( 0.937255, 0.215686, 0.34902, 1 ), Vector2( 0.8, 0.8 ), ExtResource( 9 ), 140.0, -115.0, 240.0, -99.0, ExtResource( 3 ), "0", false, "0", false, ExtResource( 2 ), 0.5, 0.5, 0.5, 0.5, -22.2865, -110.0, 22.2865, 110.0 ],
+"version": 2
+}
 
 [resource]
 script = ExtResource( 1 )
