@@ -12,14 +12,12 @@
 script = ExtResource( 4 )
 
 [node name="baseball_area2d" type="Area2D" parent="."]
-position = Vector2( 350, 172 )
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="baseball_area2d"]
 shape = SubResource( 1 )
 
 [node name="spr_baseball" type="Sprite" parent="baseball_area2d"]
-scale = Vector2( 0.625, 0.625 )
 texture = ExtResource( 1 )
 
 [node name="batter_area2d" type="Node2D" parent="."]
@@ -27,8 +25,6 @@ position = Vector2( 135, 194 )
 script = ExtResource( 3 )
 
 [node name="Sprite" type="Sprite" parent="batter_area2d"]
-position = Vector2( 75, -26.7524 )
-scale = Vector2( 0.4725, 0.495274 )
 texture = ExtResource( 5 )
 
 [connection signal="area_entered" from="baseball_area2d" to="baseball_area2d/spr_baseball" method="_on_baseball_area2d_area_entered"]

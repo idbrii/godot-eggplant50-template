@@ -24,11 +24,14 @@ var swing_power = min_swing_power
 var max_swing_power = 100
 var swing_power_increment = 1
 
+var delta_counter = 0
+
 func change_state(new_state):
 	# store the current state as last state, if it exists
 	if current_state:
 		last_state = current_state
 	
+	delta_counter = 0
 	current_state = new_state
 	pass
 
@@ -38,7 +41,8 @@ func check_for_hit():
 	#see if ball within radius of hitting sphere
 	var distance_to_ball_center = position.distance_to(baseball_object.position)
 	print('distance to ball = ' + str(distance_to_ball_center))
-	return distance_to_ball_center < 100
+	return false
+	#return distance_to_ball_center < 100
 
 func _ready():
 	change_state(initial_state)
@@ -46,6 +50,7 @@ func _ready():
 	pass
 	
 func _process(delta):
+	delta_counter += delta
 	
 	match current_state:
 		State.IDLE:
@@ -66,8 +71,11 @@ func _process(delta):
 				get_node("Sprite").set_texture(spr_batter_release)
 				# affect the ball
 				throw_power = min_throw_power # reset
-				get_parent().get_node("baseball_area2d").change_state_released()
-				get_parent().get_node("baseball_area2d").power = throw_power * 100
+				var ball = get_parent().get_node("baseball_area2d")
+				ball.change_state_released() # change state
+				ball.yVelocity = throw_power * 1000; # 10 * ((room_height - mouse_y)/room_height); // 0 to 100
+				ball.yGravity = -30; # should just be set globally so all objects have same gravity.
+				
 		State.RELEASE:
 			if Input.is_action_pressed("action1"):
 				change_state(State.WINDUP)
@@ -77,7 +85,7 @@ func _process(delta):
 			# build up power
 			if swing_power < max_swing_power:
 				swing_power += swing_power_increment
-			print("swing power = " + str(swing_power))
+			# print("swing power = " + str(swing_power))
 			#listen for change to released
 			if Input.is_action_just_released("action1"):
 				change_state(State.SWING)
@@ -88,12 +96,25 @@ func _process(delta):
 			if check_for_hit():
 				print("YOU GOT A HIT!")
 				#to do: affect the ball
-			change_state(State.FOLLOWTHROUGH)
-			get_node("Sprite").set_texture(spr_batter_followthrough)
+				var ball = get_parent().get_node("baseball_area2d")
+				ball.change_state_released() # change state
+				ball.unprojectedX = 260
+				ball.unprojectedY = 300 # should start up off the ground a bit
+				ball.unprojectedZ = 2  # should start behind you a bit
+				ball.xVelocity = 0
+				ball.yVelocity = 20; # 10 * ((room_height - mouse_y)/room_height); // 0 to 100
+				ball.zVelocity = 100; # will be set by creator
+			
+			if (delta_counter > 0.1) :
+				change_state(State.FOLLOWTHROUGH)
+				get_node("Sprite").set_texture(spr_batter_followthrough)	
+			
 		State.FOLLOWTHROUGH:
 			#when ball hits the floor...
-			change_state(State.IDLE)
-			get_node("Sprite").set_texture(spr_batter_idle)
+			if (delta_counter > 1) :
+				change_state(State.IDLE)
+				get_parent().get_node("baseball_area2d").change_state_held() # change state
+				get_node("Sprite").set_texture(spr_batter_idle)
 		_:
 			print("I am not a bat state I know of!")
 		

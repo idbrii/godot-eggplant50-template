@@ -1,7 +1,7 @@
 extends Area2D
 
-const State = {HELD = 0, WINDUP = 1, RELEASED = 2, GROUNDED = 3}
-# Access values with State.HELD, etc.
+const State = {HELD = 0, RELEASED = 2, GROUNDED = 3}  # Access values with State.HELD, etc.
+var delta_counter = 0
 
 var room_height = 360 #TO do replace with actual propery
 var room_width = 640 #TO do replace with actual propery
@@ -11,18 +11,13 @@ var current_state : int
 var last_state : int
 # tbd: set up with enter and exit state functions to set state.
 
-
-var power = 0
-var grav = 10
-var max_fall_speed = 100
-
 var unprojectedX = 260
 var unprojectedY = 300 # should start up off the ground a bit
 var unprojectedZ = 2
 var xVelocity = 0 # will be set by creator
 var yVelocity = 0 # will be set by creator
 var zVelocity = 0 # will be set by creator
-var yGravity = 0 # set by creator, should be set globally so all have same gravity
+var yGravity = -0.5; # should just be set globally so all objects have same gravity.
 
 var projectedCoordinates : Array
 var rotationSpeed = 5; # must be multiple of rotateUprightSpeed and 
@@ -34,11 +29,18 @@ func change_state(new_state):
 	
 	current_state = new_state
 	
+	delta_counter = 0 # reset for new state
 	pass
 	
 func change_state_held():
 	last_state = current_state
 	change_state(State.HELD)
+	
+	unprojectedX = 260
+	unprojectedY = 300 # should start up off the ground a bit
+	unprojectedZ = 2
+	set_3d_position()
+	
 	#get_node("spr_baseball").visible = false
 	pass
 
@@ -51,7 +53,6 @@ func change_state_released():
 func change_state_grounded():
 	last_state = current_state
 	change_state(State.GROUNDED)
-	power = 0 #reset power
 	pass
 	
 func determineZAsPercent (unprojectedZDistance) :
@@ -63,9 +64,9 @@ func convert3dCoordintesTo2d(x_cord, y_cord, z_cord):
 	var projectedX : int
 	var projectedY : int 
 	
-	var tX = unprojectedX # in room top left is 0,0, so tx = mouse_x
-	var tY = unprojectedY 
-	var tZ = unprojectedZ # in room top left is 0,0, so ty = room height - mouse_y
+	var tX = x_cord # in room top left is 0,0, so tx = mouse_x
+	var tY = y_cord 
+	var tZ = z_cord # in room top left is 0,0, so ty = room height - mouse_y
 	var t = [tX, tY, tZ]
 
 	# determine size of projected space (trapezoid)
@@ -75,7 +76,7 @@ func convert3dCoordintesTo2d(x_cord, y_cord, z_cord):
 	var trTopLeft = [(room_width - desiredHorizonWidth)/2, desiredHorizonHeight]
 	var trTopRight = [room_width - ((room_width - desiredHorizonWidth)/2), desiredHorizonHeight]
 	var trBottomLeft = [0,0]
-	var trBottomRight = [640,0]
+	var trBottomRight = [room_width,0]
 
 	var HeightOfProjectedAtCenter = ((trTopLeft[1] - trBottomLeft[1]) + (trTopRight[1] - trBottomRight[1])) / 2
 	#HeightOfProjectedLeft = tTopRight[1] - tBottomRight[1];  // 2d height squished field, currently still 360.
@@ -106,6 +107,7 @@ func convert3dCoordintesTo2d(x_cord, y_cord, z_cord):
 	
 func set_3d_position():
 	var projectedCoordinates = convert3dCoordintesTo2d(unprojectedX, unprojectedY, unprojectedZ)
+	print("projected coordinates: " + str(projectedCoordinates))
 	position.x = projectedCoordinates[0]
 	position.y = projectedCoordinates[1]
 
@@ -117,21 +119,23 @@ func set_3d_position_from_coords (x_cord, y_cord, z_cord):
 	# update the 3d position
 	set_3d_position()
 
-func determineImageScale (zDistance) :
-	var imageScale = determineZAsPercent(zDistance);
+func determineImageScale () :
+	var imageScale = determineZAsPercent(unprojectedZ);
 	return  imageScale;
 		
 
 func set_3d_image_scale () :
-	scale = 
+	var image_scale = determineImageScale()
+	scale = Vector2(image_scale, image_scale)
 
 func _ready():
 	change_state_held()
 	set_3d_position()
-	set_3d_image_scale()
+	#set_3d_image_scale()
 	pass
 	
 func _process(delta):
+	delta_counter += delta;
 	# rotation += angular_speed * delta
 	#position +=  Vector2.DOWN * movement_speed * delta
 	
@@ -139,20 +143,36 @@ func _process(delta):
 		State.HELD:
 			pass
 		State.RELEASED:
-			# do released stuff
-			y_power -= grav
-			#print('power:' + str(power))
-			var next_movement = -1 * y_power * delta
-			if next_movement <= max_fall_speed:
-				position.y += next_movement # move ball the ball
-			# also listen for hitting the ground
-			if position.y >= 300:
-				change_state_grounded()
-				power = min_power # reset
+			# apply gravity to upward momentum.
+			yVelocity += yGravity; 
+				# TBD: do the same for x and z to simulate drag?
+			# apply momentums to x, y and z
+			unprojectedY += yVelocity;
+			unprojectedX += xVelocity;
+			unprojectedZ += zVelocity;
+			# rotate in air
+			#var image_angle = get_node("spr_baseball").rotation_degrees 
+			#image_angle -= rotationSpeed * sign(xVelocity);
+			#get_node("spr_baseball").rotation = image_angle
+
+			# handle coordinate conversation to 2d space (note: do here, for now, b/c only state with movement)
+			set_3d_position()
+			#set_3d_image_scale()
+			
+			# check to see if we hit the ground	
+			if (unprojectedY + yVelocity < 0) : # for now, stop moving if at ground (y = 0);
+				change_state_grounded() # change state
+				unprojectedY = 0;  # set y to ground
+				## game feel fx
+				#obj_sound_manager.play_hit_ground();
+				#obj_displayManager.start_large_shake();
+				# if not upright, rotate to upright
+				#sprite_index = bobbingSprite;
+				#image_angle = 0;
+				# create a "splash" effect (using the wake for this)
 		State.GROUNDED:
-			#if Input.is_action_just_released("action1"):
-			if true: #placeholder - replace with timer after "strike" or hit or whatever.
-				change_state_held()
+			#print("delta counter = " + str(delta_counter));
+			pass
 		_:
 			print("I am not a baseball state I know of!")
 		
