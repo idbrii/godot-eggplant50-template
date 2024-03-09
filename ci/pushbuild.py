@@ -4,6 +4,7 @@ import json
 import pprint
 import subprocess
 from pathlib import Path
+import os
 
 import git
 
@@ -90,3 +91,6 @@ if "win" in platforms:
 
 if "mac" in platforms:
     build_platform("mac", export_path, project + "-mac.zip")
+
+# open export folder for easy testing
+os.startfile(export_path)

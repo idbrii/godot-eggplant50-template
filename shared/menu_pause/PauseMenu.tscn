@@ -1,0 +1,99 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://shared/menu_pause/pause_menu.gd" type="Script" id=1]
+[ext_resource path="res://mainmenu/theme/theme_eggplant.tres" type="Theme" id=2]
+[ext_resource path="res://mainmenu/theme/style_panel_bg.tres" type="StyleBox" id=3]
+[ext_resource path="res://shared/input/inputs.tscn" type="PackedScene" id=4]
+
+[node name="PauseMenu" type="Popup"]
+pause_mode = 2
+visible = true
+margin_left = 21.0
+margin_top = 41.0
+rect_min_size = Vector2( 600, 300 )
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource( 2 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+size_flags_horizontal = 4
+size_flags_vertical = 4
+custom_styles/panel = ExtResource( 3 )
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+margin_left = 15.0
+margin_top = 15.0
+margin_right = 573.0
+margin_bottom = 283.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer"]
+margin_right = 558.0
+margin_bottom = 268.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/HBoxContainer"]
+margin_right = 154.0
+margin_bottom = 268.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+margin_right = 154.0
+margin_bottom = 20.0
+text = "PAUSED"
+align = 1
+
+[node name="ContinueButton" type="Button" parent="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+margin_top = 24.0
+margin_right = 154.0
+margin_bottom = 82.0
+text = "Continue"
+
+[node name="RestartButton" type="Button" parent="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+margin_top = 86.0
+margin_right = 154.0
+margin_bottom = 144.0
+text = "Restart"
+
+[node name="HelpButton" type="Button" parent="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+margin_top = 148.0
+margin_right = 154.0
+margin_bottom = 206.0
+text = "Help"
+
+[node name="QuitButton" type="Button" parent="PanelContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+margin_top = 210.0
+margin_right = 154.0
+margin_bottom = 268.0
+text = "Quit to Menu"
+
+[node name="InputDisplay" parent="PanelContainer/MarginContainer/HBoxContainer" instance=ExtResource( 4 )]
+unique_name_in_owner = true
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 158.0
+margin_top = 34.0
+margin_right = 558.0
+margin_bottom = 234.0
+rect_min_size = Vector2( 400, 200 )
+size_flags_vertical = 4
+
+[node name="Help" type="AcceptDialog" parent="."]
+margin_right = 98.0
+margin_bottom = 102.0
+rect_min_size = Vector2( 300, 0 )
+size_flags_horizontal = 2
+size_flags_vertical = 5
+resizable = true
+dialog_autowrap = true

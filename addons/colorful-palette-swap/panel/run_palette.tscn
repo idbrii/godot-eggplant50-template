@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://addons/colorful-palette-swap/code/swappable_palette.gd" type="Script" id=1]
+[ext_resource path="res://addons/colorful-palette-swap/code/extract_palette.gd" type="Script" id=2]
+
+[node name="Node" type="Node"]
+
+[node name="ExtractPalette" type="Node2D" parent="."]
+script = ExtResource( 2 )
+
+[node name="CreatePalettes" type="Node2D" parent="."]
+script = ExtResource( 1 )
+primary_palette = "res://palette/in_palettes/facility.png"

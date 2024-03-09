@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/pop1.mp3-0208b111f7d4a208996f79772449ecca.mp3str"
+
+[deps]
+
+source_file="res://games/dice_stanza/sound/score/pop1.mp3"
+dest_files=[ "res://.import/pop1.mp3-0208b111f7d4a208996f79772449ecca.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

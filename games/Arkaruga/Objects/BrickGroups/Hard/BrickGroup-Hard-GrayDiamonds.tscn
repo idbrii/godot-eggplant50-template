@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://games/Arkaruga/Objects/Bricks/Diamond/Brick-Diamond-Gray.tscn" type="PackedScene" id=1]
+[ext_resource path="res://games/Arkaruga/Objects/BrickGroups/Arkaruga-BrickGroup-Base.tscn" type="PackedScene" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 240, 36 )
+
+[node name="BrickGroup" instance=ExtResource( 3 )]
+
+[node name="CollisionShape2D" parent="." index="0"]
+position = Vector2( 240, -36 )
+shape = SubResource( 1 )
+
+[node name="Brick-Diamond-Gray" parent="Bricks" index="0" instance=ExtResource( 1 )]
+position = Vector2( 56, -48 )
+
+[node name="Brick-Diamond-Gray2" parent="Bricks" index="1" instance=ExtResource( 1 )]
+position = Vector2( 184, -24 )
+
+[node name="Brick-Diamond-Gray3" parent="Bricks" index="2" instance=ExtResource( 1 )]
+position = Vector2( 280, -24 )
+
+[node name="Brick-Diamond-Gray4" parent="Bricks" index="3" instance=ExtResource( 1 )]
+position = Vector2( 408, -48 )

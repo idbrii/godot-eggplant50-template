@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://games/ripe_place/Fruit_Spawn_Scene.gd" type="Script" id=1]
+[ext_resource path="res://games/ripe_place/Fruit_Scene.tscn" type="PackedScene" id=2]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 30.0
+
+[node name="Fruit_Spawn_Scene" type="Node2D"]
+script = ExtResource( 1 )
+fruit_scene = ExtResource( 2 )
+
+[node name="SpawnArea" type="Area2D" parent="."]
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SpawnArea"]
+shape = SubResource( 1 )
+
+[node name="spawn_timer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="area_shape_entered" from="SpawnArea" to="." method="_on_SpawnArea_area_shape_entered"]
+[connection signal="area_shape_exited" from="SpawnArea" to="." method="_on_SpawnArea_area_shape_exited"]
+[connection signal="timeout" from="spawn_timer" to="." method="_on_spawn_timer_timeout"]

@@ -1,0 +1,152 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://games/Arkaruga/Scripts/Arkaruga-Paddle.gd" type="Script" id=1]
+[ext_resource path="res://games/Arkaruga/Sprites/Paddle/paddle-body.png" type="Texture" id=2]
+[ext_resource path="res://games/Arkaruga/Sprites/Paddle/paddle-bumper-dark.png" type="Texture" id=3]
+[ext_resource path="res://games/Arkaruga/Sprites/Paddle/paddle-alarm-dark.png" type="Texture" id=4]
+[ext_resource path="res://games/Arkaruga/Sprites/Paddle/paddle-bumper-light.png" type="Texture" id=5]
+[ext_resource path="res://games/Arkaruga/Sprites/Paddle/paddle-bumper-hit.png" type="Texture" id=6]
+[ext_resource path="res://games/Arkaruga/Sprites/Paddle/paddle-alarm-alert-2.png" type="Texture" id=7]
+[ext_resource path="res://games/Arkaruga/Sprites/Paddle/paddle-alarm-alert-1.png" type="Texture" id=8]
+[ext_resource path="res://games/Arkaruga/Sprites/Paddle/paddle-bumper-alert-1.png" type="Texture" id=9]
+[ext_resource path="res://games/Arkaruga/Sprites/Paddle/paddle-bumper-alert-2.png" type="Texture" id=10]
+[ext_resource path="res://games/Arkaruga/Sounds/SFX/damage.wav" type="AudioStream" id=11]
+[ext_resource path="res://games/Arkaruga/Sprites/Particles/spark.png" type="Texture" id=12]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 46, 4 )
+
+[node name="Paddle" type="KinematicBody2D" groups=["Colorized"]]
+position = Vector2( 277, 330 )
+script = ExtResource( 1 )
+maxSpeed = 275.0
+acceleration = 700.0
+reverseAcceleration = 1200.0
+bumperTextureBlue = ExtResource( 3 )
+bumperTextureGreen = ExtResource( 5 )
+
+[node name="BallAnchor" type="Node2D" parent="."]
+position = Vector2( 50, -8 )
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2( 50, 5 )
+shape = SubResource( 2 )
+
+[node name="Body" type="NinePatchRect" parent="."]
+margin_right = 100.0
+margin_bottom = 16.0
+texture = ExtResource( 2 )
+patch_margin_left = 32
+patch_margin_top = 8
+patch_margin_right = 32
+patch_margin_bottom = 8
+
+[node name="Bumper" type="NinePatchRect" parent="Body"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 3 )
+patch_margin_left = 32
+patch_margin_top = 8
+patch_margin_right = 32
+patch_margin_bottom = 8
+
+[node name="HitBumper" type="NinePatchRect" parent="Body/Bumper"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 6 )
+patch_margin_left = 32
+patch_margin_top = 8
+patch_margin_right = 32
+patch_margin_bottom = 8
+
+[node name="Alarm" type="NinePatchRect" parent="Body"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 4 )
+patch_margin_left = 32
+patch_margin_top = 8
+patch_margin_right = 32
+patch_margin_bottom = 8
+
+[node name="Alert" type="Control" parent="Body"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Frame1" type="Control" parent="Body/Alert"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Alarm" type="NinePatchRect" parent="Body/Alert/Frame1"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 8 )
+patch_margin_left = 32
+patch_margin_top = 8
+patch_margin_right = 32
+patch_margin_bottom = 8
+
+[node name="Bumper" type="NinePatchRect" parent="Body/Alert/Frame1"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 9 )
+patch_margin_left = 32
+patch_margin_top = 8
+patch_margin_right = 32
+patch_margin_bottom = 8
+
+[node name="Frame2" type="Control" parent="Body/Alert"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Alarm" type="NinePatchRect" parent="Body/Alert/Frame2"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 7 )
+patch_margin_left = 32
+patch_margin_top = 8
+patch_margin_right = 32
+patch_margin_bottom = 8
+
+[node name="Bumper" type="NinePatchRect" parent="Body/Alert/Frame2"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 10 )
+patch_margin_left = 32
+patch_margin_top = 8
+patch_margin_right = 32
+patch_margin_bottom = 8
+
+[node name="Timer" type="Timer" parent="Body/Alert"]
+wait_time = 0.25
+
+[node name="FreezeTimer" type="Timer" parent="."]
+
+[node name="FlashTimer" type="Timer" parent="."]
+
+[node name="DamageSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 11 )
+volume_db = 4.0
+
+[node name="DamageParticles" type="CPUParticles2D" parent="."]
+position = Vector2( 50, 0 )
+emitting = false
+amount = 18
+lifetime = 0.5
+one_shot = true
+explosiveness = 0.5
+local_coords = false
+texture = ExtResource( 12 )
+emission_shape = 2
+emission_rect_extents = Vector2( 36, 1 )
+direction = Vector2( 0, -1 )
+spread = 60.0
+gravity = Vector2( 0, 600 )
+initial_velocity = 240.0
+angular_velocity = 720.0
+angular_velocity_random = 1.0
+angle_random = 1.0
+
+[connection signal="timeout" from="Body/Alert/Timer" to="." method="_on_AlertTimer_timeout"]

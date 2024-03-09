@@ -1,0 +1,242 @@
+[gd_scene load_steps=62 format=2]
+
+[ext_resource path="res://games/dice_stanza/code/player/Player.gd" type="Script" id=1]
+[ext_resource path="res://games/dice_stanza/code/player/player_animgraph.gd" type="Script" id=2]
+[ext_resource path="res://games/dice_stanza/code/player/sm_climb.gd" type="Script" id=3]
+[ext_resource path="res://games/dice_stanza/code/player/sm_freestyle.gd" type="Script" id=4]
+[ext_resource path="res://games/dice_stanza/code/player/sm_default.gd" type="Script" id=5]
+[ext_resource path="res://games/dice_stanza/art/kenney_abstract-platformer/PlayerRed/playerRed_fall.png" type="Texture" id=6]
+[ext_resource path="res://games/dice_stanza/art/kenney_abstract-platformer/PlayerRed/playerRed_walk2.png" type="Texture" id=7]
+[ext_resource path="res://games/dice_stanza/art/kenney_abstract-platformer/PlayerRed/playerRed_walk1.png" type="Texture" id=8]
+[ext_resource path="res://games/dice_stanza/art/kenney_abstract-platformer/PlayerRed/playerRed_walk3.png" type="Texture" id=9]
+[ext_resource path="res://games/dice_stanza/art/kenney_abstract-platformer/PlayerRed/playerRed_walk5.png" type="Texture" id=10]
+[ext_resource path="res://games/dice_stanza/art/kenney_abstract-platformer/PlayerRed/playerRed_stand.png" type="Texture" id=11]
+[ext_resource path="res://games/dice_stanza/art/kenney_abstract-platformer/PlayerRed/playerRed_walk4.png" type="Texture" id=12]
+[ext_resource path="res://games/dice_stanza/art/swappalette/playerred-cyan.png" type="Texture" id=13]
+[ext_resource path="res://addons/colorful-palette-swap/code/palette_swap.shader" type="Shader" id=14]
+[ext_resource path="res://games/dice_stanza/code/player/animgraph/ag_uber_player.gd" type="Script" id=15]
+[ext_resource path="res://games/dice_stanza/code/player/animgraph/ag_ground_run.gd" type="Script" id=16]
+[ext_resource path="res://games/dice_stanza/code/player/animgraph/ag_default_state.gd" type="Script" id=17]
+[ext_resource path="res://games/dice_stanza/code/player/animgraph/ag_fall.gd" type="Script" id=18]
+[ext_resource path="res://games/dice_stanza/code/player/animgraph/ag_jump.gd" type="Script" id=19]
+[ext_resource path="res://games/dice_stanza/code/player/animgraph/ag_ground_idle.gd" type="Script" id=20]
+[ext_resource path="res://games/dice_stanza/code/player/animgraph/ag_land.gd" type="Script" id=21]
+[ext_resource path="res://games/dice_stanza/code/player/animgraph/ag_dash.gd" type="Script" id=22]
+[ext_resource path="res://games/dice_stanza/code/player/animgraph/ag_climb.gd" type="Script" id=23]
+[ext_resource path="res://games/dice_stanza/art/kenney_abstract-platformer/PlayerRed/playerRed_up3.png" type="Texture" id=24]
+[ext_resource path="res://games/dice_stanza/art/kenney_abstract-platformer/PlayerRed/playerRed_up2.png" type="Texture" id=25]
+[ext_resource path="res://games/dice_stanza/art/kenney_abstract-platformer/PlayerRed/playerRed_up1.png" type="Texture" id=26]
+[ext_resource path="res://games/dice_stanza/code/soundcycler.gd" type="Script" id=27]
+[ext_resource path="res://games/dice_stanza/sound/actions/jump1.mp3" type="AudioStream" id=28]
+[ext_resource path="res://games/dice_stanza/sound/actions/hit6.mp3" type="AudioStream" id=29]
+[ext_resource path="res://games/dice_stanza/sound/actions/jump4.mp3" type="AudioStream" id=30]
+[ext_resource path="res://games/dice_stanza/sound/actions/jump6.mp3" type="AudioStream" id=31]
+[ext_resource path="res://games/dice_stanza/sound/actions/pickup1.mp3" type="AudioStream" id=32]
+[ext_resource path="res://games/dice_stanza/sound/actions/pickup2.mp3" type="AudioStream" id=33]
+[ext_resource path="res://games/dice_stanza/sound/actions/pickup3.mp3" type="AudioStream" id=34]
+[ext_resource path="res://games/dice_stanza/sound/actions/pickup4.mp3" type="AudioStream" id=35]
+[ext_resource path="res://games/dice_stanza/sound/actions/pickup5.mp3" type="AudioStream" id=36]
+[ext_resource path="res://games/dice_stanza/sound/actions/pickup7.mp3" type="AudioStream" id=37]
+[ext_resource path="res://games/dice_stanza/sound/actions/pickup8.mp3" type="AudioStream" id=38]
+[ext_resource path="res://games/dice_stanza/sound/actions/hit7.mp3" type="AudioStream" id=39]
+[ext_resource path="res://games/dice_stanza/sound/actions/hit2.mp3" type="AudioStream" id=40]
+[ext_resource path="res://games/dice_stanza/sound/actions/hit4.mp3" type="AudioStream" id=41]
+[ext_resource path="res://games/dice_stanza/sound/actions/jump7.mp3" type="AudioStream" id=42]
+[ext_resource path="res://games/dice_stanza/sound/actions/jump8.mp3" type="AudioStream" id=43]
+[ext_resource path="res://games/dice_stanza/sound/actions/hit5.mp3" type="AudioStream" id=44]
+[ext_resource path="res://games/dice_stanza/sound/actions/jump3.mp3" type="AudioStream" id=45]
+[ext_resource path="res://games/dice_stanza/sound/actions/pickup6.mp3" type="AudioStream" id=46]
+[ext_resource path="res://games/dice_stanza/sound/actions/hit1.mp3" type="AudioStream" id=47]
+[ext_resource path="res://games/dice_stanza/sound/actions/hit3.mp3" type="AudioStream" id=48]
+[ext_resource path="res://games/dice_stanza/sound/actions/hit8.mp3" type="AudioStream" id=49]
+[ext_resource path="res://games/dice_stanza/sound/actions/jump2.mp3" type="AudioStream" id=50]
+[ext_resource path="res://games/dice_stanza/sound/actions/jump5.mp3" type="AudioStream" id=51]
+[ext_resource path="res://games/dice_stanza/sound/actions/pickup9.mp3" type="AudioStream" id=52]
+[ext_resource path="res://games/dice_stanza/code/soundpool.gd" type="Script" id=53]
+[ext_resource path="res://games/dice_stanza/art/kenney_abstract-platformer/PlayerRed/playerRed_hit.png" type="Texture" id=54]
+[ext_resource path="res://games/dice_stanza/art/kenney_abstract-platformer/PlayerRed/playerRed_duck.png" type="Texture" id=55]
+[ext_resource path="res://games/dice_stanza/code/player/animgraph/ag_dead.gd" type="Script" id=56]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 9, 11 )
+
+[sub_resource type="Animation" id=3]
+resource_name = "Jump"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.3 ),
+"transitions": PoolRealArray( 1.68179, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0.8, 1.2 ), Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "Land"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 0.241484, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.4, 1 ), Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="ShaderMaterial" id=5]
+shader = ExtResource( 14 )
+shader_param/palette = ExtResource( 13 )
+
+[sub_resource type="SpriteFrames" id=6]
+animations = [ {
+"frames": [ ExtResource( 26 ), ExtResource( 25 ), ExtResource( 24 ) ],
+"loop": true,
+"name": "climb",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 55 ) ],
+"loop": true,
+"name": "dead",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 6 ) ],
+"loop": true,
+"name": "fall",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 11 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 26 ), ExtResource( 25 ), ExtResource( 24 ) ],
+"loop": true,
+"name": "jump",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 54 ) ],
+"loop": true,
+"name": "land",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 8 ), ExtResource( 7 ), ExtResource( 9 ), ExtResource( 12 ), ExtResource( 10 ) ],
+"loop": true,
+"name": "run",
+"speed": 5.0
+} ]
+
+[node name="Player" type="KinematicBody2D" groups=["Grabber", "Player"]]
+position = Vector2( -1536, 704 )
+z_index = 10
+collision_mask = 14
+collision/safe_margin = 0.04
+script = ExtResource( 1 )
+throw_forward_strength = 170.0
+throw_up_strength = 150.0
+
+[node name="SquareCollisionShape" type="CollisionShape2D" parent="."]
+shape = SubResource( 2 )
+
+[node name="PlayerVisual" type="Node2D" parent="."]
+unique_name_in_owner = true
+position = Vector2( 0, 8 )
+script = ExtResource( 2 )
+player_path = NodePath("..")
+
+[node name="Polygon2D" type="Polygon2D" parent="PlayerVisual"]
+visible = false
+position = Vector2( 0, -8 )
+scale = Vector2( 0.7, 0.7 )
+color = Color( 0.513726, 0.878431, 0.298039, 1 )
+polygon = PoolVector2Array( -16, -16, -16, 16, 11.2825, 16, 16, 13, 16, -11, 11.8116, -16 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PlayerVisual"]
+anims/Jump = SubResource( 3 )
+anims/Land = SubResource( 4 )
+
+[node name="AnimatedSprite2D" type="AnimatedSprite" parent="PlayerVisual"]
+material = SubResource( 5 )
+position = Vector2( 4.52995e-06, -8.00003 )
+scale = Vector2( 0.461539, 0.458333 )
+frames = SubResource( 6 )
+animation = "fall"
+
+[node name="StateMachine" type="Node" parent="PlayerVisual"]
+
+[node name="Default" type="Node" parent="PlayerVisual/StateMachine"]
+script = ExtResource( 17 )
+
+[node name="Climb" type="Node" parent="PlayerVisual/StateMachine"]
+script = ExtResource( 23 )
+
+[node name="Dead" type="Node" parent="PlayerVisual/StateMachine"]
+script = ExtResource( 56 )
+
+[node name="Dash" type="Node" parent="PlayerVisual/StateMachine"]
+script = ExtResource( 22 )
+
+[node name="Fall" type="Node" parent="PlayerVisual/StateMachine"]
+script = ExtResource( 18 )
+
+[node name="Ground_idle" type="Node" parent="PlayerVisual/StateMachine"]
+script = ExtResource( 20 )
+
+[node name="Ground_run" type="Node" parent="PlayerVisual/StateMachine"]
+script = ExtResource( 16 )
+
+[node name="Jump" type="Node" parent="PlayerVisual/StateMachine"]
+script = ExtResource( 19 )
+
+[node name="Land" type="Node" parent="PlayerVisual/StateMachine"]
+script = ExtResource( 21 )
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource( 15 )
+
+[node name="Climb" type="Node" parent="StateMachine"]
+script = ExtResource( 3 )
+
+[node name="Default" type="Node" parent="StateMachine"]
+script = ExtResource( 5 )
+
+[node name="Freestyle" type="Node" parent="StateMachine"]
+script = ExtResource( 4 )
+
+[node name="ui_root" type="Control" parent="."]
+
+[node name="label_bookmark" type="Control" parent="ui_root"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="DiceHolder" type="Node2D" parent="."]
+position = Vector2( 0, -11 )
+
+[node name="Sound" type="Node2D" parent="."]
+
+[node name="AudioPlayer" type="Node2D" parent="Sound"]
+script = ExtResource( 53 )
+
+[node name="TemplateAudioPlayer" type="AudioStreamPlayer2D" parent="Sound/AudioPlayer"]
+volume_db = -7.482
+
+[node name="Hit" type="Node" parent="Sound"]
+script = ExtResource( 27 )
+sounds = [ ExtResource( 47 ), ExtResource( 40 ), ExtResource( 48 ), ExtResource( 41 ), ExtResource( 44 ), ExtResource( 29 ), ExtResource( 39 ), ExtResource( 49 ) ]
+
+[node name="Jump" type="Node" parent="Sound"]
+script = ExtResource( 27 )
+sounds = [ ExtResource( 28 ), ExtResource( 50 ), ExtResource( 45 ), ExtResource( 30 ), ExtResource( 51 ), ExtResource( 31 ), ExtResource( 42 ), ExtResource( 43 ) ]
+
+[node name="Pickup" type="Node" parent="Sound"]
+script = ExtResource( 27 )
+sounds = [ ExtResource( 32 ), ExtResource( 33 ), ExtResource( 34 ), ExtResource( 35 ), ExtResource( 36 ), ExtResource( 46 ), ExtResource( 37 ), ExtResource( 38 ), ExtResource( 52 ) ]

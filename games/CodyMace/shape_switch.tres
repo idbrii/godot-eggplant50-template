@@ -69,6 +69,10 @@ _bundled = {
 
 [resource]
 script = ExtResource( 1 )
-initial_scene = SubResource( 6 )
-game_name = "Shape Switch"
+initial_scene = ExtResource( 2 )
+game_name = "Shapies"
 game_author = "Cody Mace"
+input_primary_action = "Jump"
+input_secondary_action = "Transform"
+input_pause = "Pause"
+input_directions = "Movement"

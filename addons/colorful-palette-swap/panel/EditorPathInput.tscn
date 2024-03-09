@@ -1,0 +1,36 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://addons/colorful-palette-swap/code/util/pathedit.gd" type="Script" id=1]
+[ext_resource path="res://addons/colorful-palette-swap/panel/editor_path_input.gd" type="Script" id=2]
+
+[node name="Input" type="HBoxContainer"]
+margin_right = 465.0
+margin_bottom = 24.0
+script = ExtResource( 2 )
+
+[node name="Label" type="Label" parent="."]
+margin_top = 5.0
+margin_right = 90.0
+margin_bottom = 19.0
+rect_min_size = Vector2( 90, 0 )
+hint_tooltip = "A file path."
+mouse_filter = 1
+text = "Path"
+
+[node name="PathValue" type="LineEdit" parent="."]
+margin_left = 94.0
+margin_right = 437.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 100, 23.157 )
+hint_tooltip = "A file path."
+size_flags_horizontal = 3
+size_flags_vertical = 3
+caret_blink = true
+caret_blink_speed = 0.5
+script = ExtResource( 1 )
+
+[node name="PickFileButton" type="Button" parent="."]
+margin_left = 441.0
+margin_right = 465.0
+margin_bottom = 24.0
+text = "..."

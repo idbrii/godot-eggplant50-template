@@ -1,0 +1,14 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://mainmenu/gamedef.gd" type="Script" id=1]
+[ext_resource path="res://games/CodyMace/Sifter2.tscn" type="PackedScene" id=2]
+
+[resource]
+script = ExtResource( 1 )
+initial_scene = ExtResource( 2 )
+game_name = "Sifter 2"
+game_author = "Cody Mace"
+input_primary_action = "Drop Shapes"
+input_secondary_action = ""
+input_pause = "Pause"
+input_directions = ""

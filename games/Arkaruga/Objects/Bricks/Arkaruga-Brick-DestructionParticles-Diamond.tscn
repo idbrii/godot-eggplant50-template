@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://games/Arkaruga/Objects/Bricks/Arkaruga-Brick-DestructionParticles.tscn" type="PackedScene" id=1]
+
+[node name="BlockDestructionParticles" instance=ExtResource( 1 )]
+emission_shape = 1
+emission_sphere_radius = 10.0

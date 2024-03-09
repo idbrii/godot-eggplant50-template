@@ -33,7 +33,7 @@ func add_game(g) -> Button:
 
 
 func _button_pressed(game):
-	Eggplant.transition_to(game.initial_scene)
+	Eggplant.start_game(game)
 
 
 func _quit():

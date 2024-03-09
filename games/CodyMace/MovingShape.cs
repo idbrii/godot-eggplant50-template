@@ -4,22 +4,25 @@ using System.Diagnostics;
 
 public enum ShapeType
 {
-	Circle,
-	Square,
-	Triangle,
-	Heart
+    Circle,
+    Square,
+    Triangle,
+    Heart,
+    Jam
 }
 
 public class MovingShape : Area2D
 {
-	[Export]
-	public Color circleColor;
-	[Export]
-	public Color triangleColor;
-	[Export]
-	public Color squareColor;
-	[Export]
-	public Color heartColor;
+    [Export]
+    public Color circleColor;
+    [Export]
+    public Color triangleColor;
+    [Export]
+    public Color squareColor;
+    [Export]
+    public Color heartColor;
+    [Export]
+    public Color jamColor;
 
 	[Signal]
 	public delegate void ShapeHitEventHandler(ShapeType shapeType);
@@ -37,32 +40,41 @@ public class MovingShape : Area2D
 	{
 		explosion = GetNode<CPUParticles2D>("Explosion");
 
-		GD.Randomize();
-		shapeType = (ShapeType)(GD.Randi() % 3);
-		sprite = GetNode<Sprite>("Sprite");
-		int heartChance = (int)GD.RandRange(0, 7);
-		if (heartChance == 1) {
-			shapeType = ShapeType.Heart;
-		}
-		switch (shapeType) {
-			case ShapeType.Circle:
-				sprite.Texture = GD.Load<Texture>("res://games/CodyMace/Assets/circle.png");
-				sprite.Modulate = circleColor;
-				break;
-			case ShapeType.Square:
-				sprite.Texture = GD.Load<Texture>("res://games/CodyMace/Assets/square.png");
-				sprite.Modulate = squareColor;
-				break;
-			case ShapeType.Triangle:
-				sprite.Texture = GD.Load<Texture>("res://games/CodyMace/Assets/triangle.png");
-				sprite.Modulate = triangleColor;
-				break;
-			case ShapeType.Heart:
-				sprite.Texture = GD.Load<Texture>("res://games/CodyMace/Assets/heart.png");
-				sprite.Modulate = heartColor;
-				break;
-		}
-	}
+        GD.Randomize();
+        shapeType = (ShapeType)(GD.Randi() % 3);
+        sprite = GetNode<Sprite>("Sprite");
+        int heartChance = (int)GD.RandRange(0, 7);
+        if (heartChance == 1) {
+            shapeType = ShapeType.Heart;
+        }
+        int jamChance = (int)GD.RandRange(0, 20);
+        if (jamChance == 1) {
+            shapeType = ShapeType.Jam;
+        }
+
+        switch (shapeType) {
+            case ShapeType.Circle:
+                sprite.Texture = GD.Load<Texture>("res://games/CodyMace/Assets/circle.png");
+                sprite.Modulate = circleColor;
+                break;
+            case ShapeType.Square:
+                sprite.Texture = GD.Load<Texture>("res://games/CodyMace/Assets/square.png");
+                sprite.Modulate = squareColor;
+                break;
+            case ShapeType.Triangle:
+                sprite.Texture = GD.Load<Texture>("res://games/CodyMace/Assets/triangle.png");
+                sprite.Modulate = triangleColor;
+                break;
+            case ShapeType.Heart:
+                sprite.Texture = GD.Load<Texture>("res://games/CodyMace/Assets/heart.png");
+                sprite.Modulate = heartColor;
+                break;
+            case ShapeType.Jam:
+                sprite.Texture = GD.Load<Texture>("res://games/CodyMace/Assets/eggplant-jam-bordered.png");
+                sprite.Modulate = new Color(1, 1, 1, 1);
+                break;
+        }
+    }
 
 	//  // Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(float delta)
@@ -70,28 +82,32 @@ public class MovingShape : Area2D
 		Position = new Vector2(Position.x, Position.y - velocity * delta);
 	}
 
-	public void OnPlayerBodyEntered(Node body)
-	{
-		if (body.Name == "Player" && !popped) {
-			popped = true;
-			GetNode<AudioStreamPlayer>("PopSound").Play();
-			velocity = 0;
-			sprite.Visible = false;
-			GetNode<CollisionShape2D>("CollisionShape2D").Disabled = true;
-			EmitSignal(nameof(ShapeHitEventHandler), shapeType);
-			explosion.Emitting = true;
-			explosion.Color = sprite.Modulate;
-			Timer timer = new Timer();
-			timer.WaitTime = 1.0f;
-			timer.OneShot = true;
-			AddChild(timer);
-			timer.Start();
-			timer.Connect("timeout", this, nameof(OnExplosionFinished));
-		}
-	}
+    public async void OnPlayerBodyEntered(Node body)
+    {
+        if (body.Name == "Player" && !popped) {
+            popped = true;
+            GetNode<AudioStreamPlayer>("PopSound").Play();
+            velocity = 0;
+            sprite.Visible = false;
+            GetNode<CollisionShape2D>("CollisionShape2D").Disabled = true;
+            EmitSignal(nameof(ShapeHitEventHandler), shapeType);
+            explosion.Emitting = true;
+            explosion.Color = sprite.Modulate;
+            if (shapeType == ShapeType.Jam) {
+                explosion.Color = jamColor;
+            }
+		    await ToSignal(GetTree().CreateTimer(1.0f), "timeout");
+            OnExplosionFinished();
+        }
+    }
 
-	void OnExplosionFinished()
-	{
-		QueueFree();
-	}
+    void OnExplosionFinished()
+    {
+        QueueFree();
+    }
+
+    void GameOverDude()
+    {
+        GD.Print("Game over dude");
+    }
 }
