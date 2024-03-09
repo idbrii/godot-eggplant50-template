@@ -15,13 +15,13 @@ itch_project = f"bones7242/{project}"
 #~ itch_project = False
 
 ## TODO: Change to where you want to export builds.
-export_path = Path("C:\Users\billy\development\builds") / project
+export_path = Path("C:/Users/billy/development/builds") / project
 
 ## Uncomment the platforms you want to build.
 platforms = [
     # "mac",
     "web",
-    "win",
+    # "win",
 ]
 
 
