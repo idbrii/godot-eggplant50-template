@@ -37,9 +37,12 @@ func change_state(new_state):
 func change_state_held():
 	last_state = current_state
 	change_state(State.HELD)
-	unprojectedX = 220
-	unprojectedY = 300 # should start up off the ground a bit
-	unprojectedZ = 4
+	unprojectedX = 220 # reset
+	unprojectedY = 300 # reset
+	unprojectedZ = 4 # reset
+	xVelocity = 0 # reset
+	yVelocity = 0 # reset
+	zVelocity = 0 # reset
 	get_node("spr_baseball").visible = false
 	pass
 
@@ -65,6 +68,7 @@ func change_state_grounded():
 	zVelocity = 0 # will be set by creator
 	# reset batter's counter
 	get_parent().get_node("batter_area2d").delta_counter = 0 
+	get_parent().get_node("AudioStreamPlayer").play()
 	pass
 	
 func determineZAsPercent (unprojectedZDistance) :
