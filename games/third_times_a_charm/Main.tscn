@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://games/polygonal_pasture/assets/square-large.png" type="Texture" id=1]
 [ext_resource path="res://games/polygonal_pasture/assets/circle-large.png" type="Texture" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://games/third_times_a_charm/cursor.png" type="Texture" id=6]
 [ext_resource path="res://mainmenu/theme/theme_eggplant.tres" type="Theme" id=7]
 [ext_resource path="res://games/third_times_a_charm/particle.png" type="Texture" id=8]
+[ext_resource path="res://shared/menu_pause/PauseMenu.tscn" type="PackedScene" id=9]
 
 [sub_resource type="ParticlesMaterial" id=1]
 emission_shape = 1
@@ -167,3 +168,9 @@ explosiveness = 0.75
 randomness = 0.3
 process_material = SubResource( 1 )
 texture = ExtResource( 8 )
+
+[node name="PauseMenu" parent="." instance=ExtResource( 9 )]
+margin_right = 621.0
+margin_bottom = 341.0
+help_title = "help"
+help_body = "Match 3 or more of the same shapes. That's it. No move counter. No \"required match\" swaps. Take your time, match shapes to your heart's content."
