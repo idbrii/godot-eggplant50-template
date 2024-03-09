@@ -6,5 +6,9 @@
 [resource]
 script = ExtResource( 1 )
 initial_scene = ExtResource( 2 )
-game_name = "Tic Tac Toe"
+game_name = "Just Tic Tac Toe"
 game_author = "Gabe Tutone"
+input_primary_action = "Primary"
+input_secondary_action = "Secondary"
+input_pause = "Pause"
+input_directions = "Movement"
