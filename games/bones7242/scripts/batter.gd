@@ -7,12 +7,12 @@ var initial_state = State.IDLE
 var current_state : int
 var last_state : int
 
-var spr_batter_idle = preload("../sprites/1-idle.png")
-var spr_batter_crouch = preload("../sprites/2-crouch.png")
-var spr_batter_release = preload("../sprites/3-release.png")
-var spr_batter_windup = preload("../sprites/4-windup.png")
-var spr_batter_swing = preload("../sprites/5-swing.png")
-var spr_batter_followthrough = preload("../sprites/6-followthrough.png")
+var spr_batter_idle = preload("../sprites/idle.png")
+var spr_batter_crouch = preload("../sprites/crouch.png")
+var spr_batter_release = preload("../sprites/release.png")
+var spr_batter_windup = preload("../sprites/windup.png")
+var spr_batter_swing = preload("../sprites/swing.png")
+var spr_batter_followthrough = preload("../sprites/followthrough.png")
 
 var min_throw_power  = 0
 var throw_power = min_throw_power
@@ -112,3 +112,7 @@ func _process(delta):
 		
 	#print('power:' + str(power))
 	update()
+	
+#func _draw () :
+#	draw_rect(Rect2(40, 50, 60, 50), Color("#39855a"))
+#	pass

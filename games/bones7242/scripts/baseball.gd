@@ -37,7 +37,7 @@ func change_state(new_state):
 func change_state_held():
 	last_state = current_state
 	change_state(State.HELD)
-	unprojectedX = 240
+	unprojectedX = 220
 	unprojectedY = 300 # should start up off the ground a bit
 	unprojectedZ = 4
 	get_node("spr_baseball").visible = false

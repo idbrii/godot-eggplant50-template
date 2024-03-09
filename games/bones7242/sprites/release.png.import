@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/5-swing.png-ddd3544e762b748877fd3df124b98fbe.stex"
+path="res://.import/release.png-c2f67a25f35a5eec4955e58fe1d60ebe.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://games/bones7242/sprites/5-swing.png"
-dest_files=[ "res://.import/5-swing.png-ddd3544e762b748877fd3df124b98fbe.stex" ]
+source_file="res://games/bones7242/sprites/release.png"
+dest_files=[ "res://.import/release.png-c2f67a25f35a5eec4955e58fe1d60ebe.stex" ]
 
 [params]
 

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/6-followthrough.png-c047c7410d260e2d4468e52df435eae9.stex"
+path="res://.import/crouch.png-98a069e42cb4b1ef342fc6ca388f50ea.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://games/bones7242/sprites/6-followthrough.png"
-dest_files=[ "res://.import/6-followthrough.png-c047c7410d260e2d4468e52df435eae9.stex" ]
+source_file="res://games/bones7242/sprites/crouch.png"
+dest_files=[ "res://.import/crouch.png-98a069e42cb4b1ef342fc6ca388f50ea.stex" ]
 
 [params]
 
