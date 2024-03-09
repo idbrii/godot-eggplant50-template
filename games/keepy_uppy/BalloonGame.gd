@@ -43,8 +43,8 @@ func on_balloon_pop(balloon: RigidBody2D):
 	anim.play()
 	yield(anim, 'animation_finished')
 	remove_child(balloon)
-	$UI/PauseMenu.show()
+	$PauseMenu.show()
 
 func on_floor_touched():
 	game_state = GameState.FLOOR_TOUCHED
-	$UI/PauseMenu.show()
+	$PauseMenu.show()

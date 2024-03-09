@@ -7,7 +7,7 @@
 [ext_resource path="res://games/keepy_uppy/Status.gd" type="Script" id=5]
 [ext_resource path="res://mainmenu/theme/theme_eggplant.tres" type="Theme" id=6]
 [ext_resource path="res://games/keepy_uppy/BalloonGame.gd" type="Script" id=7]
-[ext_resource path="res://games/keepy_uppy/PauseMenu.gd" type="Script" id=8]
+[ext_resource path="res://shared/menu_pause/PauseMenu.tscn" type="PackedScene" id=8]
 [ext_resource path="res://games/keepy_uppy/animation/balloon-pop4.png" type="Texture" id=9]
 [ext_resource path="res://games/keepy_uppy/animation/balloon-pop1.png" type="Texture" id=10]
 [ext_resource path="res://games/keepy_uppy/animation/balloon-pop3.png" type="Texture" id=11]
@@ -114,30 +114,6 @@ margin_bottom = 26.0
 rect_min_size = Vector2( 44, 0 )
 text = "0"
 
-[node name="PauseMenu" type="VBoxContainer" parent="UI"]
-pause_mode = 2
-visible = false
-margin_left = 224.0
-margin_top = 124.0
-margin_right = 264.0
-margin_bottom = 164.0
-script = ExtResource( 8 )
-
-[node name="Restart" type="Button" parent="UI/PauseMenu"]
-margin_right = 114.0
-margin_bottom = 58.0
-focus_neighbour_top = NodePath("../Quit")
-focus_neighbour_bottom = NodePath("../Quit")
-text = "restart"
-
-[node name="Quit" type="Button" parent="UI/PauseMenu"]
-margin_top = 62.0
-margin_right = 114.0
-margin_bottom = 120.0
-focus_neighbour_top = NodePath("../Restart")
-focus_neighbour_bottom = NodePath("../Restart")
-text = "quit"
-
 [node name="Balloon" type="RigidBody2D" parent="."]
 position = Vector2( 69, 152 )
 mass = 0.05
@@ -243,3 +219,7 @@ __meta__ = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Room/RightWall"]
 position = Vector2( 0, 159 )
 shape = SubResource( 3 )
+
+[node name="PauseMenu" parent="." instance=ExtResource( 8 )]
+help_title = "How to play"
+help_body = "Keep the balloon up in the air! Jump up (with your up input) and juggle it with your lil robot head or poke it with your stick. Don't forget to dash if you're in a hurry!"
