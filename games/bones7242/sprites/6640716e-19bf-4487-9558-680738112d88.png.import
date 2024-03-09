@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/6640716e-19bf-4487-9558-680738112d88.png-c163e93b9e65a75ece02f712664f941a.stex"
+path="res://.import/6640716e-19bf-4487-9558-680738112d88.png-71f7809723042f6489cbef35d9d5aef4.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://games/bones7242/scripts/6640716e-19bf-4487-9558-680738112d88.png"
-dest_files=[ "res://.import/6640716e-19bf-4487-9558-680738112d88.png-c163e93b9e65a75ece02f712664f941a.stex" ]
+source_file="res://games/bones7242/sprites/6640716e-19bf-4487-9558-680738112d88.png"
+dest_files=[ "res://.import/6640716e-19bf-4487-9558-680738112d88.png-71f7809723042f6489cbef35d9d5aef4.stex" ]
 
 [params]
 
