@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/batter-test-06.png-94950a70540026cf9a98221be21084a3.stex"
+path="res://.import/baseball.png-51798c1d325e490b6a4e6c171ce0bd71.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://games/bones7242/sprites/batter-test-06.png"
-dest_files=[ "res://.import/batter-test-06.png-94950a70540026cf9a98221be21084a3.stex" ]
+source_file="res://games/bones7242/sprites/baseball.png"
+dest_files=[ "res://.import/baseball.png-51798c1d325e490b6a4e6c171ce0bd71.stex" ]
 
 [params]
 
