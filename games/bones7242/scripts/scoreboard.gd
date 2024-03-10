@@ -31,6 +31,7 @@ func new_out ():
 	if (outs >= 3) :
 		print("that's three outs")
 		#TBD: show game over screen
+		Eggplant.return_to_menu()
 	pass
 	
 func new_strike ():
