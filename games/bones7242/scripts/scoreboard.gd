@@ -9,8 +9,8 @@ func increase_runs ():
 	#tbd: some sort of animation
 	pass
 	
-func reset_strikes ():
-	strikes = 0
+func reset_runs ():
+	runs = 0
 	#tbd: some sort of animation
 	pass
 
@@ -19,8 +19,18 @@ func increase_strikes():
 	#tbd: some sort of animation
 	pass
 	
+func reset_strikes ():
+	strikes = 0
+	#tbd: some sort of animation
+	pass
+	
 func increase_outs():
 	outs += 1
+	#tbd: some sort of animation
+	pass
+	
+func reset_outs():
+	outs = 0
 	#tbd: some sort of animation
 	pass
 
@@ -31,7 +41,9 @@ func new_out ():
 	if (outs >= 3) :
 		print("that's three outs")
 		#TBD: show game over screen
-		Eggplant.return_to_menu()
+		reset_runs()
+		reset_outs()
+		reset_strikes()
 	pass
 	
 func new_strike ():
