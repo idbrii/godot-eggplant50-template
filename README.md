@@ -27,6 +27,25 @@ settings since these will cause conflicts. You can accept yours for
 eggplant_games.tres conflicts since we'll just re-add everyone's GameDefs
 before.
 
+## Additional Setup
+
+### Pause Screen
+
+We have an easy to setup pause screen that shows your inputs:
+![Pause Screen - keyboard](https://github.com/idbrii/godot-eggplant50-template/assets/43559/d916f8be-c370-4712-99eb-36332e75d161) ![Pause Screen - gamepad](https://github.com/idbrii/godot-eggplant50-template/assets/43559/afbef0ad-5213-44f1-893e-b4a824654819)
+
+1. Open your game scene
+1. Create a CanvasLayer node
+    * This makes the PauseMenu layout to the screen instead of the world.
+1. Drag `res://shared/menu_pause/PauseMenu.tscn` under it. See `res://games/movement2/World/World.tscn` for an example.
+    * The PauseMenu automatically detects when the pause button is hit.
+    * It **will not** show inputs if you launch your game scene directly. There's some necessary hookup in the main menu, so don't worry about it.
+1. (Optional) Fill in the "Help" fields on the PauseMenu you added to your scene.
+    * This will add a Help button to pause to explain to players how to play.
+1. Update the GameDef you created above (`res://games/your-name-here/game_yourname.tres`) with the correct input labels (`input_primary_action`, etc). Clear any input labels that don't apply to your game and they'll be hidden.
+1. Launch your game from the main scene `res://mainmenu/mainmenu.tscn` and see your inputs appear on the loading screen and in the pause screen (press Enter or Start to pause)!
+
+
 
 ## Examples
 
@@ -60,8 +79,8 @@ Use `action1` and `action2` for actions:
 
 The input mapping is modelled after [pico-8](https://iiviigames.github.io/pico8-api/img/input.png):
 
-* primary action: Z,C,N,Space keys or X,B buttons
-* secondary action: X,V,M keys or A,Y buttons
+* primary action: Z,C,N,Space keys or A,Y buttons
+* secondary action: X,V,M keys or X,B buttons
 * pause: Enter,p keys or Start,Select buttons
 
 
@@ -94,6 +113,13 @@ script to simplify build creation and itch.io upload.
 pip install -r ci/requirements.txt
 python ci/pushbuild.py
 ```
+
+## Help me get started!
+
+Godot has some [great example projects for Godot 3.5](https://github.com/godotengine/godot-demo-projects/tree/3.5 ) to help get you started on different features/genres (use the 3.5 branch and not master).
+Download them all as a zip: [3.5.zip](https://github.com/godotengine/godot-demo-projects/archive/3.5.zip)
+It's often helpful just see a working example.
+
 
 ## Troubleshooting
 

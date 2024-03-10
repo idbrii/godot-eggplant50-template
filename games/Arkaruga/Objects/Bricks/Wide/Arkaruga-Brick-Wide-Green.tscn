@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://games/Arkaruga/Objects/Bricks/Arkaruga-Brick-Base.tscn" type="PackedScene" id=1]
+[ext_resource path="res://games/Arkaruga/Sprites/Bricks/Wide/brick-wide-green.png" type="Texture" id=2]
+[ext_resource path="res://games/Arkaruga/Sprites/Bricks/Wide/brick-wide-green-outline.png" type="Texture" id=3]
+
+[node name="Brick-Wide-Green" instance=ExtResource( 1 )]
+position = Vector2( 0, 0 )
+color = 1
+
+[node name="ActiveSprite" parent="." index="0"]
+texture = ExtResource( 2 )
+
+[node name="InactiveSprite" parent="." index="1"]
+texture = ExtResource( 3 )

@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://games/Arkaruga/Objects/Bricks/Wide/Arkaruga-Brick-Wide-Blue.tscn" type="PackedScene" id=1]
+[ext_resource path="res://games/Arkaruga/Sprites/Bricks/Wide/brick-wide-blue-tape.png" type="Texture" id=2]
+[ext_resource path="res://games/Arkaruga/Sprites/Bricks/Wide/brick-wide-blue-tape-outline.png" type="Texture" id=3]
+
+[node name="Brick-Wide-Blue-Tape" instance=ExtResource( 1 )]
+fallAtZeroHealth = true
+
+[node name="ActiveSprite" parent="." index="0"]
+texture = ExtResource( 2 )
+
+[node name="InactiveSprite" parent="." index="1"]
+texture = ExtResource( 3 )

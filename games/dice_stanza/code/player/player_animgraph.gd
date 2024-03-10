@@ -15,6 +15,7 @@ onready var states = {
 	ground_idle = $StateMachine/Ground_idle,
 	ground_run = $StateMachine/Ground_run,
 	climb = $StateMachine/Climb,
+	dead = $StateMachine/Dead,
 	jump = $StateMachine/Jump,
 	fall = $StateMachine/Fall,
 	land = $StateMachine/Land,

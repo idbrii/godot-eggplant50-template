@@ -46,6 +46,10 @@ func _ready():
 	Validate.ok(Broadcast_idbrii.connect("player_rolled", self, "_on_player_rolled"))
 	Validate.ok(Broadcast_idbrii.connect("time_expired", self, "_on_time_expired"))
 	Validate.ok(Broadcast_idbrii.connect("start_round", self, "_on_start_round"))
+	for row in row_sensors.size():
+		var sensor := row_sensors[row] as Area2D
+		Validate.ok(sensor.connect("body_entered", self, "_on_body_entered"))
+		Validate.ok(sensor.connect("body_exited", self, "_on_body_exited"))
 
 	# Delay a frame for everyone else to register signal.
 	yield(get_tree(), "idle_frame")
@@ -71,6 +75,16 @@ func _on_player_rolled(_value, total_rolls):
 		for i in range(count):
 			var row = row_map[i]
 			_roll_in_row(row)
+
+
+func _on_body_entered(body):
+	if body.is_in_group("dice"):
+		body.set_is_counted(true)
+
+
+func _on_body_exited(body):
+	if body.is_in_group("dice"):
+		body.set_is_counted(false)
 
 
 func _roll_in_row(row):

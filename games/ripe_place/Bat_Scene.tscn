@@ -1,0 +1,48 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://games/ripe_place/art/bat.png" type="Texture" id=1]
+[ext_resource path="res://games/ripe_place/Bat_Scene.gd" type="Script" id=2]
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 1 )
+region = Rect2( 32, 0, 32, 32 )
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ SubResource( 2 ), SubResource( 3 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="CircleShape2D" id=4]
+radius = 4.0
+
+[node name="bat" type="Node2D"]
+scale = Vector2( 4, 4 )
+script = ExtResource( 2 )
+screen_size = Vector2( 640, 320 )
+move_size = 64
+initial_nutrition = 25
+move_cost = 2
+win_threshold = 16
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 1 )
+frame = 1
+playing = true
+
+[node name="batArea2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="batArea2D"]
+shape = SubResource( 4 )
+
+[node name="nutrition_timer" type="Timer" parent="."]
+wait_time = 6.0
+autostart = true
+
+[connection signal="timeout" from="nutrition_timer" to="." method="_on_nutrition_timer_timeout"]

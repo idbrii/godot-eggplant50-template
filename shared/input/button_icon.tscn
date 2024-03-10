@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://shared/input/buttonicon.gd" type="Script" id=1]
+[ext_resource path="res://shared/input/art/playstation/cross.png" type="Texture" id=2]
+
+[node name="ButtonIcon" type="TextureRect"]
+margin_right = 16.0
+margin_bottom = 16.0
+texture = ExtResource( 2 )
+script = ExtResource( 1 )
+__meta__ = {
+"_editor_description_": "Add to your scene and set \"Input\". Auto adapts to the current input method."
+}

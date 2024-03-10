@@ -1,0 +1,169 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://games/drop_walker/code/level.gd" type="Script" id=1]
+[ext_resource path="res://games/drop_walker/scenes/player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://games/drop_walker/scenes/goal_tile.tscn" type="PackedScene" id=3]
+[ext_resource path="res://games/drop_walker/scenes/world_layer.tscn" type="PackedScene" id=4]
+[ext_resource path="res://mainmenu/theme/theme_eggplant.tres" type="Theme" id=5]
+[ext_resource path="res://shared/menu_pause/PauseMenu.tscn" type="PackedScene" id=6]
+[ext_resource path="res://mainmenu/theme/style_panel_light.tres" type="StyleBox" id=7]
+[ext_resource path="res://games/drop_walker/art/isometric-space-interior/PNG/plank_ui.png" type="Texture" id=8]
+[ext_resource path="res://games/drop_walker/code/inventory.gd" type="Script" id=9]
+[ext_resource path="res://mainmenu/theme/style_panel_bg.tres" type="StyleBox" id=10]
+[ext_resource path="res://games/dice_stanza/art/font_kenpixel_mini_big.tres" type="DynamicFont" id=11]
+
+[node name="World" type="Node2D"]
+script = ExtResource( 1 )
+player_node = NodePath("Player")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 464, -71 )
+current = true
+zoom = Vector2( 2, 2 )
+
+[node name="Layers" type="Node2D" parent="."]
+
+[node name="layer0" parent="Layers" instance=ExtResource( 4 )]
+
+[node name="Grid_Ground" parent="Layers/layer0" index="0"]
+tile_data = PoolIntArray( -589826, 19, 0, -589825, 19, 0, -655360, 19, 0, -655359, 19, 0, -655358, 19, 0, -655357, 19, 0, -655356, 19, 0, -655355, 19, 0, -655354, 19, 0, -655353, 19, 0, -524290, 19, 0, -589824, 0, 0, -589823, 0, 0, -589821, 0, 0, -589820, 0, 0, -589817, 19, 0, -458754, 19, 0, -458753, 0, 0, -524288, 0, 0, -524287, 0, 0, -524285, 0, 0, -524284, 0, 0, -524281, 19, 0, -393218, 19, 0, -393217, 0, 0, -458752, 0, 0, -458751, 0, 0, -458749, 0, 0, -458748, 0, 0, -458747, 0, 0, -458746, 0, 0, -458745, 19, 0, -327682, 19, 0, -327681, 0, 0, -393216, 0, 0, -393215, 0, 0, -393213, 19, 0, -393212, 19, 0, -393211, 19, 0, -393210, 19, 0, -393209, 19, 0, -262146, 19, 0, -262145, 0, 0, -327680, 0, 0, -327679, 0, 0, -327677, 0, 0, -327676, 0, 0, -327675, 0, 0, -327674, 0, 0, -327673, 19, 0, -196610, 19, 0, -196609, 0, 0, -262144, 0, 0, -262143, 0, 0, -262141, 0, 0, -262140, 0, 0, -262139, 0, 0, -262138, 0, 0, -262137, 19, 0, -131074, 19, 0, -131073, 0, 0, -196608, 0, 0, -196607, 0, 0, -196605, 0, 0, -196604, 0, 0, -196601, 19, 0, -65538, 19, 0, -65537, 0, 0, -131072, 0, 0, -131071, 0, 0, -131069, 0, 0, -131068, 0, 0, -131065, 19, 0, -2, 19, 0, -1, 19, 0, -65536, 19, 0, -65535, 19, 0, -65534, 19, 0, -65533, 19, 0, -65532, 19, 0, -65531, 19, 0, -65530, 19, 0, -65529, 19, 0 )
+
+[node name="Grid_AboveGround" parent="Layers/layer0" index="1"]
+tile_data = PoolIntArray( -524288, 17, 0, -262144, 17, 0 )
+
+[node name="layer1" parent="Layers" instance=ExtResource( 4 )]
+position = Vector2( 0, 735 )
+
+[node name="Grid_Ground" parent="Layers/layer1" index="0"]
+tile_data = PoolIntArray( -589826, 19, 0, -589825, 19, 0, -655360, 19, 0, -655359, 19, 0, -655358, 19, 0, -655357, 19, 0, -655356, 19, 0, -655355, 19, 0, -655354, 19, 0, -655353, 19, 0, -524290, 19, 0, -524289, 0, 0, -589824, 0, 0, -589823, 0, 0, -589822, 0, 0, -589821, 0, 0, -589820, 0, 0, -589819, 0, 0, -589818, 0, 0, -589817, 19, 0, -458754, 19, 0, -458753, 0, 0, -524288, 0, 0, -524287, 0, 0, -524284, 0, 0, -524283, 0, 0, -524282, 0, 0, -524281, 19, 0, -393218, 19, 0, -393217, 0, 0, -458752, 0, 0, -458751, 0, 0, -458750, 0, 0, -458749, 0, 0, -458748, 0, 0, -458745, 19, 0, -327682, 19, 0, -327681, 0, 0, -393216, 0, 0, -393215, 0, 0, -393214, 0, 0, -393213, 0, 0, -393212, 0, 0, -393211, 0, 0, -393210, 0, 0, -393209, 19, 0, -262146, 19, 0, -262145, 0, 0, -327680, 0, 0, -327679, 0, 0, -327678, 0, 0, -327677, 0, 0, -327676, 0, 0, -327675, 0, 0, -327674, 0, 0, -327673, 19, 0, -196610, 19, 0, -196609, 0, 0, -262144, 0, 0, -262142, 0, 0, -262141, 0, 0, -262140, 0, 0, -262139, 0, 0, -262138, 0, 0, -262137, 19, 0, -131074, 19, 0, -131073, 0, 0, -196606, 0, 0, -196605, 0, 0, -196601, 19, 0, -65538, 19, 0, -131072, 0, 0, -131070, 0, 0, -131069, 0, 0, -131068, 0, 0, -131067, 0, 0, -131066, 0, 0, -131065, 19, 0, -2, 19, 0, -1, 19, 0, -65536, 19, 0, -65535, 19, 0, -65534, 19, 0, -65533, 19, 0, -65532, 19, 0, -65531, 19, 0, -65530, 19, 0, -65529, 19, 0 )
+
+[node name="Grid_AboveGround" parent="Layers/layer1" index="1"]
+tile_data = PoolIntArray( -524288, 17, 0, -393213, 17, 0, -196606, 17, 0 )
+
+[node name="layer2" parent="Layers" instance=ExtResource( 4 )]
+position = Vector2( 0, 1466 )
+
+[node name="Grid_Ground" parent="Layers/layer2" index="0"]
+tile_data = PoolIntArray( -589826, 19, 0, -589825, 19, 0, -655360, 19, 0, -655359, 19, 0, -655358, 19, 0, -655357, 19, 0, -655356, 19, 0, -655355, 19, 0, -655354, 19, 0, -655353, 19, 0, -524290, 19, 0, -524289, 0, 0, -589824, 0, 0, -589823, 0, 0, -589822, 0, 0, -589820, 0, 0, -589819, 0, 0, -589818, 0, 0, -589817, 19, 0, -458754, 19, 0, -524284, 0, 0, -524283, 0, 0, -524282, 0, 0, -524281, 19, 0, -393218, 19, 0, -393217, 0, 0, -458752, 0, 0, -458751, 0, 0, -458750, 0, 0, -458748, 0, 0, -458747, 0, 0, -458746, 0, 0, -458745, 19, 0, -327682, 19, 0, -327681, 0, 0, -393216, 0, 0, -393215, 0, 0, -393214, 0, 0, -393212, 0, 0, -393211, 0, 0, -393210, 0, 0, -393209, 19, 0, -262146, 19, 0, -262145, 0, 0, -327680, 0, 0, -327679, 0, 0, -327678, 0, 0, -327677, 0, 0, -327676, 0, 0, -327675, 0, 0, -327674, 0, 0, -327673, 19, 0, -196610, 19, 0, -196609, 0, 0, -262144, 0, 0, -262142, 0, 0, -262141, 0, 0, -262140, 0, 0, -262139, 0, 0, -262138, 0, 0, -262137, 19, 0, -131074, 19, 0, -131073, 0, 0, -196608, 0, 0, -196601, 19, 0, -65538, 19, 0, -65537, 0, 0, -131072, 0, 0, -131070, 0, 0, -131069, 0, 0, -131068, 0, 0, -131067, 0, 0, -131066, 0, 0, -131065, 19, 0, -2, 19, 0, -1, 19, 0, -65536, 19, 0, -65535, 19, 0, -65534, 19, 0, -65533, 19, 0, -65532, 19, 0, -65531, 19, 0, -65530, 19, 0, -65529, 19, 0 )
+
+[node name="Grid_AboveGround" parent="Layers/layer2" index="1"]
+tile_data = PoolIntArray( -589820, 17, 0, -393216, 17, 0, -393211, 17, 0 )
+
+[node name="Goal" parent="Layers/layer2/Grid_AboveGround/YSort" index="0" instance=ExtResource( 3 )]
+position = Vector2( 162, -77 )
+
+[node name="death_layer" parent="Layers" instance=ExtResource( 4 )]
+position = Vector2( 0, 3000 )
+
+[node name="Grid_Ground" parent="Layers/death_layer" index="0"]
+tile_data = PoolIntArray( -655353, 19, 0, -589817, 19, 0, -524281, 19, 0, -458745, 19, 0, -393209, 19, 0, -327673, 19, 0, -262137, 19, 0, -196601, 19, 0, -131065, 19, 0, -1, 19, 0, -65536, 19, 0, -65535, 19, 0, -65534, 19, 0, -65533, 19, 0, -65532, 19, 0, -65531, 19, 0, -65530, 19, 0, -65529, 19, 0 )
+
+[node name="Grid_AboveGround" parent="Layers/death_layer" index="1"]
+tile_data = PoolIntArray(  )
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
+position = Vector2( 304, -143 )
+gridworld_node = NodePath("../Layers/layer0/Grid_Ground")
+inventory_node = NodePath("../UI/Inventory")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="gameover" type="PanelContainer" parent="UI"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -125.0
+margin_top = -40.0
+margin_right = 125.0
+margin_bottom = 40.0
+theme = ExtResource( 5 )
+custom_styles/panel = ExtResource( 10 )
+
+[node name="Label" type="Label" parent="UI/gameover"]
+margin_left = 15.0
+margin_top = 15.0
+margin_right = 235.0
+margin_bottom = 65.0
+custom_fonts/font = ExtResource( 11 )
+text = "Game Over"
+align = 1
+valign = 1
+
+[node name="PauseMenu" parent="UI" instance=ExtResource( 6 )]
+margin_left = 18.0
+margin_top = 60.0
+margin_right = 185.0
+margin_bottom = 280.0
+help_title = "How To Play"
+help_body = "Navigate the world and get to the eggplant jam!
+
+Hold planks to cross over gaps, but you drop them as you cross and only have 3! Fall through holes to reach further below."
+
+[node name="Inventory" type="Control" parent="UI"]
+unique_name_in_owner = true
+anchor_left = 0.1
+anchor_right = 0.9
+anchor_bottom = 0.9
+margin_left = -54.0
+margin_top = 10.0
+margin_right = 54.0
+margin_bottom = 26.0
+theme = ExtResource( 5 )
+script = ExtResource( 9 )
+
+[node name="PanelContainer" type="PanelContainer" parent="UI/Inventory"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -78.0
+margin_right = 227.0
+custom_styles/panel = ExtResource( 7 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Inventory/PanelContainer"]
+margin_left = 15.0
+margin_top = 15.0
+margin_right = 212.0
+margin_bottom = 63.0
+
+[node name="Padding" type="Control" parent="UI/Inventory/PanelContainer/VBoxContainer"]
+margin_right = 197.0
+size_flags_vertical = 3
+
+[node name="Planks" type="HBoxContainer" parent="UI/Inventory/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+margin_top = 4.0
+margin_right = 197.0
+margin_bottom = 44.0
+size_flags_vertical = 4
+
+[node name="Plank1" type="TextureRect" parent="UI/Inventory/PanelContainer/VBoxContainer/Planks"]
+margin_right = 63.0
+margin_bottom = 40.0
+texture = ExtResource( 8 )
+stretch_mode = 6
+
+[node name="Plank2" type="TextureRect" parent="UI/Inventory/PanelContainer/VBoxContainer/Planks"]
+margin_left = 67.0
+margin_right = 130.0
+margin_bottom = 40.0
+texture = ExtResource( 8 )
+stretch_mode = 6
+
+[node name="Plank3" type="TextureRect" parent="UI/Inventory/PanelContainer/VBoxContainer/Planks"]
+margin_left = 134.0
+margin_right = 197.0
+margin_bottom = 40.0
+texture = ExtResource( 8 )
+stretch_mode = 6
+
+[node name="Padding2" type="Control" parent="UI/Inventory/PanelContainer/VBoxContainer"]
+margin_top = 48.0
+margin_right = 197.0
+margin_bottom = 48.0
+size_flags_vertical = 3
+
+[editable path="Layers/layer0"]
+[editable path="Layers/layer1"]
+[editable path="Layers/layer2"]
+[editable path="Layers/death_layer"]

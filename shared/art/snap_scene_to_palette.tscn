@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://shared/art/snap_to_palette.tres" type="Material" id=1]
+[ext_resource path="res://mainmenu/theme/theme_eggplant.tres" type="Theme" id=2]
+
+[node name="snap_scene_to_palette" type="CanvasLayer"]
+__meta__ = {
+"_editor_description_": "Add this to your scene and its colours will be adjusted to the jam's official mail24 palette.
+Won't work if your colors are too far away from the palette. In that case, try Tools > Create Swap Palettes instead."
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = ExtResource( 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 2 )

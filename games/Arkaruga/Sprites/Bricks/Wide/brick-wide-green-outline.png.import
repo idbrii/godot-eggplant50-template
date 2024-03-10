@@ -1,0 +1,35 @@
+[remap]
+
+importer="texture"
+type="StreamTexture"
+path="res://.import/brick-wide-green-outline.png-dd2e97ae58f042ac68660ff0c892665b.stex"
+metadata={
+"vram_texture": false
+}
+
+[deps]
+
+source_file="res://games/Arkaruga/Sprites/Bricks/Wide/brick-wide-green-outline.png"
+dest_files=[ "res://.import/brick-wide-green-outline.png-dd2e97ae58f042ac68660ff0c892665b.stex" ]
+
+[params]
+
+compress/mode=0
+compress/lossy_quality=0.7
+compress/hdr_mode=0
+compress/bptc_ldr=0
+compress/normal_map=0
+flags/repeat=0
+flags/filter=true
+flags/mipmaps=false
+flags/anisotropic=false
+flags/srgb=2
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/HDR_as_SRGB=false
+process/invert_color=false
+process/normal_map_invert_y=false
+stream=false
+size_limit=0
+detect_3d=true
+svg/scale=1.0

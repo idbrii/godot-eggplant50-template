@@ -1,0 +1,82 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://games/ripe_place/art/monochrome-transparent.png" type="Texture" id=1]
+[ext_resource path="res://games/ripe_place/Fruit_Scene.gd" type="Script" id=2]
+[ext_resource path="res://shared/art/snap_scene_to_palette.tscn" type="PackedScene" id=3]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 20.0
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 1 )
+region = Rect2( 51, 0, 17, 17 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 1 )
+region = Rect2( 34, 0, 17, 17 )
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ SubResource( 3 ), SubResource( 4 ), SubResource( 4 ), SubResource( 4 ) ],
+"loop": false,
+"name": "default",
+"speed": 6.0
+} ]
+
+[node name="Fruit" type="Node2D"]
+script = ExtResource( 2 )
+nutritions_for_ripeness_categories = {
+"overripe": -3,
+"ripe": 4,
+"unripe": 0
+}
+
+[node name="snap_scene_to_palette" parent="." instance=ExtResource( 3 )]
+
+[node name="FruitBody" type="RigidBody2D" parent="."]
+contacts_reported = 10
+contact_monitor = true
+
+[node name="FruitArea" type="Area2D" parent="FruitBody"]
+__meta__ = {
+"_editor_description_": "This is needed to detect collisions with the bat area."
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FruitBody/FruitArea"]
+scale = Vector2( 3, 3 )
+shape = SubResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FruitBody"]
+scale = Vector2( 3, 3 )
+shape = SubResource( 1 )
+
+[node name="GlowPolygon" type="Polygon2D" parent="FruitBody"]
+visible = false
+position = Vector2( -3.10714, 0.964284 )
+scale = Vector2( 1.30357, 1.23214 )
+color = Color( 0.054902, 0.380392, 0.886275, 1 )
+polygon = PoolVector2Array( -16, -16, -11, -28, 9, -30, 26, -24, 26, -15, 27, -6, 30, 9, 26, 16, 13, 23, -4, 25, -14, 26, -22, 22, -23, 12, -26, -2, -21, -9 )
+
+[node name="Sprite" type="Sprite" parent="FruitBody" groups=["fruit"]]
+scale = Vector2( 4, 4 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 578, 306, 16, 16 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="FruitBody"]
+visible = false
+modulate = Color( 0.698039, 0.890196, 0.2, 1 )
+scale = Vector2( 8, 8 )
+frames = SubResource( 2 )
+frame = 2
+centered = false
+offset = Vector2( -7.5, -8 )
+
+[node name="ripenessTimer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[connection signal="area_entered" from="FruitBody/FruitArea" to="." method="_on_FruitArea_area_entered"]
+[connection signal="area_exited" from="FruitBody/FruitArea" to="." method="_on_FruitArea_area_exited"]
+[connection signal="animation_finished" from="FruitBody/AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
+[connection signal="timeout" from="ripenessTimer" to="." method="_on_ripenessTimer_timeout"]

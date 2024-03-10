@@ -7,30 +7,27 @@
 
 [node name="PauseMenu" type="Popup"]
 pause_mode = 2
-margin_right = 167.0
-margin_bottom = 220.0
+visible = true
+margin_left = 21.0
+margin_top = 41.0
+rect_min_size = Vector2( 600, 300 )
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme = ExtResource( 2 )
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -83.5
-margin_top = -110.0
-margin_right = 516.5
-margin_bottom = 126.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 custom_styles/panel = ExtResource( 3 )
 
 [node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
-margin_left = 21.0
+margin_left = 15.0
 margin_top = 15.0
-margin_right = 579.0
+margin_right = 573.0
 margin_bottom = 283.0
 size_flags_horizontal = 4
 size_flags_vertical = 4

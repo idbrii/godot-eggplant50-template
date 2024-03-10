@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://mainmenu/art/button/button_hovered.png" type="Texture" id=1]
+[ext_resource path="res://games/dice_stanza/art/dice/white.png" type="Texture" id=1]
 [ext_resource path="res://games/dice_stanza/art/font_kenpixel_mini_big.tres" type="DynamicFont" id=2]
 [ext_resource path="res://mainmenu/theme/theme_eggplant.tres" type="Theme" id=3]
 [ext_resource path="res://games/dice_stanza/code/dice/diceblock.gd" type="Script" id=4]
@@ -14,7 +14,7 @@ extents = Vector2( 16, 16 )
 animations = [ {
 "frames": [ ExtResource( 1 ) ],
 "loop": true,
-"name": "default",
+"name": "idle",
 "speed": 5.0
 } ]
 
@@ -25,7 +25,7 @@ extents = Vector2( 23.5, 10 )
 collision_layer = 10
 collision_mask = 14
 mode = 3
-gravity_scale = 3.0
+gravity_scale = 10.0
 contacts_reported = 2
 contact_monitor = true
 angular_damp = 100.0
@@ -38,9 +38,11 @@ shape = SubResource( 1 )
 [node name="Shrinker" type="Node2D" parent="."]
 scale = Vector2( 0.5, 0.5 )
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="Shrinker"]
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Shrinker" groups=["dice"]]
+unique_name_in_owner = true
 position = Vector2( 0, -32 )
 frames = SubResource( 2 )
+animation = "idle"
 
 [node name="Area2D" type="Area2D" parent="Shrinker"]
 position = Vector2( 0, -32 )
@@ -58,6 +60,7 @@ target_path = NodePath("../..")
 
 [node name="ValueLabel" type="Label" parent="Shrinker"]
 unique_name_in_owner = true
+modulate = Color( 0.215686, 0.145098, 0.219608, 1 )
 margin_left = -24.0
 margin_top = -59.0
 margin_right = 27.0

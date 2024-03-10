@@ -27,6 +27,8 @@ func _play_fx(anim):
 func _compute_state():
 	# Can transition from any state to these based on these conditions. Order
 	# is very important.
+	if ag.player.block_input:
+		return ag.states.dead
 	if ag.player.is_climbing():
 		return ag.states.climb
 	if ag.player.is_dashing():
@@ -40,6 +42,10 @@ func _update_state_generic(_dt):
 	var dest = _compute_state()
 	if dest and dest != sm.current():
 		return sm.transition_to(dest, {})
+
+
+func _update_state_dead(dt):
+	return _update_state_generic(dt)
 
 
 func _update_state_fall(dt):
@@ -69,7 +75,7 @@ func _update_state_ground_run(dt):
 
 func _update_state_climb(dt):
 	if Vec.is_zero_approx(ag.player.velocity):
-		ag._sprite_animator.pause()
+		ag._sprite_animator.stop()
 	else:
 		ag._sprite_animator.play()
 
@@ -85,6 +91,9 @@ func _update_state_dash(dt):
 
 func _enter_state_climb(_data):
 	_play_anim("ladder")
+
+func _enter_state_dead(_data):
+	_play_anim("dead")
 
 func _enter_state_jump(_data):
 	_play_anim("jump")
