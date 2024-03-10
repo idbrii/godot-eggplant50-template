@@ -24,6 +24,8 @@ var yGravity = -20; # should just be set globally so all objects have same gravi
 var projectedCoordinates : Array
 var rotationSpeed = 5; # must be multiple of rotateUprightSpeed and 
 
+var homerun_distance = 100 # TBD: this shoudl really be stored elsewhere like score board
+
 func change_state(new_state):
 	# store the current state as last state, if it exists
 	if current_state:
@@ -63,6 +65,14 @@ func hit(batter_swing_power):
 	pass
 
 func change_state_grounded():
+	# do scoring
+	if (unprojectedZ <= 4) :
+		get_parent().get_node("Scoreboard").new_strike()
+	elif (unprojectedZ >= (homerun_distance + 4)) :
+		get_parent().get_node("Scoreboard").new_run()
+	else :
+		get_parent().get_node("Scoreboard").new_out()
+	# change to grounded
 	last_state = current_state
 	change_state(State.GROUNDED)
 	unprojectedY = ground  # set y to ground

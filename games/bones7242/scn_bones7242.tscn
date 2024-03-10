@@ -9,7 +9,7 @@
 [ext_resource path="res://games/bones7242/sprites/shadow.png" type="Texture" id=7]
 [ext_resource path="res://games/bones7242/sprites/background.png" type="Texture" id=8]
 [ext_resource path="res://games/bones7242/scripts/RichTextLabel.gd" type="Script" id=9]
-[ext_resource path="res://games/bones7242/scripts/RichTextLabel2.gd" type="Script" id=10]
+[ext_resource path="res://games/bones7242/scripts/scoreboard.gd" type="Script" id=10]
 [ext_resource path="res://games/bones7242/sounds/pickupCoin (3).wav" type="AudioStream" id=11]
 
 [sub_resource type="CircleShape2D" id=1]
@@ -21,17 +21,17 @@ flags = 4
 script = ExtResource( 4 )
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
-margin_left = 417.0
-margin_top = 293.0
-margin_right = 605.0
-margin_bottom = 338.0
+margin_left = 414.0
+margin_top = 269.0
+margin_right = 602.0
+margin_bottom = 314.0
 script = ExtResource( 9 )
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="."]
-margin_left = 410.0
-margin_top = 240.0
-margin_right = 598.0
-margin_bottom = 285.0
+[node name="Scoreboard" type="RichTextLabel" parent="."]
+margin_left = 415.0
+margin_top = 33.0
+margin_right = 603.0
+margin_bottom = 78.0
 script = ExtResource( 10 )
 
 [node name="baseball_area2d" type="Area2D" parent="."]
