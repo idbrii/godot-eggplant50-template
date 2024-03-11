@@ -20,10 +20,10 @@
 
 [sub_resource type="CircleShape2D" id=3]
 
+[sub_resource type="RectangleShape2D" id=4]
+
 [sub_resource type="StreamTexture" id=2]
 flags = 4
-
-[sub_resource type="RectangleShape2D" id=4]
 
 [node name="HRDerby" type="Node"]
 script = ExtResource( 4 )
@@ -61,6 +61,12 @@ shape = SubResource( 3 )
 z_index = -2
 texture = ExtResource( 7 )
 
+[node name="bat_area2d" type="Area2D" parent="."]
+script = ExtResource( 6 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bat_area2d"]
+shape = SubResource( 4 )
+
 [node name="batter_area2d" type="Node2D" parent="."]
 position = Vector2( 135, 194 )
 script = ExtResource( 3 )
@@ -93,11 +99,5 @@ texture = ExtResource( 13 )
 centered = false
 offset = Vector2( 0, -32 )
 script = ExtResource( 14 )
-
-[node name="bat_area2d" type="Area2D" parent="."]
-script = ExtResource( 6 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="bat_area2d"]
-shape = SubResource( 4 )
 
 [connection signal="area_entered" from="baseball_area2d" to="baseball_area2d/spr_baseball" method="_on_baseball_area2d_area_entered"]

@@ -38,11 +38,18 @@ func change_state(new_state):
 func check_for_hit():
 	#get position of ball
 	var baseball_object = $"../baseball_area2d"
+	var bat_object = $"../bat_area2d"
 	#see if ball within radius of hitting sphere
-	var distance_to_ball_center = position.distance_to(baseball_object.position)
-	print('distance to ball = ' + str(distance_to_ball_center))
-	return true
-	#return distance_to_ball_center < 100
+	#var distance_to_ball_center = bat_object.position.distance_to(baseball_object.position)
+	var x_diff = baseball_object.position.x - bat_object.position.x
+	var y_diff = baseball_object.position.y - bat_object.position.y
+	print('x distance to ball = ' + str(x_diff))
+	print('y distance to ball = ' + str(y_diff))
+	#return true
+	var y_inside = (y_diff <= 30 && y_diff >=0)
+	var x_inside = (x_diff <= 50 && x_diff >=0)
+	return (y_inside && x_inside)
+	
 
 func _ready():
 	change_state(initial_state)

@@ -10,6 +10,7 @@ var start_y = 140
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	position = Vector2(start_x,start_y)
+	visible = false
 	pass # Replace with function body.
 
 

@@ -62,9 +62,9 @@ func change_state_released(batter_throw_power):
 func hit(batter_swing_power):
 	if (State.RELEASED) :
 		get_parent().get_node("AudioStreamPlayer2").play()
-		yVelocity += batter_swing_power * 10 # multiplying b/c comes in 1-100 but now we will use delta
-		zVelocity = batter_swing_power  # make it a percent of max 20
-		xVelocity += 10
+		yVelocity = batter_swing_power * 30 # multiplying b/c comes in 1-100 but now we will use delta
+		zVelocity = batter_swing_power # make it a percent of max 20
+		xVelocity = 10
 	pass
 
 func change_state_grounded():
