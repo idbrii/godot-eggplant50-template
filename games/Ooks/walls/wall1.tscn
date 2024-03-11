@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://games/Ooks/blocks/block_v1.png" type="Texture" id=1]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 10, 180 )
+
+[node name="wall1" type="StaticBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( -1.19209e-07, 0 )
+scale = Vector2( 1.111, 20 )
+texture = ExtResource( 1 )

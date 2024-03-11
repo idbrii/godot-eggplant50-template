@@ -1,0 +1,23 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/tetris_fall.wav-5e77fd328c6def938b568e4b10b0b970.sample"
+
+[deps]
+
+source_file="res://games/Ooks/sound/tetris_fall.wav"
+dest_files=[ "res://.import/tetris_fall.wav-5e77fd328c6def938b568e4b10b0b970.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

@@ -1,0 +1,279 @@
+[gd_scene load_steps=34 format=2]
+
+[ext_resource path="res://games/Ooks4/letters/c.tscn" type="PackedScene" id=1]
+[ext_resource path="res://games/Ooks4/letters/b.tscn" type="PackedScene" id=2]
+[ext_resource path="res://games/Ooks4/letters/d.tscn" type="PackedScene" id=3]
+[ext_resource path="res://games/Ooks4/letters/e.tscn" type="PackedScene" id=4]
+[ext_resource path="res://games/Ooks4/letters/a.tscn" type="PackedScene" id=5]
+[ext_resource path="res://games/Ooks4/spellballs.gd" type="Script" id=6]
+[ext_resource path="res://games/Ooks4/letters/k.tscn" type="PackedScene" id=7]
+[ext_resource path="res://games/Ooks4/letters/n.tscn" type="PackedScene" id=8]
+[ext_resource path="res://games/Ooks4/letters/o.tscn" type="PackedScene" id=9]
+[ext_resource path="res://games/Ooks4/letters/p.tscn" type="PackedScene" id=10]
+[ext_resource path="res://games/Ooks4/letters/r.tscn" type="PackedScene" id=11]
+[ext_resource path="res://games/Ooks4/letters/s.tscn" type="PackedScene" id=12]
+[ext_resource path="res://games/Ooks4/letters/u.tscn" type="PackedScene" id=13]
+[ext_resource path="res://games/Ooks4/letters/v.tscn" type="PackedScene" id=14]
+[ext_resource path="res://games/Ooks4/letters/w.tscn" type="PackedScene" id=15]
+[ext_resource path="res://games/Ooks4/letters/y.tscn" type="PackedScene" id=16]
+[ext_resource path="res://games/Ooks4/letters/i.tscn" type="PackedScene" id=17]
+[ext_resource path="res://games/Ooks4/letters/f.tscn" type="PackedScene" id=18]
+[ext_resource path="res://games/Ooks4/letters/g.tscn" type="PackedScene" id=19]
+[ext_resource path="res://games/Ooks4/letters/h.tscn" type="PackedScene" id=20]
+[ext_resource path="res://games/Ooks4/letters/j.tscn" type="PackedScene" id=21]
+[ext_resource path="res://games/Ooks4/letters/q.tscn" type="PackedScene" id=22]
+[ext_resource path="res://games/Ooks4/letters/m.tscn" type="PackedScene" id=23]
+[ext_resource path="res://games/Ooks4/letters/t.tscn" type="PackedScene" id=24]
+[ext_resource path="res://games/Ooks4/letters/x.tscn" type="PackedScene" id=25]
+[ext_resource path="res://games/Ooks4/letters/l.tscn" type="PackedScene" id=26]
+[ext_resource path="res://games/Ooks4/letters/z.tscn" type="PackedScene" id=27]
+[ext_resource path="res://shared/menu_pause/PauseMenu.tscn" type="PackedScene" id=28]
+[ext_resource path="res://eggplant-jam.png" type="Texture" id=29]
+[ext_resource path="res://games/Ooks4/ColorRect.tscn" type="PackedScene" id=30]
+[ext_resource path="res://mainmenu/art/font/font_kenpixel_blocks.tres" type="DynamicFont" id=31]
+[ext_resource path="res://games/Ooks4/Selector.tscn" type="PackedScene" id=32]
+[ext_resource path="res://mainmenu/art/font/font_kenpixel_mini.tres" type="DynamicFont" id=33]
+
+[node name="spellballs" type="Node2D"]
+script = ExtResource( 6 )
+
+[node name="spawnPoint" type="Node2D" parent="."]
+visible = false
+position = Vector2( 287, 37 )
+
+[node name="Eggplant-jam" type="Sprite" parent="spawnPoint"]
+texture = ExtResource( 29 )
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="GameMenu" parent="UI" instance=ExtResource( 28 )]
+margin_left = 31.0
+margin_top = 33.0
+margin_right = 198.0
+margin_bottom = 253.0
+help_title = "help"
+help_body = "2 of the 3 columns were randomly generated using the same rules. Select the odd one out.
+Earn points for correct answers, lose points for incorrect answers.
+Sometimes the random generation isn't really fair. Sorry! You can regenerate the columns for free."
+
+[node name="letters" type="Node2D" parent="."]
+
+[node name="a" parent="letters" instance=ExtResource( 5 )]
+visible = false
+position = Vector2( 215, 149 )
+
+[node name="b" parent="letters" instance=ExtResource( 2 )]
+visible = false
+position = Vector2( 254, 193 )
+
+[node name="c" parent="letters" instance=ExtResource( 1 )]
+visible = false
+position = Vector2( 288, 241 )
+
+[node name="d" parent="letters" instance=ExtResource( 3 )]
+visible = false
+position = Vector2( 361, 251 )
+
+[node name="e" parent="letters" instance=ExtResource( 4 )]
+visible = false
+position = Vector2( 322, 319 )
+
+[node name="f" parent="letters" instance=ExtResource( 18 )]
+visible = false
+position = Vector2( 167, 183 )
+
+[node name="g" parent="letters" instance=ExtResource( 19 )]
+visible = false
+position = Vector2( 276, 299 )
+
+[node name="h" parent="letters" instance=ExtResource( 20 )]
+visible = false
+position = Vector2( 266, 138 )
+
+[node name="i" parent="letters" instance=ExtResource( 17 )]
+visible = false
+position = Vector2( 215, 219 )
+
+[node name="j" parent="letters" instance=ExtResource( 21 )]
+visible = false
+position = Vector2( 177, 243 )
+
+[node name="k" parent="letters" instance=ExtResource( 7 )]
+visible = false
+position = Vector2( 312, 180 )
+
+[node name="l" parent="letters" instance=ExtResource( 26 )]
+visible = false
+position = Vector2( 251, 247 )
+
+[node name="m" parent="letters" instance=ExtResource( 23 )]
+visible = false
+position = Vector2( 215, 296 )
+
+[node name="n" parent="letters" instance=ExtResource( 8 )]
+visible = false
+position = Vector2( 379, 188 )
+
+[node name="o" parent="letters" instance=ExtResource( 9 )]
+visible = false
+position = Vector2( 149, 119 )
+
+[node name="p" parent="letters" instance=ExtResource( 10 )]
+visible = false
+position = Vector2( 125, 174 )
+
+[node name="q" parent="letters" instance=ExtResource( 22 )]
+visible = false
+position = Vector2( 131, 236 )
+
+[node name="r" parent="letters" instance=ExtResource( 11 )]
+visible = false
+position = Vector2( 352, 125 )
+
+[node name="s" parent="letters" instance=ExtResource( 12 )]
+visible = false
+position = Vector2( 153, 303 )
+
+[node name="t" parent="letters" instance=ExtResource( 24 )]
+visible = false
+position = Vector2( 370, 310 )
+
+[node name="u" parent="letters" instance=ExtResource( 13 )]
+visible = false
+position = Vector2( 417, 247 )
+
+[node name="v" parent="letters" instance=ExtResource( 14 )]
+visible = false
+position = Vector2( 426, 153 )
+
+[node name="w" parent="letters" instance=ExtResource( 15 )]
+visible = false
+position = Vector2( 436, 312 )
+
+[node name="x" parent="letters" instance=ExtResource( 25 )]
+visible = false
+position = Vector2( 95, 296 )
+
+[node name="y" parent="letters" instance=ExtResource( 16 )]
+visible = false
+position = Vector2( 73, 229 )
+
+[node name="z" parent="letters" instance=ExtResource( 27 )]
+visible = false
+position = Vector2( 472, 198 )
+
+[node name="background" type="Node2D" parent="."]
+
+[node name="BackgroundColor" parent="background" instance=ExtResource( 30 )]
+margin_right = 641.0
+margin_bottom = 361.0
+color = Color( 0.215686, 0.145098, 0.219608, 1 )
+
+[node name="titleLabel" type="RichTextLabel" parent="."]
+margin_left = 190.0
+margin_top = -5.0
+margin_right = 453.0
+margin_bottom = 49.0
+custom_fonts/normal_font = ExtResource( 31 )
+text = "Odd one out?"
+
+[node name="successNode" type="Node2D" parent="."]
+
+[node name="successLabel" type="RichTextLabel" parent="successNode"]
+visible = false
+margin_left = 238.0
+margin_top = 3.0
+margin_right = 453.0
+margin_bottom = 57.0
+custom_fonts/normal_font = ExtResource( 31 )
+text = "Correct"
+
+[node name="failLabel" type="RichTextLabel" parent="successNode"]
+visible = false
+margin_left = 257.0
+margin_top = 3.0
+margin_right = 453.0
+margin_bottom = 57.0
+custom_colors/default_color = Color( 0.882353, 0.254902, 0.254902, 1 )
+custom_fonts/normal_font = ExtResource( 31 )
+text = "Wrong"
+
+[node name="label1" type="RichTextLabel" parent="."]
+margin_left = 141.0
+margin_top = 289.0
+margin_right = 166.0
+margin_bottom = 343.0
+custom_fonts/normal_font = ExtResource( 31 )
+text = "1"
+
+[node name="label2" type="RichTextLabel" parent="."]
+margin_left = 325.0
+margin_top = 289.0
+margin_right = 350.0
+margin_bottom = 343.0
+custom_fonts/normal_font = ExtResource( 31 )
+text = "2"
+
+[node name="label3" type="RichTextLabel" parent="."]
+margin_left = 484.0
+margin_top = 288.0
+margin_right = 509.0
+margin_bottom = 342.0
+custom_fonts/normal_font = ExtResource( 31 )
+text = "3"
+
+[node name="labelRegen" type="RichTextLabel" parent="."]
+margin_left = 273.0
+margin_top = 338.0
+margin_right = 547.0
+margin_bottom = 392.0
+custom_fonts/normal_font = ExtResource( 33 )
+text = "  Regenerate?"
+
+[node name="highlighted" type="Node2D" parent="labelRegen"]
+visible = false
+position = Vector2( 9, 0 )
+
+[node name="ColorRect" type="ColorRect" parent="labelRegen/highlighted"]
+margin_left = -6.0
+margin_right = 112.0
+margin_bottom = 3.0
+
+[node name="ColorRect2" type="ColorRect" parent="labelRegen/highlighted"]
+margin_left = -6.0
+margin_top = 19.0
+margin_right = 112.0
+margin_bottom = 22.0
+
+[node name="ColorRect3" type="ColorRect" parent="labelRegen/highlighted"]
+margin_left = 109.0
+margin_top = 1.0
+margin_right = 112.0
+margin_bottom = 21.0
+
+[node name="ColorRect4" type="ColorRect" parent="labelRegen/highlighted"]
+margin_left = -8.0
+margin_right = -5.0
+margin_bottom = 22.0
+
+[node name="count" type="RichTextLabel" parent="."]
+margin_left = 3.0
+margin_top = -8.0
+margin_right = 188.0
+margin_bottom = 46.0
+custom_fonts/normal_font = ExtResource( 31 )
+text = "0"
+scroll_active = false
+
+[node name="bonus" type="RichTextLabel" parent="."]
+visible = false
+margin_left = 520.0
+margin_top = -8.0
+margin_right = 705.0
+margin_bottom = 46.0
+custom_fonts/normal_font = ExtResource( 31 )
+text = "bonus"
+scroll_active = false
+
+[node name="Selector" parent="." instance=ExtResource( 32 )]
+position = Vector2( 141, 289 )

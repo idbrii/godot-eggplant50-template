@@ -1,0 +1,248 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://games/Ooks2/twoBody.tscn" type="PackedScene" id=1]
+[ext_resource path="res://shared/menu_pause/PauseMenu.tscn" type="PackedScene" id=2]
+[ext_resource path="res://games/Ooks2/edge.tscn" type="PackedScene" id=3]
+[ext_resource path="res://games/Ooks/walls/wall1.tscn" type="PackedScene" id=4]
+[ext_resource path="res://games/Ooks2/main.gd" type="Script" id=5]
+[ext_resource path="res://games/Ooks2/eggplant-jam.png" type="Texture" id=6]
+[ext_resource path="res://games/Ooks/sound/tetris_discover.wav" type="AudioStream" id=7]
+[ext_resource path="res://games/Ooks/sound/tetris_win.wav" type="AudioStream" id=8]
+[ext_resource path="res://games/Ooks/sound/tetris_rotate.wav" type="AudioStream" id=9]
+[ext_resource path="res://games/Ooks/sound/tetris_fall2.wav" type="AudioStream" id=10]
+[ext_resource path="res://games/Ooks/fontOoks/font_kenpixel_blocks.tres" type="DynamicFont" id=11]
+
+[sub_resource type="CapsuleShape2D" id=3]
+radius = 7.0
+height = 6.0
+
+[sub_resource type="DynamicFontData" id=1]
+font_path = "res://mainmenu/art/font/kenpixel/high.ttf"
+
+[sub_resource type="DynamicFont" id=4]
+size = 26
+font_data = SubResource( 1 )
+
+[node name="main" type="Node2D"]
+script = ExtResource( 5 )
+
+[node name="Background" type="ColorRect" parent="."]
+margin_left = -438.0
+margin_top = -27.0
+margin_right = 1146.0
+margin_bottom = 398.0
+color = Color( 0.219608, 0.596078, 1, 1 )
+
+[node name="wall4" parent="." instance=ExtResource( 4 )]
+position = Vector2( 496, 351 )
+rotation = 1.5708
+
+[node name="wall5" parent="." instance=ExtResource( 4 )]
+position = Vector2( 496, 380 )
+rotation = 1.5708
+
+[node name="wall7" parent="." instance=ExtResource( 4 )]
+position = Vector2( 496, 405 )
+rotation = 1.5708
+
+[node name="wall6" parent="." instance=ExtResource( 4 )]
+position = Vector2( 140, 351 )
+rotation = 1.5708
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 318, 183 )
+current = true
+
+[node name="winAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
+volume_db = -28.841
+
+[node name="discoverAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+volume_db = -14.858
+
+[node name="rotateAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 9 )
+volume_db = -10.859
+
+[node name="fallAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 10 )
+volume_db = -14.078
+
+[node name="cloud1" type="ColorRect" parent="."]
+margin_left = 13.0
+margin_top = 40.0
+margin_right = 33.0
+margin_bottom = 60.0
+
+[node name="ColorRect2" type="ColorRect" parent="cloud1"]
+margin_left = 20.0
+margin_right = 40.0
+margin_bottom = 20.0
+
+[node name="ColorRect4" type="ColorRect" parent="cloud1"]
+margin_left = 20.0
+margin_top = -20.0
+margin_right = 40.0
+
+[node name="ColorRect5" type="ColorRect" parent="cloud1"]
+margin_left = 60.0
+margin_top = -20.0
+margin_right = 80.0
+
+[node name="ColorRect3" type="ColorRect" parent="cloud1"]
+margin_left = 40.0
+margin_right = 60.0
+margin_bottom = 20.0
+
+[node name="ColorRect6" type="ColorRect" parent="cloud1"]
+margin_left = 60.0
+margin_right = 80.0
+margin_bottom = 20.0
+
+[node name="ColorRect7" type="ColorRect" parent="cloud1"]
+margin_left = 80.0
+margin_right = 100.0
+margin_bottom = 20.0
+
+[node name="cloud2" type="ColorRect" parent="."]
+margin_left = 599.0
+margin_top = 20.0
+margin_right = 619.0
+margin_bottom = 40.0
+
+[node name="ColorRect19" type="ColorRect" parent="cloud2"]
+margin_left = 80.0
+margin_right = 100.0
+margin_bottom = 20.0
+
+[node name="ColorRect9" type="ColorRect" parent="cloud2"]
+margin_left = 20.0
+margin_right = 40.0
+margin_bottom = 20.0
+
+[node name="ColorRect10" type="ColorRect" parent="cloud2"]
+margin_left = 20.0
+margin_top = -20.0
+margin_right = 40.0
+
+[node name="ColorRect16" type="ColorRect" parent="cloud2"]
+margin_left = 40.0
+margin_right = 60.0
+margin_bottom = 20.0
+
+[node name="ColorRect17" type="ColorRect" parent="cloud2"]
+margin_left = 60.0
+margin_right = 80.0
+margin_bottom = 20.0
+
+[node name="ColorRect18" type="ColorRect" parent="cloud2"]
+margin_left = 60.0
+margin_top = -20.0
+margin_right = 80.0
+
+[node name="cloud3" type="ColorRect" parent="."]
+margin_left = 485.0
+margin_right = 505.0
+margin_bottom = 20.0
+
+[node name="ColorRect14" type="ColorRect" parent="cloud3"]
+margin_left = -20.0
+margin_bottom = 20.0
+
+[node name="ColorRect15" type="ColorRect" parent="cloud3"]
+margin_left = -40.0
+margin_right = -20.0
+margin_bottom = 20.0
+
+[node name="cloud4" type="ColorRect" parent="."]
+margin_left = 219.0
+margin_right = 239.0
+margin_bottom = 20.0
+
+[node name="ColorRect13" type="ColorRect" parent="cloud4"]
+margin_left = 20.0
+margin_right = 40.0
+margin_bottom = 20.0
+
+[node name="ColorGrnd" type="ColorRect" parent="."]
+margin_left = -6.0
+margin_top = 340.0
+margin_right = 642.0
+margin_bottom = 408.0
+color = Color( 0.223529, 0.521569, 0.352941, 1 )
+
+[node name="Eggplantjam" type="Sprite" parent="."]
+position = Vector2( 337, 75 )
+texture = ExtResource( 6 )
+
+[node name="Area2D" type="Area2D" parent="Eggplantjam"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Eggplantjam/Area2D"]
+shape = SubResource( 3 )
+
+[node name="ColorRock2" type="ColorRect" parent="."]
+margin_left = 18.0
+margin_top = 313.0
+margin_right = 56.0
+margin_bottom = 340.0
+color = Color( 0.243137, 0.215686, 0.360784, 1 )
+
+[node name="ColorRock3" type="ColorRect" parent="."]
+margin_left = 596.0
+margin_top = 306.0
+margin_right = 653.0
+margin_bottom = 340.0
+color = Color( 0.243137, 0.215686, 0.360784, 1 )
+
+[node name="ColorRock" type="ColorRect" parent="."]
+margin_left = 115.0
+margin_top = 85.0
+margin_right = 544.0
+margin_bottom = 340.0
+color = Color( 0.698039, 0.737255, 0.760784, 1 )
+
+[node name="edge2" parent="." instance=ExtResource( 3 )]
+position = Vector2( 327, 89 )
+scale = Vector2( 5, 1 )
+
+[node name="TwoBody" parent="." instance=ExtResource( 1 )]
+position = Vector2( 319, 330 )
+rotation = -1.5708
+
+[node name="SeedLabel" type="RichTextLabel" parent="."]
+visible = false
+margin_left = 2.0
+margin_top = 315.0
+margin_right = 289.0
+margin_bottom = 365.0
+custom_fonts/normal_font = SubResource( 4 )
+text = "Seed: "
+
+[node name="Node2DMenu" type="Node2D" parent="."]
+position = Vector2( 236, 78 )
+
+[node name="GameMenu" parent="Node2DMenu" instance=ExtResource( 2 )]
+margin_left = -202.0
+margin_top = -50.0
+margin_right = -35.0
+margin_bottom = 170.0
+help_title = "Help"
+help_body = "This is a weird simulation of slippery rock climbing.
+You can move the open hand, while the closed hand will fall and slide on holds.
+Try to find the best route up the boulder using the geometry of the holds.
+Grab the jam to win.
+Restart to find a different boulder.
+"
+
+[node name="Node2DYouWin" type="Node2D" parent="."]
+position = Vector2( 236, 78 )
+
+[node name="YouWinLabelMid" type="RichTextLabel" parent="Node2DYouWin"]
+visible = false
+margin_right = 252.0
+margin_bottom = 64.0
+custom_fonts/normal_font = ExtResource( 11 )
+text = "You Won!"
+
+[connection signal="body_entered" from="Eggplantjam/Area2D" to="." method="_on_Area2D_body_entered"]

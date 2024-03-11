@@ -1,0 +1,27 @@
+[gd_scene format=2]
+
+[node name="Selector" type="Node2D"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_left = -10.0
+margin_top = 4.0
+margin_right = 30.0
+margin_bottom = 10.0
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+margin_left = -10.0
+margin_top = 42.0
+margin_right = 30.0
+margin_bottom = 48.0
+
+[node name="ColorRect3" type="ColorRect" parent="."]
+margin_left = -10.0
+margin_top = 4.0
+margin_right = -5.0
+margin_bottom = 48.0
+
+[node name="ColorRect4" type="ColorRect" parent="."]
+margin_left = 25.0
+margin_top = 4.0
+margin_right = 30.0
+margin_bottom = 48.0

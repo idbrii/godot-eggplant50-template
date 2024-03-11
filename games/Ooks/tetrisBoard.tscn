@@ -1,0 +1,305 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://games/Ooks/tetrisBoard.gd" type="Script" id=1]
+[ext_resource path="res://shared/menu_pause/PauseMenu.tscn" type="PackedScene" id=2]
+[ext_resource path="res://games/Ooks/Player/Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://games/Ooks/walls/wall1.tscn" type="PackedScene" id=4]
+[ext_resource path="res://games/Ooks/fontOoks/font_kenpixel_high.tres" type="DynamicFont" id=5]
+[ext_resource path="res://games/Ooks/fontOoks/font_kenpixel_blocks.tres" type="DynamicFont" id=6]
+[ext_resource path="res://games/Ooks/sound/tetris_discover.wav" type="AudioStream" id=7]
+[ext_resource path="res://games/Ooks/sound/tetris_win.wav" type="AudioStream" id=8]
+[ext_resource path="res://games/Ooks/sound/tetris_rotate.wav" type="AudioStream" id=9]
+[ext_resource path="res://games/Ooks/sound/tetris_fall2.wav" type="AudioStream" id=10]
+
+[sub_resource type="DynamicFontData" id=1]
+font_path = "res://mainmenu/art/font/kenpixel/high.ttf"
+
+[sub_resource type="DynamicFont" id=2]
+size = 64
+font_data = SubResource( 1 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 492.5, 38 )
+
+[node name="tetris" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="Background" type="ColorRect" parent="."]
+margin_left = -438.0
+margin_top = -27.0
+margin_right = 1146.0
+margin_bottom = 398.0
+color = Color( 0.219608, 0.596078, 1, 1 )
+
+[node name="Player" parent="." instance=ExtResource( 3 )]
+position = Vector2( 308, 310 )
+
+[node name="wall1" parent="." instance=ExtResource( 4 )]
+position = Vector2( 153, 135 )
+
+[node name="wall2" parent="." instance=ExtResource( 4 )]
+position = Vector2( 468, 135 )
+
+[node name="wall4" parent="." instance=ExtResource( 4 )]
+position = Vector2( -162, 160 )
+
+[node name="wall6" parent="." instance=ExtResource( 4 )]
+position = Vector2( 8, 350 )
+rotation = 1.5708
+
+[node name="spawnLocationMid" type="Node2D" parent="."]
+position = Vector2( 312, -74 )
+
+[node name="spawnLocationLeft" type="Node2D" parent="."]
+position = Vector2( -5, -74 )
+
+[node name="spawnLocationRight" type="Node2D" parent="."]
+position = Vector2( 625, -74 )
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="GameMenu" parent="UI" instance=ExtResource( 2 )]
+margin_left = 43.0
+margin_top = 29.0
+margin_right = 210.0
+margin_bottom = 249.0
+help_title = "Help"
+help_body = "Escape the Tetris board by avoiding and jumping onto tetrominoes.
+Some tetrominoes react to your actions or position.
+Down arrow = make tetrominoes fall faster.
+Go to the left or right board for a different experience.
+"
+
+[node name="RandomLabel" type="RichTextLabel" parent="."]
+visible = false
+margin_left = 274.0
+margin_top = 43.0
+margin_right = 362.0
+margin_bottom = 86.0
+custom_fonts/normal_font = ExtResource( 5 )
+text = "Random"
+
+[node name="wall7" parent="." instance=ExtResource( 4 )]
+position = Vector2( 783, 160 )
+
+[node name="wall8" parent="." instance=ExtResource( 4 )]
+position = Vector2( 613, 350 )
+rotation = 1.5708
+
+[node name="wall3" parent="." instance=ExtResource( 4 )]
+position = Vector2( 310, 350 )
+rotation = 1.5708
+
+[node name="ChallengeLabel" type="RichTextLabel" parent="."]
+margin_left = 577.0
+margin_top = 38.0
+margin_right = 690.0
+margin_bottom = 81.0
+custom_fonts/normal_font = ExtResource( 5 )
+text = "Challenge"
+
+[node name="ProfileLabel" type="RichTextLabel" parent="."]
+margin_left = -43.0
+margin_top = 39.0
+margin_right = 36.0
+margin_bottom = 82.0
+custom_fonts/normal_font = ExtResource( 5 )
+text = "Profile"
+
+[node name="EscapeLabel" type="RichTextLabel" parent="."]
+margin_left = 234.0
+margin_top = 29.0
+margin_right = 401.0
+margin_bottom = 86.0
+custom_fonts/normal_font = SubResource( 2 )
+text = "Escape!"
+
+[node name="YouWinLabelMid" type="RichTextLabel" parent="."]
+visible = false
+margin_left = 208.0
+margin_top = -10.0
+margin_right = 460.0
+margin_bottom = 54.0
+custom_fonts/normal_font = ExtResource( 6 )
+text = "You Won!"
+
+[node name="YouWinLabelLeft" type="RichTextLabel" parent="."]
+visible = false
+margin_left = -106.0
+margin_top = -10.0
+margin_right = 128.0
+margin_bottom = 59.0
+custom_fonts/normal_font = ExtResource( 6 )
+text = "You Won!"
+
+[node name="YouWinLabelRight" type="RichTextLabel" parent="."]
+visible = false
+margin_left = 515.0
+margin_top = -10.0
+margin_right = 762.0
+margin_bottom = 57.0
+custom_fonts/normal_font = ExtResource( 6 )
+text = "You Won!"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 310, 179 )
+current = true
+
+[node name="GoalArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GoalArea"]
+position = Vector2( 312, -46 )
+shape = SubResource( 3 )
+
+[node name="Blackout1" type="ColorRect" parent="."]
+margin_left = -418.0
+margin_top = -6.0
+margin_right = 143.0
+margin_bottom = 340.0
+color = Color( 0.0901961, 0.0666667, 0.101961, 1 )
+
+[node name="Blackout3" type="ColorRect" parent="Blackout1"]
+margin_left = 561.0
+margin_top = 321.0
+margin_right = 581.0
+margin_bottom = 346.0
+color = Color( 0.0901961, 0.0666667, 0.101961, 1 )
+
+[node name="Blackout2" type="ColorRect" parent="."]
+margin_left = 478.0
+margin_top = -6.0
+margin_right = 1084.0
+margin_bottom = 340.0
+color = Color( 0.0901961, 0.0666667, 0.101961, 1 )
+
+[node name="Blackout4" type="ColorRect" parent="Blackout2"]
+margin_left = -20.0
+margin_top = 321.0
+margin_bottom = 346.0
+color = Color( 0.0901961, 0.0666667, 0.101961, 1 )
+
+[node name="winAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
+volume_db = -28.841
+
+[node name="discoverAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+volume_db = -14.858
+
+[node name="rotateAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 9 )
+volume_db = -10.859
+
+[node name="fallAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 10 )
+volume_db = -14.078
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_left = 250.0
+margin_top = 155.0
+margin_right = 270.0
+margin_bottom = 175.0
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+margin_left = 270.0
+margin_top = 175.0
+margin_right = 290.0
+margin_bottom = 195.0
+
+[node name="ColorRect3" type="ColorRect" parent="."]
+margin_left = 290.0
+margin_top = 195.0
+margin_right = 310.0
+margin_bottom = 215.0
+
+[node name="ColorRect4" type="ColorRect" parent="."]
+margin_left = 339.0
+margin_top = 115.0
+margin_right = 359.0
+margin_bottom = 135.0
+
+[node name="ColorRect5" type="ColorRect" parent="."]
+margin_left = 359.0
+margin_top = 135.0
+margin_right = 379.0
+margin_bottom = 155.0
+
+[node name="ColorRect6" type="ColorRect" parent="."]
+margin_left = 379.0
+margin_top = 155.0
+margin_right = 399.0
+margin_bottom = 175.0
+
+[node name="ColorRect7" type="ColorRect" parent="."]
+margin_left = -306.0
+margin_top = 213.0
+margin_right = -286.0
+margin_bottom = 233.0
+
+[node name="ColorRect8" type="ColorRect" parent="."]
+margin_left = -286.0
+margin_top = 233.0
+margin_right = -266.0
+margin_bottom = 253.0
+
+[node name="ColorRect9" type="ColorRect" parent="."]
+margin_left = -266.0
+margin_top = 253.0
+margin_right = -246.0
+margin_bottom = 273.0
+
+[node name="ColorRect10" type="ColorRect" parent="."]
+margin_left = -267.0
+margin_top = 52.0
+margin_right = -247.0
+margin_bottom = 72.0
+
+[node name="ColorRect11" type="ColorRect" parent="."]
+margin_left = -247.0
+margin_top = 72.0
+margin_right = -227.0
+margin_bottom = 92.0
+
+[node name="ColorRect12" type="ColorRect" parent="."]
+margin_left = -227.0
+margin_top = 92.0
+margin_right = -207.0
+margin_bottom = 112.0
+
+[node name="ColorRect13" type="ColorRect" parent="."]
+margin_left = 816.0
+margin_top = 266.0
+margin_right = 836.0
+margin_bottom = 286.0
+
+[node name="ColorRect14" type="ColorRect" parent="."]
+margin_left = 836.0
+margin_top = 286.0
+margin_right = 856.0
+margin_bottom = 306.0
+
+[node name="ColorRect15" type="ColorRect" parent="."]
+margin_left = 856.0
+margin_top = 306.0
+margin_right = 876.0
+margin_bottom = 326.0
+
+[node name="ColorRect16" type="ColorRect" parent="."]
+margin_left = 855.0
+margin_top = 105.0
+margin_right = 875.0
+margin_bottom = 125.0
+
+[node name="ColorRect17" type="ColorRect" parent="."]
+margin_left = 875.0
+margin_top = 125.0
+margin_right = 895.0
+margin_bottom = 145.0
+
+[node name="ColorRect18" type="ColorRect" parent="."]
+margin_left = 895.0
+margin_top = 145.0
+margin_right = 915.0
+margin_bottom = 165.0
+
+[connection signal="body_entered" from="GoalArea" to="." method="_on_GoalArea_body_entered"]

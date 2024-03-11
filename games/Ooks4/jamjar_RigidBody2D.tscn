@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://games/Ooks4/eggplant-jam4.png" type="Texture" id=1]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 2.0
+height = 2.0
+
+[node name="jamjar_RigidBody2D" type="RigidBody2D"]
+position = Vector2( 232, 58 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 1 )
