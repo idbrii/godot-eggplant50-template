@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource( 1 )
 initial_scene = ExtResource( 2 )
-game_name = "baseball"
+game_name = "Home Run Derby"
 game_author = "bones7242"
 input_primary_action = "ACTION"
 input_secondary_action = "n/a"
