@@ -78,6 +78,7 @@ func _process(delta):
 				change_state(State.WINDUP)
 				swing_power = min_swing_power
 				get_node("Sprite").set_texture(spr_batter_windup)
+				get_parent().get_node("bat_area2d").visible = true
 		State.WINDUP:
 			# build up power
 			if swing_power < max_swing_power:
@@ -107,6 +108,7 @@ func _process(delta):
 					change_state(State.IDLE)
 					get_parent().get_node("baseball_area2d").change_state_held() # change state
 					get_node("Sprite").set_texture(spr_batter_idle)
+					get_parent().get_node("bat_area2d").visible = false
 		_:
 			print("I am not a bat state I know of!")
 		
