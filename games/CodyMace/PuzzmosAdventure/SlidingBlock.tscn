@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://games/CodyMace/Assets/block-green.png" type="Texture" id=1]
+[ext_resource path="res://games/CodyMace/SlidingBlock.cs" type="Script" id=2]
+
+[sub_resource type="PhysicsMaterial" id=12]
+
+[node name="SlidingBlock2" type="RigidBody2D"]
+position = Vector2( -195, 0 )
+mass = 3.0
+physics_material_override = SubResource( 12 )
+gravity_scale = 8.0
+linear_damp = 5.0
+script = ExtResource( 2 )
+maxHorizontalSpeed = 7.0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( -30, -25, -25, -30, 25, -30, 30, -25, 30, 25, 25, 30, -25, 30, -30, 25 )
+
+[node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 1.9, 1.9 )
+texture = ExtResource( 1 )

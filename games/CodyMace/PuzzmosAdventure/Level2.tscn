@@ -1,0 +1,247 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://games/CodyMace/PuzzmosAdventure/Letter.tscn" type="PackedScene" id=1]
+[ext_resource path="res://games/CodyMace/PuzzmosAdventure/SlidingBlock.tscn" type="PackedScene" id=2]
+[ext_resource path="res://games/CodyMace/Assets/circle.png" type="Texture" id=3]
+[ext_resource path="res://games/CodyMace/PuzzmosAdventure/PuzzmoTileMap.cs" type="Script" id=4]
+[ext_resource path="res://games/CodyMace/Assets/puzzmo-body.png" type="Texture" id=5]
+[ext_resource path="res://games/CodyMace/PuzzmosAdventure/Puzzmo.cs" type="Script" id=6]
+
+[sub_resource type="CircleShape2D" id=13]
+
+[sub_resource type="CircleShape2D" id=14]
+radius = 10.2956
+
+[sub_resource type="ConvexPolygonShape2D" id=6]
+points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
+
+[sub_resource type="StreamTexture" id=11]
+flags = 4
+load_path = "res://.import/puzzmo-blocks.png-561a85a43291bedd142df35e088368a8.stex"
+
+[sub_resource type="ConvexPolygonShape2D" id=7]
+points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
+
+[sub_resource type="ConvexPolygonShape2D" id=8]
+points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
+
+[sub_resource type="ConvexPolygonShape2D" id=9]
+points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
+
+[sub_resource type="TileSet" id=12]
+0/name = "puzzmo-blocks.png 0"
+0/texture = SubResource( 11 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 0, 0, 32, 32 )
+0/tile_mode = 0
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape = SubResource( 6 )
+0/shape_one_way = false
+0/shape_one_way_margin = 1.0
+0/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 6 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+0/z_index = 0
+1/name = "puzzmo-blocks.png 1"
+1/texture = SubResource( 11 )
+1/tex_offset = Vector2( 0, 0 )
+1/modulate = Color( 1, 1, 1, 1 )
+1/region = Rect2( 32, 0, 32, 32 )
+1/tile_mode = 0
+1/occluder_offset = Vector2( 0, 0 )
+1/navigation_offset = Vector2( 0, 0 )
+1/shape_offset = Vector2( 0, 0 )
+1/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+1/shape = SubResource( 7 )
+1/shape_one_way = false
+1/shape_one_way_margin = 1.0
+1/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 7 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+1/z_index = 0
+2/name = "puzzmo-blocks.png 2"
+2/texture = SubResource( 11 )
+2/tex_offset = Vector2( 0, 0 )
+2/modulate = Color( 1, 1, 1, 1 )
+2/region = Rect2( 0, 32, 32, 32 )
+2/tile_mode = 0
+2/occluder_offset = Vector2( 0, 0 )
+2/navigation_offset = Vector2( 0, 0 )
+2/shape_offset = Vector2( 0, 0 )
+2/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+2/shape = SubResource( 8 )
+2/shape_one_way = false
+2/shape_one_way_margin = 1.0
+2/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 8 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+2/z_index = 0
+3/name = "puzzmo-blocks.png 3"
+3/texture = SubResource( 11 )
+3/tex_offset = Vector2( 0, 0 )
+3/modulate = Color( 1, 1, 1, 1 )
+3/region = Rect2( 32, 32, 32, 32 )
+3/tile_mode = 0
+3/occluder_offset = Vector2( 0, 0 )
+3/navigation_offset = Vector2( 0, 0 )
+3/shape_offset = Vector2( 0, 0 )
+3/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+3/shape = SubResource( 9 )
+3/shape_one_way = false
+3/shape_one_way_margin = 1.0
+3/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 9 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+3/z_index = 0
+
+[node name="Level" type="Node2D"]
+
+[node name="LetterW" parent="." instance=ExtResource( 1 )]
+position = Vector2( -319, -191 )
+
+[node name="LetterO" parent="." instance=ExtResource( 1 )]
+position = Vector2( 322, -193 )
+letterName = "O"
+
+[node name="LetterR" parent="." instance=ExtResource( 1 )]
+position = Vector2( -261, 192 )
+letterName = "R"
+
+[node name="LetterD" parent="." instance=ExtResource( 1 )]
+position = Vector2( 259, 194 )
+letterName = "D"
+
+[node name="Puzzmo" type="Node2D" parent="."]
+position = Vector2( 0, -62 )
+script = ExtResource( 6 )
+
+[node name="LeftArmLine" type="Line2D" parent="Puzzmo"]
+default_color = Color( 1, 0.74902, 0.211765, 1 )
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="RightArmLine" type="Line2D" parent="Puzzmo"]
+default_color = Color( 1, 0.74902, 0.211765, 1 )
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="LeftHand" type="RigidBody2D" parent="Puzzmo"]
+position = Vector2( -50, 0 )
+collision_layer = 2
+gravity_scale = 0.0
+contacts_reported = 4
+contact_monitor = true
+linear_damp = 17.879
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Puzzmo/LeftHand"]
+shape = SubResource( 13 )
+
+[node name="Outline" type="Sprite" parent="Puzzmo/LeftHand"]
+visible = false
+scale = Vector2( 1.2, 1.2 )
+texture = ExtResource( 3 )
+
+[node name="Sprite" type="Sprite" parent="Puzzmo/LeftHand"]
+modulate = Color( 1, 0.74902, 0.211765, 1 )
+position = Vector2( -7.62939e-06, -3.8147e-06 )
+texture = ExtResource( 3 )
+
+[node name="RightHand" type="RigidBody2D" parent="Puzzmo"]
+position = Vector2( 50, -3.8147e-06 )
+collision_layer = 2
+gravity_scale = 0.0
+linear_damp = 17.879
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Puzzmo/RightHand"]
+shape = SubResource( 13 )
+
+[node name="Outline" type="Sprite" parent="Puzzmo/RightHand"]
+visible = false
+scale = Vector2( 1.2, 1.2 )
+texture = ExtResource( 3 )
+
+[node name="Sprite" type="Sprite" parent="Puzzmo/RightHand"]
+modulate = Color( 1, 0.74902, 0.211765, 1 )
+position = Vector2( -7.62939e-06, -3.8147e-06 )
+texture = ExtResource( 3 )
+
+[node name="Body" type="RigidBody2D" parent="Puzzmo"]
+position = Vector2( 0, -4.54747e-12 )
+collision_layer = 6
+collision_mask = 5
+gravity_scale = 0.0
+linear_damp = 17.879
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Puzzmo/Body"]
+scale = Vector2( 2, 2 )
+shape = SubResource( 14 )
+
+[node name="Outline" type="Sprite" parent="Puzzmo/Body"]
+visible = false
+scale = Vector2( 2.2, 2.2 )
+texture = ExtResource( 3 )
+
+[node name="Sprite" type="Sprite" parent="Puzzmo/Body"]
+position = Vector2( -1.90735e-06, -3.8147e-06 )
+texture = ExtResource( 5 )
+
+[node name="LeftArmJoint" type="DampedSpringJoint2D" parent="Puzzmo"]
+node_a = NodePath("../Body")
+node_b = NodePath("../LeftHand")
+length = 20.0
+rest_length = 10.0
+stiffness = 64.0
+damping = 0.01
+
+[node name="RightArmJoint" type="DampedSpringJoint2D" parent="Puzzmo"]
+node_a = NodePath("../Body")
+node_b = NodePath("../RightHand")
+length = 20.0
+rest_length = 10.0
+stiffness = 64.0
+damping = 0.01
+
+[node name="WallsTileMap" type="TileMap" parent="."]
+tile_set = SubResource( 12 )
+cell_size = Vector2( 32, 32 )
+cell_quadrant_size = 1
+cell_custom_transform = Transform2D( 128, 0, 0, 128, 0, 0 )
+collision_friction = 0.0
+format = 1
+tile_data = PoolIntArray( -458766, 1610612739, 0, -458765, 1610612739, 0, -458764, 1610612736, 0, -458763, 1610612739, 0, -458762, 1610612736, 0, -458761, 1610612739, 0, -458760, 1610612736, 0, -458759, 1610612739, 0, -458758, 1610612736, 0, -458757, 1610612739, 0, -458756, 1610612736, 0, -458755, 1610612739, 0, -458754, 1610612736, 0, -458753, 1610612739, 0, -524288, 1610612736, 0, -524287, 1610612739, 0, -524286, 1610612736, 0, -524285, 1610612739, 0, -524284, 1610612736, 0, -524283, 1610612739, 0, -524282, 1610612736, 0, -524281, 1610612739, 0, -524280, 1610612736, 0, -524279, 1610612739, 0, -524278, 1610612736, 0, -524277, 1610612739, 0, -524276, 1610612736, 0, -524275, 1610612739, 0, -393230, 1610612739, 0, -393229, 0, 0, -393228, 0, 0, -393225, 0, 0, -393224, 0, 0, -393223, 0, 0, -393222, 0, 0, -393221, 0, 0, -393220, 0, 0, -393219, 0, 0, -393218, 0, 0, -393217, 0, 0, -458752, 0, 0, -458751, 0, 0, -458750, 0, 0, -458749, 0, 0, -458748, 0, 0, -458747, 0, 0, -458746, 0, 0, -458745, 0, 0, -458744, 0, 0, -458741, 0, 0, -458740, 0, 0, -458739, 1610612739, 0, -327694, 1610612739, 0, -327693, 0, 0, -327692, 0, 0, -327689, 0, 0, -327688, 0, 0, -327687, 0, 0, -327686, 0, 0, -327685, 0, 0, -327684, 0, 0, -327683, 0, 0, -327682, 0, 0, -327681, 0, 0, -393216, 0, 0, -393215, 0, 0, -393214, 0, 0, -393213, 0, 0, -393212, 0, 0, -393211, 0, 0, -393210, 0, 0, -393209, 0, 0, -393208, 0, 0, -393205, 0, 0, -393204, 0, 0, -393203, 1610612739, 0, -262158, 1610612739, 0, -262157, 0, 0, -262156, 0, 0, -262153, 0, 0, -262152, 0, 0, -262151, 1610612736, 0, -262150, 1610612736, 0, -262149, 1610612736, 0, -262148, 1610612736, 0, -262147, 0, 0, -262146, 0, 0, -262145, 0, 0, -327680, 0, 0, -327679, 0, 0, -327678, 1610612736, 0, -327677, 1610612736, 0, -327676, 1610612736, 0, -327675, 1610612736, 0, -327674, 1610612736, 0, -327673, 0, 0, -327672, 0, 0, -327669, 0, 0, -327668, 0, 0, -327667, 1610612739, 0, -196622, 1610612739, 0, -196621, 0, 0, -196620, 0, 0, -196617, 0, 0, -196616, 0, 0, -196615, 1610612736, 0, -196614, 1610612739, 0, -196613, 1610612736, 0, -196612, 1610612739, 0, -196611, 1610612736, 0, -196610, 1610612739, 0, -196609, 1610612736, 0, -262144, 0, 0, -262143, 0, 0, -262142, 1610612739, 0, -262141, 1610612736, 0, -262140, 1610612739, 0, -262139, 1610612736, 0, -262138, 1610612739, 0, -262137, 0, 0, -262136, 0, 0, -262133, 0, 0, -262132, 0, 0, -262131, 1610612739, 0, -131086, 1610612739, 0, -196595, 1610612739, 0, -65550, 1610612739, 0, -131059, 1610612739, 0, -14, 1610612739, 0, -11, 0, 0, -10, 0, 0, -9, 0, 0, -8, 0, 0, -7, 0, 0, -6, 0, 0, -5, 0, 0, -4, 1610612736, 0, -3, 1610612736, 0, -2, 1610612736, 0, -65535, 0, 0, -65534, 1610612736, 0, -65533, 1610612736, 0, -65532, 1610612736, 0, -65531, 1610612739, 0, -65530, 1610612736, 0, -65529, 1610612736, 0, -65528, 1610612736, 0, -65527, 1610612736, 0, -65526, 1610612736, 0, -65523, 1610612739, 0, 65522, 1610612739, 0, 65525, 0, 0, 65526, 0, 0, 65527, 0, 0, 65528, 0, 0, 65529, 0, 0, 65530, 0, 0, 65531, 1610612736, 0, 65532, 1610612736, 0, 65533, 1610612736, 0, 65534, 1610612736, 0, 1, 0, 0, 2, 1610612736, 0, 3, 1610612736, 0, 4, 1610612736, 0, 5, 1610612736, 0, 6, 1610612736, 0, 7, 1610612736, 0, 8, 1610612736, 0, 9, 1610612736, 0, 10, 1610612736, 0, 13, 1610612739, 0, 131058, 1610612739, 0, 65549, 1610612739, 0, 196594, 1610612739, 0, 131085, 1610612739, 0, 262130, 1610612739, 0, 262133, 1610612736, 0, 262134, 1610612736, 0, 262135, 1610612736, 0, 262136, 1610612736, 0, 262137, 0, 0, 262138, 0, 0, 262139, 0, 0, 262140, 0, 0, 262141, 0, 0, 262142, 0, 0, 262143, 0, 0, 196608, 0, 0, 196609, 0, 0, 196610, 0, 0, 196611, 0, 0, 196612, 0, 0, 196613, 0, 0, 196614, 0, 0, 196615, 0, 0, 196616, 0, 0, 196617, 0, 0, 196618, 0, 0, 196621, 1610612739, 0, 327666, 1610612739, 0, 327669, 1610612736, 0, 327670, 1610612736, 0, 327671, 1610612736, 0, 327672, 1610612739, 0, 327673, 1610612736, 0, 327674, 1610612739, 0, 327675, 1610612736, 0, 327676, 1610612739, 0, 327677, 1610612736, 0, 327678, 1610612739, 0, 327679, 1610612736, 0, 262144, 1610612739, 0, 262145, 1610612736, 0, 262146, 1610612739, 0, 262147, 1610612736, 0, 262148, 1610612739, 0, 262149, 1610612736, 0, 262150, 1610612739, 0, 262151, 1610612736, 0, 262152, 1610612736, 0, 262153, 1610612736, 0, 262154, 1610612736, 0, 262157, 1610612739, 0, 393202, 1610612739, 0, 327693, 1610612739, 0, 458738, 1610612739, 0, 393229, 1610612739, 0, 524274, 1610612739, 0, 524275, 1610612736, 0, 524276, 1610612739, 0, 524277, 1610612736, 0, 524278, 1610612739, 0, 524279, 1610612736, 0, 524280, 1610612739, 0, 524281, 1610612736, 0, 524282, 1610612739, 0, 524283, 1610612736, 0, 524284, 1610612739, 0, 524285, 1610612736, 0, 524286, 1610612739, 0, 524287, 1610612736, 0, 458752, 1610612739, 0, 458753, 1610612736, 0, 458754, 1610612739, 0, 458755, 1610612736, 0, 458756, 1610612739, 0, 458757, 1610612736, 0, 458758, 1610612739, 0, 458759, 1610612736, 0, 458760, 1610612739, 0, 458761, 1610612736, 0, 458762, 1610612739, 0, 458763, 1610612736, 0, 458764, 1610612739, 0, 458765, 1610612739, 0 )
+script = ExtResource( 4 )
+tile_index_2 = 3
+
+[node name="SlidingBlock2" parent="." instance=ExtResource( 2 )]
+position = Vector2( -320, -64 )
+
+[node name="SlidingBlock4" parent="." instance=ExtResource( 2 )]
+position = Vector2( -321, -130 )
+
+[node name="SlidingBlock5" parent="." instance=ExtResource( 2 )]
+position = Vector2( 319, -132 )
+
+[node name="SlidingBlock3" parent="." instance=ExtResource( 2 )]
+position = Vector2( 320, -64 )
