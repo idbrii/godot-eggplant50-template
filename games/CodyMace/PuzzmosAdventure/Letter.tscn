@@ -1,7 +1,6 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://games/CodyMace/PuzzmosAdventure/Letter.cs" type="Script" id=1]
-[ext_resource path="res://mainmenu/art/font/font_kenpixel_mini.tres" type="DynamicFont" id=2]
 
 [sub_resource type="PhysicsMaterial" id=24]
 friction = 0.0
@@ -16,6 +15,13 @@ font_path = "res://mainmenu/art/font/kenpixel/mini.ttf"
 size = 41
 outline_color = Color( 0, 0, 0, 1 )
 font_data = SubResource( 23 )
+
+[sub_resource type="DynamicFontData" id=14]
+font_path = "res://mainmenu/art/font/kenpixel/mini.ttf"
+
+[sub_resource type="DynamicFont" id=25]
+size = 39
+font_data = SubResource( 14 )
 
 [sub_resource type="Animation" id=22]
 resource_name = "RotateLetter"
@@ -75,7 +81,7 @@ margin_left = -30.0
 margin_top = -30.0
 margin_right = 30.0
 margin_bottom = 30.0
-custom_fonts/normal_font = ExtResource( 2 )
+custom_fonts/normal_font = SubResource( 25 )
 bbcode_enabled = true
 bbcode_text = "[center]W[/center]"
 text = "W"

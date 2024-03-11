@@ -4,5 +4,5 @@
 font_path = "res://mainmenu/art/font/kenpixel/mini.ttf"
 
 [resource]
-size = 40
+size = 15
 font_data = SubResource( 14 )
