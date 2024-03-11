@@ -254,4 +254,3 @@ margin_bottom = 110.0
 
 [connection signal="GameOverEventHandler" from="." to="UI/GameOverMenu" method="_on_game_over"]
 [connection signal="jump" from="Player" to="." method="_on_Player_jump"]
-[connection signal="jump_landed" from="Player" to="." method="JumpLandedEventHandler"]

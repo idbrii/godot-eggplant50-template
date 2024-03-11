@@ -8,7 +8,8 @@
 [ext_resource path="res://games/CodyMace/shape_switch.tres" type="Resource" id=6]
 [ext_resource path="res://games/CodyMace/sifter.tres" type="Resource" id=7]
 [ext_resource path="res://games/CodyMace/sifter2.tres" type="Resource" id=8]
+[ext_resource path="res://games/CodyMace/puzzmo.tres" type="Resource" id=9]
 
 [resource]
 script = ExtResource( 1 )
-games = [ ExtResource( 4 ), ExtResource( 3 ), ExtResource( 2 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ) ]
+games = [ ExtResource( 4 ), ExtResource( 3 ), ExtResource( 2 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ) ]
