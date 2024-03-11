@@ -8,3 +8,7 @@ script = ExtResource( 1 )
 initial_scene = ExtResource( 2 )
 game_name = "Puzzmo's Puzzling Pursuit"
 game_author = "Cody Mace"
+input_primary_action = "Control Left Hand"
+input_secondary_action = "Control Right Hand"
+input_pause = "Pause"
+input_directions = "Movement"

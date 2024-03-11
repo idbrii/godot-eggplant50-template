@@ -132,12 +132,6 @@ public class ShapeSwitch : Node2D
 		UpdateNextShapeUI(nextShapeType);
 	}
 
-	async void HandleGameOver()
-	{
-		await ToSignal(GetTree().CreateTimer(1.0f), "timeout");
-		EmitSignal(nameof(GameOverEventHandler));
-	}
-
 	void SwitchShape()
 	{
 		playerShapeType = playerShapeType + 1;

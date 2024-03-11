@@ -9,7 +9,6 @@
 [ext_resource path="res://mainmenu/art/font/font_kenpixel_mini.tres" type="DynamicFont" id=7]
 [ext_resource path="res://games/CodyMace/Audio/jump.wav" type="AudioStream" id=8]
 [ext_resource path="res://games/movement2/ui/GameMenu.tscn" type="PackedScene" id=9]
-[ext_resource path="res://games/CodyMace/Assets/triangle.png" type="Texture" id=10]
 [ext_resource path="res://games/CodyMace/Assets/circle.png" type="Texture" id=10]
 [ext_resource path="res://games/CodyMace/ShakeableCamera.cs" type="Script" id=11]
 [ext_resource path="res://games/CodyMace/Audio/point.wav" type="AudioStream" id=12]
