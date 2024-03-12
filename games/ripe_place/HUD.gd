@@ -23,7 +23,14 @@ func show_game_over(fruit_count: int, win: bool):
 		+ ' ripe fruits!'
 
 	$gameOverRect.visible = true
-	
+
+	# Give button focus to be gamepad clickable.
+	$gameOverRect/newGameButton.grab_focus()
+	# Disable button for a second to prevent accidental clicks.
+	$gameOverRect/newGameButton.disabled = true
+	yield(get_tree().create_timer(1), "timeout")
+	$gameOverRect/newGameButton.disabled = false
+
 func update_score(score):
 	$nutritionLabel.text = str(score)
 
