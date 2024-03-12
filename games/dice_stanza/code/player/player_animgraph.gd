@@ -58,7 +58,8 @@ func _ready() -> void:
 
 
 func _on_facing_flipped(should_face_right):
-	_sprite_animator.flip_h = should_face_right
+	# Animations are mostly configured to face right, so flip when facing left.
+	_sprite_animator.flip_h = not should_face_right
 
 
 func _process(dt: float) -> void:

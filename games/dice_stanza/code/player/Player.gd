@@ -168,7 +168,7 @@ func set_direction(hor_direction):
 	if hor_direction == 0:
 		# No clear direction, so don't change.
 		return
-	player_visual.scale = Vector2(abs(player_visual.scale.y) * hor_direction, player_visual.scale.y)
+	#~ player_visual.scale = Vector2(abs(player_visual.scale.y) * hor_direction, player_visual.scale.y)
 	face_direction = hor_direction # remember direction
 	emit_signal("facing_flipped", hor_direction > 0)
 
