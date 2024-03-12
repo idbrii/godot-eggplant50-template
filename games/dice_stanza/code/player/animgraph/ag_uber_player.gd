@@ -9,13 +9,16 @@ var sm
 
 
 func _is_falling(vel):
-	return vel.y > 0
+	return vel.y > 0.05
 
 func _is_soaring(vel):
-	return vel.y < 0
+	return vel.y < -0.05
 
 func _is_run(vel):
 	return vel.x != 0
+
+func is_supported():
+	return ag.player.is_on_floor()
 
 # wrapper function to allow printing or other debugging
 func _play_anim(anim):
@@ -33,10 +36,13 @@ func _compute_state():
 		return ag.states.climb
 	if ag.player.is_dashing():
 		return ag.states.dash
-	if _is_soaring(ag.player.velocity):
-		return ag.states.jump
-	if _is_falling(ag.player.velocity):
-		return ag.states.fall
+	if not is_supported():
+		if _is_soaring(ag.player.velocity):
+			return ag.states.jump
+		if _is_falling(ag.player.velocity):
+			return ag.states.fall
+	if is_supported() and _is_run(ag.player.velocity):
+		return ag.states.ground_run
 
 func _update_state_generic(_dt):
 	var dest = _compute_state()
@@ -62,8 +68,6 @@ func _update_state_jump(dt):
 	return _update_state_generic(dt)
 
 func _update_state_ground_idle(dt):
-	if ag.player.is_on_floor() and _is_run(ag.player.velocity):
-		return sm.transition_to(ag.states.ground_run, {})
 	return _update_state_generic(dt)
 
 
@@ -85,8 +89,9 @@ func _update_state_climb(dt):
 
 
 func _update_state_dash(dt):
-	if not ag.player.is_dashing():
+	if ag.player.is_dashing():
 		return _update_state_generic(dt)
+	return sm.transition_to(ag.states.ground_idle, {})
 
 
 func _enter_state_climb(_data):
