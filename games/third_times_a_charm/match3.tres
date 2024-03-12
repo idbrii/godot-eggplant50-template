@@ -9,6 +9,6 @@ initial_scene = ExtResource( 2 )
 game_name = "Third Time's a Charm"
 game_author = "Dan Brook"
 input_primary_action = "Hold to swap"
-input_secondary_action = "-"
+input_secondary_action = ""
 input_pause = "Pause"
 input_directions = "Movement"

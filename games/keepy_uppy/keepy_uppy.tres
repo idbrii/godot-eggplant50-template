@@ -9,6 +9,6 @@ initial_scene = ExtResource( 2 )
 game_name = "Keepy Uppy"
 game_author = "Dan Brook"
 input_primary_action = "Dash"
-input_secondary_action = "-"
+input_secondary_action = ""
 input_pause = "Pause"
 input_directions = "Movement"

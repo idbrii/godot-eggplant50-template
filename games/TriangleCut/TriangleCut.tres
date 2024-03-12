@@ -9,6 +9,6 @@ initial_scene = ExtResource( 2 )
 game_name = "TriEdge Hack"
 game_author = "Nishchal Bhandari"
 input_primary_action = "Cut Edge"
-input_secondary_action = "N/A"
+input_secondary_action = ""
 input_pause = "Pause"
 input_directions = "Change Selection"
