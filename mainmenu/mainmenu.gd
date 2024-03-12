@@ -5,6 +5,9 @@ const TheList : GameList = preload("res://games/eggplant_games.tres")
 onready var ButtonTemplate = get_node("%ButtonTemplate")
 onready var QuitButton = get_node("%Quit")
 
+class GameDefSorter:
+	static func sort_alpha(a, b):
+		return a.game_name < b.game_name
 
 func _ready():
 	QuitButton.connect("pressed", self, "_quit")  # warning-ignore:return_value_discarded
@@ -13,7 +16,9 @@ func _ready():
 		QuitButton.visible = false
 
 	var needs_focus = true
-	for g in TheList.games:
+	var games = TheList.games.duplicate()
+	games.sort_custom(GameDefSorter, "sort_alpha")
+	for g in games:
 		var btn = add_game(g)
 		if needs_focus:
 			needs_focus = false
