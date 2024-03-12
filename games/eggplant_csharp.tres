@@ -1,7 +1,11 @@
-[gd_resource type="Resource" load_steps=2 format=2]
+[gd_resource type="Resource" load_steps=6 format=2]
 
 [ext_resource path="res://mainmenu/gamelist.gd" type="Script" id=1]
+[ext_resource path="res://games/CodyMace/sifter2.tres" type="Resource" id=16]
+[ext_resource path="res://games/CodyMace/sifter.tres" type="Resource" id=17]
+[ext_resource path="res://games/CodyMace/puzzmo.tres" type="Resource" id=18]
+[ext_resource path="res://games/CodyMace/shape_switch.tres" type="Resource" id=19]
 
 [resource]
 script = ExtResource( 1 )
-games = [  ]
+games = [ ExtResource( 18 ), ExtResource( 19 ), ExtResource( 16 ), ExtResource( 17 ) ]
