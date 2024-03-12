@@ -17,6 +17,13 @@ func _ready():
 
 	var needs_focus = true
 	var games = TheList.games.duplicate()
+
+	# These are only populated on the csharp branch so they don't cause
+	# failures if people use the non-mono version of godot.
+	var cs_games: GameList = load("res://games/eggplant_csharp.tres")
+	for g in cs_games.games:
+		games.append(g)
+
 	games.sort_custom(GameDefSorter, "sort_alpha")
 	for g in games:
 		var btn = add_game(g)
