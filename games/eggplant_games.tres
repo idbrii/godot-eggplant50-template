@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=9 format=2]
+[gd_resource type="Resource" load_steps=15 format=2]
 
 [ext_resource path="res://mainmenu/gamelist.gd" type="Script" id=1]
 [ext_resource path="res://games/Arkaruga/arkaruga.tres" type="Resource" id=2]
@@ -8,7 +8,13 @@
 [ext_resource path="res://games/polygonal_pasture/polygonal_pasture.tres" type="Resource" id=6]
 [ext_resource path="res://games/third_times_a_charm/match3.tres" type="Resource" id=7]
 [ext_resource path="res://games/keepy_uppy/keepy_uppy.tres" type="Resource" id=8]
+[ext_resource path="res://games/TriangleCut/TriangleCut.tres" type="Resource" id=9]
+[ext_resource path="res://games/Ooks4/ooks4.tres" type="Resource" id=10]
+[ext_resource path="res://games/Ooks/ooks.tres" type="Resource" id=11]
+[ext_resource path="res://games/Ooks3/ooks3.tres" type="Resource" id=12]
+[ext_resource path="res://games/GabeTutone/tictactoe.tres" type="Resource" id=13]
+[ext_resource path="res://games/Ooks2/ooks2.tres" type="Resource" id=14]
 
 [resource]
 script = ExtResource( 1 )
-games = [ ExtResource( 8 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 4 ), ExtResource( 3 ), ExtResource( 2 ), ExtResource( 5 ) ]
+games = [ ExtResource( 8 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 4 ), ExtResource( 3 ), ExtResource( 2 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 12 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 9 ), ExtResource( 5 ) ]
