@@ -17,6 +17,8 @@ export (int) var multiballCombo = 10
 export (float) var multiballAngleOffset = 45.0
 export (float) var mediumGroupChanceIncrement = .5
 export (float) var hardGroupChanceIncrement = .1
+export (float) var lostBallFlashStrength = 1.0
+export (float) var lostBallFlashDuration = 1.5
 
 onready var uiManager = get_node("%UILayer")
 onready var paddle = get_node("%Paddle")
@@ -97,6 +99,8 @@ func onBallLost(_ball):
 	# there are no balls left -- respawn!
 	if !getAnyBallsActive():
 		if _livesRemaining > 0:
+			get_tree().call_group("DamageEffect", "onDamaged", lostBallFlashStrength, lostBallFlashDuration)
+			
 			_lostBallTimer.start()
 			yield(_lostBallTimer, "timeout")
 			loseLife()
@@ -187,7 +191,7 @@ func addScore(points : int):
 		_bonusLifeSFX.play()
 		gainLife()
 		if uiManager:
-			uiManager.playToast("BALL GET!")
+			uiManager.playToast("EXTRA LIFE!")
 		
 	
 func addCombo(ball, value : int = 1):

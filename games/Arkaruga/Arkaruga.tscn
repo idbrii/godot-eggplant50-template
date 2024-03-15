@@ -318,7 +318,7 @@ __meta__ = {
 [node name="BackgroundLayer" type="CanvasLayer" parent="."]
 layer = -99
 
-[node name="ArkarugaBackground" type="ColorRect" parent="BackgroundLayer" groups=["Colorized"]]
+[node name="ArkarugaBackground" type="ColorRect" parent="BackgroundLayer" groups=["Colorized", "DamageEffect"]]
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0.243137, 0.215686, 0.360784, 1 )
@@ -326,7 +326,7 @@ script = ExtResource( 14 )
 __meta__ = {
 "_edit_lock_": true
 }
-_flashStrength = 0.1
+_damagedFlashColor = Color( 0.882353, 0.254902, 0.254902, 1 )
 _blueBgColor = Color( 0.243137, 0.215686, 0.360784, 1 )
 _greenBgColor = Color( 0.215686, 0.145098, 0.219608, 1 )
 
