@@ -63,6 +63,7 @@ scale = Vector2( 3.2, 1.6 )
 
 [node name="BlockFallSFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )
+volume_db = -10.0
 
 [connection signal="body_entered" from="FallingDamageArea" to="." method="_on_FallingArea_body_entered"]
 [connection signal="area_entered" from="GutterDetectionArea" to="." method="_on_GutterDetectionArea_area_entered"]

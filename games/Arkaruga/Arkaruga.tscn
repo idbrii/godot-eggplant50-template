@@ -805,40 +805,42 @@ wait_time = 2.0
 
 [node name="StartScreenMusic" type="AudioStreamPlayer" parent="Manager/Music"]
 stream = ExtResource( 30 )
-volume_db = -4.0
+volume_db = -14.0
 
 [node name="GameplayMusic" type="AudioStreamPlayer" parent="Manager/Music"]
 stream = ExtResource( 32 )
-volume_db = -8.0
+volume_db = -18.0
 
 [node name="EndScreenMusic" type="AudioStreamPlayer" parent="Manager/Music"]
 stream = ExtResource( 31 )
-volume_db = -4.0
+volume_db = -14.0
 
 [node name="SFX" type="Node2D" parent="Manager"]
 
 [node name="GameOverSFX" type="AudioStreamPlayer" parent="Manager/SFX"]
 stream = ExtResource( 33 )
-volume_db = 2.0
+volume_db = -8.0
 
 [node name="CountdownSFX" type="AudioStreamPlayer" parent="Manager/SFX"]
 stream = ExtResource( 34 )
+volume_db = -10.0
 
 [node name="CountdownGoSFX" type="AudioStreamPlayer" parent="Manager/SFX"]
 stream = ExtResource( 35 )
+volume_db = -10.0
 
 [node name="MultiballSFX" type="AudioStreamPlayer" parent="Manager/SFX"]
 stream = ExtResource( 36 )
-volume_db = 2.0
+volume_db = -8.0
 
 [node name="BonusLifeSFX" type="AudioStreamPlayer" parent="Manager/SFX"]
 stream = ExtResource( 37 )
-volume_db = 2.0
+volume_db = -8.0
 
 [node name="LoseLifeSFX" type="AudioStreamPlayer" parent="Manager/SFX"]
 stream = ExtResource( 38 )
-volume_db = 2.0
+volume_db = -8.0
 
 [node name="ColorSwapSFX" type="AudioStreamPlayer" parent="Manager/SFX"]
 stream = ExtResource( 39 )
-volume_db = 2.0
+volume_db = -8.0

@@ -128,7 +128,7 @@ wait_time = 0.25
 
 [node name="DamageSFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 11 )
-volume_db = 4.0
+volume_db = -6.0
 
 [node name="DamageParticles" type="CPUParticles2D" parent="."]
 position = Vector2( 50, 0 )
