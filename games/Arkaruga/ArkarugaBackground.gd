@@ -2,13 +2,16 @@ extends ColorRect
 
 const Types = preload("res://games/Arkaruga/Scripts/Arkaruga-Types.gd")
 
-export var _flashColor : Color = Color.white
-export var _flashStrength : float = .5
-export var _flashDuration : float = .25
+export var _colorChangedFlashColor : Color = Color.white
+export var _colorChangedFlashStrength : float = .1
+export var _colorChangedFlashDuration : float = .25
+
+export var _damagedFlashColor : Color = Color.white
+
 export var _blueBgColor : Color
 export var _greenBgColor : Color
 
-var _targetColor : Color
+var _backgroundColor : Color
 var _flashRoutine
 
 func _process(delta):
@@ -18,21 +21,25 @@ func _process(delta):
 func onActiveColorChanged(color: int):
 	match color:
 		Types.ElementColor.BLUE:
-			_targetColor = _blueBgColor
+			_backgroundColor = _blueBgColor
 		Types.ElementColor.GREEN:
-			_targetColor = _greenBgColor
+			_backgroundColor = _greenBgColor
 	
-	_flashRoutine = _flashCoroutine()
-			
-func _flashCoroutine():
-	var flashStartColor = lerp(_targetColor, _flashColor, _flashStrength)
-	color = flashStartColor
-	var t = 0.0
-	while t < 1:
-		var delta = yield()
-		t += delta / _flashDuration
-		color = lerp(flashStartColor, _targetColor, t)
+	_flashRoutine = _flashCoroutine(_colorChangedFlashColor, _colorChangedFlashStrength, _colorChangedFlashDuration)
 	
-	yield()
-	color = _targetColor
+func onDamaged(strength : float, duration : float):
+	_flashRoutine = _flashCoroutine(_damagedFlashColor, strength, duration)
+
+func _flashCoroutine(flashColor : Color, strength : float, duration : float):
+	if duration > 0:
+		var flashStartColor = lerp(_backgroundColor, flashColor, strength)
+		color = flashStartColor
+		var t = 0.0
+		while t < 1:
+			var delta = yield()
+			t += delta / duration
+			color = lerp(flashStartColor, _backgroundColor, t)
+		
+		yield()
+	color = _backgroundColor
 	

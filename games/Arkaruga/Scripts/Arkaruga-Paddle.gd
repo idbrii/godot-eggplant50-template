@@ -13,6 +13,8 @@ export var alarmTextureBlue : Texture
 export var alarmTextureGreen : Texture
 export var damageFreezeDuration = 1.0
 export var hitBumperFlashDuration = .2
+export var damageFlashStrength = .5
+export var damageFlashDuration = .75
 
 onready var _manager : Node2D = get_tree().get_nodes_in_group("Manager")[0]
 
@@ -134,6 +136,8 @@ func _freeze(duration: float):
 	
 	_damageSFX.play()
 	_damageParticles.emitting = true
+	
+	get_tree().call_group("DamageEffect", "onDamaged", damageFlashStrength, damageFlashDuration)
 	
 	_freezeTimer.start(duration)
 	yield(_freezeTimer, "timeout")
