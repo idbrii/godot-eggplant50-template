@@ -11,6 +11,7 @@ export var maxSpeedModifier : float = 2.5
 export var gravity : float = 10
 export var paddleSpeedRatio : float = .5
 export var paddlePositionRatio : float = .5
+export var paddleFriction : float = .1
 export var minPaddleComponentBounceVerticalComponent : float = .25
 export var textureBlue : Texture
 export var textureGreen : Texture
@@ -76,6 +77,9 @@ func processCollision(collision):
 		
 		# add the paddle's own velocity to our bounce
 		velocity += (paddle.getVelocity() * paddleSpeedRatio)
+		
+		# reduce our velocity somewhat by our friction amount
+		velocity -= velocity * paddleFriction
 	
 	# cap our max speed
 	var finalSpeed = clamp(velocity.length(), minSpeed, maxSpeed)
