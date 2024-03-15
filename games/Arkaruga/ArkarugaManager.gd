@@ -127,6 +127,7 @@ func getAnyBallsActive():
 func startGame():
 	if uiManager:
 		uiManager.setStartScreenVisible(false)
+		uiManager.setEndScreenVisible(false)
 		uiManager.setSidebarResultsVisible(false)
 		uiManager.setBestScoreVisible(false)
 		uiManager.setBestTimeVisible(false)
@@ -179,9 +180,7 @@ func endGame():
 	_saveHighScores()
 	
 func closeEndGameScreen():
-	uiManager.setStartScreenVisible(true)
-	uiManager.setEndScreenVisible(false)
-	playStartScreenMusic()
+	startGame()
 	
 func addScore(points : int):
 	var prevLiveIncrement = _score / bonusLifePoints

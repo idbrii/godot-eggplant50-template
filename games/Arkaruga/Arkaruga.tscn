@@ -777,7 +777,6 @@ margin_bottom = 8.0
 rect_pivot_offset = Vector2( 8, 8 )
 texture = ExtResource( 28 )
 script = ExtResource( 24 )
-input = 1
 
 [node name="PauseMenu" parent="UILayer" instance=ExtResource( 22 )]
 margin_left = 19.0
