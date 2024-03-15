@@ -11,7 +11,7 @@ export var bumperTextureBlue : Texture
 export var bumperTextureGreen : Texture
 export var alarmTextureBlue : Texture
 export var alarmTextureGreen : Texture
-export var damageFreezeDuration = 1
+export var damageFreezeDuration = 1.0
 export var hitBumperFlashDuration = .2
 
 onready var _manager : Node2D = get_tree().get_nodes_in_group("Manager")[0]
