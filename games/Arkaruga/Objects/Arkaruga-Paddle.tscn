@@ -24,7 +24,7 @@ acceleration = 5555.0
 reverseAcceleration = 9999.0
 bumperTextureBlue = ExtResource( 3 )
 bumperTextureGreen = ExtResource( 5 )
-damageFreezeDuration = 0.66
+damageFreezeDuration = 0.6
 
 [node name="BallAnchor" type="Node2D" parent="."]
 position = Vector2( 50, -8 )
