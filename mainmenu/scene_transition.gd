@@ -19,9 +19,9 @@ func transition_to_new_game(next_scene : PackedScene):
 	_anim_player.play("fade")
 	yield(_anim_player, "animation_finished")
 
+	yield($PressToContinue.start_waiting(), "completed")
 	transition_to(get_tree(), next_scene)
-	yield(get_tree(), "idle_frame")
-	$PressToContinue.start_waiting()
+	queue_free()
 
 
 static func transition_to(tree : SceneTree, next_scene : PackedScene):
