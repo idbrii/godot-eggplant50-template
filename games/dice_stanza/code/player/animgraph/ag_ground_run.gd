@@ -9,6 +9,3 @@ func update(dt):
 func exit(_data):
 	return true
 
-func is_supported():
-	return true
-
