@@ -20,7 +20,7 @@ tile_data = PoolIntArray( -589826, 19, 0, -589825, 19, 0, -655360, 19, 0, -65535
 tile_data = PoolIntArray( -393216, 17, 0, -393211, 17, 0, -131070, 17, 0 )
 
 [node name="Goal" parent="Layers/layer2/Grid_AboveGround/YSort" index="0"]
-position = Vector2( 373, -34 )
+position = Vector2( 297, -195 )
 
 [node name="Player" parent="." index="2"]
 position = Vector2( 485, -316 )
