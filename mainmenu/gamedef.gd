@@ -17,8 +17,11 @@ export(String) var input_secondary_action := "Secondary"
 export(String) var input_pause := "Pause"
 export(String) var input_directions := "Movement"
 
+export(AudioStream) var music : AudioStream
+export var music_volume : float = 0
 
-func _init(p_initial_scene = null, p_game_name = "", p_game_author = "", p_input_primary_action = "", p_input_secondary_action = "", p_input_pause = "", p_input_directions = ""):
+
+func _init(p_initial_scene = null, p_game_name = "", p_game_author = "", p_input_primary_action = "", p_input_secondary_action = "", p_input_pause = "", p_input_directions = "", p_music = null):
 	initial_scene = p_initial_scene
 	game_name = p_game_name
 	game_author = p_game_author
@@ -27,4 +30,6 @@ func _init(p_initial_scene = null, p_game_name = "", p_game_author = "", p_input
 	input_secondary_action = p_input_secondary_action
 	input_pause = p_input_pause
 	input_directions = p_input_directions
+
+	music = p_music
 

@@ -29,3 +29,9 @@ by  Kenney Vleugels (Kenney.nl)
 	License (Creative Commons Zero, CC0)
 	http://creativecommons.org/publicdomain/zero/1.0/
 
+
+## Music
+
+Song: Quiet Rain - No Background Noise
+Music provided and produced by LonePeakMusic
+YouTube Channel: bit.ly/2xNM03K

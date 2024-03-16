@@ -19,10 +19,18 @@ var current_game : GameDef
 var _current_device := ""
 var _last_input_joy := 0
 
+var _music_player : AudioStreamPlayer
+var muted_volume := -80.0
+var music_fader : SceneTreeTween
+
 
 func _ready():
 	# To toggle fullscreen while paused.
 	pause_mode = PAUSE_MODE_PROCESS
+	_music_player = AudioStreamPlayer.new()
+	_music_player.bus = "Music"
+	_music_player.volume_db = muted_volume
+	add_child(_music_player)
 
 
 func _input(event: InputEvent):
@@ -43,6 +51,32 @@ func start_game(gamedef: GameDef = null):
 	current_game = gamedef
 	if gamedef:
 		transitioner.show_game_def(gamedef)
+		if gamedef.music:
+			music_fade_in(gamedef.music, gamedef.music_volume)
+
+
+func music_fade_in(music: AudioStream, volume_db: float):
+	_music_player.stream = music
+	_music_player.playing = true
+	if music_fader:
+		music_fader.stop()
+	music_fader = create_tween()
+	var t := music_fader.tween_property(_music_player, "volume_db", volume_db, 1)
+	t = t.from_current()
+	t = t.set_ease(Tween.EASE_IN)
+	t = t.set_trans(Tween.TRANS_CIRC)
+	return music_fader
+
+
+func music_fade_out():
+	if music_fader:
+		music_fader.stop()
+	music_fader = create_tween()
+	var t := music_fader.tween_property(_music_player, "volume_db", muted_volume, 2)
+	t = t.from_current()
+	t = t.set_ease(Tween.EASE_IN)
+	t = t.set_trans(Tween.TRANS_CIRC)
+	return music_fader
 
 
 func transition_to(next_scene: PackedScene, starting_game := false):
@@ -63,6 +97,7 @@ func restart_scene():
 
 
 func return_to_menu():
+	music_fade_out()
 	current_game = null
 	printt("Returning to menu...")
 	transition_to(preload("res://mainmenu/mainmenu.tscn"))

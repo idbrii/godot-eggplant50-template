@@ -102,7 +102,10 @@ margin_bottom = 280.0
 help_title = "How To Play"
 help_body = "Navigate the world and get to the eggplant jam!
 
-Hold planks to cross over gaps, but you drop them as you cross and only have 3! Fall through holes to reach further below."
+Hold planks to cross over gaps, but you drop them as you cross and only have 3! Fall through holes to reach further below.
+
+Song: Quiet Rain by LonePeakMusic
+"
 
 [node name="Inventory" type="Control" parent="UI"]
 unique_name_in_owner = true

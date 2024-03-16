@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/LonePeakMusic - Freebies - 13 Phobos - Retro Gaming Version.mp3-3306c9c9df7010650293a5634b58aa4c.mp3str"
+
+[deps]
+
+source_file="res://games/dice_stanza/sound/music/LonePeakMusic - Freebies - 13 Phobos - Retro Gaming Version.mp3"
+dest_files=[ "res://.import/LonePeakMusic - Freebies - 13 Phobos - Retro Gaming Version.mp3-3306c9c9df7010650293a5634b58aa4c.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

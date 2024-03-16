@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/LonePeakMusic - Freebies - 19 Quiet Rain - No Background Noise.mp3-9a4be182f83ab03f1001d585f81ec2c9.mp3str"
+
+[deps]
+
+source_file="res://games/drop_walker/sound/music/LonePeakMusic - Freebies - 19 Quiet Rain - No Background Noise.mp3"
+dest_files=[ "res://.import/LonePeakMusic - Freebies - 19 Quiet Rain - No Background Noise.mp3-9a4be182f83ab03f1001d585f81ec2c9.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

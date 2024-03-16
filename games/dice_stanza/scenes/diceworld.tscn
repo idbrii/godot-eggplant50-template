@@ -228,7 +228,9 @@ margin_bottom = 258.0
 help_title = "How to Play"
 help_body = "Throw dice into the alcoves to compete against an unseen opponent.
 
-Get higher on most rows to win, but don't leave any rows unfilled or they'll overflow and add dice to other rows!"
+Get higher on most rows to win, but don't leave any rows unfilled or they'll overflow and add dice to other rows!
+
+Song: Phobos by LonePeakMusic"
 
 [node name="Control" type="Control" parent="HUD/PauseMenu"]
 pause_mode = 2

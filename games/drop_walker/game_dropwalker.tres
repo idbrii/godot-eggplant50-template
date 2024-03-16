@@ -1,7 +1,8 @@
-[gd_resource type="Resource" load_steps=3 format=2]
+[gd_resource type="Resource" load_steps=4 format=2]
 
 [ext_resource path="res://mainmenu/gamedef.gd" type="Script" id=1]
 [ext_resource path="res://games/drop_walker/scenes/levelselect.tscn" type="PackedScene" id=2]
+[ext_resource path="res://games/drop_walker/sound/music/LonePeakMusic - Freebies - 19 Quiet Rain - No Background Noise.mp3" type="AudioStream" id=3]
 
 [resource]
 script = ExtResource( 1 )
@@ -12,3 +13,5 @@ input_primary_action = "Drop Plank"
 input_secondary_action = "Zoom Out"
 input_pause = "Pause"
 input_directions = "Movement"
+music = ExtResource( 3 )
+music_volume = -25.0
