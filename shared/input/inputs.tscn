@@ -125,8 +125,8 @@ text = "Movement"
 align = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-margin_left = 216.0
-margin_right = 421.0
+margin_left = 202.553
+margin_right = 407.553
 margin_bottom = 180.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
