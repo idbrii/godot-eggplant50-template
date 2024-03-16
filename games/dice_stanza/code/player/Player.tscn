@@ -234,7 +234,7 @@ position = Vector2( 0, -11 )
 script = ExtResource( 53 )
 
 [node name="TemplateAudioPlayer" type="AudioStreamPlayer2D" parent="Sound/AudioPlayer"]
-volume_db = -7.482
+volume_db = -9.0
 
 [node name="Hit" type="Node" parent="Sound"]
 script = ExtResource( 27 )
