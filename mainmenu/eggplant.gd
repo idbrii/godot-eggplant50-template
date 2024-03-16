@@ -39,18 +39,21 @@ func _input(event: InputEvent):
 
 
 func start_game(gamedef: GameDef = null):
-	var transitioner = transition_to(gamedef.initial_scene)
+	var transitioner = transition_to(gamedef.initial_scene, true)
 	current_game = gamedef
 	if gamedef:
 		transitioner.show_game_def(gamedef)
 
 
-func transition_to(next_scene: PackedScene):
+func transition_to(next_scene: PackedScene, starting_game := false):
 	assert(next_scene, "Need a scene to transition to.")
 	last_played_scene = next_scene
 	var transitioner = transition_scene.instance()
 	add_child(transitioner)
-	transitioner.fade_transition_to(next_scene)
+	if starting_game:
+		transitioner.transition_to_new_game(next_scene)
+	else:
+		transitioner.fade_transition_to(next_scene)
 	return transitioner
 
 

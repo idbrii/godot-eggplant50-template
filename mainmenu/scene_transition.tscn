@@ -1,8 +1,11 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://mainmenu/scene_transition.gd" type="Script" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
 [ext_resource path="res://shared/input/inputs.tscn" type="PackedScene" id=3]
+[ext_resource path="res://mainmenu/theme/theme_eggplant.tres" type="Theme" id=4]
+[ext_resource path="res://shared/input/button_icon.tscn" type="PackedScene" id=5]
+[ext_resource path="res://mainmenu/wait_for_input.gd" type="Script" id=6]
 
 [sub_resource type="Animation" id=1]
 resource_name = "fade"
@@ -94,3 +97,41 @@ rect_min_size = Vector2( 400, 0 )
 size_flags_horizontal = 5
 size_flags_vertical = 5
 contrast_theme = 0
+
+[node name="PressToContinue" type="Control" parent="."]
+visible = false
+margin_left = 466.0
+margin_top = 324.0
+margin_right = 630.0
+margin_bottom = 364.0
+rect_min_size = Vector2( 40, 20 )
+theme = ExtResource( 4 )
+script = ExtResource( 6 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PressToContinue"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="Label" type="Label" parent="PressToContinue/HBoxContainer"]
+margin_top = 10.0
+margin_right = 50.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 0, 20 )
+text = "Press"
+valign = 1
+
+[node name="ButtonIcon" parent="PressToContinue/HBoxContainer" instance=ExtResource( 5 )]
+margin_left = 54.0
+margin_right = 70.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 0, 20 )
+stretch_mode = 6
+
+[node name="Label2" type="Label" parent="PressToContinue/HBoxContainer"]
+margin_left = 74.0
+margin_top = 10.0
+margin_right = 168.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 0, 20 )
+text = "to continue"
+valign = 1
