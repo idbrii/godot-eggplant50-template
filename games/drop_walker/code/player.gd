@@ -164,6 +164,10 @@ func fall_to_layer(layer, dest):
     var n_bounces = 2
     var bounce_height = fall_speed * bounce_duration / n_bounces * 0.5
 
+    var dest_tile = layer.get_world_cellv(dest)
+    if dest_tile == GroundType.EMPTY:
+        n_bounces = 0
+
     var t := tween.tween_property(self, "global_position", dest, fall_duration)
     t = t.from_current()
     t = t.set_ease(Tween.EASE_IN)
