@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/win-387232__steaq__badge-coin-win.mp3-7d68c40b0a2a59e2fb26c05314622f00.mp3str"
+
+[deps]
+
+source_file="res://games/drop_walker/sound/sfx/win-387232__steaq__badge-coin-win.mp3"
+dest_files=[ "res://.import/win-387232__steaq__badge-coin-win.mp3-7d68c40b0a2a59e2fb26c05314622f00.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

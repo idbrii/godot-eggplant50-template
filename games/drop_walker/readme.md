@@ -35,3 +35,14 @@ by  Kenney Vleugels (Kenney.nl)
 Song: Quiet Rain - No Background Noise
 Music provided and produced by LonePeakMusic
 YouTube Channel: bit.ly/2xNM03K
+
+
+## Sounds
+
+Badge Coin Win - steaq
+https://freesound.org/people/steaq/sounds/387232/
+CC0
+
+j1game_over_mono - jivatma07
+https://freesound.org/people/jivatma07/sounds/173859/
+CC0

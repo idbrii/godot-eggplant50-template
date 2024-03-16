@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/lose-173859__jivatma07__j1game_over_mono.mp3-9cbacfd750dab1756cf403c824a1d7b2.mp3str"
+
+[deps]
+
+source_file="res://games/drop_walker/sound/sfx/lose-173859__jivatma07__j1game_over_mono.mp3"
+dest_files=[ "res://.import/lose-173859__jivatma07__j1game_over_mono.mp3-9cbacfd750dab1756cf403c824a1d7b2.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

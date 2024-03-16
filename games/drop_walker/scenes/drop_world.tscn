@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://games/drop_walker/code/level.gd" type="Script" id=1]
 [ext_resource path="res://games/drop_walker/scenes/player.tscn" type="PackedScene" id=2]
@@ -12,6 +12,8 @@
 [ext_resource path="res://mainmenu/theme/style_panel_bg.tres" type="StyleBox" id=10]
 [ext_resource path="res://games/dice_stanza/art/font_kenpixel_mini_big.tres" type="DynamicFont" id=11]
 [ext_resource path="res://shared/art/snap_scene_to_palette.tscn" type="PackedScene" id=12]
+[ext_resource path="res://games/drop_walker/sound/sfx/win-387232__steaq__badge-coin-win.mp3" type="AudioStream" id=13]
+[ext_resource path="res://games/drop_walker/sound/sfx/lose-173859__jivatma07__j1game_over_mono.mp3" type="AudioStream" id=14]
 
 [node name="World" type="Node2D"]
 script = ExtResource( 1 )
@@ -169,6 +171,16 @@ margin_top = 48.0
 margin_right = 197.0
 margin_bottom = 48.0
 size_flags_vertical = 3
+
+[node name="Sound" type="Node2D" parent="."]
+
+[node name="Win" type="AudioStreamPlayer" parent="Sound"]
+stream = ExtResource( 13 )
+volume_db = -7.0
+
+[node name="Lose" type="AudioStreamPlayer" parent="Sound"]
+stream = ExtResource( 14 )
+volume_db = -20.0
 
 [editable path="Layers/layer0"]
 [editable path="Layers/layer1"]

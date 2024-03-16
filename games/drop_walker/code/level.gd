@@ -74,6 +74,7 @@ func set_world_layer(index, snap, is_game_over):
 func _on_reached_goal():
 	$UI/gameover.visible = true
 	$UI/gameover/Label.text = "Win!"
+	$Sound/Win.play()
 	var goals = get_tree().get_nodes_in_group("goal")
 	for g in goals:
 		g.play_win()
@@ -87,6 +88,7 @@ func _on_fall_through_hole():
 	if is_game_over:
 		yield(get_tree().create_timer(0.5), "timeout")
 		$UI/gameover.visible = true
+		$Sound/Lose.play()
 
 
 func _on_player_moved(_player, dest_pos, delta):
