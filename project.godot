@@ -63,7 +63,7 @@ window/stretch/aspect="keep"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/colorful-palette-swap/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/colorful-palette-swap/plugin.cfg", "res://addons/toggle-external-editor/plugin.cfg" )
 
 [global]
 
