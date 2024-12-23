@@ -15,7 +15,7 @@ static func choose_value(list: Array):
 
 
 static func choose_index(list: Array):
-	var i = integer(0, list.size())
+	var i = integer(0, list.size() - 1)
 	return i
 
 
